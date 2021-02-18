@@ -13,7 +13,11 @@ public class District : MonoBehaviour
 
     void Start()
     {
-        _grid = new Grid(10, 10, 2);
+        int tileSize = 2;
+        int widthTileCnt = (int) (width / tileSize);
+        int heightTileCnt = (int) (height / tileSize);
+        
+        _grid = new Grid(widthTileCnt, heightTileCnt, tileSize);
 
         if (showGrid) 
             __debug__CreateGridText();
