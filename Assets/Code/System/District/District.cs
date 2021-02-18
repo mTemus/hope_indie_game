@@ -5,8 +5,12 @@ using Grid = Code.System.Grid.Grid;
 public class District : MonoBehaviour
 {
     [SerializeField] private bool showGrid = true;
+    [SerializeField] private bool showDistrict = true;
+
     private Grid _grid;
-    
+    private float width = 100f;
+    private float height = 50f;
+
     void Start()
     {
         _grid = new Grid(10, 10, 2);
@@ -43,5 +47,13 @@ public class District : MonoBehaviour
         Debug.DrawLine(_grid.GetWorldPosition(_grid.Width, 0), _grid.GetWorldPosition(_grid.Width, _grid.Height), Color.white);
     }
 
-    
+     private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Vector3 districtSize = new Vector3(width, height, 0);
+            
+            if (showDistrict) 
+                Gizmos.DrawWireCube(transform.position + districtSize * 0.5f, districtSize);
+        }
+
 }
