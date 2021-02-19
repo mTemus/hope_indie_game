@@ -13,9 +13,9 @@ namespace Code.System.Grid
 
         public Grid(int width, int height, int tileSize)
         {
-            this._width = width;
-            this._height = height;
-            this._tileSize = tileSize;
+            _width = width;
+            _height = height;
+            _tileSize = tileSize;
 
             tiles = new Tile[width, height];
 
