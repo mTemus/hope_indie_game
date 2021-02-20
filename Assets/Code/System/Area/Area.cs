@@ -1,4 +1,5 @@
 using Code.Utilities;
+using Code.System.Properties;
 using UnityEngine;
 
 namespace Code.System.Area
@@ -10,11 +11,11 @@ namespace Code.System.Area
 
         private Grid.Grid _grid;
         private float width = 100f;
-        private float height = 50f;
+        private float height = 30f;
 
         void Start()
         {
-            int tileSize = 2;
+            int tileSize = GlobalProperties.TileSize;
             int widthTileCnt = (int) (width / tileSize);
             int heightTileCnt = (int) (height / tileSize);
         
