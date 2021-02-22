@@ -1,5 +1,6 @@
 using Code.Utilities;
 using Code.System.Properties;
+using Code.System.Grid;
 using UnityEngine;
 
 namespace Code.System.Area
@@ -9,7 +10,7 @@ namespace Code.System.Area
         [SerializeField] private bool showGrid = true;
         [SerializeField] private bool showDistrict = true;
 
-        private Grid.Grid _grid;
+        private Grid.Grid grid;
         private float width = 100f;
         private float height = 30f;
 
@@ -19,7 +20,7 @@ namespace Code.System.Area
             int widthTileCnt = (int) (width / tileSize);
             int heightTileCnt = (int) (height / tileSize);
         
-            _grid = new Grid.Grid(widthTileCnt, heightTileCnt, tileSize);
+            grid = new Grid.Grid(widthTileCnt, heightTileCnt, tileSize);
 
             if (showGrid) 
                 __debug__CreateGridText();
@@ -33,9 +34,9 @@ namespace Code.System.Area
 
         private void __debug__CreateGridText()
         {
-            for (int x = 0; x < _grid.Tiles.GetLength(0); x++) {
-                for (int y = 0; y < _grid.Tiles.GetLength(1); y++) {
-                    CodeMonkeyUtils.ShowWorldText(x + "," + y, null, _grid.GetWorldPosition(x, y) + new Vector3(_grid.TileSize, _grid.TileSize) * 0.5f, 8, Color.white,
+            for (int x = 0; x < grid.Tiles.GetLength(0); x++) {
+                for (int y = 0; y < grid.Tiles.GetLength(1); y++) {
+                    CodeMonkeyUtils.ShowWorldText(x + "," + y, null, grid.GetWorldPosition(x, y) + new Vector3(grid.TileSize, grid.TileSize) * 0.5f, 8, Color.white,
                         TextAnchor.MiddleCenter);
                 }
             }
@@ -43,14 +44,14 @@ namespace Code.System.Area
     
         private void __debug__ShowGrid()
         {
-            for (int x = 0; x < _grid.Tiles.GetLength(0); x++) 
-            for (int y = 0; y < _grid.Tiles.GetLength(1); y++) {
-                Debug.DrawLine(_grid.GetWorldPosition(x, y), _grid.GetWorldPosition(x, y + 1), Color.white);
-                Debug.DrawLine(_grid.GetWorldPosition(x, y), _grid.GetWorldPosition(x + 1, y), Color.white);
+            for (int x = 0; x < grid.Tiles.GetLength(0); x++) 
+            for (int y = 0; y < grid.Tiles.GetLength(1); y++) {
+                Debug.DrawLine(grid.GetWorldPosition(x, y), grid.GetWorldPosition(x, y + 1), Color.white);
+                Debug.DrawLine(grid.GetWorldPosition(x, y), grid.GetWorldPosition(x + 1, y), Color.white);
             }
         
-            Debug.DrawLine(_grid.GetWorldPosition(0, _grid.Height), _grid.GetWorldPosition(_grid.Width, _grid.Height), Color.white);
-            Debug.DrawLine(_grid.GetWorldPosition(_grid.Width, 0), _grid.GetWorldPosition(_grid.Width, _grid.Height), Color.white);
+            Debug.DrawLine(grid.GetWorldPosition(0, grid.Height), grid.GetWorldPosition(grid.Width, grid.Height), Color.white);
+            Debug.DrawLine(grid.GetWorldPosition(grid.Width, 0), grid.GetWorldPosition(grid.Width, grid.Height), Color.white);
         }
 
         private void OnDrawGizmos()

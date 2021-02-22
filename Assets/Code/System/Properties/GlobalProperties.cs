@@ -1,8 +1,7 @@
 
-
 namespace Code.System.Properties
 {
-    public class GlobalProperties
+    public static class GlobalProperties
     {
         private static int tileSize = 2;
 
