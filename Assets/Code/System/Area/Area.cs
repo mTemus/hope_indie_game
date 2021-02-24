@@ -1,6 +1,5 @@
 using Code.Utilities;
 using Code.System.Properties;
-using Code.System.Grid;
 using UnityEngine;
 
 namespace Code.System.Area
@@ -10,12 +9,16 @@ namespace Code.System.Area
         [SerializeField] private bool showGrid = true;
         [SerializeField] private bool showDistrict = true;
 
+        private static Area instance;
+        
         private Grid.Grid grid;
         private float width = 100f;
         private float height = 30f;
 
         void Start()
         {
+            instance = this;
+            
             int tileSize = GlobalProperties.TileSize;
             int widthTileCnt = (int) (width / tileSize);
             int heightTileCnt = (int) (height / tileSize);
@@ -34,9 +37,9 @@ namespace Code.System.Area
 
         private void __debug__CreateGridText()
         {
-            for (int x = 0; x < grid.Tiles.GetLength(0); x++) {
-                for (int y = 0; y < grid.Tiles.GetLength(1); y++) {
-                    CodeMonkeyUtils.ShowWorldText(x + "," + y, null, grid.GetWorldPosition(x, y) + new Vector3(grid.TileSize, grid.TileSize) * 0.5f, 8, Color.white,
+            for (int x = 0; x < grid.Cells.GetLength(0); x++) {
+                for (int y = 0; y < grid.Cells.GetLength(1); y++) {
+                    CodeMonkeyUtils.ShowWorldText(x + "," + y, null, grid.GetWorldPosition(x, y) + new Vector3(grid.CellSize, grid.CellSize) * 0.5f, 8, Color.white,
                         TextAnchor.MiddleCenter);
                 }
             }
@@ -44,8 +47,8 @@ namespace Code.System.Area
     
         private void __debug__ShowGrid()
         {
-            for (int x = 0; x < grid.Tiles.GetLength(0); x++) 
-            for (int y = 0; y < grid.Tiles.GetLength(1); y++) {
+            for (int x = 0; x < grid.Cells.GetLength(0); x++) 
+            for (int y = 0; y < grid.Cells.GetLength(1); y++) {
                 Debug.DrawLine(grid.GetWorldPosition(x, y), grid.GetWorldPosition(x, y + 1), Color.white);
                 Debug.DrawLine(grid.GetWorldPosition(x, y), grid.GetWorldPosition(x + 1, y), Color.white);
             }
@@ -63,5 +66,8 @@ namespace Code.System.Area
                 Gizmos.DrawWireCube(transform.position + districtSize * 0.5f, districtSize);
         }
 
+        public static Area Instance => instance;
+
+        public Grid.Grid Grid => grid;
     }
 }

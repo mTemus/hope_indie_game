@@ -4,35 +4,47 @@ namespace Code.System.Grid
 {
     public class Grid
     {
-        private int _width;
-        private int _height;
-        private readonly int _tileSize;
+        private readonly int width;
+        private readonly int height;
+        private readonly int cellSize;
 
-        public Tile[,] tiles;
+        private readonly Cell[,] cells;
 
-        public Grid(int width, int height, int tileSize)
+        public Grid(int width, int height, int cellSize)
         {
-            _width = width;
-            _height = height;
-            _tileSize = tileSize;
+            this.width = width;
+            this.height = height;
+            this.cellSize = cellSize;
 
-            tiles = new Tile[width, height];
+            cells = new Cell[width, height];
 
             for (int i = 0; i < width; i++)
             for (int j = 0; j < height; j++) 
-                tiles[i, j] = new Tile();
+                cells[i, j] = new Cell();
+        }
+
+        public void GetXY(Vector3 worldPosition, out int x, out int y)
+        {
+            x = Mathf.FloorToInt(worldPosition.x / cellSize);
+            y = Mathf.FloorToInt(worldPosition.y / cellSize);
         }
 
         public Vector3 GetWorldPosition(int x, int y) => 
-            new Vector3(x, y) * _tileSize;
+            new Vector3(x, y) * cellSize;
+        
+        public Vector2 GetWorldPosition(Vector2 pos) => 
+            pos * cellSize;
 
-        public int TileSize => _tileSize;
+        public Cell GetCellAt(int x, int y) =>
+            cells[x, y];
 
-        public Tile[,] Tiles => tiles;
+        public int CellSize => cellSize;
 
-        public int Width => _width;
+        public Cell[,] Cells => cells;
 
-        public int Height => _height;
+        public int Width => width;
+
+        public int Height => height;
     }
     
     
