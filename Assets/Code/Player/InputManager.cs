@@ -6,7 +6,10 @@ namespace Code.Player
 {
     public enum InputState
     {
-        WALKING, UI
+        MOVING,
+        TOOL_SELECTING,
+        SELECT_BUILDING,
+        BUILDING,
     }
     
     public class InputManager : MonoBehaviour
@@ -23,12 +26,12 @@ namespace Code.Player
             }
             
             switch (InputState) {
-                case InputState.WALKING:
+                case InputState.MOVING:
                     MovePlayerCharacter();
                     UseTool();
                     break;
                 
-                case InputState.UI:
+                case InputState.TOOL_SELECTING:
                     ChangePlayerTool();
                     break;
                 
@@ -64,7 +67,7 @@ namespace Code.Player
 
         private void ToggleState()
         {
-            inputState = inputState == InputState.WALKING ? InputState.UI : InputState.WALKING;
+            inputState = inputState == InputState.MOVING ? InputState.TOOL_SELECTING : InputState.MOVING;
         }
         
         public InputState InputState
