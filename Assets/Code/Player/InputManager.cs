@@ -9,7 +9,7 @@ namespace Code.Player
         WALKING, UI
     }
     
-    public class PlayerInputManager : MonoBehaviour
+    public class InputManager : MonoBehaviour
     {
         [SerializeField] private PlayerMovement movement;
         [SerializeField] private PlayerToolsManager tools;
