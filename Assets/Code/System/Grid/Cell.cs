@@ -1,15 +1,24 @@
+using Code.Map.Building;
 using UnityEngine;
 
 namespace Code.System.Grid
 {
     public class Cell
     {
-        private Transform buildingInCell;
+        private BuildingData buildingData;
+
+        public Cell()
+        {
+            buildingData = new BuildingData();
+        }
 
         public void SetBuildingAtCell(Transform building) =>
-            buildingInCell = building;
+            buildingData.BuildingObject = building;
+
+        public void SetBuildingScriptAtCell(BuildingScript buildingScript) =>
+            buildingData.BuildingScript = buildingScript;
         
         public bool CanBuild() => 
-            buildingInCell == null;
+            buildingData.BuildingObject == null && buildingData.BuildingScript;
     }
 }
