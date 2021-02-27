@@ -1,20 +1,23 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace Code.Map.Building
 {
-    [CreateAssetMenu(fileName = "Building Data", menuName = "Map Objects", order = 0)]
-    public class BuildingData : ScriptableObject
+    public class BuildingData
     {
-        public Transform prefab;
-        public Transform visual;
-        
-        public string buildingName;
-        public int width;
-        public int height;
-        public float xPivot;
-        public float yPivot;
-        
-        
-        
+        private BuildingScript buildingScript;
+        private Transform buildingObject;
+
+
+        public BuildingScript BuildingScript
+        {
+            get => buildingScript;
+            set => buildingScript = value;
+        }
+
+        public Transform BuildingObject
+        {
+            get => buildingObject;
+            set => buildingObject = value;
+        }
     }
 }
