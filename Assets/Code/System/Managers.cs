@@ -6,13 +6,13 @@ namespace Code.System
 {
    public class Managers : MonoBehaviour
    {
-      [SerializeField] private PlayerInputManager input;
+      [SerializeField] private InputManager input;
       [SerializeField] private PlayerToolsManager tools;
       [SerializeField] private PlayerManager player;
       [SerializeField] private BuildingManager building;
 
 
-      public PlayerInputManager Input => input;
+      public InputManager Input => input;
 
       public PlayerToolsManager Tools => tools;
 
