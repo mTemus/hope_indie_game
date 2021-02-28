@@ -1,5 +1,9 @@
+using System;
+using System.Runtime.CompilerServices;
 using Code.Map.Building.Systems;
 using Code.Player;
+using Code.Player.Tools;
+using Code.System.PlayerInput;
 using UnityEngine;
 
 namespace Code.System
@@ -11,7 +15,14 @@ namespace Code.System
       [SerializeField] private PlayerManager player;
       [SerializeField] private BuildingManager building;
 
+      private static Managers _instance;
 
+      
+      private void Awake()
+      {
+         _instance = this;
+      }
+      
       public InputManager Input => input;
 
       public PlayerToolsManager Tools => tools;
@@ -20,6 +31,6 @@ namespace Code.System
 
       public BuildingManager Building => building;
 
-      public Managers Instance => this;
+      public static Managers Instance => _instance;
    }
 }
