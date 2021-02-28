@@ -1,13 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class MoveCamera : MonoBehaviour {
-	private float spd = 3f;
+namespace AssetStore.Wolv_Interactive.Pixel_Perfect_Retro_Camera.Scenes.Example
+{
+	public class MoveCamera : MonoBehaviour {
+		private float spd = 3f;
 
-	void Update() {
-		Vector2 v = new Vector2(Input.GetAxis("Horizontal") * spd, Input.GetAxis("Vertical") * spd);
+		void Update() {
+			Vector2 v = new Vector2(Input.GetAxis("Horizontal") * spd, Input.GetAxis("Vertical") * spd);
 
-		transform.Translate(v * Time.deltaTime);
+			transform.Translate(v * Time.deltaTime);
+		}
 	}
 }
