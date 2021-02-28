@@ -1,7 +1,6 @@
-using Code.Player.Tools;
 using UnityEngine;
 
-namespace Code.Player
+namespace Code.Player.Tools
 {
     public class PlayerToolsManager : MonoBehaviour
     {
