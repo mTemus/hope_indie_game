@@ -17,6 +17,10 @@ namespace Code.System.PlayerInput.States
         
             if (Input.GetKeyDown(inputManager.Right) || Input.GetKeyDown(inputManager.RightAlt)) 
                 Managers.Instance.Tools.SelectTool(1);
+            
+            if (Input.GetKeyDown(inputManager.Tools)) {
+                Managers.Instance.Input.SetState(InputManager.MovingInputState);
+            }
         }
 
         public void OnStateChange()
