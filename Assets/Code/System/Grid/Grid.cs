@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Code.System.Grid
@@ -28,6 +29,18 @@ namespace Code.System.Grid
             x = Mathf.FloorToInt(worldPosition.x / cellSize);
             y = Mathf.FloorToInt(worldPosition.y / cellSize);
         }
+        
+        public List<Vector2Int> GetTileWithNeighbours(Vector2Int tile, Vector2Int objectSize)
+        {
+            List<Vector2Int> tiles = new List<Vector2Int>();
+
+            for (int x = 0; x < objectSize.x; x++) {
+                for (int y = 0; y < objectSize.y; y++) {
+                    tiles.Add(new Vector2Int(tile.x + x, tile.y + y));
+                }
+            }
+            return tiles;
+        }
 
         public Vector3 GetWorldPosition(int x, int y) => 
             new Vector3(x, y) * cellSize;
@@ -37,6 +50,9 @@ namespace Code.System.Grid
 
         public Cell GetCellAt(int x, int y) =>
             cells[x, y];
+
+        public bool IsTileInRange(int x, int y) =>
+            y <= height && y >= 0 && x <= width && x >= 0;
 
         public int CellSize => cellSize;
 

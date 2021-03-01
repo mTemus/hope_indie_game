@@ -23,6 +23,7 @@ namespace Code.System.PlayerInput
         private static MovingInputState _movingInputState;
         private static ToolSelectingInputState _toolSelectingInputState;
         private static BuildingSelectingInputState _buildingSelectingInputState;
+        private static BuildingPlacingInputState _buildingPlacingInputState;
         
         private IInputState currentInputState;
 
@@ -31,21 +32,24 @@ namespace Code.System.PlayerInput
             _movingInputState = new MovingInputState();
             _toolSelectingInputState = new ToolSelectingInputState();
             _buildingSelectingInputState = new BuildingSelectingInputState();
+            _buildingPlacingInputState = new BuildingPlacingInputState();
             
             currentInputState = _movingInputState;
+            Debug.LogWarning(currentInputState.GetType().Name);
         }
 
         void Update()
         {
             currentInputState.HandleState(this);
         }
-
-       
+        
         public void SetState(IInputState newInputState)
         {
             currentInputState.OnStateChange();
             currentInputState = newInputState;
             currentInputState.OnStateSet();
+            
+            Debug.LogWarning(currentInputState.GetType().Name);
         }
         
         public PlayerMovement Movement => movement;
@@ -73,11 +77,9 @@ namespace Code.System.PlayerInput
         public static MovingInputState MovingInputState => _movingInputState;
 
         public static ToolSelectingInputState ToolSelectingInputState => _toolSelectingInputState;
-
-        public static MovingInputState MovingInputState1 => _movingInputState;
-
-        public static ToolSelectingInputState ToolSelectingInputState1 => _toolSelectingInputState;
-
+        
         public static BuildingSelectingInputState BuildingSelectingInputState => _buildingSelectingInputState;
+
+        public static BuildingPlacingInputState BuildingPlacingInputState => _buildingPlacingInputState;
     }
 }
