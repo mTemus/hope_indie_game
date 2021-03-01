@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Warehouse
   m_EditorClassIdentifier: 
   prefab: {fileID: 3085277392001244628, guid: 2fa98d1e929f51c43a0ac176884a0bb3, type: 3}
-  visual: {fileID: 3085277392001244628, guid: 2fa98d1e929f51c43a0ac176884a0bb3, type: 3}
   buildingName: Warehouse
-  width: 0
-  height: 0
+  width: 7
+  height: 8
   xPivot: 0
   yPivot: 0
