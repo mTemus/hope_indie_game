@@ -11,12 +11,9 @@ namespace Code.Player.Tools
         public void SelectTool(int increase)
         {
             toolIdx += increase;
-            Debug.LogWarning(toolIdx);
-            
-            
+
             if (toolIdx > tools.Length - 1) 
                 toolIdx = 0;
-        
 
             if (toolIdx < 0) 
                 toolIdx = tools.Length - 1;
@@ -30,7 +27,5 @@ namespace Code.Player.Tools
         
             Debug.Log(tools[toolIdx].name + " used.");
         }
-    
-    
     }
 }

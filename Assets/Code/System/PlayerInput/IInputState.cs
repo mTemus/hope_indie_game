@@ -1,6 +1,4 @@
-﻿using Code.Player;
-
-namespace Code.System.PlayerInput
+﻿namespace Code.System.PlayerInput
 {
     public interface IInputState
     {

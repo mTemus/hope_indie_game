@@ -1,6 +1,3 @@
-
-using UnityEngine;
-
 namespace Code.System.Properties
 {
     public static class GlobalProperties

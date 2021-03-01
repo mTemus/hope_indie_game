@@ -1,18 +1,9 @@
-using System;
 using Code.Player;
 using Code.System.PlayerInput.States;
 using UnityEngine;
 
 namespace Code.System.PlayerInput
 {
-    public enum InputState
-    {
-        MOVING,
-        TOOL_SELECTING,
-        SELECT_BUILDING,
-        BUILDING,
-    }
-    
     public class InputManager : MonoBehaviour
     {
         [SerializeField] private PlayerMovement movement;

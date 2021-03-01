@@ -1,13 +1,7 @@
-﻿using UnityEngine;
-
-namespace Code.Utilities
+﻿namespace Code.Utilities
 {
     public static class Utilities
     {
-        //TODO: fix main cam
-        public static Vector2 GetMouseWorldPosition2D() =>
-            Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
         public static int IncrementIdx(int idx, int value, int maxValue)
         {
             if (idx + value >= maxValue) 
