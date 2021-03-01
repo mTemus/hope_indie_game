@@ -1,6 +1,7 @@
 using Code.Map.Building.Systems;
 using Code.Player;
 using Code.Player.Tools;
+using Code.System.Camera;
 using Code.System.PlayerInput;
 using UnityEngine;
 
@@ -12,7 +13,8 @@ namespace Code.System
       [SerializeField] private PlayerToolsManager tools;
       [SerializeField] private PlayerManager player;
       [SerializeField] private BuildingManager building;
-
+      [SerializeField] private CameraManager cameras;
+      
       private static Managers _instance;
 
       
@@ -28,6 +30,8 @@ namespace Code.System
       public PlayerManager Player => player;
 
       public BuildingManager Building => building;
+
+      public CameraManager Cameras => cameras;
 
       public static Managers Instance => _instance;
    }

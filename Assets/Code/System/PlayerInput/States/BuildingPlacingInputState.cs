@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Code.Map.Building.Systems;
+using UnityEngine;
 
 namespace Code.System.PlayerInput.States
 {
@@ -6,7 +7,7 @@ namespace Code.System.PlayerInput.States
     {
         public void OnStateSet()
         {
-            //TODO: camera focus on object
+            Managers.Instance.Cameras.FocusCameraOn(BuildingManager.CurrentBuilding.transform);
         }
 
         public void HandleState(InputManager inputManager)
@@ -24,7 +25,7 @@ namespace Code.System.PlayerInput.States
 
         public void OnStateChange()
         {
-            //TODO: camera focus on player
+            Managers.Instance.Cameras.FocusCameraOn(Managers.Instance.Player.Player.transform);
         }
     }
 }
