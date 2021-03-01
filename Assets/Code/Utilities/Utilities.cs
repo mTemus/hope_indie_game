@@ -4,10 +4,10 @@
     {
         public static int IncrementIdx(int idx, int value, int maxValue)
         {
-            if (idx + value >= maxValue) 
+            if (idx + value > maxValue - 1) 
                 return 0;
             if(idx + value < 0) 
-                return maxValue;
+                return maxValue - 1;
             
             return idx + value;
         }
