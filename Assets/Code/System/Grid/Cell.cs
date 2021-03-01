@@ -19,6 +19,6 @@ namespace Code.System.Grid
             buildingData.BuildingScript = buildingScript;
         
         public bool CanBuild() => 
-            buildingData.BuildingObject == null && buildingData.BuildingScript;
+            buildingData.BuildingObject == null && buildingData.BuildingScript == null;
     }
 }
