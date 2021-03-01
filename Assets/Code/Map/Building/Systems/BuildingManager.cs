@@ -22,8 +22,6 @@ namespace Code.Map.Building.Systems
         public void ChangeBuilding(int value)
         {
             buildingIdx = Utilities.Utilities.IncrementIdx(buildingIdx, value, buildings.Length);
-            
-            Debug.Log(buildingIdx);
             SetBuilding(buildingIdx);
         }
 
@@ -60,8 +58,6 @@ namespace Code.Map.Building.Systems
             List<Vector2Int> buildingArea =
                 Area.Instance.Grid.GetTileWithNeighbours(new Vector2Int(currBuildPos.x / GlobalProperties.TileSize, currBuildPos.y), new Vector2Int(buildingScript.width, buildingScript.height));
             
-            Debug.Log("here");
-            
             foreach (Vector2Int tilePos in buildingArea) {
                 Cell cell = Area.Instance.Grid.GetCellAt(tilePos.x, tilePos.y);
 
@@ -69,8 +65,6 @@ namespace Code.Map.Building.Systems
                 Debug.LogWarning("Can't build this object at: " + tilePos.x + " " + tilePos.y);
                 return;
             }
-
-            Debug.Log("here2 " + buildingArea.Count);
             
             foreach (Vector2Int tilePos in buildingArea) {
                 Debug.Log(tilePos);
@@ -79,8 +73,6 @@ namespace Code.Map.Building.Systems
                 cell.SetBuildingAtCell(currBuildTransf);
                 cell.SetBuildingScriptAtCell(buildingScript);
             }
-
-            Debug.Log("here3");
             
             _currentBuilding = null;
             currOffset = Vector3Int.zero;
