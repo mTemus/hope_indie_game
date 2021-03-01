@@ -6023,6 +6023,7 @@ GameObject:
   - component: {fileID: 1579721258}
   - component: {fileID: 1579721257}
   - component: {fileID: 1579721256}
+  - component: {fileID: 1579721259}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -6061,6 +6062,7 @@ MonoBehaviour:
   tools: {fileID: 2013423543}
   player: {fileID: 2013423544}
   building: {fileID: 1579721256}
+  cameras: {fileID: 1579721259}
 --- !u!4 &1579721258
 Transform:
   m_ObjectHideFlags: 0
@@ -6075,6 +6077,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1579721259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1579721255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a25b28e27e132c545930c01d67cb11ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 519420031}
+  cmv: {fileID: 1363674097}
 --- !u!1 &1688838133
 GameObject:
   m_ObjectHideFlags: 0
