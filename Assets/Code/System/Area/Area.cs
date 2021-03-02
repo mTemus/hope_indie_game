@@ -3,12 +3,19 @@ using UnityEngine;
 
 namespace Code.System.Area
 {
-    public class Area : MonoBehaviour
+    public enum AreaType
     {
-        [SerializeField] private bool showGrid = true;
-        [SerializeField] private bool showDistrict = true;
+        VILLAGE,
+        FOREST,
+        EMPTY,
+    }
 
-        private static Area instance;
+    public abstract class Area : MonoBehaviour
+    {
+        [Header("Properties")]
+        [SerializeField] private AreaType type;
+        [SerializeField] private float width = 100f;
+        [SerializeField] private float height = 30f;
         
         private Grid.Grid grid;
         
