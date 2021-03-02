@@ -42,7 +42,10 @@ namespace Code.System.Grid
             return tiles;
         }
 
-        public Vector3 GetWorldPosition(int x, int y) => 
+        public Vector3 GetWorldPosition(int x, int y, Vector3 worldAreaPos) => 
+            new Vector3(x, y) * cellSize + worldAreaPos;
+        
+        public Vector3 GetLocalAreaPosition(int x, int y) => 
             new Vector3(x, y) * cellSize;
         
         public Vector2 GetWorldPosition(Vector2 pos) => 
