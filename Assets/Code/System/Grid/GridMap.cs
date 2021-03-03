@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Code.System.Grid
 {
-    public class Grid
+    public class GridMap
     {
         private readonly int width;
         private readonly int height;
@@ -11,7 +11,7 @@ namespace Code.System.Grid
 
         private readonly Cell[,] cells;
 
-        public Grid(int width, int height, int cellSize)
+        public GridMap(int width, int height, int cellSize)
         {
             this.width = width;
             this.height = height;
