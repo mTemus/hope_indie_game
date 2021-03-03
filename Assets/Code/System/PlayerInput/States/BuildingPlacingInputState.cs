@@ -21,6 +21,12 @@ namespace Code.System.PlayerInput.States
             if (Input.GetKeyDown(inputManager.Action)) {
                 Managers.Instance.Building.BuildBuilding();
             }
+
+            if (Input.GetKeyDown(inputManager.Cancel)) {
+                Managers.Instance.Building.CancelBuilding();
+                Managers.Instance.Cameras.FocusCameraOn(Managers.Instance.Player.Player.transform);
+                Managers.Instance.Input.SetState(InputManager.MovingInputState);
+            }
         }
 
         public void OnStateChange()

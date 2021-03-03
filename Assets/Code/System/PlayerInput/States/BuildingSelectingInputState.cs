@@ -19,6 +19,11 @@ namespace Code.System.PlayerInput.States
             
             if (Input.GetKeyDown(inputManager.Action)) 
                 inputManager.SetState(InputManager.BuildingPlacingInputState);
+            
+            if (Input.GetKeyDown(inputManager.Cancel)) {
+                Managers.Instance.Building.CancelBuilding();
+                Managers.Instance.Input.SetState(InputManager.MovingInputState);
+            }
         }
 
         public void OnStateChange()

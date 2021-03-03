@@ -19,6 +19,7 @@ namespace Code.System.PlayerInput
         [SerializeField] private KeyCode downAlt;
         [SerializeField] private KeyCode action;
         [SerializeField] private KeyCode tools;
+        [SerializeField] private KeyCode cancel;
 
         private static MovingInputState _movingInputState;
         private static ToolSelectingInputState _toolSelectingInputState;
@@ -73,6 +74,8 @@ namespace Code.System.PlayerInput
         public KeyCode Action => action;
 
         public KeyCode Tools => tools;
+
+        public KeyCode Cancel => cancel;
 
         public static MovingInputState MovingInputState => _movingInputState;
 
