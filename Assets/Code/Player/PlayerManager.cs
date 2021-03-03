@@ -1,3 +1,5 @@
+using Code.System;
+using Code.System.Area;
 using UnityEngine;
 
 namespace Code.Player
@@ -5,19 +7,17 @@ namespace Code.Player
     public class PlayerManager : MonoBehaviour
     {
         [SerializeField] private GameObject player;
-
-        private static PlayerManager _instance;
-    
-        private void Awake()
+        
+        private void Start()
         {
-            _instance = this;
+            Area area = Managers.Instance.Areas.GetAreaByCoords(Vector3Int.FloorToInt(player.transform.position));
+            Debug.LogWarning("Start area: " + area.name);
+            area.SetPlayerToArea(player);
         }
 
         public Vector2 GetPlayerPosition() 
             => player.transform.position;
     
         public GameObject Player => player;
-
-        public static PlayerManager Instance => _instance;
     }
 }
