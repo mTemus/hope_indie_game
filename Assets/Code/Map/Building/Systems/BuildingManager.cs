@@ -18,6 +18,7 @@ namespace Code.Map.Building.Systems
         private Vector3Int currOffset;
 
         private static GameObject _currentBuilding;
+        private static BuildingScript _currentBuildingData;
         
         public void ChangeBuilding(int value)
         {
@@ -33,9 +34,10 @@ namespace Code.Map.Building.Systems
             Vector2 playerPos = Managers.Instance.Player.GetPlayerLocalPosition();
             Area playerArea = Managers.Instance.Areas.GetPlayerArea();
             playerArea.GridMap.GetXY(playerPos, out int x, out int y);
-            
+
+            _currentBuildingData = buildings[buildingId];
             _currentBuilding = Instantiate(
-                buildings[buildingId].prefab.gameObject, 
+                _currentBuildingData.prefab.gameObject, 
                 playerArea.GridMap.GetWorldPosition(x, y - 1, playerArea.transform.position), 
                 Quaternion.identity, 
                 playerArea.transform);
@@ -45,9 +47,10 @@ namespace Code.Map.Building.Systems
         {
             Vector3Int currBuildPos = Vector3Int.FloorToInt(_currentBuilding.transform.localPosition);
             direction *= GlobalProperties.TileSize;
-
+            
             if (Mathf.Abs(currOffset.x + direction.x) > maxXOffset) return;
-            if (Managers.Instance.Areas.GetPlayerArea().GridMap.IsTileInRange(currBuildPos.x + direction.x, currBuildPos.y)) return;
+            if (!Managers.Instance.Areas.GetPlayerArea().GridMap.IsTileInRange(currBuildPos.x + direction.x, currBuildPos.y)) return;
+            if (!Managers.Instance.Areas.GetPlayerArea().GridMap.IsTileInRange(currBuildPos.x + direction.x, currBuildPos.y, _currentBuildingData.width)) return;
             
             currOffset += direction;
             _currentBuilding.transform.localPosition += direction;
@@ -78,6 +81,7 @@ namespace Code.Map.Building.Systems
             }
             
             _currentBuilding = null;
+            _currentBuildingData = null;
             currOffset = Vector3Int.zero;
             
             Managers.Instance.Input.SetState(InputManager.MovingInputState);

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Code.System.Properties;
 using UnityEngine;
 
 namespace Code.System.Grid
@@ -54,8 +55,19 @@ namespace Code.System.Grid
         public Cell GetCellAt(int x, int y) =>
             cells[x, y];
 
-        public bool IsTileInRange(int x, int y) =>
-            y <= height && y >= 0 && x <= width && x >= 0;
+        public bool IsTileInRange(int x, int y)
+        {
+            x /= GlobalProperties.TileSize;
+            y /= GlobalProperties.TileSize;
+            return y <= height && y >= 0 && x <= width && x >= 0;
+        }
+        
+        public bool IsTileInRange(int x, int y, int objectWidth)
+        {
+            x /= GlobalProperties.TileSize;
+            y /= GlobalProperties.TileSize;
+            return y  <= height && y >= 0 && x + objectWidth <= width && x >= 0;
+        }
 
         public int CellSize => cellSize;
 
