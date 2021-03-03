@@ -29,47 +29,50 @@ namespace Code.Map.Building.Systems
         {
             if (_currentBuilding != null) 
                 DestroyImmediate(_currentBuilding.gameObject);
-            
-            Vector2 playerPos = PlayerManager.Instance.GetPlayerPosition();
 
-            Area.Instance.Grid.GetXY(playerPos, out int x, out int y);
-            BuildingScript currBuildingTempl = buildings[buildingId];
-            _currentBuilding = Instantiate(currBuildingTempl.prefab.gameObject, Area.Instance.Grid.GetWorldPosition(x, y - 1), Quaternion.identity);
+            Vector2 playerPos = Managers.Instance.Player.GetPlayerLocalPosition();
+            Area playerArea = Managers.Instance.Areas.GetPlayerArea();
+            playerArea.GridMap.GetXY(playerPos, out int x, out int y);
+            
+            _currentBuilding = Instantiate(
+                buildings[buildingId].prefab.gameObject, 
+                playerArea.GridMap.GetWorldPosition(x, y - 1, playerArea.transform.position), 
+                Quaternion.identity, 
+                playerArea.transform);
         }
 
         public void MoveCurrentBuilding(Vector3Int direction)
         {
-            Vector3Int currBuildPos = Vector3Int.FloorToInt(_currentBuilding.transform.position);
+            Vector3Int currBuildPos = Vector3Int.FloorToInt(_currentBuilding.transform.localPosition);
             direction *= GlobalProperties.TileSize;
 
             if (Mathf.Abs(currOffset.x + direction.x) > maxXOffset) return;
-            if (!Area.Instance.Grid.IsTileInRange(currBuildPos.x + direction.x, currBuildPos.y)) return;
+            if (Managers.Instance.Areas.GetPlayerArea().GridMap.IsTileInRange(currBuildPos.x + direction.x, currBuildPos.y)) return;
             
             currOffset += direction;
-            _currentBuilding.transform.position += direction;
+            _currentBuilding.transform.localPosition += direction;
         }
 
         public void BuildBuilding()
         {
             Transform currBuildTransf = _currentBuilding.transform;
-            Vector3Int currBuildPos = Vector3Int.FloorToInt(currBuildTransf.position);
-
+            Vector3Int currBuildPos = Vector3Int.FloorToInt(currBuildTransf.localPosition);
+            Area playerArea = Managers.Instance.Areas.GetPlayerArea();
+            
             BuildingScript buildingScript = buildings[buildingIdx];
             List<Vector2Int> buildingArea =
-                Area.Instance.Grid.GetTileWithNeighbours(new Vector2Int(currBuildPos.x / GlobalProperties.TileSize, currBuildPos.y), new Vector2Int(buildingScript.width, buildingScript.height));
+                playerArea.GridMap.GetTileWithNeighbours(new Vector2Int(currBuildPos.x / GlobalProperties.TileSize, currBuildPos.y), new Vector2Int(buildingScript.width, buildingScript.height));
             
             foreach (Vector2Int tilePos in buildingArea) {
-                Cell cell = Area.Instance.Grid.GetCellAt(tilePos.x, tilePos.y);
-
+                Cell cell = playerArea.GridMap.GetCellAt(tilePos.x, tilePos.y);
+            
                 if (cell.CanBuild()) continue;
                 Debug.LogWarning("Can't build this object at: " + tilePos.x + " " + tilePos.y);
                 return;
             }
             
             foreach (Vector2Int tilePos in buildingArea) {
-                Debug.Log(tilePos);
-                
-                Cell cell = Area.Instance.Grid.GetCellAt(tilePos.x, tilePos.y);
+                Cell cell = playerArea.GridMap.GetCellAt(tilePos.x, tilePos.y);
                 cell.SetBuildingAtCell(currBuildTransf);
                 cell.SetBuildingScriptAtCell(buildingScript);
             }

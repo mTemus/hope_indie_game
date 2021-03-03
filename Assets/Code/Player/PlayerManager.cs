@@ -17,7 +17,10 @@ namespace Code.Player
 
         public Vector2 GetPlayerPosition() 
             => player.transform.position;
-    
+
+        public Vector2 GetPlayerLocalPosition()
+            => player.transform.localPosition;
+        
         public GameObject Player => player;
     }
 }

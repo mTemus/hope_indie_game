@@ -34,6 +34,9 @@ namespace Code.System.Area
             return playerObject != null;
         }
 
+        public Vector3 GetAreaWorldPosition 
+            => transform.position;
+        
         public void SetPlayerToArea(GameObject player)
         {
             playerObject = player;
