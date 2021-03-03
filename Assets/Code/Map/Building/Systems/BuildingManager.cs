@@ -30,15 +30,23 @@ namespace Code.Map.Building.Systems
         {
             if (_currentBuilding != null) 
                 DestroyImmediate(_currentBuilding.gameObject);
-
+            
+            //TODO: CLEAR THIS CODE
             Vector2 playerPos = Managers.Instance.Player.GetPlayerLocalPosition();
             Area playerArea = Managers.Instance.Areas.GetPlayerArea();
             playerArea.GridMap.GetXY(playerPos, out int x, out int y);
-
             _currentBuildingData = buildings[buildingId];
+
+            Vector3Int buildingPosition = new Vector3Int(x, y, 0) * GlobalProperties.TileSize;
+            if (!playerArea.GridMap.IsTileInRange(buildingPosition.x, buildingPosition.y, _currentBuildingData.width)) 
+                while (!playerArea.GridMap.IsTileInRange(buildingPosition.x, buildingPosition.y, _currentBuildingData.width)) 
+                    buildingPosition.x -= 1 * GlobalProperties.TileSize;
+            
+            buildingPosition /= GlobalProperties.TileSize;
+            
             _currentBuilding = Instantiate(
                 _currentBuildingData.prefab.gameObject, 
-                playerArea.GridMap.GetWorldPosition(x, y - 1, playerArea.transform.position), 
+                playerArea.GridMap.GetWorldPosition(buildingPosition.x, buildingPosition.y - 1, playerArea.transform.position), 
                 Quaternion.identity, 
                 playerArea.transform);
         }
@@ -85,6 +93,15 @@ namespace Code.Map.Building.Systems
             currOffset = Vector3Int.zero;
             
             Managers.Instance.Input.SetState(InputManager.MovingInputState);
+        }
+
+        public void CancelBuilding()
+        {
+            DestroyImmediate(_currentBuilding);
+            
+            _currentBuilding = null;
+            _currentBuildingData = null;
+            currOffset = Vector3Int.zero;
         }
 
         public static GameObject CurrentBuilding => _currentBuilding;
