@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Code.Map.Building.Systems
 {
-    public class BuildingManager : MonoBehaviour
+    public class BuildingSystem : MonoBehaviour
     {
         [SerializeField] private BuildingScript[] buildings;
 

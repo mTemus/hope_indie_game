@@ -7,23 +7,23 @@ namespace Code.System.PlayerInput.States
     {
         public void OnStateSet()
         {
-            Managers.Instance.Cameras.FocusCameraOn(BuildingManager.CurrentBuilding.transform);
+            Managers.Instance.Cameras.FocusCameraOn(BuildingSystem.CurrentBuilding.transform);
         }
 
         public void HandleState(InputManager inputManager)
         {
             if (Input.GetKeyDown(inputManager.Left) || Input.GetKeyDown(inputManager.LeftAlt)) 
-                Managers.Instance.Building.MoveCurrentBuilding(Vector3Int.left);
+                Systems.Instance.Building.MoveCurrentBuilding(Vector3Int.left);
         
             if (Input.GetKeyDown(inputManager.Right) || Input.GetKeyDown(inputManager.RightAlt)) 
-                Managers.Instance.Building.MoveCurrentBuilding(Vector3Int.right);
+                Systems.Instance.Building.MoveCurrentBuilding(Vector3Int.right);
 
             if (Input.GetKeyDown(inputManager.Action)) {
-                Managers.Instance.Building.BuildBuilding();
+                Systems.Instance.Building.BuildBuilding();
             }
 
             if (Input.GetKeyDown(inputManager.Cancel)) {
-                Managers.Instance.Building.CancelBuilding();
+                Systems.Instance.Building.CancelBuilding();
                 Managers.Instance.Cameras.FocusCameraOn(Managers.Instance.Player.Player.transform);
                 Managers.Instance.Input.SetState(InputManager.MovingInputState);
             }

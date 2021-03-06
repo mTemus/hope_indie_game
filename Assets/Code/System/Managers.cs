@@ -13,7 +13,6 @@ namespace Code.System
       [SerializeField] private InputManager input;
       [SerializeField] private PlayerToolsManager tools;
       [SerializeField] private PlayerManager player;
-      [SerializeField] private BuildingManager building;
       [SerializeField] private CameraManager cameras;
       [SerializeField] private AreaManager areas;
       
@@ -30,9 +29,7 @@ namespace Code.System
       public PlayerToolsManager Tools => tools;
 
       public PlayerManager Player => player;
-
-      public BuildingManager Building => building;
-
+      
       public CameraManager Cameras => cameras;
 
       public AreaManager Areas => areas;
