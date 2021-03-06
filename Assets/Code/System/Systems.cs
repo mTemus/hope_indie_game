@@ -13,10 +13,9 @@ namespace Code.System
         {
             _instance = this;
         }
-
-
-        public static Systems Instance => _instance;
-
+        
         public BuildingSystem Building => building;
+        
+        public static Systems Instance => _instance;
     }
 }
