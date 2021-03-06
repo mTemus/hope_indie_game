@@ -1,9 +1,12 @@
-using Code.Map.Building.Systems;
+using Code.Map.Building;
 using Code.Player;
 using Code.Player.Tools;
+using Code.Resources;
 using Code.System.Area;
 using Code.System.Camera;
 using Code.System.PlayerInput;
+using Code.Villagers;
+using Code.Villagers.Tasks;
 using UnityEngine;
 
 namespace Code.System
@@ -15,10 +18,13 @@ namespace Code.System
       [SerializeField] private PlayerManager player;
       [SerializeField] private CameraManager cameras;
       [SerializeField] private AreaManager areas;
+      [SerializeField] private VillagersManager villagers;
+      [SerializeField] private BuildingsManager buildings;
+      [SerializeField] private TasksManager tasks;
+      [SerializeField] private ResourcesManager resources;
       
       private static Managers _instance;
 
-      
       private void Awake()
       {
          _instance = this;
@@ -33,6 +39,14 @@ namespace Code.System
       public CameraManager Cameras => cameras;
 
       public AreaManager Areas => areas;
+
+      public VillagersManager Villagers => villagers;
+
+      public BuildingsManager Buildings => buildings;
+
+      public TasksManager Tasks => tasks;
+
+      public ResourcesManager Resources => resources;
 
       public static Managers Instance => _instance;
    }
