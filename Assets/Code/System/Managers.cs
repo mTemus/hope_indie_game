@@ -6,6 +6,7 @@ using Code.System.Area;
 using Code.System.Camera;
 using Code.System.PlayerInput;
 using Code.Villagers;
+using Code.Villagers.Professions;
 using Code.Villagers.Tasks;
 using UnityEngine;
 
@@ -22,6 +23,7 @@ namespace Code.System
       [SerializeField] private BuildingsManager buildings;
       [SerializeField] private TasksManager tasks;
       [SerializeField] private ResourcesManager resources;
+      [SerializeField] private ProfessionManager professions;
       
       private static Managers _instance;
 
