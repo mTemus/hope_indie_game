@@ -57,15 +57,15 @@ namespace Code.System.Grid
 
         public bool IsTileInRange(int x, int y)
         {
-            x /= GlobalProperties.TileSize;
-            y /= GlobalProperties.TileSize;
+            x /= GlobalProperties.WorldTileSize;
+            y /= GlobalProperties.WorldTileSize;
             return y <= height && y >= 0 && x <= width && x >= 0;
         }
         
         public bool IsTileInRange(int x, int y, int objectWidth)
         {
-            x /= GlobalProperties.TileSize;
-            y /= GlobalProperties.TileSize;
+            x /= GlobalProperties.WorldTileSize;
+            y /= GlobalProperties.WorldTileSize;
             return y  <= height && y >= 0 && x + objectWidth <= width && x >= 0;
         }
 
