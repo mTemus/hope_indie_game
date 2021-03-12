@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Code.Map.Building;
 using Code.System.Grid;
 using Code.System.Properties;
 using UnityEngine;
@@ -18,15 +20,16 @@ namespace Code.System.Area
         [SerializeField] private float width = 100f;
         [SerializeField] private float height = 30f;
 
+        private List<Building> buildings = new List<Building>();
         private GameObject playerObject;
         private GridMap gridMap;
         
         void Awake()
         {
-            int widthTileCnt = (int) (width / GlobalProperties.TileSize);
-            int heightTileCnt = (int) (height / GlobalProperties.TileSize);
+            int widthTileCnt = (int) (width / GlobalProperties.WorldTileSize);
+            int heightTileCnt = (int) (height / GlobalProperties.WorldTileSize);
         
-            gridMap = new GridMap(widthTileCnt, heightTileCnt, GlobalProperties.TileSize);
+            gridMap = new GridMap(widthTileCnt, heightTileCnt, GlobalProperties.WorldTileSize);
         }
 
         public bool IsPlayerInArea() 
@@ -47,6 +50,13 @@ namespace Code.System.Area
         {
             playerObject.transform.SetParent(transform.root);
             playerObject = null;
+        }
+
+        public void AddBuilding(Building building)
+        {
+            buildings.Add(building);
+            
+            Debug.Log("Add building " + building.name + "  to area "+ gameObject.name + ".");
         }
 
         public GridMap GridMap => gridMap;

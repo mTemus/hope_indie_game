@@ -30,18 +30,18 @@ namespace Code.Map.Building.Systems
             if (_currentBuilding != null) 
                 DestroyImmediate(_currentBuilding.gameObject);
             
-            //TODO: CLEAR THIS CODE
+            //TODO: CLEAN THIS CODE
             Vector2 playerPos = Managers.Instance.Player.GetPlayerLocalPosition();
             Area playerArea = Managers.Instance.Areas.GetPlayerArea();
             playerArea.GridMap.GetXY(playerPos, out int x, out int y);
             _currentBuildingData = buildings[buildingId];
 
-            Vector3Int buildingPosition = new Vector3Int(x, y, 0) * GlobalProperties.TileSize;
+            Vector3Int buildingPosition = new Vector3Int(x, y, 0) * GlobalProperties.WorldTileSize;
             if (!playerArea.GridMap.IsTileInRange(buildingPosition.x, buildingPosition.y, _currentBuildingData.width)) 
                 while (!playerArea.GridMap.IsTileInRange(buildingPosition.x, buildingPosition.y, _currentBuildingData.width)) 
-                    buildingPosition.x -= 1 * GlobalProperties.TileSize;
+                    buildingPosition.x -= 1 * GlobalProperties.WorldTileSize;
             
-            buildingPosition /= GlobalProperties.TileSize;
+            buildingPosition /= GlobalProperties.WorldTileSize;
             
             _currentBuilding = Instantiate(
                 _currentBuildingData.prefab.gameObject, 
@@ -53,7 +53,7 @@ namespace Code.Map.Building.Systems
         public void MoveCurrentBuilding(Vector3Int direction)
         {
             Vector3Int currBuildPos = Vector3Int.FloorToInt(_currentBuilding.transform.localPosition);
-            direction *= GlobalProperties.TileSize;
+            direction *= GlobalProperties.WorldTileSize;
             
             if (Mathf.Abs(currOffset.x + direction.x) > maxXOffset) return;
             if (!Managers.Instance.Areas.GetPlayerArea().GridMap.IsTileInRange(currBuildPos.x + direction.x, currBuildPos.y)) return;
@@ -71,7 +71,7 @@ namespace Code.Map.Building.Systems
             
             BuildingScript buildingScript = buildings[buildingIdx];
             List<Vector2Int> buildingArea =
-                playerArea.GridMap.GetTileWithNeighbours(new Vector2Int(currBuildPos.x / GlobalProperties.TileSize, currBuildPos.y), new Vector2Int(buildingScript.width, buildingScript.height));
+                playerArea.GridMap.GetTileWithNeighbours(new Vector2Int(currBuildPos.x / GlobalProperties.WorldTileSize, currBuildPos.y), new Vector2Int(buildingScript.width, buildingScript.height));
             
             foreach (Vector2Int tilePos in buildingArea) {
                 Cell cell = playerArea.GridMap.GetCellAt(tilePos.x, tilePos.y);
