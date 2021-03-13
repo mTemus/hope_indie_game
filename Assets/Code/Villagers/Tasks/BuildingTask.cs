@@ -1,5 +1,6 @@
 using Code.Map.Building;
 using UnityEngine;
+using NotImplementedException = System.NotImplementedException;
 
 namespace Code.Villagers.Tasks
 {
@@ -31,5 +32,9 @@ namespace Code.Villagers.Tasks
             OnTaskCompleted?.Invoke();
         }
 
+        public override void OnTaskPause()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -17,12 +17,14 @@ namespace Code.Villagers.Tasks
     public class ResourceCarryingTask : Task
     {
         private readonly Warehouse storage;
+        private readonly ProfessionType profession;
         private Resource resourceData;
         private ResourceCarryingTaskState resourceCarryingState = ResourceCarryingTaskState.GO_TO_STORAGE;
 
         private readonly Func<Resource, Resource> onResourceDelivered;
         
-        public ResourceCarryingTask(int taskPriority, 
+        public ResourceCarryingTask(int taskPriority,
+            ProfessionType profession,
             Vector3 taskPosition, 
             Warehouse storage, 
             Resource resourceData, 
@@ -30,6 +32,7 @@ namespace Code.Villagers.Tasks
         {
             base.TaskPriority = taskPriority;
             base.TaskPosition = taskPosition;
+            this.profession = profession;
             this.storage = storage;
             this.resourceData = resourceData;
             this.onResourceDelivered = onResourceDelivered;
@@ -97,10 +100,17 @@ namespace Code.Villagers.Tasks
             // }
         }
 
+        public override void OnTaskPause()
+        {
+            
+        }
+
         public void SetWorker(Villager newWorker)
         {
             Worker = newWorker;
         }
+
+        public ProfessionType Profession => profession;
 
         public int TaskPriority => base.TaskPriority;
     }
