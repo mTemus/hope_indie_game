@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Code.Map.Building.Buildings.Components
 {
-    public class Warehouse : MonoBehaviour
+    public class Warehouse : Building
     {
         private readonly List<Resource> storedResources = new List<Resource>();
 
