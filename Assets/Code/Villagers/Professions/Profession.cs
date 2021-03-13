@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using Code.Map.Building;
 using Code.Resources;
 using Code.Villagers.AI;
+using Code.Villagers.AI.Worker;
 using Code.Villagers.Tasks;
 using UnityEngine;
 
@@ -17,35 +19,61 @@ namespace Code.Villagers.Professions
         [SerializeField] private ProfessionType type;
         
         protected Node ProfessionAI;
-        protected Node WorkNode;
+        protected WorkNode WorkNode;
         private readonly Queue<Task> tasks = new Queue<Task>();
         
+        private Building workplace;
+
         private Resource carriedResource;
         private Task currentTask;
+        
         public void DoWork()
         {
-            //TODO: move this to work node
-            if (currentTask == null) {
-                currentTask = tasks.Dequeue();
-                currentTask.OnTaskStart();
-            }
-
             currentTask.DoTask();
         }
 
-        public void GetTask(Task task)
+        public bool GetTask()
+        {
+            if (tasks.Count <= 0) return false;
+            currentTask = tasks.Dequeue();
+            currentTask.OnTaskStart();
+            return true;
+
+        }
+
+        public void AddTask(Task task)
         {
             tasks.Enqueue(task);
+        }
+
+        public void PauseCurrentTask()
+        {
+            currentTask.OnTaskPause();
+            tasks.Enqueue(currentTask);
+            currentTask = null;
+        }
+
+        public void AbandonCurrentTask()
+        {
+            currentTask = null;
         }
 
         public void OnTaskCompleted()
         {
             currentTask.OnTaskEnd();
             currentTask = null;
-            // change boolean in work node to inform about ended task
+            WorkNode.StartNewTask();
+        }
 
+        public void SetWorkplace(Building newWorkplace)
+        {
+            workplace = newWorkplace;
         }
         
+        public Building Workplace => workplace;
+
+        public ProfessionType Type => type;
+
         public Resource CarriedResource
         {
             get => carriedResource;

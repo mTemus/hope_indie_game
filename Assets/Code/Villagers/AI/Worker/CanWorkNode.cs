@@ -1,18 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class CanWorkNode : MonoBehaviour
+namespace Code.Villagers.AI.Worker
 {
-    // Start is called before the first frame update
-    void Start()
+    public class CanWorkNode : Node
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public override NodeState Evaluate()
+        {
+            return NodeState.SUCCESS;
+        }
     }
 }

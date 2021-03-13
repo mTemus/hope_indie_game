@@ -1,18 +1,42 @@
-using System.Collections;
-using System.Collections.Generic;
+using Code.Villagers.Professions;
 using UnityEngine;
 
-public class Wander : MonoBehaviour
+namespace Code.Villagers.AI.Worker
 {
-    // Start is called before the first frame update
-    void Start()
+    public class WanderNextToWorkplaceNode : Node
     {
+        private Profession profession;
+        private Villager villager;
         
-    }
+        private Vector3 nearPosition;
+        private float wanderDistance = 3f;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public WanderNextToWorkplaceNode(Profession profession)
+        {
+            this.profession = profession;
+            villager = profession.GetComponent<Villager>();
+        }
+
+        public override NodeState Evaluate()
+        {
+            if (nearPosition == Vector3.zero) {
+                Vector3 workplacePos = profession.Workplace.transform.position;
+                float newX = Random.Range(workplacePos.x - wanderDistance, workplacePos.x + wanderDistance);
+
+                nearPosition = new Vector3(newX, workplacePos.y, workplacePos.z);
+            }
+            
+            villager.MoveTo(nearPosition, 3f);
+
+            if (villager.IsOnPosition(nearPosition)) {
+                nearPosition = Vector3.zero;
+                state = NodeState.FAILURE;
+            }
+            else {
+                state = NodeState.RUNNING;
+            }
+            
+            return state;
+        }
     }
 }
