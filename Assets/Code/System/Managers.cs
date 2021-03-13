@@ -50,6 +50,8 @@ namespace Code.System
 
       public ResourcesManager Resources => resources;
 
+      public ProfessionManager Professions => professions;
+
       public static Managers Instance => _instance;
    }
 }
