@@ -4,6 +4,7 @@ using Code.Player.Tools;
 using Code.Resources;
 using Code.System.Area;
 using Code.System.Camera;
+using Code.System.Initialization;
 using Code.System.PlayerInput;
 using Code.Villagers;
 using Code.Villagers.Professions;
@@ -24,6 +25,7 @@ namespace Code.System
       [SerializeField] private TasksManager tasks;
       [SerializeField] private ResourcesManager resources;
       [SerializeField] private ProfessionManager professions;
+      [SerializeField] private InitializationManager initialization;
       
       private static Managers _instance;
 
@@ -51,6 +53,8 @@ namespace Code.System
       public ResourcesManager Resources => resources;
 
       public ProfessionManager Professions => professions;
+
+      public InitializationManager Initialization => initialization;
 
       public static Managers Instance => _instance;
    }
