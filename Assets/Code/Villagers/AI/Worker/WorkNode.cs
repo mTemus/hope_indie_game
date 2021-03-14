@@ -1,5 +1,3 @@
-using System;
-using Code.Map.Building;
 using Code.Villagers.Professions;
 using UnityEngine;
 
@@ -19,13 +17,11 @@ namespace Code.Villagers.AI.Worker
         private readonly Profession profession;
         private readonly Villager villager;
         
-        private WorkNodeState currentState;
+        private WorkNodeState currentState = WorkNodeState.GO_TO_WORKPLACE;
 
-        public WorkNode(Profession profession, WorkNodeState currentState)
+        public WorkNode(Profession profession)
         {
             this.profession = profession;
-            this.currentState = currentState;
-            
             villager = profession.GetComponent<Villager>();
         }
         
