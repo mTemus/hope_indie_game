@@ -9,7 +9,7 @@ namespace Code.Villagers.AI.Worker
         private Villager villager;
         
         private Vector3 nearPosition;
-        private float wanderDistance = 3f;
+        private float wanderDistance = 6f;
 
         public WanderNextToWorkplaceNode(Profession profession)
         {
@@ -26,7 +26,7 @@ namespace Code.Villagers.AI.Worker
                 nearPosition = new Vector3(newX, workplacePos.y, workplacePos.z);
             }
             
-            villager.MoveTo(nearPosition, 3f);
+            villager.MoveTo(nearPosition, 2.5f);
 
             if (villager.IsOnPosition(nearPosition)) {
                 nearPosition = Vector3.zero;
