@@ -17,12 +17,11 @@ namespace Code.Villagers.Professions
     public abstract class Profession : MonoBehaviour
     {
         [SerializeField] private ProfessionType type;
+        [SerializeField] private Building workplace;
         
         protected Node ProfessionAI;
         protected WorkNode WorkNode;
         private readonly Queue<Task> tasks = new Queue<Task>();
-        
-        private Building workplace;
 
         private Resource carriedResource;
         private Task currentTask;
@@ -38,7 +37,6 @@ namespace Code.Villagers.Professions
             currentTask = tasks.Dequeue();
             currentTask.OnTaskStart();
             return true;
-
         }
 
         public void AddTask(Task task)
@@ -69,7 +67,24 @@ namespace Code.Villagers.Professions
         {
             workplace = newWorkplace;
         }
-        
+
+        public void InitializeWorkerAI()
+        {
+            TryToGetTaskNode tryToGetTask = new TryToGetTaskNode(this);
+            WanderNextToWorkplaceNode wanderNextToWorkplace = new WanderNextToWorkplaceNode(this);
+            CanWorkNode canWork = new CanWorkNode();
+            WorkNode workNode = new WorkNode(this);
+
+            Selector findTasks = new Selector(new List<Node> { tryToGetTask, wanderNextToWorkplace });
+            Selector doTasks = new Selector(new List<Node>{ canWork, workNode });
+            Sequence workerAI = new Sequence(new List<Node> { findTasks, doTasks });
+
+            ProfessionAI = workerAI;
+            WorkNode = workNode;
+            
+            Debug.Log("Here " + name);
+        }
+
         public Building Workplace => workplace;
 
         public ProfessionType Type => type;
