@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Code.Map.Building;
 using Code.System.Grid;
 using Code.System.Properties;
+using Code.Villagers;
 using UnityEngine;
 
 namespace Code.System.Area
@@ -20,6 +21,7 @@ namespace Code.System.Area
         [SerializeField] private float width = 100f;
         [SerializeField] private float height = 30f;
 
+        private List<Villager> villagers = new List<Villager>();
         private List<Building> buildings = new List<Building>();
         private GameObject playerObject;
         private GridMap gridMap;
@@ -54,9 +56,18 @@ namespace Code.System.Area
 
         public void AddBuilding(Building building)
         {
+            building.transform.SetParent(transform);
             buildings.Add(building);
             
             Debug.Log("Add building " + building.name + "  to area "+ gameObject.name + ".");
+        }
+        
+        public void AddVillager(Villager villager)
+        {
+            villager.transform.SetParent(transform);
+            villagers.Add(villager);
+            
+            Debug.Log("Add building " + villager.name + "  to area "+ gameObject.name + ".");
         }
 
         public GridMap GridMap => gridMap;
