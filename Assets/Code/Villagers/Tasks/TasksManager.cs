@@ -68,7 +68,7 @@ namespace Code.Villagers.Tasks
 
         public void CreateBuildingTask(Construction construction)
         {
-            BuildingTask bt = new BuildingTask(0, construction.transform.position, construction);
+            BuildingTask bt = new BuildingTask(0, construction.transform.position + construction.PositionOffset, construction);
             construction.SetBuildingTask(bt);
             buildingTasks.Add(bt);
         }
