@@ -75,7 +75,6 @@ namespace Code.System.Area
             foreach (Vector2Int tilePos in buildingArea) {
                 Cell cell = gridMap.GetCellAt(tilePos.x, tilePos.y);
                 cell.SetBuildingAtCell(buildingTransform);
-                cell.SetBuildingScriptAtCell(buildingData);
             }
             
             buildings.Add(building);
