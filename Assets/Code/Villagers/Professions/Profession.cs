@@ -85,6 +85,9 @@ namespace Code.Villagers.Professions
             Debug.Log("Here " + name);
         }
 
+        public bool HasWorkToDo() =>
+            tasks.Count > 0 || currentTask != null;
+
         public Building Workplace => workplace;
 
         public ProfessionType Type => type;

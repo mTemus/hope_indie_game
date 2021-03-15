@@ -19,6 +19,9 @@ namespace Code.Villagers.AI.Worker
 
         public override NodeState Evaluate()
         {
+            if (profession.HasWorkToDo()) 
+                return NodeState.FAILURE;
+
             if (nearPosition == Vector3.zero) {
                 Vector3 workplacePos = profession.Workplace.transform.position;
                 float newX = Random.Range(workplacePos.x - wanderDistance, workplacePos.x + wanderDistance);
