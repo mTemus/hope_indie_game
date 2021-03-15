@@ -5,7 +5,7 @@ namespace Code.System.Grid
 {
     public class Cell
     {
-        private BuildingData buildingData;
+        private readonly BuildingData buildingData;
 
         public Cell()
         {
