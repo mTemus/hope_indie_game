@@ -18,7 +18,7 @@ namespace Code.Map.Building.Buildings.Components
         private bool CanWithdraw(Resource storedResource, int amount)
         {
             if (storedResource == null) return false;
-            if (storedResource.Amount - amount <= 0) return false;
+            if (storedResource.amount - amount <= 0) return false;
 
             return true;
         }
@@ -31,7 +31,7 @@ namespace Code.Map.Building.Buildings.Components
             Resource storedResource = GetResource(resource.Type);
 
             if (storedResource != null) 
-                storedResource.Amount += resource.Amount;
+                storedResource.amount += resource.amount;
             else 
                 storedResources.Add(resource);
         }
@@ -42,11 +42,11 @@ namespace Code.Map.Building.Buildings.Components
             Resource takenResource = new Resource(resource);
 
             if (!CanWithdraw(storedResource, amount)) {
-                takenResource.Amount = 0;
+                takenResource.amount = 0;
                 return takenResource;
             }
 
-            takenResource.Amount = amount;
+            takenResource.amount = amount;
             
             return takenResource;
         }
@@ -58,7 +58,7 @@ namespace Code.Map.Building.Buildings.Components
             if (storedResource == null) 
                 storedResources.Add(resourceToStore);
             else 
-                storedResource.Amount += resourceToStore.Amount;
+                storedResource.amount += resourceToStore.amount;
         }
         
     }

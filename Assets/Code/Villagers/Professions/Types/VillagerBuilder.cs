@@ -1,5 +1,3 @@
-using System;
-
 namespace Code.Villagers.Professions.Types
 {
     public class VillagerBuilder : Profession
