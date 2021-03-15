@@ -18,11 +18,11 @@ namespace Code.Resources
       }
 
       private bool CanWithdraw(Resource resource, int amount) =>
-         resource.Amount - amount >= 0;
+         resource.amount - amount >= 0;
 
       public void StoreResource(ResourceType resource, int amount)
       {
-         GetResourceByType(resource).Amount += amount;
+         GetResourceByType(resource).amount += amount;
       }
 
       public Resource GetResourceAmount(ResourceType resource, int amount)
@@ -31,12 +31,12 @@ namespace Code.Resources
          Resource resourceToWithdraw = GetResourceByType(resource);
 
          if (!CanWithdraw(resourceToWithdraw, amount)) {
-            takenResource.Amount = 0;
+            takenResource.amount = 0;
             return takenResource;
          }
 
-         takenResource.Amount = amount;
-         resourceToWithdraw.Amount -= amount;
+         takenResource.amount = amount;
+         resourceToWithdraw.amount -= amount;
          return takenResource;
       }
 
