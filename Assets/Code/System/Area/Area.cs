@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Code.Map.Building;
+using Code.Map.Building.Buildings.Components;
 using Code.System.Grid;
 using Code.System.Properties;
 using Code.Villagers;
@@ -21,8 +22,8 @@ namespace Code.System.Area
         [SerializeField] private float width = 100f;
         [SerializeField] private float height = 30f;
 
-        private List<Villager> villagers = new List<Villager>();
-        private List<Building> buildings = new List<Building>();
+        private readonly List<Villager> villagers = new List<Villager>();
+        private readonly List<Building> buildings = new List<Building>();
         private GameObject playerObject;
         private GridMap gridMap;
         
@@ -58,7 +59,26 @@ namespace Code.System.Area
         {
             building.transform.SetParent(transform);
             buildings.Add(building);
+        }
+        
+        
+        public void AddBuilding(Building building, BuildingScript buildingData)
+        {
+            Transform buildingTransform = building.transform;
+            buildingTransform.SetParent(transform);
             
+            Vector3Int currBuildPos = Vector3Int.FloorToInt(buildingTransform.localPosition);
+            
+            List<Vector2Int> buildingArea =
+                gridMap.GetTileWithNeighbours(new Vector2Int(currBuildPos.x / GlobalProperties.WorldTileSize, currBuildPos.y), new Vector2Int(buildingData.width, buildingData.height));
+            
+            foreach (Vector2Int tilePos in buildingArea) {
+                Cell cell = gridMap.GetCellAt(tilePos.x, tilePos.y);
+                cell.SetBuildingAtCell(buildingTransform);
+                cell.SetBuildingScriptAtCell(buildingData);
+            }
+            
+            buildings.Add(building);
             Debug.Log("Add building " + building.name + "  to area "+ gameObject.name + ".");
         }
         
@@ -68,6 +88,15 @@ namespace Code.System.Area
             villagers.Add(villager);
             
             Debug.Log("Add building " + villager.name + "  to area "+ gameObject.name + ".");
+        }
+
+        public Warehouse GetWarehouse()
+        {
+            foreach (Building building in buildings) 
+                if (building.TryGetComponent(out Warehouse w)) 
+                    return w;
+            
+            return null;
         }
 
         public GridMap GridMap => gridMap;
