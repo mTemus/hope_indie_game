@@ -78,26 +78,6 @@ namespace Code.Villagers.Tasks
                         OnTaskCompleted?.Invoke();
                     break;
             }
-            
-            
-            // if (Worker.CarriedResource == null) {
-            //     if (Vector3.Distance(workerTransform.position, storage.transform.position) <= 0.1f) 
-            //         Worker.MoveTo(TaskPosition);
-            //     else 
-            //         Worker.CarriedResource = storage.GetResource(resourceData.Type, resourceData.Amount);
-            // }
-            // else {
-            //     if (Vector3.Distance(workerTransform.position, TaskPosition) <= 0.1f) {
-            //         Worker.MoveTo(TaskPosition);
-            //     }
-            //     else {
-            //         resourceData = onResourceDelivered.Invoke(Worker.CarriedResource);
-            //         Worker.CarriedResource = null;
-            //
-            //         if (resourceData.Amount == 0) 
-            //             OnTaskComplete.Invoke();
-            //     }
-            // }
         }
 
         public override void OnTaskPause()
