@@ -52,7 +52,7 @@ namespace Code.Villagers.Tasks
         {
             switch (resourceCarryingState) {
                 case ResourceCarryingTaskState.GO_TO_STORAGE:
-                    Worker.MoveTo(TaskPosition);
+                    Worker.MoveTo(storage.transform.position);
 
                     if (Vector3.Distance(Worker.transform.position, storage.transform.position) <= 0.1f)
                         resourceCarryingState = ResourceCarryingTaskState.TAKE_RESOURCES;
