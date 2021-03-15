@@ -59,7 +59,7 @@ namespace Code.Villagers.Tasks
                     break;
                 
                 case ResourceCarryingTaskState.TAKE_RESOURCES:
-                    Worker.GetComponent<Profession>().CarriedResource = storage.GetResource(resourceData.Type, resourceData.Amount);
+                    Worker.GetComponent<Profession>().CarriedResource = storage.GetResource(resourceData.Type, resourceData.amount);
                     resourceCarryingState = ResourceCarryingTaskState.GO_ON_TASK_POSITION;
                     break;
                 
@@ -72,10 +72,11 @@ namespace Code.Villagers.Tasks
                 case ResourceCarryingTaskState.DELIVER_RESOURCES:
                     resourceData = onResourceDelivered?.Invoke(Worker.GetComponent<Profession>().CarriedResource);
 
-                    if (resourceData != null && resourceData.Amount != 0) 
+                    if (resourceData != null && resourceData.amount != 0) 
                         resourceCarryingState = ResourceCarryingTaskState.GO_TO_STORAGE;
-                    else 
-                        OnTaskCompleted?.Invoke();
+                    else {
+                        OnTaskCompleted.Invoke();
+                    }
                     break;
             }
         }
