@@ -67,6 +67,8 @@ namespace Code.Villagers.AI.Worker
                     break;
             }
 
+            Debug.Log("WorkNode --- " + state);
+            Debug.Log("WorkNodeState --- " + currentState);
             return state;
         }
 
