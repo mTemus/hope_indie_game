@@ -14,14 +14,13 @@ namespace Code.Map.Building
         private BuildingTask buildingTask;
 
         private bool AreResourceDelivered() =>
-            requiredResources.All(resource => resource.Amount == 0);
+            requiredResources.All(resource => resource.amount == 0);
         
         public bool Construct()
         {
-            currentProgress += 5 * Time.deltaTime;
-            currentProgress = Mathf.Clamp(currentProgress, 0f, 100f);
-
-            return currentProgress >= 100f;
+            currentProgress += 1 * Time.deltaTime;
+            currentProgress = Mathf.Clamp(currentProgress, 0f, 5f);
+            return currentProgress >= 5f;
         }
 
         public void SetRequiredResource(Resource resource)
@@ -37,14 +36,14 @@ namespace Code.Map.Building
         public Resource AddResources(Resource deliveredResource)
         {
             Resource res = requiredResources.Single(resource => resource.Type == deliveredResource.Type);
-            res.Amount = Mathf.Max(0, res.Amount - deliveredResource.Amount);
+            res.amount = Mathf.Max(0, res.amount - deliveredResource.amount);
             Resource resourceLeft = new Resource(deliveredResource.Type);
 
             if (AreResourceDelivered())
                 buildingTask.ResourcesDelivered = true;
             else 
-                resourceLeft.Amount = res.Amount > GlobalProperties.MAXResourceHeld ? 
-                GlobalProperties.MAXResourceHeld : res.Amount;
+                resourceLeft.amount = res.amount > GlobalProperties.MAXResourceHeld ? 
+                GlobalProperties.MAXResourceHeld : res.amount;
             return resourceLeft;
         }
 
