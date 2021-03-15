@@ -77,7 +77,7 @@ namespace Code.Villagers.Professions
 
             Selector findTasks = new Selector(new List<Node> { tryToGetTask, wanderNextToWorkplace });
             Selector doTasks = new Selector(new List<Node>{ canWork, workNode });
-            Sequence workerAI = new Sequence(new List<Node> { findTasks, doTasks });
+            Selector workerAI = new Selector(new List<Node> { findTasks, doTasks });
 
             ProfessionAI = workerAI;
             WorkNode = workNode;
