@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Code.Resources;
 using UnityEngine;
 
 namespace Code.Map.Building
@@ -13,6 +14,7 @@ namespace Code.Map.Building
         public int height;
         public float xPivot;
         public float yPivot;
+        public Resource[] RequiredResources;
 
         public List<Vector2Int> GetOffset(Vector2Int pivot)
         {
