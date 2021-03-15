@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Code.Map.Building;
 using Code.Map.Building.Buildings.Components;
 using Code.System.Grid;
@@ -80,7 +81,18 @@ namespace Code.System.Area
             buildings.Add(building);
             Debug.Log("Add building " + building.name + "  to area "+ gameObject.name + ".");
         }
+
+        public bool CanPlaceBuilding(List<Vector2Int> buildingArea) =>
+            buildingArea
+                .Select(tilePos => gridMap.GetCellAt(tilePos.x, tilePos.y))
+                .All(cell => cell.CanBuild());
         
+        public void FillTiles(List<Vector2Int> buildingArea, Transform building)
+        {
+            foreach (Vector2Int tilePos in buildingArea) 
+                gridMap.GetCellAt(tilePos.x, tilePos.y).SetBuildingAtCell(building);
+        }
+
         public void AddVillager(Villager villager)
         {
             villager.transform.SetParent(transform);

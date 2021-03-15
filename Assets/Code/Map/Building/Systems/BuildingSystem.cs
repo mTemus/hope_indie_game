@@ -72,34 +72,17 @@ namespace Code.Map.Building.Systems
             Vector3Int currBuildPos = Vector3Int.FloorToInt(currBuildTransf.localPosition);
             Area playerArea = Managers.Instance.Areas.GetPlayerArea();
             
-            BuildingScript buildingScript = buildings[buildingIdx];
             List<Vector2Int> buildingArea =
-                playerArea.GridMap.GetTileWithNeighbours(new Vector2Int(currBuildPos.x / GlobalProperties.WorldTileSize, currBuildPos.y), new Vector2Int(buildingScript.width, buildingScript.height));
-            
-            foreach (Vector2Int tilePos in buildingArea) {
-                Cell cell = playerArea.GridMap.GetCellAt(tilePos.x, tilePos.y);
-            
-                if (cell.CanBuild()) continue;
-                Debug.LogWarning("Can't build this object at: " + tilePos.x + " " + tilePos.y);
+                playerArea.GridMap.GetTileWithNeighbours(new Vector2Int(currBuildPos.x / GlobalProperties.WorldTileSize, currBuildPos.y), new Vector2Int(_currentBuildingData.width, _currentBuildingData.height));
+
+            if (!playerArea.CanPlaceBuilding(buildingArea)) {
+                Debug.LogWarning("Can't build this object there");
                 return;
             }
             
-            foreach (Vector2Int tilePos in buildingArea) {
-                Cell cell = playerArea.GridMap.GetCellAt(tilePos.x, tilePos.y);
-                cell.SetBuildingAtCell(currBuildTransf);
-                cell.SetBuildingScriptAtCell(buildingScript);
-            }
+            playerArea.FillTiles(buildingArea, currBuildTransf);
             
-            Warehouse warehouse = Managers.Instance.Buildings.GetClosestWarehouse();
-            Construction construction = _currentBuilding.GetComponent<Construction>();
-            
-            Managers.Instance.Tasks.CreateBuildingTask(construction);
-            
-            foreach (Resource resource in _currentBuildingData.RequiredResources) {
-                construction.SetRequiredResource(resource);
-                Managers.Instance.Tasks.CreateResourceCarryingTask(_currentBuilding.transform.position, ProfessionType.BUILDER, warehouse, resource, construction.AddResources);
-            }
-            
+            _currentBuilding.GetComponent<Construction>().InitializeConstruction(_currentBuildingData);
             playerArea.AddBuilding(_currentBuilding.GetComponent<Building>());
             
             _currentBuilding = null;
