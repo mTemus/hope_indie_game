@@ -27,6 +27,9 @@ namespace Code.Villagers.Tasks
 
         public override void DoTask()
         {
+            //TODO: add moving worker to build position
+            //TODO: add moving to pivot construction not the original building pivot
+            
             if (!construction.Construct()) return;
             construction.SendMessage("CleanAfterConstruction");
             OnTaskCompleted?.Invoke();
