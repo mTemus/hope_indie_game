@@ -1,15 +1,20 @@
+using System;
+using UnityEngine;
+
 namespace Code.Resources
 {
+    [Serializable]
     public enum ResourceType
     {
         WOOD, STONE
     }
 
+    [Serializable]
     public class Resource
     {
-        private ResourceType type;
+        [SerializeField] private ResourceType type;
 
-        public int Amount;
+        public int amount;
         
         public Resource(ResourceType type)
         { 
@@ -19,7 +24,7 @@ namespace Code.Resources
         public Resource(ResourceType type, int amount)
         {
             this.type = type;
-            Amount = amount;
+            this.amount = amount;
         }
 
         public ResourceType Type => type;
