@@ -1,4 +1,5 @@
 using System;
+using Code.Map.Building;
 using Code.Map.Building.Buildings.Components;
 using Code.Resources;
 using Code.Villagers.Professions;
@@ -18,6 +19,7 @@ namespace Code.Villagers.Tasks
     {
         private readonly Warehouse storage;
         private readonly ProfessionType profession;
+        private Vector3 storagePosition;
         private Resource resourceData;
         private ResourceCarryingTaskState resourceCarryingState = ResourceCarryingTaskState.GO_TO_STORAGE;
 
@@ -36,6 +38,8 @@ namespace Code.Villagers.Tasks
             this.storage = storage;
             this.resourceData = resourceData;
             this.onResourceDelivered = onResourceDelivered;
+
+            storagePosition = storage.transform.position + storage.GetComponent<Building>().EntrancePivot;
         }
 
         public override void OnTaskStart()
@@ -53,8 +57,8 @@ namespace Code.Villagers.Tasks
             switch (resourceCarryingState) {
                 case ResourceCarryingTaskState.GO_TO_STORAGE:
                     Worker.MoveTo(storage.transform.position);
-
-                    if (Vector3.Distance(Worker.transform.position, storage.transform.position) <= 0.1f)
+                    
+                    if (Vector3.Distance(Worker.transform.position, storagePosition) <= 0.1f)
                         resourceCarryingState = ResourceCarryingTaskState.TAKE_RESOURCES;
                     break;
                 
