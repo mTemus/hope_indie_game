@@ -55,6 +55,9 @@ namespace Code.System.Area
                 where coordinates.x > xAreaStart && coordinates.x < xAreaEnd 
                 select area).FirstOrDefault();
 
+        public Area GetVillageArea() =>
+            areas.FirstOrDefault(area => area.Type == AreaType.VILLAGE);
+
         public void SetPlayerToArea(Area newArea, GameObject player)
         {
             GetPlayerArea().ClearPlayerInArea();;
