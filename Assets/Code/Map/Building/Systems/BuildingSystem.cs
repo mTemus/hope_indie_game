@@ -1,9 +1,12 @@
 using System.Collections.Generic;
+using Code.Map.Building.Buildings.Components;
+using Code.Resources;
 using Code.System;
 using Code.System.Area;
 using Code.System.Grid;
 using Code.System.PlayerInput;
 using Code.System.Properties;
+using Code.Villagers.Professions;
 using UnityEngine;
 
 namespace Code.Map.Building.Systems
@@ -86,6 +89,18 @@ namespace Code.Map.Building.Systems
                 cell.SetBuildingAtCell(currBuildTransf);
                 cell.SetBuildingScriptAtCell(buildingScript);
             }
+            
+            Warehouse warehouse = Managers.Instance.Buildings.GetClosestWarehouse();
+            Construction construction = _currentBuilding.GetComponent<Construction>();
+            
+            Managers.Instance.Tasks.CreateBuildingTask(construction);
+            
+            foreach (Resource resource in _currentBuildingData.RequiredResources) {
+                construction.SetRequiredResource(resource);
+                Managers.Instance.Tasks.CreateResourceCarryingTask(_currentBuilding.transform.position, ProfessionType.BUILDER, warehouse, resource, construction.AddResources);
+            }
+            
+            playerArea.AddBuilding(_currentBuilding.GetComponent<Building>());
             
             _currentBuilding = null;
             _currentBuildingData = null;
