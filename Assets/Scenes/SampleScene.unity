@@ -6954,8 +6954,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a25b28e27e132c545930c01d67cb11ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
-  cmv: {fileID: 0}
+  mainCamera: {fileID: 519420031}
+  cmv: {fileID: 1363674097}
 --- !u!4 &1577391080
 Transform:
   m_ObjectHideFlags: 0
@@ -11713,6 +11713,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initializeMode: 0
+  buildingData: {fileID: 11400000, guid: 637109f6c1fc6574986b3180f53f872b, type: 2}
 --- !u!114 &1965323580
 MonoBehaviour:
   m_ObjectHideFlags: 0
