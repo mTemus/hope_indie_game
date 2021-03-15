@@ -20,10 +20,11 @@ namespace Code.Villagers.AI.Worker
             List<Task> newTasks = new List<Task>();
             
             for (int i = 0; i < taskCnt; i++) {
-                Task newTask = Managers.Instance.Professions.GetTask(profession.Type);
+                Task newTask = Managers.Instance.Tasks.GetTask(profession.Type);
 
-                if (newTask != null) 
-                    newTasks.Add(newTask);
+                if (newTask == null) continue;
+                newTask.OnTaskTaken(profession.GetComponent<Villager>(), profession.OnTaskCompleted);
+                newTasks.Add(newTask);
             }
 
             if (newTasks.Count > 0) {
