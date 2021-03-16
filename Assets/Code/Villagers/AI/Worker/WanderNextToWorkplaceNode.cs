@@ -23,7 +23,7 @@ namespace Code.Villagers.AI.Worker
                 return NodeState.FAILURE;
 
             if (nearPosition == Vector3.zero) {
-                Vector3 workplacePos = profession.Workplace.transform.position;
+                Vector3 workplacePos = profession.Workplace.transform.position + profession.Workplace.EntrancePivot;
                 float newX = Random.Range(workplacePos.x - wanderDistance, workplacePos.x + wanderDistance);
 
                 nearPosition = new Vector3(newX, workplacePos.y, workplacePos.z);
