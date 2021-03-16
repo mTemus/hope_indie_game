@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Code.System;
 using Code.Villagers.Professions;
 using Code.Villagers.Tasks;
+using UnityEngine;
 
 namespace Code.Villagers.AI.Worker
 {
@@ -36,6 +37,7 @@ namespace Code.Villagers.AI.Worker
             else 
                 state = NodeState.FAILURE;
             
+            Debug.LogWarning("TryToGetTaskNode --- " + state);
             return state;
         }
     }

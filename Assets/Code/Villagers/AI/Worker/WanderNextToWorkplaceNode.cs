@@ -39,6 +39,7 @@ namespace Code.Villagers.AI.Worker
                 state = NodeState.RUNNING;
             }
             
+            Debug.LogWarning("WanderNextToWorkplaceNode --- " + state);
             return state;
         }
     }
