@@ -96,7 +96,5 @@ namespace Code.Villagers.Tasks
         }
 
         public ProfessionType Profession => profession;
-
-        public int TaskPriority => base.TaskPriority;
     }
 }
