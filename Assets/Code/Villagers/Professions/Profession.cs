@@ -60,7 +60,7 @@ namespace Code.Villagers.Professions
         {
             currentTask.OnTaskEnd();
             currentTask = null;
-            WorkNode.StartNewTask();
+            currentWorkNode.StartNewTask();
         }
 
         public void SetWorkplace(Building newWorkplace)
@@ -80,9 +80,7 @@ namespace Code.Villagers.Professions
             Selector workerAI = new Selector(new List<Node> { findTasks, doTasks });
 
             ProfessionAI = workerAI;
-            WorkNode = workNode;
-            
-            Debug.Log("Here " + name);
+            currentWorkNode = workNode;
         }
 
         public bool HasWorkToDo() =>

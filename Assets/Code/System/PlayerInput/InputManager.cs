@@ -50,7 +50,7 @@ namespace Code.System.PlayerInput
             currentInputState = newInputState;
             currentInputState.OnStateSet();
             
-            Debug.LogWarning(currentInputState.GetType().Name);
+            Debug.LogWarning("INPUT STATE ----" + currentInputState.GetType().Name);
         }
         
         public PlayerMovement Movement => movement;

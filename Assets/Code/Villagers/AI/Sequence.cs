@@ -4,7 +4,7 @@ using Code.Villagers.AI;
 
 public class Sequence : Node
 {
-    protected List<Node> nodes = new List<Node>();
+    private readonly List<Node> nodes;
     public Sequence(List<Node> nodes)
     {
         this.nodes = nodes;
