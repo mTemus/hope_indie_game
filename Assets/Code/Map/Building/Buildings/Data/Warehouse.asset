@@ -16,5 +16,8 @@ MonoBehaviour:
   buildingName: Warehouse
   width: 7
   height: 8
-  xPivot: 0
+  xPivot: 5.5
   yPivot: 0
+  RequiredResources:
+  - type: 0
+    amount: 100
