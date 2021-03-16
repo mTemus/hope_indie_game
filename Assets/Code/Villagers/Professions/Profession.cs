@@ -20,7 +20,7 @@ namespace Code.Villagers.Professions
         [SerializeField] private Building workplace;
         
         protected Node ProfessionAI;
-        protected WorkNode WorkNode;
+        private WorkNode currentWorkNode;
         private readonly Queue<Task> tasks = new Queue<Task>();
 
         private Resource carriedResource;
@@ -76,7 +76,7 @@ namespace Code.Villagers.Professions
             WorkNode workNode = new WorkNode(this);
 
             Selector findTasks = new Selector(new List<Node> { tryToGetTask, wanderNextToWorkplace });
-            Selector doTasks = new Selector(new List<Node>{ canWork, workNode });
+            Sequence doTasks = new Sequence(new List<Node>{ canWork, workNode });
             Selector workerAI = new Selector(new List<Node> { findTasks, doTasks });
 
             ProfessionAI = workerAI;
