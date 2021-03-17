@@ -18,7 +18,7 @@ namespace Code.Villagers.Tasks
     public class ResourceCarryingTask : Task
     {
         private readonly Warehouse storage;
-        private readonly ProfessionType profession;
+        private readonly ProfessionType professionType;
         private readonly Vector3 storagePosition;
         private Resource resourceData;
         private ResourceCarryingTaskState resourceCarryingState = ResourceCarryingTaskState.GO_TO_STORAGE;

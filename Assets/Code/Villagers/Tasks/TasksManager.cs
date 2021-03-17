@@ -25,7 +25,7 @@ namespace Code.Villagers.Tasks
                 
                 case ProfessionType.BUILDER:
                     taskToGet = buildingTasks.FirstOrDefault(task => task.ResourcesDelivered) ?? (Task) resourceCarryingTasks.FirstOrDefault(task =>
-                        task.Profession == ProfessionType.BUILDER);
+                        task.ProfessionType == ProfessionType.BUILDER);
                     break;
                 
                 default:
@@ -51,7 +51,7 @@ namespace Code.Villagers.Tasks
 
                     else {
                         taskToGet = resourceCarryingTasks.FirstOrDefault(task =>
-                            task.Profession == ProfessionType.BUILDER);
+                            task.ProfessionType == ProfessionType.BUILDER);
 
                         if (taskToGet != null) 
                             resourceCarryingTasks.Remove((ResourceCarryingTask) taskToGet);
