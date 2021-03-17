@@ -2,6 +2,7 @@ using System;
 using Code.Map.Building;
 using Code.Map.Building.Buildings.Components;
 using Code.Resources;
+using Code.System.Properties;
 using Code.Villagers.Professions;
 using UnityEngine;
 
@@ -20,23 +21,23 @@ namespace Code.Villagers.Tasks
         private readonly Warehouse storage;
         private readonly ProfessionType professionType;
         private readonly Vector3 storagePosition;
-        private Resource resourceData;
+        private readonly Resource requiredResource;
         private ResourceCarryingTaskState resourceCarryingState = ResourceCarryingTaskState.GO_TO_STORAGE;
 
-        private readonly Func<Resource, Resource> onResourceDelivered;
+        private readonly Action<Resource> onResourceDelivered;
         
         public ResourceCarryingTask(int taskPriority,
-            ProfessionType profession,
+            ProfessionType professionType,
             Vector3 taskPosition, 
             Warehouse storage, 
-            Resource resourceData, 
-            Func<Resource, Resource> onResourceDelivered)
+            Resource requiredResource, 
+            Action<Resource> onResourceDelivered)
         {
             base.TaskPriority = taskPriority;
             base.TaskPosition = taskPosition;
-            this.profession = profession;
+            this.professionType = professionType;
             this.storage = storage;
-            this.resourceData = resourceData;
+            this.requiredResource = requiredResource;
             this.onResourceDelivered = onResourceDelivered;
 
             storagePosition = storage.transform.position + storage.GetComponent<Building>().EntrancePivot;
@@ -63,7 +64,9 @@ namespace Code.Villagers.Tasks
                     break;
                 
                 case ResourceCarryingTaskState.TAKE_RESOURCES:
-                    Worker.GetComponent<Profession>().CarriedResource = storage.GetResource(resourceData.Type, resourceData.amount);
+                    WorkerProfession.CarriedResource = storage.GetResourceFromStorage(requiredResource.Type, requiredResource.amount > GlobalProperties.MAXResourceHeld ? 
+                        GlobalProperties.MAXResourceHeld : requiredResource.amount);
+                    requiredResource.amount -= WorkerProfession.CarriedResource.amount;
                     resourceCarryingState = ResourceCarryingTaskState.GO_ON_TASK_POSITION;
                     break;
                 
@@ -74,9 +77,9 @@ namespace Code.Villagers.Tasks
                     break;
                 
                 case ResourceCarryingTaskState.DELIVER_RESOURCES:
-                    resourceData = onResourceDelivered?.Invoke(Worker.GetComponent<Profession>().CarriedResource);
+                    onResourceDelivered?.Invoke(WorkerProfession.CarriedResource);
 
-                    if (resourceData != null && resourceData.amount != 0) 
+                    if (requiredResource.amount != 0) 
                         resourceCarryingState = ResourceCarryingTaskState.GO_TO_STORAGE;
                     else {
                         OnTaskCompleted.Invoke();
@@ -95,6 +98,6 @@ namespace Code.Villagers.Tasks
             Worker = newWorker;
         }
 
-        public ProfessionType Profession => profession;
+        public ProfessionType ProfessionType => professionType;
     }
 }

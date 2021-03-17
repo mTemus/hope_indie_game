@@ -3,7 +3,6 @@ using System.Linq;
 using Code.Map.Building.Buildings.Components;
 using Code.Resources;
 using Code.System;
-using Code.System.Properties;
 using Code.Villagers.Professions;
 using Code.Villagers.Tasks;
 using UnityEngine;
@@ -37,18 +36,13 @@ namespace Code.Map.Building
             buildingTask = thisTask;
         }
         
-        public Resource AddResources(Resource deliveredResource)
+        public void AddResources(Resource deliveredResource)
         {
             Resource res = requiredResources.Single(resource => resource.Type == deliveredResource.Type);
             res.amount = Mathf.Max(0, res.amount - deliveredResource.amount);
-            Resource resourceLeft = new Resource(deliveredResource.Type);
-
+            
             if (AreResourceDelivered())
                 buildingTask.ResourcesDelivered = true;
-            else 
-                resourceLeft.amount = res.amount > GlobalProperties.MAXResourceHeld ? 
-                GlobalProperties.MAXResourceHeld : res.amount;
-            return resourceLeft;
         }
 
         public void InitializeConstruction(BuildingScript buildingData)
@@ -60,7 +54,7 @@ namespace Code.Map.Building
             Managers.Instance.Tasks.CreateBuildingTask(this);
             
             foreach (Resource resource in buildingData.RequiredResources) {
-                SetRequiredResource(resource);
+                SetRequiredResource(new Resource(resource));
                 Managers.Instance.Tasks.CreateResourceCarryingTask(transform.position + positionOffset, ProfessionType.BUILDER, warehouse, resource, AddResources);
             }
         }

@@ -73,7 +73,7 @@ namespace Code.Villagers.Tasks
             buildingTasks.Add(bt);
         }
 
-        public void CreateResourceCarryingTask(Vector3 taskPosition, ProfessionType workerType, Warehouse storage, Resource resource, Func<Resource, Resource> onResourceDelivered)
+        public void CreateResourceCarryingTask(Vector3 taskPosition, ProfessionType workerType, Warehouse storage, Resource resource, Action<Resource> onResourceDelivered)
         {
             ResourceCarryingTask rct = new ResourceCarryingTask(0, workerType, taskPosition, storage, resource, onResourceDelivered);
             resourceCarryingTasks.Add(rct);

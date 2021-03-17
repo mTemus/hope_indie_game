@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Code.Resources;
+using Code.System.Properties;
 using UnityEngine;
 
 namespace Code.Map.Building.Buildings.Components
@@ -36,17 +37,21 @@ namespace Code.Map.Building.Buildings.Components
                 storedResources.Add(resource);
         }
         
-        public Resource GetResource(ResourceType resource, int amount)
+        public Resource GetResourceFromStorage(ResourceType resource, int amount)
         {
             Resource storedResource = GetResource(resource);
             Resource takenResource = new Resource(resource);
 
+            if (amount > GlobalProperties.MAXResourceHeld) 
+                amount = GlobalProperties.MAXResourceHeld;
+            
             if (!CanWithdraw(storedResource, amount)) {
                 takenResource.amount = 0;
                 return takenResource;
             }
 
             takenResource.amount = amount;
+            Debug.LogWarning("Took resource: " + takenResource.Type + " " + takenResource.amount);
             
             return takenResource;
         }
