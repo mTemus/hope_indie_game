@@ -1,18 +1,20 @@
 using Code.Map.Building;
 using UnityEngine;
-using NotImplementedException = System.NotImplementedException;
 
 namespace Code.Villagers.Tasks
 {
-   public class BuildingTask : Task
+    public class BuildingTask : Task
     {
         private readonly Construction construction;
+        private readonly Vector3 constructionPosition;
         public bool ResourcesDelivered;
+        
         public BuildingTask(int taskPriority, Vector3 taskPosition, Construction construction)
         {
             TaskPriority = taskPriority;
             TaskPosition = taskPosition;
             this.construction = construction;
+            constructionPosition = construction.transform.position + construction.GetComponent<Building>().EntrancePivot;
         }
         
         public override void OnTaskStart()
@@ -27,17 +29,18 @@ namespace Code.Villagers.Tasks
 
         public override void DoTask()
         {
-            //TODO: add moving worker to build position
-            //TODO: add moving to pivot construction not the original building pivot
-            
-            if (!construction.Construct()) return;
-            construction.SendMessage("CleanAfterConstruction");
-            OnTaskCompleted?.Invoke();
+            if (Vector3.Distance(Worker.transform.position, constructionPosition) >= 0.1f) {
+                Worker.MoveTo(constructionPosition);
+            }
+            else {
+                if (!construction.Construct()) return;
+                construction.SendMessage("CleanAfterConstruction");
+                OnTaskCompleted?.Invoke();
+            }
         }
 
         public override void OnTaskPause()
         {
-            throw new NotImplementedException();
         }
     }
 }
