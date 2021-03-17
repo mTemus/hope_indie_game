@@ -15,6 +15,12 @@ namespace Code.Resources
         [SerializeField] private ResourceType type;
 
         public int amount;
+
+        public Resource(Resource copy)
+        {
+            type = copy.type;
+            amount = copy.amount;
+        }
         
         public Resource(ResourceType type)
         { 
