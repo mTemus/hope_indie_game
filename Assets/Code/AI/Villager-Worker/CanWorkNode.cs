@@ -1,4 +1,4 @@
-namespace Code.Villagers.AI.Worker
+namespace Code.AI
 {
     public class CanWorkNode : Node
     {

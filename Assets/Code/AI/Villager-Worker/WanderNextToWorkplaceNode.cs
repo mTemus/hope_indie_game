@@ -1,12 +1,13 @@
+using Code.Villagers;
 using Code.Villagers.Professions;
 using UnityEngine;
 
-namespace Code.Villagers.AI.Worker
+namespace Code.AI
 {
     public class WanderNextToWorkplaceNode : Node
     {
-        private Profession profession;
-        private Villager villager;
+        private readonly Profession profession;
+        private readonly Villager villager;
         
         private Vector3 nearPosition;
         private float wanderDistance = 6f;

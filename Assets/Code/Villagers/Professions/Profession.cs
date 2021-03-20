@@ -1,8 +1,7 @@
 using System.Collections.Generic;
+using Code.AI;
 using Code.Map.Building;
 using Code.Resources;
-using Code.Villagers.AI;
-using Code.Villagers.AI.Worker;
 using Code.Villagers.Tasks;
 using UnityEngine;
 

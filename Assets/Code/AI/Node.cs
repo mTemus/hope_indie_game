@@ -1,6 +1,6 @@
 using System;
 
-namespace Code.Villagers.AI
+namespace Code.AI
 {
     public enum NodeState
     {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Code.Villagers.AI
+namespace Code.AI
 {
     public class Selector : Node
     {

@@ -1,7 +1,8 @@
+using Code.Villagers;
 using Code.Villagers.Professions;
 using UnityEngine;
 
-namespace Code.Villagers.AI.Worker
+namespace Code.AI
 {
     public enum WorkNodeState
     {
