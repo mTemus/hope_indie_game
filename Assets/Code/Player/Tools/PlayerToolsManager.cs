@@ -4,28 +4,36 @@ namespace Code.Player.Tools
 {
     public class PlayerToolsManager : MonoBehaviour
     {
-        [SerializeField] private Tool[] tools;
+        private readonly PlayerTool hammer = new PlayerToolHammer();
+        private readonly PlayerTool hand = new PlayerToolFreeHand();
+        private readonly PlayerTool goldPocket = new PlayerToolGoldPocket();
+        private readonly PlayerTool villagersBook = new PlayerToolVillagersBook();
+        private readonly PlayerTool buildingsBook = new PlayerToolBuildingsBook();
 
-        private int toolIdx = 0;
+        private PlayerTool currentTool;
 
-        public void SelectTool(int increase)
+        private void Awake()
         {
-            toolIdx += increase;
-
-            if (toolIdx > tools.Length - 1) 
-                toolIdx = 0;
-
-            if (toolIdx < 0) 
-                toolIdx = tools.Length - 1;
-        
-            Debug.Log(tools[toolIdx].name + " selected.");
+            currentTool = hand;
         }
 
         public void UseCurrentTool()
         {
-            tools[toolIdx].UseTool();
+            currentTool.UseTool();
+        }
         
-            Debug.Log(tools[toolIdx].name + " used.");
+        public void SelectTool(int toolIndex)
+        {
+            currentTool = toolIndex switch {
+                0 => buildingsBook,
+                1 => villagersBook,
+                2 => goldPocket,
+                3 => hammer,
+                4 => hand,
+                _ => currentTool
+            };
+            
+            Debug.LogWarning(currentTool.ToString() + " selected.");
         }
     }
 }
