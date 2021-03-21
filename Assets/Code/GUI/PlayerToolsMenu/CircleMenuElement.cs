@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace RadialMenu.Scripts.UI.Controller
+namespace Code.GUI.PlayerToolsMenu
 {
     [Serializable]
     public class CircleMenuElement : MonoBehaviour

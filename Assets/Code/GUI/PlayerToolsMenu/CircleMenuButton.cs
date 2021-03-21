@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace RadialMenu.Scripts.UI.Controller
+namespace Code.GUI.PlayerToolsMenu
 {
     public class CircleMenuButton : MonoBehaviour
     {
