@@ -13,14 +13,14 @@ namespace Code.Map.Building.Systems
 {
     public class BuildingSystem : MonoBehaviour
     {
-        [SerializeField] private BuildingScript[] buildings;
+        [SerializeField] private BuildingData[] buildings;
 
         private int buildingIdx;
         private readonly int maxXOffset = 20;
         private Vector3Int currOffset;
 
         private static GameObject _currentBuilding;
-        private static BuildingScript _currentBuildingData;
+        private static BuildingData _currentBuildingData;
         
         public void ChangeBuilding(int value)
         {

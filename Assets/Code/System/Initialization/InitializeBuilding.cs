@@ -5,7 +5,7 @@ namespace Code.System.Initialization
 {
     public class InitializeBuilding : InitializeObject
     {
-        [SerializeField] private BuildingScript buildingData;
+        [SerializeField] private BuildingData buildingData;
         
         public override void InitializeMe()
         {

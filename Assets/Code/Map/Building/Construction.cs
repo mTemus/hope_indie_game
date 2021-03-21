@@ -45,7 +45,7 @@ namespace Code.Map.Building
                 buildingTask.ResourcesDelivered = true;
         }
 
-        public void InitializeConstruction(BuildingScript buildingData)
+        public void InitializeConstruction(BuildingData buildingData)
         {
             positionOffset = new Vector3(buildingData.xPivot, buildingData.yPivot, 0f);
             Warehouse warehouse = Managers.Instance.Buildings.GetClosestWarehouse();
