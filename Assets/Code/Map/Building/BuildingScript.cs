@@ -14,7 +14,7 @@ namespace Code.Map.Building
         public int height;
         public float xPivot;
         public float yPivot;
-        public Resource[] RequiredResources;
+        public Resource[] requiredResources;
 
         public List<Vector2Int> GetOffset(Vector2Int pivot)
         {

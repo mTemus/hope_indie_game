@@ -18,7 +18,7 @@ MonoBehaviour:
   height: 6
   xPivot: 7
   yPivot: 0
-  RequiredResources:
+  requiredResources:
   - type: 0
     amount: 50
   - type: 1
