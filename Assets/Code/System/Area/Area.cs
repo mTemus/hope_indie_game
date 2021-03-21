@@ -63,7 +63,7 @@ namespace Code.System.Area
         }
         
         
-        public void AddBuilding(Building building, BuildingScript buildingData)
+        public void AddBuilding(Building building, BuildingData buildingData)
         {
             Transform buildingTransform = building.transform;
             buildingTransform.SetParent(transform);
@@ -75,7 +75,7 @@ namespace Code.System.Area
             
             foreach (Vector2Int tilePos in buildingArea) {
                 Cell cell = gridMap.GetCellAt(tilePos.x, tilePos.y);
-                cell.SetBuildingAtCell(buildingTransform);
+                cell.SetBuildingAtCell(building);
             }
             
             buildings.Add(building);
@@ -90,7 +90,7 @@ namespace Code.System.Area
         public void FillTiles(List<Vector2Int> buildingArea, Transform building)
         {
             foreach (Vector2Int tilePos in buildingArea) 
-                gridMap.GetCellAt(tilePos.x, tilePos.y).SetBuildingAtCell(building);
+                gridMap.GetCellAt(tilePos.x, tilePos.y).SetBuildingAtCell(building.GetComponent<Building>());
         }
 
         public void AddVillager(Villager villager)
