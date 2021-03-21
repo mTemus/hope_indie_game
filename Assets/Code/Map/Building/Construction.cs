@@ -54,8 +54,9 @@ namespace Code.Map.Building
             Managers.Instance.Tasks.CreateBuildingTask(this);
             
             foreach (Resource resource in buildingData.requiredResources) {
-                SetRequiredResource(new Resource(resource));
-                Managers.Instance.Tasks.CreateResourceCarryingTask(transform.position + positionOffset, ProfessionType.BUILDER, warehouse, new Resource(resource), AddResources);
+                Resource requiredResource = new Resource(resource);
+                SetRequiredResource(requiredResource);
+                Managers.Instance.Tasks.CreateResourceCarryingTask(transform.position + positionOffset, ProfessionType.BUILDER, warehouse, requiredResource, AddResources);
             }
         }
 
