@@ -26,6 +26,7 @@ namespace Code.System
       [SerializeField] private ResourcesManager resources;
       [SerializeField] private ProfessionManager professions;
       [SerializeField] private InitializationManager initialization;
+      [SerializeField] private GUIManager gui;
       
       private static Managers _instance;
 
@@ -55,6 +56,8 @@ namespace Code.System
       public ProfessionManager Professions => professions;
 
       public InitializationManager Initialization => initialization;
+
+      public GUIManager GUI => gui;
 
       public static Managers Instance => _instance;
    }
