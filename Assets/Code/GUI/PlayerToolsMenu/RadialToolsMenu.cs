@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using Code.System;
-using RadialMenu.Scripts.UI.Controller;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace RadialMenu.Scripts.UI.Manager
+namespace Code.GUI.PlayerToolsMenu
 {
     public class RadialToolsMenu : MonoBehaviour
     {

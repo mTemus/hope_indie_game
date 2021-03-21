@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Code.Player.Tools
 {
-    public class ToolHammer : Tool
+    public class PlayerToolHammer : PlayerTool
     {
         public override void UseTool()
         {

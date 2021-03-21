@@ -1,9 +1,12 @@
-using RadialMenu.Scripts.UI.Manager;
+using Code.GUI.PlayerToolsMenu;
 using UnityEngine;
 
-public class GUIManager : MonoBehaviour
+namespace Code.GUI
 {
-    [SerializeField] private RadialToolsMenu playerToolsMenu;
+    public class GUIManager : MonoBehaviour
+    {
+        [SerializeField] private RadialToolsMenu playerToolsMenu;
     
-    public RadialToolsMenu PlayerToolsMenu => playerToolsMenu;
+        public RadialToolsMenu PlayerToolsMenu => playerToolsMenu;
+    }
 }
