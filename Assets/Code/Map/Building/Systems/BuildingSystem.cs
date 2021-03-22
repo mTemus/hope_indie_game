@@ -22,11 +22,11 @@ namespace Code.Map.Building.Systems
         
         public void ChangeBuilding(int value)
         {
-            buildingIdx = Utilities.Utilities.IncrementIdx(buildingIdx, value, buildings.Length);
-            SetBuilding(buildingIdx);
+            // buildingIdx = Utilities.Utilities.IncrementIdx(buildingIdx, value, buildings.Length);
+            // SetBuilding(buildingIdx);
         }
 
-        public void SetBuilding(int buildingId)
+        public void SetBuilding(BuildingData buildingData)
         {
             if (_currentBuilding != null) 
                 DestroyImmediate(_currentBuilding.gameObject);
@@ -35,7 +35,8 @@ namespace Code.Map.Building.Systems
             Vector2 playerPos = Managers.Instance.Player.GetPlayerLocalPosition();
             Area playerArea = Managers.Instance.Areas.GetPlayerArea();
             playerArea.GridMap.GetXY(playerPos, out int x, out int y);
-            _currentBuildingData = buildings[buildingId];
+            _currentBuildingData = buildingData;
+
 
             Vector3Int buildingPosition = new Vector3Int(x, y, 0) * GlobalProperties.WorldTileSize;
             if (!playerArea.GridMap.IsTileInRange(buildingPosition.x, buildingPosition.y, _currentBuildingData.width)) 
