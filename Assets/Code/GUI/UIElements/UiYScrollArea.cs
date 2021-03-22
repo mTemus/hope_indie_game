@@ -7,11 +7,8 @@ namespace Code.GUI.UIElements
     {
         private void Awake()
         {
-            float spacing = content.GetComponent<VerticalLayoutGroup>().spacing;
-            float elementY = content.GetChild(0).GetComponent<RectTransform>().sizeDelta.y;
-            elementValue = elementY + spacing;
-            minValue = content.transform.localPosition.y;
-            maxValue = minValue * -1;
+            currentContent = content[0];
+            CountAreaProperties();
         }
         
         private void Update()
@@ -25,7 +22,7 @@ namespace Code.GUI.UIElements
 
         public override void ChangeValue(int value)
         {
-            Transform contentTransform = content.transform;
+            Transform contentTransform = currentContent.transform;
             Vector3 contentPos = contentTransform.localPosition;
 
             float newY = contentPos.y + value * elementValue;
@@ -33,11 +30,20 @@ namespace Code.GUI.UIElements
             contentTransform.localPosition = new Vector3(contentPos.x, newY, contentPos.z);
         }
 
-        public override void ResetArea()
+        protected override void ResetArea()
         {
-            Transform contentTransform = content.transform;
+            Transform contentTransform = currentContent.transform;
             Vector3 contentPos = contentTransform.localPosition;
             contentTransform.localPosition = new Vector3(contentPos.x, minValue, contentPos.z);
+        }
+
+        protected override void CountAreaProperties()
+        {
+            float spacing = currentContent.GetComponent<VerticalLayoutGroup>().spacing;
+            float elementY = currentContent.GetChild(0).GetComponent<RectTransform>().sizeDelta.y;
+            elementValue = elementY + spacing;
+            minValue = currentContent.transform.localPosition.y;
+            maxValue = minValue * -1;
         }
     }
 }

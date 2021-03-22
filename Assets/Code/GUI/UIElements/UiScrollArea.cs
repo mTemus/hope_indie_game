@@ -1,18 +1,31 @@
-using System;
 using UnityEngine;
 
 namespace Code.GUI.UIElements
 {
     public abstract class UiScrollArea : MonoBehaviour
     {
-        [SerializeField] protected Transform content;
+        [SerializeField] protected Transform[] content;
 
+        protected Transform currentContent;
         protected float elementValue;
         protected float maxValue;
         protected float minValue;
         
+        protected abstract void CountAreaProperties();
+        
         public abstract void ChangeValue(int value);
 
-        public abstract void ResetArea();
+        protected abstract void ResetArea();
+        
+        public void ChangeContent(int id)
+        {
+            ResetArea();
+            
+            currentContent.gameObject.SetActive(false);
+            currentContent = content[id];
+            currentContent.gameObject.SetActive(true);
+            
+            CountAreaProperties();
+        }
     }
 }

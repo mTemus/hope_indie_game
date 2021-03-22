@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using NotImplementedException = System.NotImplementedException;
 
 namespace Code.GUI.UIElements
 {
@@ -8,11 +7,8 @@ namespace Code.GUI.UIElements
     {
         private void Awake()
         {
-            float spacing = content.GetComponent<HorizontalLayoutGroup>().spacing;
-            float elementX = content.GetChild(0).GetComponent<RectTransform>().sizeDelta.x;
-            elementValue = elementX + spacing;
-            maxValue = content.transform.localPosition.x;
-            minValue = maxValue * -1;
+            currentContent = content[0];
+            CountAreaProperties();
         }
         
         private void Update()
@@ -26,7 +22,7 @@ namespace Code.GUI.UIElements
 
         public override void ChangeValue(int value)
         {
-            Transform contentTransform = content.transform;
+            Transform contentTransform = currentContent.transform;
             Vector3 contentPos = contentTransform.localPosition;
 
             float newX = contentPos.x + value * elementValue;
@@ -34,11 +30,20 @@ namespace Code.GUI.UIElements
             contentTransform.localPosition = new Vector3(newX, contentPos.y, contentPos.z);
         }
 
-        public override void ResetArea()
+        protected override void ResetArea()
         {
-            Transform contentTransform = content.transform;
+            Transform contentTransform = currentContent.transform;
             Vector3 contentPos = contentTransform.localPosition;
             contentTransform.localPosition = new Vector3(minValue, contentPos.y, contentPos.z);
+        }
+
+        protected override void CountAreaProperties()
+        {
+            float spacing = currentContent.GetComponent<HorizontalLayoutGroup>().spacing;
+            float elementX =currentContent.GetChild(0).GetComponent<RectTransform>().sizeDelta.x;
+            elementValue = elementX + spacing;
+            maxValue = currentContent.transform.localPosition.x;
+            minValue = maxValue * -1;
         }
     }
 }
