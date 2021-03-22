@@ -6918,6 +6918,8 @@ MonoBehaviour:
   buildings:
   - {fileID: 11400000, guid: 5e84a8114d814de4ca21cafc82e1523d, type: 2}
   - {fileID: 11400000, guid: 637109f6c1fc6574986b3180f53f872b, type: 2}
+  normalMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  buildingFadeMaterial: {fileID: 2100000, guid: d81160b9a2b5ce445853adb619668337, type: 2}
 --- !u!114 &814882511
 MonoBehaviour:
   m_ObjectHideFlags: 0
