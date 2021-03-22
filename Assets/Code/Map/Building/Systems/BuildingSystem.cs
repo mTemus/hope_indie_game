@@ -1,12 +1,8 @@
 using System.Collections.Generic;
-using Code.Map.Building.Buildings.Components;
-using Code.Resources;
 using Code.System;
 using Code.System.Area;
-using Code.System.Grid;
 using Code.System.PlayerInput;
 using Code.System.Properties;
-using Code.Villagers.Professions;
 using UnityEngine;
 
 namespace Code.Map.Building.Systems
