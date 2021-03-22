@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3f3b576d1c44b88ae6a8184d2bfbc26, type: 3}
-  m_Name: Warehouse
+  m_Name: House
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3085277392001244628, guid: 2fa98d1e929f51c43a0ac176884a0bb3, type: 3}
-  buildingName: Warehouse
-  width: 7
-  height: 8
-  xPivot: 5.5
+  prefab: {fileID: 2699120673269493026, guid: ea3a3f3e8e5d66a47a1eebef9e16a9be, type: 3}
+  buildingName: Town Hall
+  width: 6
+  height: 6
+  xPivot: 7
   yPivot: 0
-  RequiredResources:
+  requiredResources:
   - type: 0
     amount: 100
