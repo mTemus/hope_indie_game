@@ -16,14 +16,23 @@ namespace Code.Map.Building
         private BuildingTask buildingTask;
         private Vector3 positionOffset;
 
+        private Material normalMaterial;
+        private Material buildingMaterial;
+        private static readonly int Visibility = Shader.PropertyToID("Vector1_Visibility");
+
         private bool AreResourceDelivered() =>
             requiredResources.All(resource => resource.amount == 0);
         
         public bool Construct()
         {
-            currentProgress += 1 * Time.deltaTime;
-            currentProgress = Mathf.Clamp(currentProgress, 0f, 5f);
-            return currentProgress >= 5f;
+            currentProgress -= 5 * Time.deltaTime;
+            currentProgress = Mathf.Clamp(currentProgress, 0.1f, 30f);
+            buildingMaterial.SetFloat(Visibility, currentProgress);
+
+            if (!(currentProgress <= 0.1f)) return false;
+            DestroyImmediate(buildingMaterial);
+            GetComponent<SpriteRenderer>().material = normalMaterial;
+            return true;
         }
 
         public void SetRequiredResource(Resource resource)
@@ -45,8 +54,16 @@ namespace Code.Map.Building
                 buildingTask.ResourcesDelivered = true;
         }
 
-        public void InitializeConstruction(BuildingData buildingData)
+        public void InitializeConstruction(BuildingData buildingData, Material fadeMaterial)
         {
+            SpriteRenderer buildingRenderer = GetComponent<SpriteRenderer>();
+            
+            normalMaterial = buildingRenderer.material;
+            buildingMaterial = fadeMaterial;
+            buildingRenderer.material = buildingMaterial;
+            
+            currentProgress = buildingMaterial.GetFloat(Visibility);
+            
             positionOffset = new Vector3(buildingData.xPivot, buildingData.yPivot, 0f);
             Warehouse warehouse = Managers.Instance.Buildings.GetClosestWarehouse();
             GetComponent<Building>().SetEntrancePivot(positionOffset);

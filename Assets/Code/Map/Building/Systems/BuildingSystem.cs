@@ -15,6 +15,8 @@ namespace Code.Map.Building.Systems
     {
         [SerializeField] private BuildingData[] buildings;
 
+        [SerializeField] private Material buildingFadeMaterial;
+        
         private int buildingIdx;
         private readonly int maxXOffset = 20;
         private Vector3Int currOffset;
@@ -82,7 +84,7 @@ namespace Code.Map.Building.Systems
             
             playerArea.FillTiles(buildingArea, currBuildTransf);
             
-            _currentBuilding.GetComponent<Construction>().InitializeConstruction(_currentBuildingData);
+            _currentBuilding.GetComponent<Construction>().InitializeConstruction(_currentBuildingData, new Material(buildingFadeMaterial));
             playerArea.AddBuilding(_currentBuilding.GetComponent<Building>());
             
             _currentBuilding = null;
