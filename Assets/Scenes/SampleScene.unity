@@ -7777,6 +7777,7 @@ MonoBehaviour:
   type: 1
   workplace: {fileID: 1965323580}
   stateText: {fileID: 727341682}
+  resourceImage: {fileID: 0}
 --- !u!114 &875197754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14698,6 +14699,10 @@ PrefabInstance:
       propertyPath: amount
       value: 
       objectReference: {fileID: 1027320615}
+    - target: {fileID: 9121497810608894777, guid: 4df1d36c48834dc49a2cf89db670d492, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5281326655419403437, guid: a07ef64005c9148469dec01b4531ea58, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4df1d36c48834dc49a2cf89db670d492, type: 3}
 --- !u!1001 &4743904103935674425
@@ -14803,6 +14808,10 @@ PrefabInstance:
       propertyPath: amount
       value: 
       objectReference: {fileID: 355803392}
+    - target: {fileID: 9121497810608894777, guid: 4df1d36c48834dc49a2cf89db670d492, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -7470800371356827753, guid: a07ef64005c9148469dec01b4531ea58, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4df1d36c48834dc49a2cf89db670d492, type: 3}
 --- !u!224 &4743904103935674426 stripped
