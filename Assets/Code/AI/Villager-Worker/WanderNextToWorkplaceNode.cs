@@ -40,7 +40,8 @@ namespace Code.AI
                 state = NodeState.RUNNING;
             }
             
-            Debug.LogWarning("WanderNextToWorkplaceNode --- " + state);
+            profession.StateText.text = "Wandering";
+            // Debug.LogWarning("WanderNextToWorkplaceNode --- " + state);
             return state;
         }
     }

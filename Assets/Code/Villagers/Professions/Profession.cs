@@ -3,6 +3,7 @@ using Code.AI;
 using Code.Map.Building;
 using Code.Resources;
 using Code.Villagers.Tasks;
+using TMPro;
 using UnityEngine;
 
 namespace Code.Villagers.Professions
@@ -17,6 +18,8 @@ namespace Code.Villagers.Professions
     {
         [SerializeField] private ProfessionType type;
         [SerializeField] private Building workplace;
+
+        [SerializeField] private TextMeshProUGUI stateText;
         
         protected Node ProfessionAI;
         private WorkNode currentWorkNode;
@@ -88,6 +91,8 @@ namespace Code.Villagers.Professions
         public Building Workplace => workplace;
 
         public ProfessionType Type => type;
+
+        public TextMeshProUGUI StateText => stateText;
 
         public Resource CarriedResource
         {
