@@ -66,6 +66,7 @@ namespace Code.Villagers.Tasks
                 case ResourceCarryingTaskState.TAKE_RESOURCES:
                     WorkerProfession.CarriedResource = storage.GetResourceFromStorage(requiredResource.Type, requiredResource.amount > GlobalProperties.MAXResourceHeld ? 
                         GlobalProperties.MAXResourceHeld : requiredResource.amount);
+                    WorkerProfession.SetResourceIcon(true);
                     requiredResource.amount -= WorkerProfession.CarriedResource.amount;
                     resourceCarryingState = ResourceCarryingTaskState.GO_ON_TASK_POSITION;
                     break;
@@ -78,6 +79,7 @@ namespace Code.Villagers.Tasks
                 
                 case ResourceCarryingTaskState.DELIVER_RESOURCES:
                     onResourceDelivered?.Invoke(WorkerProfession.CarriedResource);
+                    WorkerProfession.SetResourceIcon(false);
 
                     if (requiredResource.amount != 0) 
                         resourceCarryingState = ResourceCarryingTaskState.GO_TO_STORAGE;

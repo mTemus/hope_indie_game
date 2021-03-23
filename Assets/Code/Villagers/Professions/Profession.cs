@@ -2,9 +2,11 @@ using System.Collections.Generic;
 using Code.AI;
 using Code.Map.Building;
 using Code.Resources;
+using Code.System;
 using Code.Villagers.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Code.Villagers.Professions
 {
@@ -19,7 +21,9 @@ namespace Code.Villagers.Professions
         [SerializeField] private ProfessionType type;
         [SerializeField] private Building workplace;
 
+        [Header("GUI")]
         [SerializeField] private TextMeshProUGUI stateText;
+        [SerializeField] private Image resourceImage;
         
         protected Node ProfessionAI;
         private WorkNode currentWorkNode;
@@ -83,6 +87,18 @@ namespace Code.Villagers.Professions
 
             ProfessionAI = workerAI;
             currentWorkNode = workNode;
+        }
+
+        public void SetResourceIcon(bool visible)
+        {
+            if (visible) {
+                resourceImage.gameObject.SetActive(true);
+                resourceImage.sprite = Managers.Instance.GUI.GetResourceIcon(carriedResource.Type);
+            }
+            else {
+                resourceImage.sprite = null;
+                resourceImage.gameObject.SetActive(false);
+            }
         }
 
         public bool HasWorkToDo() =>
