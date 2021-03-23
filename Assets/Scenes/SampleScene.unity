@@ -475,7 +475,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e34f46576eb1e4320b39165bb67ebbfc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fa534a63c52e442fab833f8c4c218610, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6546,7 +6546,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fa534a63c52e442fab833f8c4c218610, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e34f46576eb1e4320b39165bb67ebbfc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -14371,9 +14371,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4889424372093786325, guid: 1a82717df8e9f2c4e92bfafc237c4fd6, type: 3}
+      propertyPath: content.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4889424372093786325, guid: 1a82717df8e9f2c4e92bfafc237c4fd6, type: 3}
       propertyPath: content.Array.data[0]
       value: 
       objectReference: {fileID: 1987010540}
+    - target: {fileID: 4889424372093786325, guid: 1a82717df8e9f2c4e92bfafc237c4fd6, type: 3}
+      propertyPath: content.Array.data[1]
+      value: 
+      objectReference: {fileID: 2089969472}
     - target: {fileID: 4889424372093786334, guid: 1a82717df8e9f2c4e92bfafc237c4fd6, type: 3}
       propertyPath: m_Name
       value: BuildingObjectsSlider

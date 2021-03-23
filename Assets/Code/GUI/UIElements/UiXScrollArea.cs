@@ -10,15 +10,6 @@ namespace Code.GUI.UIElements
             currentContent = content[0];
             CountAreaProperties();
         }
-        
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.LeftArrow)) 
-                ChangeValue(1);
-            
-            if (Input.GetKeyDown(KeyCode.RightArrow)) 
-                ChangeValue(-1);
-        }
 
         public override void ChangeValue(int value)
         {
@@ -34,7 +25,7 @@ namespace Code.GUI.UIElements
         {
             Transform contentTransform = currentContent.transform;
             Vector3 contentPos = contentTransform.localPosition;
-            contentTransform.localPosition = new Vector3(minValue, contentPos.y, contentPos.z);
+            contentTransform.localPosition = new Vector3(maxValue, contentPos.y, contentPos.z);
         }
 
         protected override void CountAreaProperties()

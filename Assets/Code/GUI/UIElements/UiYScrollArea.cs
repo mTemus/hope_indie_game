@@ -10,15 +10,6 @@ namespace Code.GUI.UIElements
             currentContent = content[0];
             CountAreaProperties();
         }
-        
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.UpArrow)) 
-                ChangeValue(-1);
-            
-            if (Input.GetKeyDown(KeyCode.DownArrow)) 
-                ChangeValue(1);
-        }
 
         public override void ChangeValue(int value)
         {
