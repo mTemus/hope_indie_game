@@ -82,30 +82,27 @@ namespace Code.GUI.BuildingSelecting
         public void ChangeBuildingType(int value)
         {
             buildingTypesIdx += value;
-            buildingTypesIdx = (int) Mathf.Clamp(buildingTypesIdx, 0f, buildingTypesContent.childCount - 1);
+            buildingTypesIdx = Mathf.Clamp(buildingTypesIdx, 0, buildingTypesContent.childCount - 1);
             
+            buildingTypesArea.ChangeValue(value);
             buildingObjectsArea.ChangeContent(buildingTypesIdx);
-            buildingTypesArea.ChangeValue(buildingTypesIdx);
             UpdateBuildingObjectsArray();
             
             buildingObjectsIdx = 0;
             currentBuilding = buildingObjectsArray[buildingObjectsIdx];
+            Systems.Instance.Building.SetBuilding(currentBuilding.Data);
             UpdateBuildingProperties();
         }
 
         public void ChangeBuilding(int value)
         {
             buildingObjectsIdx += value;
-            buildingObjectsIdx = (int) Mathf.Clamp(buildingTypesIdx, 0f, buildingObjectsArray.Length - 1);
+            buildingObjectsIdx = Mathf.Clamp(buildingObjectsIdx, 0, buildingObjectsArray.Length - 1);
 
-            buildingObjectsArea.ChangeValue(buildingObjectsIdx);
+            buildingObjectsArea.ChangeValue(-value);
             currentBuilding = buildingObjectsArray[buildingObjectsIdx];
             Systems.Instance.Building.SetBuilding(currentBuilding.Data);
             UpdateBuildingProperties();
         }
-        
-        
-        
-        
     }
 }

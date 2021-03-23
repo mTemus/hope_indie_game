@@ -19,10 +19,10 @@ namespace Code.System.PlayerInput.States
                 Managers.Instance.GUI.BuildingSelectingMenu.ChangeBuilding(1);
             
             if (Input.GetKeyDown(inputManager.Up) || Input.GetKeyDown(inputManager.UpAlt)) 
-                Managers.Instance.GUI.BuildingSelectingMenu.ChangeBuildingType(1);
+                Managers.Instance.GUI.BuildingSelectingMenu.ChangeBuildingType(-1);
             
             if (Input.GetKeyDown(inputManager.Down) || Input.GetKeyDown(inputManager.DownAlt)) 
-                Managers.Instance.GUI.BuildingSelectingMenu.ChangeBuildingType(-1);
+                Managers.Instance.GUI.BuildingSelectingMenu.ChangeBuildingType(1);
             
             if (Input.GetKeyDown(inputManager.Action)) 
                 inputManager.SetState(InputManager.BuildingPlacingInputState);
