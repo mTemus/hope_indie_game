@@ -22,8 +22,6 @@ namespace Code.Map.Building.Systems
         
         public void SetBuilding(BuildingData buildingData)
         {
-            Debug.LogWarning("Building setting: " + buildingData.buildingName);
-            
             if (_currentBuilding != null) 
                 DestroyImmediate(_currentBuilding.gameObject);
             
