@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4889424372093786321}
   - component: {fileID: 4889424372093786323}
-  - component: {fileID: 4889424372093786325}
   - component: {fileID: 4889424372093786320}
+  - component: {fileID: 4889424372093786325}
   m_Layer: 5
   m_Name: XAreaSlider
   m_TagString: Untagged
@@ -48,19 +48,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4889424372093786334}
   m_CullTransparentMesh: 1
---- !u!114 &4889424372093786325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4889424372093786334}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d98c51c4b9a74e4b960ce45b6eb5658, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  content: {fileID: 4889424372218042837}
 --- !u!114 &4889424372093786320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,6 +78,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 3
+--- !u!114 &4889424372093786325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4889424372093786334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d98c51c4b9a74e4b960ce45b6eb5658, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  content:
+  - {fileID: 0}
 --- !u!1 &4889424372218042834
 GameObject:
   m_ObjectHideFlags: 0
