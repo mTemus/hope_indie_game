@@ -16,7 +16,7 @@ MonoBehaviour:
   buildingName: Sawmill
   width: 7
   height: 6
-  xPivot: 11.5
+  xPivot: 11
   yPivot: 0
   requiredResources:
   - type: 0
