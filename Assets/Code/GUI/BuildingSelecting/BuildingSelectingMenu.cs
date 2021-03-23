@@ -1,5 +1,7 @@
 using System;
+using System.Linq;
 using Code.GUI.UIElements;
+using Code.Resources;
 using Code.System;
 using TMPro;
 using UnityEngine;
@@ -24,7 +26,7 @@ namespace Code.GUI.BuildingSelecting
         [SerializeField] private Image miniature;
         [SerializeField] private TextMeshProUGUI buildingName;
         [SerializeField] private TextMeshProUGUI buildingDescription;
-        [SerializeField] private Transform buildingResources;
+        [SerializeField] private UiRequiredResource[] requiredResources;
         
         private int buildingTypesIdx;
         private int buildingObjectsIdx;
@@ -41,11 +43,23 @@ namespace Code.GUI.BuildingSelecting
 
         private void UpdateBuildingProperties()
         {
+            ResetResources();
+            
             miniature.sprite = currentBuilding.Sprite;
             buildingName.text = currentBuilding.Data.buildingName;
             buildingDescription.text = currentBuilding.Description;
-            
-            //Building resources
+
+            foreach (Resource resourceData in currentBuilding.Data.requiredResources) {
+                UiRequiredResource uiResource = requiredResources.FirstOrDefault(r => r.Type == resourceData.Type);
+
+                if (uiResource != null) {
+                    uiResource.gameObject.SetActive(true);
+                    uiResource.Amount.text = resourceData.amount.ToString();
+                }
+                else {
+                    throw new Exception("No ui resource for type: " + resourceData.Type);
+                }
+            }
         }
 
         private void UpdateBuildingObjectsArray()
@@ -63,6 +77,12 @@ namespace Code.GUI.BuildingSelecting
                     break;
             }
         }
+
+        private void ResetResources()
+        {
+            foreach (UiRequiredResource resource in requiredResources) 
+                resource.gameObject.SetActive(false);
+        }
         
         public void OnMenuOpen()
         {
@@ -76,6 +96,7 @@ namespace Code.GUI.BuildingSelecting
             buildingObjectsIdx = 0;
             buildingTypesIdx = 0;
             
+            ResetResources();
             UpdateBuildingObjectsArray();
         }
 
