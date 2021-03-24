@@ -40,8 +40,7 @@ namespace Code.AI
                 state = NodeState.RUNNING;
             }
             
-            profession.StateText.text = "Wandering";
-            // Debug.LogWarning("WanderNextToWorkplaceNode --- " + state);
+            villager.UI.StateText.text = "Wandering";
             return state;
         }
     }

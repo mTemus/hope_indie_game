@@ -68,7 +68,7 @@ namespace Code.AI
                     break;
             }
 
-            profession.StateText.text = "Working: " + currentState;
+            villager.UI.StateText.text = "Working: " + currentState;
 
             // Debug.Log("WorkNode --- " + state);
             // Debug.Log("WorkNodeState --- " + currentState);

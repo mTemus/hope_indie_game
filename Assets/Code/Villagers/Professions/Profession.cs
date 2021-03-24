@@ -19,10 +19,6 @@ namespace Code.Villagers.Professions
         [SerializeField] private ProfessionType type;
         [SerializeField] private Building workplace;
 
-        [Header("GUI")]
-        [SerializeField] private TextMeshProUGUI stateText;
-        [SerializeField] private Image resourceImage;
-        
         protected Node ProfessionAI;
         private WorkNode currentWorkNode;
         private readonly Queue<Task> tasks = new Queue<Task>();
@@ -87,27 +83,13 @@ namespace Code.Villagers.Professions
             currentWorkNode = workNode;
         }
 
-        public void SetResourceIcon(bool visible)
-        {
-            if (visible) {
-                resourceImage.gameObject.SetActive(true);
-                resourceImage.sprite = Managers.Instance.GUI.GetResourceIcon(carriedResource.Type);
-            }
-            else {
-                resourceImage.sprite = null;
-                resourceImage.gameObject.SetActive(false);
-            }
-        }
-
         public bool HasWorkToDo() =>
             tasks.Count > 0 || currentTask != null;
 
         public Building Workplace => workplace;
 
         public ProfessionType Type => type;
-
-        public TextMeshProUGUI StateText => stateText;
-
+        
         public Resource CarriedResource
         {
             get => carriedResource;
