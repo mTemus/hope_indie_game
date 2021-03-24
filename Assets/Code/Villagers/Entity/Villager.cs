@@ -1,14 +1,17 @@
 using Code.Villagers.Professions;
 using UnityEngine;
 
-namespace Code.Villagers
+namespace Code.Villagers.Entity
 {
     public class Villager : MonoBehaviour
     {
+        [Header("Villager properties")]
         [SerializeField] private int healthPoints;
         [SerializeField] private float speed = 5f;
-        
+
+        [Header("Villager components")]
         [SerializeField] private Profession profession;
+        [SerializeField] private VillagerUi ui;
         
         public void MoveTo(Vector3 position)
         {
@@ -22,6 +25,9 @@ namespace Code.Villagers
 
         public bool IsOnPosition(Vector3 position) =>
             transform.position == position;
+        
+        public Profession Profession => profession;
 
+        public VillagerUi UI => ui;
     }
 }

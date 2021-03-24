@@ -4,7 +4,7 @@ using Code.Map.Building;
 using Code.Map.Building.Buildings.Components;
 using Code.System.Grid;
 using Code.System.Properties;
-using Code.Villagers;
+using Code.Villagers.Entity;
 using UnityEngine;
 
 namespace Code.System.Area

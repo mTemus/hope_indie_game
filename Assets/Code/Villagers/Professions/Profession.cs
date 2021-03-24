@@ -4,9 +4,7 @@ using Code.Map.Building;
 using Code.Resources;
 using Code.System;
 using Code.Villagers.Tasks;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Code.Villagers.Professions
 {

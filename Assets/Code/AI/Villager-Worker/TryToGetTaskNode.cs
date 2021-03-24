@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Code.System;
-using Code.Villagers;
+using Code.Villagers.Entity;
 using Code.Villagers.Professions;
 using Code.Villagers.Tasks;
 using UnityEngine;

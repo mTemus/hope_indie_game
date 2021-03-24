@@ -1,5 +1,5 @@
 using System;
-using Code.Villagers.Professions;
+using Code.Villagers.Entity;
 using UnityEngine;
 
 namespace Code.Villagers.Tasks

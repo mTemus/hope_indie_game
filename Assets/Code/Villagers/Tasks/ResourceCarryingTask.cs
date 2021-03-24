@@ -3,6 +3,7 @@ using Code.Map.Building;
 using Code.Map.Building.Buildings.Components;
 using Code.Resources;
 using Code.System.Properties;
+using Code.Villagers.Entity;
 using Code.Villagers.Professions;
 using UnityEngine;
 
