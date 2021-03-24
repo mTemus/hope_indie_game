@@ -65,7 +65,7 @@ namespace Code.Villagers.Tasks
                     break;
                 
                 case ResourceCarryingTaskState.TAKE_RESOURCES:
-                    WorkerProfession.CarriedResource = storage.GetResourceFromStorage(requiredResource.Type, requiredResource.amount > GlobalProperties.MAXResourceHeld ? 
+                    Worker.Profession.CarriedResource = storage.GetResourceFromStorage(requiredResource.Type, requiredResource.amount > GlobalProperties.MAXResourceHeld ? 
                         GlobalProperties.MAXResourceHeld : requiredResource.amount);
                     Worker.UI.SetResourceIcon(true, requiredResource.Type);
                     requiredResource.amount -= Worker.Profession.CarriedResource.amount;

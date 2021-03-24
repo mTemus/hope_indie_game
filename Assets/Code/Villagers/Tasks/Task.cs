@@ -9,7 +9,6 @@ namespace Code.Villagers.Tasks
         protected int TaskPriority;
         protected Vector3 TaskPosition;
         protected Villager Worker;
-        protected Profession WorkerProfession;
         protected Action OnTaskCompleted;
         
         public abstract void OnTaskStart();
@@ -20,7 +19,6 @@ namespace Code.Villagers.Tasks
         public void OnTaskTaken(Villager newWorker, params Action[] taskCompleteActions)
         {
             Worker = newWorker;
-            WorkerProfession = Worker.GetComponent<Profession>();
         
             foreach (Action taskCompleted in taskCompleteActions) 
                 OnTaskCompleted += taskCompleted;

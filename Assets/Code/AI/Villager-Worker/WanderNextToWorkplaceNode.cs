@@ -1,4 +1,4 @@
-using Code.Villagers;
+using Code.Villagers.Entity;
 using Code.Villagers.Professions;
 using UnityEngine;
 
