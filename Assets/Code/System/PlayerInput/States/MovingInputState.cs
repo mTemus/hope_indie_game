@@ -17,13 +17,11 @@ namespace Code.System.PlayerInput.States
             if (Input.GetKey(inputManager.Right) || Input.GetKey(inputManager.RightAlt)) 
                 inputManager.Movement.Move(Vector3.right);
 
-            if (Input.GetKeyDown(inputManager.Down) || Input.GetKeyDown(inputManager.DownAlt)) {
+            if (Input.GetKeyDown(inputManager.Action)) 
                 Managers.Instance.Tools.UseCurrentTool();
-            }
             
-            if (Input.GetKeyDown(inputManager.Tools)) {
+            if (Input.GetKeyDown(inputManager.Tools)) 
                 Managers.Instance.Input.SetState(InputManager.ToolSelectingInputState);
-            }
         }
 
         public void OnStateChange()
