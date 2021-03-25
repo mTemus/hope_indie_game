@@ -24,14 +24,14 @@ namespace Code.System.PlayerInput.States
 
             if (Input.GetKeyDown(inputManager.Cancel)) {
                 Systems.Instance.Building.CancelBuilding();
-                Managers.Instance.Cameras.FocusCameraOn(Managers.Instance.Player.Player.transform);
+                Managers.Instance.Cameras.FocusCameraOn(Managers.Instance.Player.PlayerGO.transform);
                 Managers.Instance.Input.SetState(InputManager.MovingInputState);
             }
         }
 
         public void OnStateChange()
         {
-            Managers.Instance.Cameras.FocusCameraOn(Managers.Instance.Player.Player.transform);
+            Managers.Instance.Cameras.FocusCameraOn(Managers.Instance.Player.PlayerGO.transform);
         }
     }
 }
