@@ -1,6 +1,6 @@
 ﻿namespace Code.Utilities
 {
-    public static class Utilities
+    public static class GlobalUtilities
     {
         public static int IncrementIdx(int idx, int value, int maxValue)
         {
