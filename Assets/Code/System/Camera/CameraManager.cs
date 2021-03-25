@@ -10,5 +10,14 @@ namespace Code.System.Camera
 
         public void FocusCameraOn(Transform target) => 
             cmv.Follow = target;
+
+        public void FocusCameraOnPlayer()
+        {
+            if (IsCameraOnPlayer()) return;
+            FocusCameraOn(Managers.Instance.Player.PlayerGO.transform);
+        }
+
+        public bool IsCameraOnPlayer() =>
+            cmv.Follow == Managers.Instance.Player.PlayerGO.transform;
     }
 }
