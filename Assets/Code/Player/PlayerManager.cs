@@ -12,7 +12,7 @@ namespace Code.Player
         {
             Area area = Managers.Instance.Areas.GetAreaByCoords(Vector3Int.FloorToInt(player.transform.position));
             Debug.LogWarning("Start area: " + area.name);
-            area.SetPlayerToArea(player);
+            area.SetPlayerToArea(player.gameObject);
         }
 
         public Vector2 GetPlayerPosition() 
