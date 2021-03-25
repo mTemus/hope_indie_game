@@ -10173,6 +10173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66f596f32a7914d49a6dfbb05597a158, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  portraitImage: {fileID: 0}
   villagerNameText: {fileID: 1758119847}
   villagerProfessionText: {fileID: 1224180283}
   home: {fileID: 1362637540}
@@ -15814,8 +15815,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d4f62b4d7ad624c82731479ddef444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerGO: {fileID: 738032748}
-  controller: {fileID: 738032754}
+  player: {fileID: 738032754}
 --- !u!1 &2025210462
 GameObject:
   m_ObjectHideFlags: 0
