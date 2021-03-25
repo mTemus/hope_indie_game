@@ -6,7 +6,7 @@ namespace Code.Player
 {
     public class PlayerManager : MonoBehaviour
     {
-        [SerializeField] private GameObject player;
+        [SerializeField] private PlayerController player;
         
         private void Start()
         {
@@ -20,7 +20,9 @@ namespace Code.Player
 
         public Vector2 GetPlayerLocalPosition()
             => player.transform.localPosition;
-        
-        public GameObject Player => player;
+
+        public PlayerController Player => player;
+
+        public GameObject PlayerGO => player.gameObject;
     }
 }
