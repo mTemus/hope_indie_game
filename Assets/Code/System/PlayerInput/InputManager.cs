@@ -25,6 +25,7 @@ namespace Code.System.PlayerInput
         private static ToolSelectingInputState _toolSelectingInputState;
         private static BuildingSelectingInputState _buildingSelectingInputState;
         private static BuildingPlacingInputState _buildingPlacingInputState;
+        private static VillagerPropertiesInputState _villagerPropertiesInputState;
         
         private IInputState currentInputState;
 
@@ -34,6 +35,7 @@ namespace Code.System.PlayerInput
             _toolSelectingInputState = new ToolSelectingInputState();
             _buildingSelectingInputState = new BuildingSelectingInputState();
             _buildingPlacingInputState = new BuildingPlacingInputState();
+            _villagerPropertiesInputState = new VillagerPropertiesInputState();
             
             currentInputState = _movingInputState;
             Debug.LogWarning(currentInputState.GetType().Name);
@@ -84,5 +86,7 @@ namespace Code.System.PlayerInput
         public static BuildingSelectingInputState BuildingSelectingInputState => _buildingSelectingInputState;
 
         public static BuildingPlacingInputState BuildingPlacingInputState => _buildingPlacingInputState;
+
+        public static VillagerPropertiesInputState VillagerPropertiesInputState => _villagerPropertiesInputState;
     }
 }
