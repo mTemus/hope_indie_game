@@ -36,6 +36,8 @@ namespace Code.GUI.Villagers
             currentElement = elementsToSelect[selectionIdx];
             currentElement.OnElementSelected();
             pointer.SetPointerOnUiElement(currentElement.transform);
+            
+            gameObject.SetActive(false);
         }
 
         public void MovePointer(int value)
@@ -55,7 +57,7 @@ namespace Code.GUI.Villagers
         public void OpenPropertiesPanel(Villager villager)
         {
             villagerNameText.text = villager.name;
-            villagerProfessionText.text = villager.Profession.Type.ToString().ToLower();
+            villagerProfessionText.text = villager.Profession.Type.ToString();
             workplace.SetBuilding(villager.Profession.Workplace);
         }
         

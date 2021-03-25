@@ -10,8 +10,9 @@ namespace Code.Villagers.Professions
 {
     public enum ProfessionType
     {
-        UNEMPLOYED,
-        BUILDER,
+        Unemployed,
+        Builder,
+        Lumberjack
     }
     
     public abstract class Profession : MonoBehaviour

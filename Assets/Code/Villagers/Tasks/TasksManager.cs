@@ -20,12 +20,12 @@ namespace Code.Villagers.Tasks
             Task taskToGet = null;
             
             switch (professionType) {
-                case ProfessionType.UNEMPLOYED:
+                case ProfessionType.Unemployed:
                     break;
                 
-                case ProfessionType.BUILDER:
+                case ProfessionType.Builder:
                     taskToGet = buildingTasks.FirstOrDefault(task => task.ResourcesDelivered) ?? (Task) resourceCarryingTasks.FirstOrDefault(task =>
-                        task.ProfessionType == ProfessionType.BUILDER);
+                        task.ProfessionType == ProfessionType.Builder);
                     break;
                 
                 default:
@@ -40,10 +40,10 @@ namespace Code.Villagers.Tasks
             Task taskToGet = null;
             
             switch (profession) {
-                case ProfessionType.UNEMPLOYED:
+                case ProfessionType.Unemployed:
                     break;
                 
-                case ProfessionType.BUILDER:
+                case ProfessionType.Builder:
                     taskToGet = buildingTasks.FirstOrDefault(task => task.ResourcesDelivered);
 
                     if (taskToGet != null) 
@@ -51,7 +51,7 @@ namespace Code.Villagers.Tasks
 
                     else {
                         taskToGet = resourceCarryingTasks.FirstOrDefault(task =>
-                            task.ProfessionType == ProfessionType.BUILDER);
+                            task.ProfessionType == ProfessionType.Builder);
 
                         if (taskToGet != null) 
                             resourceCarryingTasks.Remove((ResourceCarryingTask) taskToGet);

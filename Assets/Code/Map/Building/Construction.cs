@@ -73,7 +73,7 @@ namespace Code.Map.Building
             foreach (Resource resource in buildingData.requiredResources) {
                 Resource requiredResource = new Resource(resource);
                 SetRequiredResource(requiredResource);
-                Managers.Instance.Tasks.CreateResourceCarryingTask(transform.position + positionOffset, ProfessionType.BUILDER, warehouse, requiredResource, AddResources);
+                Managers.Instance.Tasks.CreateResourceCarryingTask(transform.position + positionOffset, ProfessionType.Builder, warehouse, requiredResource, AddResources);
             }
         }
 
