@@ -5,7 +5,7 @@ namespace Code.GUI.UIElements
    public class UiSelectingPointer : MonoBehaviour
    {
       [SerializeField] private RectTransform pointer;
-      [SerializeField] private float offset = 5f;
+      [SerializeField] private float offset;
       public void SetPointerOnUiElement(Transform element)
       {
          Rect elementRect = element.GetComponent<RectTransform>().rect;
