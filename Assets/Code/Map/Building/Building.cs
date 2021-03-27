@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Code.Map.Building
 {
-    public class Building : MonoBehaviour
+    public abstract class Building : MonoBehaviour
     {
         private Vector3 entrancePivot;
         private Vector2Int buildingSize;
