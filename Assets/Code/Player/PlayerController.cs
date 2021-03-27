@@ -1,3 +1,4 @@
+using Code.System;
 using Code.Villagers.Entity;
 using UnityEngine;
 
@@ -13,14 +14,14 @@ namespace Code.Player
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.CompareTag("Villager")) {
-                villagerToInteract = other.gameObject.GetComponent<Villager>();
+                Managers.Instance.VillagerSelection.AddVillagerToSelect(other.gameObject.GetComponent<Villager>());
             }
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
             if (other.CompareTag("Villager")) {
-                villagerToInteract = null;
+                Managers.Instance.VillagerSelection.RemoveVillagerToSelect(other.GetComponent<Villager>());
             }
         }
 

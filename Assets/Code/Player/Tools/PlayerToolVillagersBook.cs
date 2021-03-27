@@ -14,7 +14,7 @@ namespace Code.Player.Tools
 
             if (villager == null) return;
             villager.Profession.enabled = false;
-            Managers.Instance.GUI.VillagerPropertiesPanel.OpenPropertiesPanel(villager);
+            Managers.Instance.VillagerSelection.SelectVillager();
             Managers.Instance.Input.SetState(InputManager.VillagerPropertiesInputState);
         }
     }
