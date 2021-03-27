@@ -20,7 +20,12 @@ namespace Code.GUI.Villagers
 
         [Header("Villager Status")] 
         [SerializeField] private Transform status;
-        
+
+        [SerializeField] private TextMeshProUGUI strengthValue;
+        [SerializeField] private TextMeshProUGUI dexterity;
+        [SerializeField] private TextMeshProUGUI intelligenceValue;
+
+
         [Header("Villager Skills")] 
         [SerializeField] private Transform skills;
 
@@ -59,6 +64,9 @@ namespace Code.GUI.Villagers
             villagerNameText.text = villager.name;
             villagerProfessionText.text = villager.Profession.Type.ToString();
             workplace.SetBuilding(villager.Profession.Workplace);
+            strengthValue.text = villager.Statistics.Strength.ToString();
+            dexterity.text = villager.Statistics.Dexterity.ToString();
+            intelligenceValue.text = villager.Statistics.Intelligence.ToString();
         }
         
         
