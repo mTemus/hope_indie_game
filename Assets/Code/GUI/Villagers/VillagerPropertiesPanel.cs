@@ -1,5 +1,6 @@
 using Code.GUI.UIElements;
 using Code.GUI.UIElements.SelectableElement;
+using Code.System;
 using Code.Utilities;
 using Code.Villagers.Entity;
 using TMPro;
@@ -14,8 +15,6 @@ namespace Code.GUI.Villagers
         [SerializeField] private Image portraitImage;
         [SerializeField] private TextMeshProUGUI villagerNameText;
         [SerializeField] private TextMeshProUGUI villagerProfessionText;
-        [SerializeField] private SelectableBuildingReference home;
-        [SerializeField] private SelectableBuildingReference workplace;
         
         [Header("Villager Status")] 
         [SerializeField] private Transform status;
@@ -61,12 +60,20 @@ namespace Code.GUI.Villagers
         {
             villagerNameText.text = villager.name;
             villagerProfessionText.text = villager.Profession.Type.ToString();
-            workplace.SetBuilding(villager.Profession.Workplace);
             strengthValue.text = villager.Statistics.Strength.ToString();
             dexterity.text = villager.Statistics.Dexterity.ToString();
             intelligenceValue.text = villager.Statistics.Intelligence.ToString();
         }
-        
+    
+        public void FocusCameraOnVillagerWorkplace()
+        {
+            Managers.Instance.Cameras.FocusCameraOn(Managers.Instance.VillagerSelection.SelectedVillager.Profession.Workplace.transform);
+        }
+
+        public void FocusCameraOnVillagerHouse()
+        {
+            
+        }
         
     }
 }

@@ -1,6 +1,6 @@
 namespace Code.GUI.UIElements.SelectableElement
 {
-    public class SelectableText : UiSelectableElement
+    public class SelectableTextUiElement : UiSelectableElement
     {
         public override void OnElementSelected()
         {
@@ -14,7 +14,7 @@ namespace Code.GUI.UIElements.SelectableElement
 
         public override void InvokeSelectedElement()
         {
-            
+            attachedEvent.Invoke();
         }
     }
 }
