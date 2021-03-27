@@ -10,8 +10,8 @@ namespace Code.System.Initialization
         public override void InitializeMe()
         {
             Building building = GetComponent<Building>();
-            building.SetEntrancePivot(buildingData.xPivot, buildingData.yPivot, 0f);
-            building.SetBuildingSize(buildingData.width, buildingData.height);
+            building.SetEntrancePivot(buildingData.XPivot, buildingData.YPivot, 0f);
+            building.SetBuildingSize(buildingData.Width, buildingData.Height);
             Area.Area myArea = Managers.Instance.Areas.GetAreaByCoords(Vector3Int.FloorToInt(transform.position));
             myArea.AddBuilding(building, buildingData);
             Managers.Instance.Buildings.AddBuilding(building);

@@ -7,14 +7,19 @@ namespace Code.Map.Building
     [CreateAssetMenu(fileName = "Game Data", menuName = "Map Objects/Building Data", order = 0)]
     public class BuildingData : ScriptableObject
     {
-        public Transform prefab;
+        [Header("Properties")]
+        [SerializeField] private Transform prefab;
+        [SerializeField] private string buildingName;
+        [SerializeField] private int maxOccupancy;
         
-        public string buildingName;
-        public int width;
-        public int height;
-        public float xPivot;
-        public float yPivot;
-        public Resource[] requiredResources;
+        [Header("Size")]
+        [SerializeField] private int width;
+        [SerializeField] private int height;
+        [SerializeField] private float xPivot;
+        [SerializeField] private float yPivot;
+        
+        [Header("Resources")]
+        [SerializeField] private Resource[] requiredResources;
 
         public List<Vector2Int> GetOffset(Vector2Int pivot)
         {
@@ -28,6 +33,21 @@ namespace Code.Map.Building
 
             return offsetPositions;
         }
-        
+
+        public Transform Prefab => prefab;
+
+        public string BuildingName => buildingName;
+
+        public int MAXOccupancy => maxOccupancy;
+
+        public int Width => width;
+
+        public int Height => height;
+
+        public float XPivot => xPivot;
+
+        public float YPivot => yPivot;
+
+        public Resource[] RequiredResources => requiredResources;
     }
 }

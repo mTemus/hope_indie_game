@@ -32,14 +32,14 @@ namespace Code.Map.Building.Systems
             _currentBuildingData = buildingData;
 
             Vector3Int buildingPosition = new Vector3Int(x, y, 0) * GlobalProperties.WorldTileSize;
-            if (!playerArea.GridMap.IsTileInRange(buildingPosition.x, buildingPosition.y, _currentBuildingData.width)) 
-                while (!playerArea.GridMap.IsTileInRange(buildingPosition.x, buildingPosition.y, _currentBuildingData.width)) 
+            if (!playerArea.GridMap.IsTileInRange(buildingPosition.x, buildingPosition.y, _currentBuildingData.Width)) 
+                while (!playerArea.GridMap.IsTileInRange(buildingPosition.x, buildingPosition.y, _currentBuildingData.Width)) 
                     buildingPosition.x -= 1 * GlobalProperties.WorldTileSize;
             
             buildingPosition /= GlobalProperties.WorldTileSize;
             
             _currentBuilding = Instantiate(
-                _currentBuildingData.prefab.gameObject, 
+                _currentBuildingData.Prefab.gameObject, 
                 playerArea.GridMap.GetWorldPosition(buildingPosition.x, buildingPosition.y - 1, playerArea.transform.position), 
                 Quaternion.identity, 
                 playerArea.transform);
@@ -52,7 +52,7 @@ namespace Code.Map.Building.Systems
             
             if (Mathf.Abs(currOffset.x + direction.x) > maxXOffset) return;
             if (!Managers.Instance.Areas.GetPlayerArea().GridMap.IsTileInRange(currBuildPos.x + direction.x, currBuildPos.y)) return;
-            if (!Managers.Instance.Areas.GetPlayerArea().GridMap.IsTileInRange(currBuildPos.x + direction.x, currBuildPos.y, _currentBuildingData.width)) return;
+            if (!Managers.Instance.Areas.GetPlayerArea().GridMap.IsTileInRange(currBuildPos.x + direction.x, currBuildPos.y, _currentBuildingData.Width)) return;
             
             currOffset += direction;
             _currentBuilding.transform.localPosition += direction;
@@ -65,7 +65,7 @@ namespace Code.Map.Building.Systems
             Area playerArea = Managers.Instance.Areas.GetPlayerArea();
             
             List<Vector2Int> buildingArea =
-                playerArea.GridMap.GetTileWithNeighbours(new Vector2Int(currBuildPos.x / GlobalProperties.WorldTileSize, currBuildPos.y), new Vector2Int(_currentBuildingData.width, _currentBuildingData.height));
+                playerArea.GridMap.GetTileWithNeighbours(new Vector2Int(currBuildPos.x / GlobalProperties.WorldTileSize, currBuildPos.y), new Vector2Int(_currentBuildingData.Width, _currentBuildingData.Height));
 
             if (!playerArea.CanPlaceBuilding(buildingArea)) {
                 Debug.LogWarning("Can't build this object there");

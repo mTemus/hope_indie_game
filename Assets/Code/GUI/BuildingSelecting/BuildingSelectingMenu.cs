@@ -46,10 +46,10 @@ namespace Code.GUI.BuildingSelecting
             ResetResources();
             
             miniature.sprite = currentBuilding.Sprite;
-            buildingName.text = currentBuilding.Data.buildingName;
+            buildingName.text = currentBuilding.Data.BuildingName;
             buildingDescription.text = currentBuilding.Description;
 
-            foreach (Resource resourceData in currentBuilding.Data.requiredResources) {
+            foreach (Resource resourceData in currentBuilding.Data.RequiredResources) {
                 UiRequiredResource uiResource = requiredResources.FirstOrDefault(r => r.Type == resourceData.Type);
 
                 if (uiResource != null) {

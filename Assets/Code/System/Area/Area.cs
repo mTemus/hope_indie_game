@@ -71,7 +71,7 @@ namespace Code.System.Area
             Vector3Int currBuildPos = Vector3Int.FloorToInt(buildingTransform.localPosition);
             
             List<Vector2Int> buildingArea =
-                gridMap.GetTileWithNeighbours(new Vector2Int(currBuildPos.x / GlobalProperties.WorldTileSize, currBuildPos.y), new Vector2Int(buildingData.width, buildingData.height));
+                gridMap.GetTileWithNeighbours(new Vector2Int(currBuildPos.x / GlobalProperties.WorldTileSize, currBuildPos.y), new Vector2Int(buildingData.Width, buildingData.Height));
             
             foreach (Vector2Int tilePos in buildingArea) {
                 Cell cell = gridMap.GetCellAt(tilePos.x, tilePos.y);

@@ -64,13 +64,13 @@ namespace Code.Map.Building
             
             currentProgress = buildingMaterial.GetFloat(Visibility);
             
-            positionOffset = new Vector3(buildingData.xPivot, buildingData.yPivot, 0f);
+            positionOffset = new Vector3(buildingData.XPivot, buildingData.YPivot, 0f);
             Warehouse warehouse = Managers.Instance.Buildings.GetClosestWarehouse();
             GetComponent<Building>().SetEntrancePivot(positionOffset);
             
             Managers.Instance.Tasks.CreateBuildingTask(this);
             
-            foreach (Resource resource in buildingData.requiredResources) {
+            foreach (Resource resource in buildingData.RequiredResources) {
                 Resource requiredResource = new Resource(resource);
                 SetRequiredResource(requiredResource);
                 Managers.Instance.Tasks.CreateResourceCarryingTask(transform.position + positionOffset, ProfessionType.Builder, warehouse, requiredResource, AddResources);
