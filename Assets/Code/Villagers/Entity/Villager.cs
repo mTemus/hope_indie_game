@@ -8,6 +8,7 @@ namespace Code.Villagers.Entity
         [Header("Villager properties")]
         [SerializeField] private int healthPoints;
         [SerializeField] private float speed = 5f;
+        [SerializeField] private VillagersStatistics statistics;
 
         [Header("Villager components")]
         [SerializeField] private Profession profession;
@@ -23,6 +24,11 @@ namespace Code.Villagers.Entity
             transform.position = Vector3.MoveTowards(transform.position , position, villagerSpeed * Time.deltaTime);
         }
 
+        public void SetStatistics(VillagersStatistics newStatistics)
+        {
+            statistics = newStatistics;
+        }
+        
         public bool IsOnPosition(Vector3 position) =>
             transform.position == position;
         
