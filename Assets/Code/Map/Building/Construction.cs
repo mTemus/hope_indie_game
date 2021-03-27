@@ -32,6 +32,7 @@ namespace Code.Map.Building
             if (!(currentProgress <= 0.1f)) return false;
             DestroyImmediate(buildingMaterial);
             GetComponent<SpriteRenderer>().material = normalMaterial;
+            CleanAfterConstruction();
             return true;
         }
 
@@ -66,7 +67,6 @@ namespace Code.Map.Building
             
             positionOffset = new Vector3(buildingData.XPivot, buildingData.YPivot, 0f);
             Warehouse warehouse = Managers.Instance.Buildings.GetClosestWarehouse();
-            GetComponent<Building>().SetEntrancePivot(positionOffset);
             
             Managers.Instance.Tasks.CreateBuildingTask(this);
             
@@ -75,6 +75,11 @@ namespace Code.Map.Building
                 SetRequiredResource(requiredResource);
                 Managers.Instance.Tasks.CreateResourceCarryingTask(transform.position + positionOffset, ProfessionType.Builder, warehouse, requiredResource, AddResources);
             }
+
+            Building b = GetComponent<Building>();
+            b.SetBuildingSize(buildingData.Width, buildingData.Height);
+            b.SetEntrancePivot(positionOffset);
+            b.SetMaxOccupancy(buildingData.MAXOccupancy);
         }
 
         public void CleanAfterConstruction()
