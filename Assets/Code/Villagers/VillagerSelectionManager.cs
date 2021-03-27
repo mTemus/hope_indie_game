@@ -43,6 +43,7 @@ namespace Code.Villagers
         {
             selectedVillager = null;
         }
-    
+
+        public Villager SelectedVillager => selectedVillager;
     }
 }
