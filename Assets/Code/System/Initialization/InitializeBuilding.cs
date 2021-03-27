@@ -14,6 +14,7 @@ namespace Code.System.Initialization
             building.SetBuildingSize(buildingData.width, buildingData.height);
             Area.Area myArea = Managers.Instance.Areas.GetAreaByCoords(Vector3Int.FloorToInt(transform.position));
             myArea.AddBuilding(building, buildingData);
+            Managers.Instance.Buildings.AddBuilding(building);
         }
     }
 }
