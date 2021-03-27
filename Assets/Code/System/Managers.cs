@@ -16,19 +16,29 @@ namespace Code.System
 {
    public class Managers : MonoBehaviour
    {
-      [SerializeField] private InputManager input;
+      [Header("Player")]
       [SerializeField] private PlayerToolsManager tools;
       [SerializeField] private PlayerManager player;
+
+      [Header("System")]
+      [SerializeField] private InputManager input;
       [SerializeField] private CameraManager cameras;
-      [SerializeField] private AreaManager areas;
-      [SerializeField] private VillagersManager villagers;
-      [SerializeField] private BuildingsManager buildings;
-      [SerializeField] private TasksManager tasks;
-      [SerializeField] private ResourcesManager resources;
-      [SerializeField] private ProfessionManager professions;
       [SerializeField] private InitializationManager initialization;
-      [SerializeField] private GUIManager gui;
+
+      [Header("Map")]
+      [SerializeField] private AreaManager areas;
+      [SerializeField] private BuildingsManager buildings;
+      [SerializeField] private ResourcesManager resources;
+
+      [Header("Villagers")]
+      [SerializeField] private VillagersManager villagers;
+      [SerializeField] private TasksManager tasks;
+      [SerializeField] private ProfessionManager professions;
+      [SerializeField] private VillagerSelectionManager villagerSelection;
       
+      [Header("GUI")]
+      [SerializeField] private GUIManager gui;
+
       private static Managers _instance;
 
       private void Awake()
@@ -57,6 +67,8 @@ namespace Code.System
       public ProfessionManager Professions => professions;
 
       public InitializationManager Initialization => initialization;
+
+      public VillagerSelectionManager VillagerSelection => villagerSelection;
 
       public GUIManager GUI => gui;
 
