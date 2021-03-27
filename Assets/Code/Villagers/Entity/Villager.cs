@@ -31,7 +31,9 @@ namespace Code.Villagers.Entity
         
         public bool IsOnPosition(Vector3 position) =>
             transform.position == position;
-        
+
+        public VillagersStatistics Statistics => statistics;
+
         public Profession Profession => profession;
 
         public VillagerUi UI => ui;
