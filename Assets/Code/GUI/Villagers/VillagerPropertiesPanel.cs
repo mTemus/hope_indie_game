@@ -16,16 +16,14 @@ namespace Code.GUI.Villagers
         [SerializeField] private TextMeshProUGUI villagerProfessionText;
         [SerializeField] private SelectableBuildingReference home;
         [SerializeField] private SelectableBuildingReference workplace;
-
-
+        
         [Header("Villager Status")] 
         [SerializeField] private Transform status;
 
         [SerializeField] private TextMeshProUGUI strengthValue;
         [SerializeField] private TextMeshProUGUI dexterity;
         [SerializeField] private TextMeshProUGUI intelligenceValue;
-
-
+        
         [Header("Villager Skills")] 
         [SerializeField] private Transform skills;
 
