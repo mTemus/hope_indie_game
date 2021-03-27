@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Code.Map.Building
 {
-    [CreateAssetMenu(fileName = "Building Data", menuName = "Map Objects/Building Data", order = 0)]
+    [CreateAssetMenu(fileName = "Game Data", menuName = "Map Objects/Building Data", order = 0)]
     public class BuildingData : ScriptableObject
     {
         public Transform prefab;
