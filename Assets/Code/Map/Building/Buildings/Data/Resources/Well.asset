@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 8793695768821999390, guid: 9d54e0cff6b04084d9810a56aa2ad2f4, type: 3}
   buildingName: Well
+  maxOccupancy: 2
   width: 2
   height: 2
   xPivot: 1

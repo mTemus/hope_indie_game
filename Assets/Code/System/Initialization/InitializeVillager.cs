@@ -26,6 +26,8 @@ namespace Code.System.Initialization
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+            
+            villager.Profession.Workplace.Occupy(villager);
         }
     }
 }

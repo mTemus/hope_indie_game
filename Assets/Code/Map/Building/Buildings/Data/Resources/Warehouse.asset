@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 3085277392001244628, guid: 2fa98d1e929f51c43a0ac176884a0bb3, type: 3}
   buildingName: Warehouse
+  maxOccupancy: 4
   width: 7
   height: 8
   xPivot: 5.5
