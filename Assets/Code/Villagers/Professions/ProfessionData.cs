@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Code.Villagers.Professions
 {
-    [CreateAssetMenu(fileName = "Game Data", menuName = "Villagers/Profession Data", order = 0)]
+    [CreateAssetMenu(fileName = "Profession Data", menuName = "Game Data/Villagers/Profession Data", order = 0)]
     public class ProfessionData : ScriptableObject
     {
         [SerializeField] private ProfessionType professionType;
