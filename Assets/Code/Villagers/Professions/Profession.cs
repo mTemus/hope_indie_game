@@ -84,6 +84,11 @@ namespace Code.Villagers.Professions
             currentWorkNode = workNode;
         }
 
+        public void InitializeUnemployedAI()
+        {
+            
+        }
+
         public bool HasWorkToDo() =>
             tasks.Count > 0 || currentTask != null;
 
