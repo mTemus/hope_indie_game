@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Code.Map.Building;
 using Code.Villagers.Entity;
 using Code.Villagers.Professions.Types;
 using UnityEngine;
@@ -52,7 +53,7 @@ namespace Code.Villagers.Professions
             lumberjacks.Add(villager);
         }
         
-        public void SetVillagerProfession(Villager villager, ProfessionType professionType)
+        public void SetVillagerProfession(Villager villager, ProfessionType professionType, Building workplace)
         {
             FireVillagerFromOldProfession(villager);
 
@@ -72,6 +73,9 @@ namespace Code.Villagers.Professions
                 default:
                     throw new ArgumentOutOfRangeException(nameof(professionType), professionType, null);
             }
+
+            villager.Profession.SetWorkplace(workplace);
+            workplace.Occupy(villager);
         }
     }
 }
