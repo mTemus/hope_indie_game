@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Code.GUI.UIElements
+namespace Code.GUI.UIElements.SelectableElement
 {
     public abstract class UiSelectableElement : MonoBehaviour
     {
