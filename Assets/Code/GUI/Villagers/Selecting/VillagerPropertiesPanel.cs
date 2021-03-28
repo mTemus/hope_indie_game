@@ -1,13 +1,13 @@
-using Code.GUI.UIElements;
+using Code.GUI.UIElements.SelectableElement;
 using Code.System;
 using Code.Villagers.Entity;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Code.GUI.Villagers
+namespace Code.GUI.Villagers.Selecting
 {
-    public class VillagerPropertiesPanel : MonoBehaviour
+    public class VillagerPropertiesPanel : UiSelectablePanel
     {
         [Header("Villager Data")]
         [SerializeField] private Image portraitImage;
@@ -23,13 +23,6 @@ namespace Code.GUI.Villagers
         
         [Header("Villager Skills")] 
         [SerializeField] private Transform skills;
-
-        [Header("Script elements")] 
-        [SerializeField] private UiSelectingPointer pointer;
-        [SerializeField] private UiSelectableElement[] elementsToSelect;
-   
-        private int selectionIdx;
-        private UiSelectableElement currentElement;
         
         private void Awake()
         {
@@ -38,20 +31,6 @@ namespace Code.GUI.Villagers
             pointer.SetPointerOnUiElement(currentElement.transform);
             
             gameObject.SetActive(false);
-        }
-
-        public void MovePointer(int value)
-        {
-            selectionIdx = GlobalUtilities.IncrementIdx(selectionIdx, value, elementsToSelect.Length);
-            currentElement.OnElementDeselected();
-            currentElement = elementsToSelect[selectionIdx];
-            pointer.SetPointerOnUiElement(currentElement.transform);
-            currentElement.OnElementSelected();
-        }
-
-        public void UseSelectedElement()
-        {
-            currentElement.InvokeSelectedElement();
         }
 
         public void OpenPropertiesPanel(Villager villager)
