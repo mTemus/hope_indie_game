@@ -25,6 +25,7 @@ namespace Code.Villagers
 
         public void SelectVillager()
         {
+            if (villagersToSelect.Count <= 0) return;
             Vector3 playerPos = Managers.Instance.Player.GetPlayerPosition();
             float closestDistance = Vector3.Distance(villagersToSelect[0].transform.position, playerPos);
         
