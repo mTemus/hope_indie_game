@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: UnemployedProfession
   m_EditorClassIdentifier: 
   professionType: 0
-  workspace: {fileID: 2699120673269493026, guid: ea3a3f3e8e5d66a47a1eebef9e16a9be, type: 3}
+  workspace: {fileID: 2699120673269493026, guid: 71d6fb766878d6f479c257e7fc4867fb, type: 3}
   requiredStats:
     strength: 0
     dexterity: 0
