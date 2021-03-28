@@ -29,6 +29,7 @@ namespace Code.GUI.Villagers.Selecting
 
         public void OnPanelOpen()
         {
+            InputManager.VillagerPropertiesInputState.SetToVillagerProfessionDisplayChildState(Managers.Instance.GUI.VillagerProfessionChangingPanel);
             Villager villager = Managers.Instance.VillagerSelection.SelectedVillager;
             
             foreach (UiSelectableElement element in elementsToSelect) {
