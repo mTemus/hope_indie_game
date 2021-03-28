@@ -1,43 +1,42 @@
-using UnityEngine;
+using Code.GUI.UIElements.SelectableElement;
+using Code.GUI.Villagers.Selecting;
 
 namespace Code.System.PlayerInput.States
 {
     public class VillagerPropertiesInputState : IInputState
     {
+        private IInputState currentChildState;
+        
         public void OnStateSet()
         {
+            SetToVillagerPropertiesDisplayChildState();
             Managers.Instance.GUI.VillagerPropertiesPanel.gameObject.SetActive(true);
         }
 
         public void HandleState(InputManager inputManager)
         {
-            // A - D -> change selection pointer
-            // E -> use selection
-            // Exit -> reset camera -> end state
-        
-            if (Input.GetKeyDown(inputManager.Left) || Input.GetKeyDown(inputManager.LeftAlt)) 
-                Managers.Instance.GUI.VillagerPropertiesPanel.MovePointer(-1);
-        
-            if (Input.GetKeyDown(inputManager.Right) || Input.GetKeyDown(inputManager.RightAlt)) 
-                Managers.Instance.GUI.VillagerPropertiesPanel.MovePointer(1);
-        
-            if (Input.GetKeyDown(inputManager.Action)) 
-                Managers.Instance.GUI.VillagerPropertiesPanel.UseSelectedElement();
-
-            if (Input.GetKeyDown(inputManager.Cancel)) {
-                if (!Managers.Instance.Cameras.IsCameraOnPlayer()) {
-                    Managers.Instance.Cameras.FocusCameraOnPlayer();
-                    return;
-                }
-            
-                Managers.Instance.GUI.VillagerPropertiesPanel.gameObject.SetActive(false);
-                Managers.Instance.Input.SetState(InputManager.MovingInputState);
-            }
+            currentChildState.HandleState(inputManager);
         }
 
         public void OnStateChange()
         {
             Managers.Instance.Player.Player.VillagerToInteract.Profession.enabled = true;
+            currentChildState = null;
+        }
+
+        public void SetToVillagerPropertiesDisplayChildState()
+        {
+            currentChildState = new VillagerPropertiesDisplayChildState();
+        }
+
+        public void SetToVillagerProfessionDisplayChildState(VillagerProfessionChangingPanel panel)
+        {
+            currentChildState = new VillagerProfessionDisplayChildInputState(panel);
+        }
+
+        public void SetToNewProfessionAcceptChildState(UiAcceptancePanel panel)
+        {
+            currentChildState = new VillagerProfessionSetAcceptanceChildInputState(panel);
         }
     }
 }
