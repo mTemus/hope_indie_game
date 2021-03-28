@@ -31,13 +31,15 @@ namespace Code.GUI.Villagers.Selecting
             Villager villager = Managers.Instance.VillagerSelection.SelectedVillager;
             
             foreach (UiSelectableElement element in elementsToSelect) {
-                if (element.GetComponent<ProfessionLabelItem>().ProfessionData.ProfessionType !=
-                    villager.Profession.Type) continue;
+                ProfessionLabelItem currItem = element.GetComponent<ProfessionLabelItem>();
+                
+                if (currItem.ProfessionData.ProfessionType != villager.Profession.Type) continue;
                 Transform pointerTransform = currentProfessionPointer.transform;
-                Vector3 currPointerPos = pointerTransform.position;
-                Vector3 newPointerPos =
-                    new Vector3(currPointerPos.x, element.transform.position.y, currPointerPos.z);
-                pointerTransform.position = newPointerPos;
+                Vector3 pointerPos = pointerTransform.localPosition;
+                
+                pointerTransform.SetParent(element.transform);
+                Vector3 newPointerPos = new Vector3(pointerPos.x, 0, pointerPos.z);
+                pointerTransform.localPosition = newPointerPos;
                 break;
             }
 
