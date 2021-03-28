@@ -31,7 +31,7 @@ namespace Code.GUI.Villagers.Selecting
 
         public void ResetSize(int normalHeight)
         {
-            Rect r = GetComponent<Rect>();
+            Rect r = GetComponent<RectTransform>().rect;
             r.size = new Vector2(r.width, normalHeight);
         }
 

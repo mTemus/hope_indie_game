@@ -57,7 +57,7 @@ namespace Code.GUI.Villagers.Selecting
 
         public void AttachPanelToProfession(Transform parent)
         {
-            Rect parentRect = parent.GetComponent<Rect>();
+            Rect parentRect = parent.GetComponent<RectTransform>().rect;
             Transform panelTransform = transform;
             
             parentRect.size += labelSize;
