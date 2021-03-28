@@ -24,5 +24,14 @@ namespace Code.GUI.UIElements.SelectableElement
             pointer.SetPointerOnUiElement(currentElement.transform);
             currentElement.OnElementSelected();
         }
+
+        public void MovePointerWithParent(int value)
+        {
+            selectionIdx = GlobalUtilities.IncrementIdx(selectionIdx, value, elementsToSelect.Length);
+            currentElement.OnElementDeselected();
+            currentElement = elementsToSelect[selectionIdx];
+            pointer.SetPointerOnUiElementWithParent(currentElement.transform);
+            currentElement.OnElementSelected();
+        }
     }
 }

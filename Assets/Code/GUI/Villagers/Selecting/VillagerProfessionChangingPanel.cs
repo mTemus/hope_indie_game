@@ -42,7 +42,19 @@ namespace Code.GUI.Villagers.Selecting
                 pointerTransform.localPosition = newPointerPos;
                 break;
             }
-
+            
+            currentProfession = (ProfessionLabelItem) elementsToSelect[0];
+            pointer.SetPointerOnUiElementWithParent(currentProfession.transform);
+            
+            //
+            // if (currentProfession.Workplaces.Length <= 0) 
+            //     propertiesLabel.ShowAvailableWorkplacesPanel(true);
+            // else {
+            //     propertiesLabel.AttachPanelToProfession(currentProfession.transform); 
+            //     propertiesLabel.LoadProfessionData(currentProfession.ProfessionData, villager);
+            // }
+            
+            
             foreach (UiSelectableElement selectableElement in elementsToSelect) {
                 ProfessionLabelItem labelItem = (ProfessionLabelItem) selectableElement;
                 labelItem.LoadWorkplaces();
@@ -71,7 +83,7 @@ namespace Code.GUI.Villagers.Selecting
 
         public void SetPointerOnProfession(int value)
         {
-            MovePointer(value);
+            MovePointerWithParent(value);
             currentProfession.ResetSize(normalLabelHeight);
             currentProfession = (ProfessionLabelItem) currentElement;
             propertiesLabel.AttachPanelToProfession(currentProfession.transform);
