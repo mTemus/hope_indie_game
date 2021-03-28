@@ -15,8 +15,8 @@ namespace Code.GUI.Villagers.Selecting
         
         public override void OnElementSelected()
         {
-            if (workplaces.Length > 0) 
-                Managers.Instance.Cameras.FocusCameraOn(workplaces[0].transform);
+            if (workplaces.Length <= 0) return; 
+            Managers.Instance.Cameras.FocusCameraOn(workplaces[0].transform);
         }
 
         public override void OnElementDeselected()
