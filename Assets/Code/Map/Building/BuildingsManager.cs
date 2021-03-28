@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Code.Map.Building.Buildings.Components;
 using Code.System;
 using UnityEngine;
@@ -18,7 +17,27 @@ namespace Code.Map.Building
 
         public Building[] GetAllBuildingsOfType(Type buildingType)
         {
-            return (from buildingKVP in buildings where buildingKVP.Key == buildingType select buildingKVP.Value).ToArray();
+            List<Building> returnBuildings = new List<Building>();
+
+            foreach (KeyValuePair<Type, Building> building in buildings) {
+                if (building.Key == buildingType) 
+                    returnBuildings.Add(building.Value);
+                
+            }
+            return returnBuildings.ToArray();
+        }
+
+        public Building[] GetAllFreeWorkplacesOfType(Type buildingType)
+        {
+            List<Building> returnBuildings = new List<Building>();
+
+            foreach (KeyValuePair<Type, Building> building in buildings) {
+                if (building.Key != buildingType) continue;
+                if (!building.Value.CanBeOccupied()) continue;
+                returnBuildings.Add(building.Value);
+            }
+            
+            return returnBuildings.ToArray();
         }
         
         public Warehouse GetClosestWarehouse() =>
