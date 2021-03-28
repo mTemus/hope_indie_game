@@ -7,13 +7,9 @@ namespace Code.Player.Tools
     {
         public override void UseTool()
         {
-            //TODO: stopVillager to move while getting properties
-
-            Villager villager = Managers.Instance.Player.Player.VillagerToInteract;
-
-            if (villager == null) return;
-            villager.Profession.enabled = false;
+            if (Managers.Instance.VillagerSelection.SelectedVillager != null) return;
             Managers.Instance.VillagerSelection.SelectVillager();
+            Managers.Instance.VillagerSelection.SelectedVillager.Profession.enabled = false;
             Managers.Instance.Input.SetState(InputManager.VillagerPropertiesInputState);
         }
     }
