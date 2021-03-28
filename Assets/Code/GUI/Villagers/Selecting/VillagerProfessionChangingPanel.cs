@@ -94,7 +94,7 @@ namespace Code.GUI.Villagers.Selecting
         public void ShowWorkplace(int value)
         {
             //TODO: switch arrows on available workplaces, but someday, maybe
-            
+            if (currentProfession.Workplaces.Length <= 0) return;
             workplacesIdx = GlobalUtilities.IncrementIdx(workplacesIdx, value, currentProfession.Workplaces.Length);
             Managers.Instance.Cameras.FocusCameraOn(currentProfession.Workplaces[workplacesIdx].transform);
         }
