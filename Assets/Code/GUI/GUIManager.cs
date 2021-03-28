@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Code.GUI.BuildingSelecting;
 using Code.GUI.PlayerToolsMenu;
-using Code.GUI.Villagers;
+using Code.GUI.Villagers.Selecting;
 using Code.Resources;
 using UnityEngine;
 
@@ -15,6 +15,7 @@ namespace Code.GUI
 
         [Header("Villager GUI")] 
         [SerializeField] private VillagerPropertiesPanel villagerPropertiesPanel;
+        [SerializeField] private VillagerProfessionChangingPanel villagerProfessionChangingPanel;
         
         [Header("Other")]
         [SerializeField] private List<Sprite> resourceIcons;
@@ -24,7 +25,8 @@ namespace Code.GUI
             //TODO: this should be changed to addressables!
             return resourceIcons.Find(sprite => sprite.name == resourceType.ToString().ToLower());
         }
-
+        
+        public VillagerProfessionChangingPanel VillagerProfessionChangingPanel => villagerProfessionChangingPanel;
 
         public VillagerPropertiesPanel VillagerPropertiesPanel => villagerPropertiesPanel;
 
