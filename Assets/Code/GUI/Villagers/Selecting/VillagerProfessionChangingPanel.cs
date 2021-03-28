@@ -23,6 +23,7 @@ namespace Code.GUI.Villagers.Selecting
 
         private void Awake()
         {
+            currentElement = elementsToSelect[0];
             gameObject.SetActive(false);
         }
 
