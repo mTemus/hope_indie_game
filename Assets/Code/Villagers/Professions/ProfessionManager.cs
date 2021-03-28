@@ -74,6 +74,7 @@ namespace Code.Villagers.Professions
                     throw new ArgumentOutOfRangeException(nameof(professionType), professionType, null);
             }
 
+            villager.UI.ProfessionName.text = professionType.ToString();
             villager.Profession.SetWorkplace(workplace);
             workplace.Occupy(villager);
         }

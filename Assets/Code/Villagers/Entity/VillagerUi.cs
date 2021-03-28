@@ -8,7 +8,8 @@ namespace Code.Villagers.Entity
 {
     public class VillagerUi : MonoBehaviour
     {
-        [Header("GUI")]
+        [Header("GUI")] 
+        [SerializeField] private TextMeshProUGUI professionName;
         [SerializeField] private TextMeshProUGUI stateText;
         [SerializeField] private Image resourceImage;
         
@@ -23,6 +24,8 @@ namespace Code.Villagers.Entity
                 resourceImage.gameObject.SetActive(false);
             }
         }
+
+        public TextMeshProUGUI ProfessionName => professionName;
 
         public TextMeshProUGUI StateText => stateText;
     }

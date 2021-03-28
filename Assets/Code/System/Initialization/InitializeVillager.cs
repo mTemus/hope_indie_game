@@ -28,6 +28,7 @@ namespace Code.System.Initialization
             }
             
             villager.Profession.Workplace.Occupy(villager);
+            villager.UI.ProfessionName.text = villager.Profession.Type.ToString();
         }
     }
 }
