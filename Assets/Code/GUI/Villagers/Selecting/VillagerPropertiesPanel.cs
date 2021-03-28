@@ -1,6 +1,5 @@
 using Code.GUI.UIElements;
 using Code.System;
-using Code.Utilities;
 using Code.Villagers.Entity;
 using TMPro;
 using UnityEngine;

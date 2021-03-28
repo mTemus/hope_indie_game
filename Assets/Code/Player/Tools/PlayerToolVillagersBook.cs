@@ -1,6 +1,5 @@
 using Code.System;
 using Code.System.PlayerInput;
-using Code.Villagers.Entity;
 
 namespace Code.Player.Tools
 {

@@ -6,6 +6,7 @@ namespace Code.GUI.UIElements
    {
       [SerializeField] private RectTransform pointer;
       [SerializeField] private float offset;
+      
       public void SetPointerOnUiElement(Transform element)
       {
          Rect elementRect = element.GetComponent<RectTransform>().rect;
