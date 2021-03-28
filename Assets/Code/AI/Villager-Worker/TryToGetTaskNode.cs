@@ -38,7 +38,6 @@ namespace Code.AI
             else 
                 state = NodeState.FAILURE;
             
-            Debug.LogWarning("TryToGetTaskNode --- " + state);
             return state;
         }
     }
