@@ -4,7 +4,7 @@ namespace Code.Villagers.Professions.Types
     {
         private void Update()
         {
-            ProfessionAI.Evaluate();
+            // ProfessionAI.Evaluate();
         }
     }
 }
