@@ -15,7 +15,7 @@ MonoBehaviour:
   professionType: 2
   workspace: {fileID: 2961238222191277132, guid: 29849b52182697849a1804d9b539db17, type: 3}
   requiredStats:
-    strength: 3
-    dexterity: 3
-    intelligence: 1
+    strength: 8
+    dexterity: 6
+    intelligence: 3
   goldPerDay: 15
