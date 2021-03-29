@@ -37,7 +37,9 @@ namespace Code.GUI.Villagers.Selecting
 
         public void LoadWorkplaces()
         {
-            workplaces = Managers.Instance.Buildings.GetAllFreeWorkplacesOfType(professionData.WorkplaceType);
+            workplaces = professionData.ProfessionType == ProfessionType.Unemployed ? 
+                Managers.Instance.Buildings.GetAllBuildingsOfType(professionData.WorkplaceType) : 
+                Managers.Instance.Buildings.GetAllFreeWorkplacesOfType(professionData.WorkplaceType);
         }
         
         public void ClearWorkplaces()
