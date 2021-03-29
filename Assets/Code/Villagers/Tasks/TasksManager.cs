@@ -58,6 +58,10 @@ namespace Code.Villagers.Tasks
                     }
                 
                     break;
+
+                case ProfessionType.Lumberjack:
+                    //TODO: add lumberjack tasks
+                    break;
                 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(profession), profession, null);
