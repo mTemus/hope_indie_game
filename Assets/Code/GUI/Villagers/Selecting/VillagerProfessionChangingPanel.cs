@@ -32,31 +32,36 @@ namespace Code.GUI.Villagers.Selecting
             InputManager.VillagerPropertiesInputState.SetToVillagerProfessionDisplayChildState(Managers.Instance.GUI.VillagerProfessionChangingPanel);
             Villager villager = Managers.Instance.VillagerSelection.SelectedVillager;
             
+            //Initialize profession pointer pos
             foreach (UiSelectableElement element in elementsToSelect) {
                 ProfessionLabelItem currItem = element.GetComponent<ProfessionLabelItem>();
                 
                 if (currItem.ProfessionData.ProfessionType != villager.Profession.Type) continue;
-                Transform pointerTransform = currentProfessionPointer.transform;
-                Vector3 pointerPos = pointerTransform.localPosition;
+                RectTransform pointerRect = currentProfessionPointer.GetComponent<RectTransform>();
                 
-                pointerTransform.SetParent(element.transform);
-                Vector3 newPointerPos = new Vector3(pointerPos.x, 0, pointerPos.z);
-                pointerTransform.localPosition = newPointerPos;
+                currentProfessionPointer.transform.SetParent(element.transform);
+                Vector3 pointerPos = pointerRect.localPosition;
+                
+                float newY = element.GetComponent<RectTransform>().sizeDelta.y / 2;
+                Vector3 newPointerPos = new Vector3(newY + 5, -newY, pointerPos.z);
+                
+                pointerRect.anchoredPosition = newPointerPos;
                 break;
             }
             
+            //Initialize first selected item
             currentProfession = (ProfessionLabelItem) elementsToSelect[0];
             pointer.SetPointerOnUiElementWithParent(currentProfession.transform);
             
-            //
-            // if (currentProfession.Workplaces.Length <= 0) 
-            //     propertiesLabel.ShowAvailableWorkplacesPanel(true);
-            // else {
-            //     propertiesLabel.AttachPanelToProfession(currentProfession.transform); 
-            //     propertiesLabel.LoadProfessionData(currentProfession.ProfessionData, villager);
-            // }
-            
-            
+            //Initialize profession label
+            if (currentProfession.Workplaces.Length <= 0) 
+                propertiesLabel.ShowNotAvailableWorkplacesPanel(true);
+            else 
+                propertiesLabel.LoadProfessionData(currentProfession.ProfessionData, villager);
+
+            propertiesLabel.AttachPanelToProfession(currentProfession.transform);
+            professionsGroup.UpdateElementsPosition();
+
             foreach (UiSelectableElement selectableElement in elementsToSelect) {
                 ProfessionLabelItem labelItem = (ProfessionLabelItem) selectableElement;
                 labelItem.LoadWorkplaces();

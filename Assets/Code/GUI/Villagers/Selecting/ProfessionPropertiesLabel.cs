@@ -57,12 +57,9 @@ namespace Code.GUI.Villagers.Selecting
 
         public void AttachPanelToProfession(Transform parent)
         {
-            Rect parentRect = parent.GetComponent<RectTransform>().rect;
-            Transform panelTransform = transform;
-            
-            parentRect.size += labelSize;
-            panelTransform.SetParent(parent);
-            panelTransform.position = Vector3.zero;
+            transform.SetParent(parent);
+            parent.GetComponent<RectTransform>().sizeDelta += new Vector2(0, labelSize.y);
+            GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         }
 
         public void LoadProfessionData(ProfessionData professionData, Villager villager)
@@ -74,9 +71,11 @@ namespace Code.GUI.Villagers.Selecting
             SetVillagerText(strengthValueVillager, villager.Statistics.Strength, professionData.RequiredStats.Strength);
             SetVillagerText(dexterityValueVillager, villager.Statistics.Dexterity, professionData.RequiredStats.Dexterity);
             SetVillagerText(intelligenceValueVillager, villager.Statistics.Intelligence, professionData.RequiredStats.Intelligence);
+
+            goldValue.text = professionData.GoldPerDay.ToString();
         }
 
-        public void ShowAvailableWorkplacesPanel(bool condition)
+        public void ShowNotAvailableWorkplacesPanel(bool condition)
         {
             noAvailableWorkplacePanel.SetActive(condition);
         }
