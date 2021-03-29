@@ -144,10 +144,11 @@ namespace Code.GUI.Villagers.Selecting
             } else 
                 Managers.Instance.Professions.SetVillagerProfession(selectedVillager, currentProfession.ProfessionData.ProfessionType, currentProfession.Workplaces[workplacesIdx]);
             
+            CloseAcceptablePanel();
             UpdateCurrentWorkPointerPosition();
         }
 
-        public void CancelTakingProfession()
+        public void CloseAcceptablePanel()
         {
             acceptancePanel.gameObject.SetActive(false);
             InputManager.VillagerPropertiesInputState.SetToVillagerProfessionDisplayChildState(Managers.Instance.GUI.VillagerProfessionChangingPanel);
