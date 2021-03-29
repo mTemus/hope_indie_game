@@ -37,19 +37,19 @@ namespace Code.Villagers.Professions
         
         private void MakeVillagerUnemployed(Villager villager)
         {
-            villager.gameObject.AddComponent<VillagerUnemployed>();
+            villager.UpdateProfession(villager.gameObject.AddComponent<VillagerUnemployed>(), ProfessionType.Unemployed);
             unemployed.Add(villager);
         }
         
         private void HireBuilder(Villager villager)
         {
-            villager.gameObject.AddComponent<VillagerBuilder>();
+            villager.UpdateProfession(villager.gameObject.AddComponent<VillagerBuilder>(), ProfessionType.Builder);
             builders.Add(villager);
         }
 
         private void HireLumberjack(Villager villager)
         {
-            villager.gameObject.AddComponent<VillagerLumberjack>();
+            villager.UpdateProfession(villager.gameObject.AddComponent<VillagerLumberjack>(), ProfessionType.Lumberjack);
             lumberjacks.Add(villager);
         }
         
@@ -74,9 +74,11 @@ namespace Code.Villagers.Professions
                     throw new ArgumentOutOfRangeException(nameof(professionType), professionType, null);
             }
 
+            villager.Profession.enabled = false;
             villager.UI.ProfessionName.text = professionType.ToString();
             villager.Profession.SetWorkplace(workplace);
-
+            villager.Profession.InitializeWorkerAI();
+            
             if (professionType != ProfessionType.Unemployed) 
                 workplace.Occupy(villager);
         }

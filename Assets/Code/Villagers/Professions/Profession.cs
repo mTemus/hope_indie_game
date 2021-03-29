@@ -77,6 +77,11 @@ namespace Code.Villagers.Professions
             workplace.Occupy(me);
         }
 
+        public void UpdateProfessionType(ProfessionType t)
+        {
+            type = t;
+        }
+
         public void InitializeWorkerAI()
         {
             TryToGetTaskNode tryToGetTask = new TryToGetTaskNode(this);

@@ -28,6 +28,12 @@ namespace Code.Villagers.Entity
         {
             statistics = newStatistics;
         }
+
+        public void UpdateProfession(Profession newProfession, ProfessionType type)
+        {
+            profession = newProfession;
+            profession.UpdateProfessionType(type);
+        }
         
         public bool IsOnPosition(Vector3 position) =>
             transform.position == position;
