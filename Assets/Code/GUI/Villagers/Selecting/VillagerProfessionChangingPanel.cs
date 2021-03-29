@@ -131,6 +131,7 @@ namespace Code.GUI.Villagers.Selecting
 
         public void ShowAcceptancePanel()
         {
+            if(currentProfession.Workplaces.Length == 0) return;
             acceptancePanel.gameObject.SetActive(true);
             InputManager.VillagerPropertiesInputState.SetToNewProfessionAcceptChildState(acceptancePanel);
         }
