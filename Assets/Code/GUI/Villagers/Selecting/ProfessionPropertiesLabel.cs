@@ -35,10 +35,10 @@ namespace Code.GUI.Villagers.Selecting
         private Color CompareStats(int profession, int villager)
         {
             int difference = profession - villager;
-
-            if (difference > 5) 
+            
+            if (difference >= 5) 
                 return badColor;
-            if (difference < 5 && difference > 2) 
+            if (difference > 1) 
                 return neutralColor;
             
             return goodColor;
