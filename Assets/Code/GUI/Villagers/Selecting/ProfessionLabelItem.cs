@@ -29,10 +29,10 @@ namespace Code.GUI.Villagers.Selecting
             attachedEvent.Invoke();
         }
 
-        public void ResetSize(int normalHeight)
+        public void ResetLabel(int normalHeight)
         {
-            Rect r = GetComponent<RectTransform>().rect;
-            r.size = new Vector2(r.width, normalHeight);
+            RectTransform r = GetComponent<RectTransform>();
+            r.sizeDelta = new Vector2(r.sizeDelta.x, normalHeight);
         }
 
         public void LoadWorkplaces()
