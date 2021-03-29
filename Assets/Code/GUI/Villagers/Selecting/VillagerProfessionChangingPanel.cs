@@ -75,8 +75,12 @@ namespace Code.GUI.Villagers.Selecting
             }
             
             //Initialize profession label data
-            if (currentProfession.Workplaces.Length <= 0) propertiesLabel.ShowNotAvailableWorkplacesPanel(true);
-            else propertiesLabel.LoadProfessionData(currentProfession.ProfessionData, villager);
+            if (currentProfession.Workplaces.Length <= 0) 
+                propertiesLabel.ShowNotAvailableWorkplacesPanel(true);
+            else {
+                propertiesLabel.LoadProfessionData(currentProfession.ProfessionData, villager); 
+                Managers.Instance.Cameras.FocusCameraOn(currentProfession.Workplaces[0].transform);
+            }
         }
 
         public void OnPanelClose()
