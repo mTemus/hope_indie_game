@@ -91,7 +91,7 @@ namespace Code.GUI.Villagers.Selecting
                 labelItem.ClearWorkplaces();
             }
 
-            currentProfessionPointer.transform.SetParent(transform);
+            selectionIdx = 0;
             gameObject.SetActive(false);
         }
 
