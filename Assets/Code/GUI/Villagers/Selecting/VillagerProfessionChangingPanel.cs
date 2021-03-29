@@ -31,27 +31,30 @@ namespace Code.GUI.Villagers.Selecting
             gameObject.SetActive(false);
         }
 
+        private void UpdateCurrentWorkPointerPosition()
+        {
+            Villager villager = Managers.Instance.VillagerSelection.SelectedVillager;
+
+            foreach (UiSelectableElement element in elementsToSelect) {
+                ProfessionLabelItem currItem = (ProfessionLabelItem) element;
+                
+                if (currItem.ProfessionData.ProfessionType != villager.Profession.Type) continue;
+                RectTransform pointerRect = currentProfessionPointer.GetComponent<RectTransform>();
+                currentProfessionPointer.transform.SetParent(element.transform);
+                
+                float newY = element.GetComponent<RectTransform>().sizeDelta.y / 2;
+                pointerRect.anchoredPosition = new Vector2(newY, -newY);
+                break;
+            }
+        }
+
         public void OnPanelOpen()
         {
             InputManager.VillagerPropertiesInputState.SetToVillagerProfessionDisplayChildState(Managers.Instance.GUI.VillagerProfessionChangingPanel);
             Villager villager = Managers.Instance.VillagerSelection.SelectedVillager;
             
             //Initialize profession pointer pos
-            foreach (UiSelectableElement element in elementsToSelect) {
-                ProfessionLabelItem currItem = element.GetComponent<ProfessionLabelItem>();
-                
-                if (currItem.ProfessionData.ProfessionType != villager.Profession.Type) continue;
-                RectTransform pointerRect = currentProfessionPointer.GetComponent<RectTransform>();
-                
-                currentProfessionPointer.transform.SetParent(element.transform);
-                Vector3 pointerPos = pointerRect.localPosition;
-                
-                float newY = element.GetComponent<RectTransform>().sizeDelta.y / 2;
-                Vector3 newPointerPos = new Vector3(newY + 5, -newY, pointerPos.z);
-                
-                pointerRect.anchoredPosition = newPointerPos;
-                break;
-            }
+            UpdateCurrentWorkPointerPosition();
             
             //Initialize first selected item
             currentProfession = (ProfessionLabelItem) elementsToSelect[0];
@@ -120,6 +123,7 @@ namespace Code.GUI.Villagers.Selecting
         {
             Villager selectedVillager = Managers.Instance.VillagerSelection.SelectedVillager;
             Managers.Instance.Professions.SetVillagerProfession(selectedVillager, currentProfession.ProfessionData.ProfessionType, currentProfession.Workplaces[workplacesIdx]);
+            UpdateCurrentWorkPointerPosition();
         }
 
         public void CancelTakingProfession()
