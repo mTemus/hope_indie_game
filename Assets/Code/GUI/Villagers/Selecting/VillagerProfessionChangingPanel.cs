@@ -12,6 +12,8 @@ namespace Code.GUI.Villagers.Selecting
     {
         [Header("Properties")] 
         [SerializeField] private int normalLabelHeight;
+        
+        [Header("Components")]
         [SerializeField] private UiAcceptancePanel acceptancePanel;
         [SerializeField] private UiVerticalGroup professionsGroup;
         
@@ -66,16 +68,6 @@ namespace Code.GUI.Villagers.Selecting
             foreach (UiSelectableElement selectableElement in elementsToSelect) {
                 ProfessionLabelItem labelItem = (ProfessionLabelItem) selectableElement;
                 labelItem.LoadWorkplaces();
-            }
-
-            currentProfession = (ProfessionLabelItem) elementsToSelect[0];
-            pointer.SetPointerOnUiElement(currentProfession.transform);
-
-            if (currentProfession.Workplaces.Length <= 0) 
-                propertiesLabel.ShowAvailableWorkplacesPanel(true);
-            else {
-                propertiesLabel.AttachPanelToProfession(currentProfession.transform); 
-                propertiesLabel.LoadProfessionData(currentProfession.ProfessionData, villager);
             }
         }
 
