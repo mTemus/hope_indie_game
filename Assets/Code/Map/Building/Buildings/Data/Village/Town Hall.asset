@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
   buildingName: Town Hall
-  maxOccupancy: 20
+  maxOccupancy: 0
   width: 3
   height: 3
   xPivot: 2.5

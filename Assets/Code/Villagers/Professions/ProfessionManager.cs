@@ -76,7 +76,9 @@ namespace Code.Villagers.Professions
 
             villager.UI.ProfessionName.text = professionType.ToString();
             villager.Profession.SetWorkplace(workplace);
-            workplace.Occupy(villager);
+
+            if (professionType != ProfessionType.Unemployed) 
+                workplace.Occupy(villager);
         }
     }
 }
