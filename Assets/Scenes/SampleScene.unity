@@ -13318,7 +13318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goodColor: {r: 0.14220059, g: 0.4528302, b: 0.09611963, a: 1}
-  neutralColor: {r: 0.4509804, g: 0.33588248, b: 0.09803922, a: 1}
+  neutralColor: {r: 0.6792453, g: 0.48309395, b: 0.16340333, a: 1}
   badColor: {r: 0.4509804, g: 0.09803922, b: 0.12740004, a: 1}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   strengthValueProfession: {fileID: 1689191241}
