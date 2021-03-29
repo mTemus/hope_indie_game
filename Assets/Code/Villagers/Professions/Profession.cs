@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Code.AI;
 using Code.Map.Building;
 using Code.Resources;
+using Code.Villagers.Entity;
 using Code.Villagers.Tasks;
 using UnityEngine;
 
@@ -66,6 +67,14 @@ namespace Code.Villagers.Professions
         public void SetWorkplace(Building newWorkplace)
         {
             workplace = newWorkplace;
+        }
+
+        public void UpdateWorkplaceForProfession(Building newWorkplace)
+        {
+            Villager me = GetComponent<Villager>();
+            workplace.Vacate(me);
+            workplace = newWorkplace;
+            workplace.Occupy(me);
         }
 
         public void InitializeWorkerAI()

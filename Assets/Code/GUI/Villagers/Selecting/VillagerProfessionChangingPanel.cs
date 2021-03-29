@@ -129,8 +129,6 @@ namespace Code.GUI.Villagers.Selecting
 
         public void ShowAcceptancePanel()
         {
-            if (currentProfession.ProfessionData.ProfessionType == Managers.Instance.VillagerSelection.SelectedVillager.Profession.Type) return;
-            
             acceptancePanel.gameObject.SetActive(true);
             InputManager.VillagerPropertiesInputState.SetToNewProfessionAcceptChildState(acceptancePanel);
         }
@@ -138,7 +136,13 @@ namespace Code.GUI.Villagers.Selecting
         public void TakeProfession()
         {
             Villager selectedVillager = Managers.Instance.VillagerSelection.SelectedVillager;
-            Managers.Instance.Professions.SetVillagerProfession(selectedVillager, currentProfession.ProfessionData.ProfessionType, currentProfession.Workplaces[workplacesIdx]);
+
+            if (selectedVillager.Profession.Type == currentProfession.ProfessionData.ProfessionType) {
+                if (selectedVillager.Profession.Workplace != currentProfession.Workplaces[workplacesIdx]) 
+                    selectedVillager.Profession.UpdateWorkplaceForProfession(currentProfession.Workplaces[workplacesIdx]);
+            } else 
+                Managers.Instance.Professions.SetVillagerProfession(selectedVillager, currentProfession.ProfessionData.ProfessionType, currentProfession.Workplaces[workplacesIdx]);
+            
             UpdateCurrentWorkPointerPosition();
         }
 
