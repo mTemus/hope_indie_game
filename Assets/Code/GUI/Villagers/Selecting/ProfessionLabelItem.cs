@@ -29,7 +29,7 @@ namespace Code.GUI.Villagers.Selecting
             attachedEvent.Invoke();
         }
 
-        public void ResetLabel(int normalHeight)
+        public void ResetLabel(float normalHeight)
         {
             RectTransform r = GetComponent<RectTransform>();
             r.sizeDelta = new Vector2(r.sizeDelta.x, normalHeight);

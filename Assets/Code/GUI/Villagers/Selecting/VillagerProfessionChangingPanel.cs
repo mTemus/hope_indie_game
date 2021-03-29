@@ -11,7 +11,7 @@ namespace Code.GUI.Villagers.Selecting
     public class VillagerProfessionChangingPanel : UiSelectablePanel
     {
         [Header("Properties")] 
-        [SerializeField] private int normalLabelHeight;
+        [SerializeField] private float normalLabelHeight;
         
         [Header("Components")]
         [SerializeField] private UiAcceptancePanel acceptancePanel;
