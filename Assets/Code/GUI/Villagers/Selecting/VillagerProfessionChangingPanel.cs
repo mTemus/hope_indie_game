@@ -2,7 +2,6 @@ using Code.GUI.UIElements;
 using Code.GUI.UIElements.SelectableElement;
 using Code.System;
 using Code.System.PlayerInput;
-using Code.Utilities;
 using Code.Villagers.Entity;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,6 +20,8 @@ namespace Code.GUI.Villagers.Selecting
         [Header("Additional pointers")] 
         [SerializeField] private Image currentProfessionPointer;
         [SerializeField] private ProfessionPropertiesLabel propertiesLabel;
+        [SerializeField] private GameObject leftArrow;
+        [SerializeField] private GameObject rightArrow;
 
         private int workplacesIdx;
         private ProfessionLabelItem currentProfession;
@@ -67,6 +68,7 @@ namespace Code.GUI.Villagers.Selecting
             pointer.SetPointerOnUiElementWithParent(currentProfession.transform);
             
             // Initialize workplaces
+            rightArrow.SetActive(true);
             foreach (UiSelectableElement selectableElement in elementsToSelect) {
                 ProfessionLabelItem labelItem = (ProfessionLabelItem) selectableElement;
                 labelItem.LoadWorkplaces();
@@ -110,7 +112,14 @@ namespace Code.GUI.Villagers.Selecting
         {
             //TODO: switch arrows on available workplaces, but someday, maybe
             if (currentProfession.Workplaces.Length <= 0) return;
-            workplacesIdx = GlobalUtilities.IncrementIdx(workplacesIdx, value, currentProfession.Workplaces.Length);
+            workplacesIdx += value;
+            
+            if (workplacesIdx < 0) workplacesIdx = 0;
+            else if (workplacesIdx >= currentProfession.Workplaces.Length) workplacesIdx = currentProfession.Workplaces.Length - 1;
+            
+            leftArrow.SetActive(workplacesIdx > 0);
+            rightArrow.SetActive(workplacesIdx < currentProfession.Workplaces.Length -1);
+            
             Managers.Instance.Cameras.FocusCameraOn(currentProfession.Workplaces[workplacesIdx].transform);
         }
 
