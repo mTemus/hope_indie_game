@@ -43,7 +43,7 @@ namespace Code.GUI.Villagers.Selecting
                 RectTransform pointerRect = currentProfessionPointer.GetComponent<RectTransform>();
                 currentProfessionPointer.transform.SetParent(element.transform);
                 
-                float newY = element.GetComponent<RectTransform>().sizeDelta.y / 2;
+                float newY = normalLabelHeight / 2;
                 pointerRect.anchoredPosition = new Vector2(newY, -newY);
                 break;
             }
