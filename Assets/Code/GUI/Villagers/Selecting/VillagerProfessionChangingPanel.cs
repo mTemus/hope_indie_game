@@ -13,6 +13,7 @@ namespace Code.GUI.Villagers.Selecting
         [Header("Properties")] 
         [SerializeField] private int normalLabelHeight;
         [SerializeField] private UiAcceptancePanel acceptancePanel;
+        [SerializeField] private UiVerticalGroup professionsGroup;
         
         [Header("Additional pointers")] 
         [SerializeField] private Image currentProfessionPointer;
@@ -91,9 +92,19 @@ namespace Code.GUI.Villagers.Selecting
         public void SetPointerOnProfession(int value)
         {
             MovePointerWithParent(value);
-            currentProfession.ResetSize(normalLabelHeight);
+            currentProfession.ResetLabel(normalLabelHeight);
             currentProfession = (ProfessionLabelItem) currentElement;
+
+            if (currentProfession.Workplaces.Length > 0) {
+                propertiesLabel.ShowNotAvailableWorkplacesPanel(false);
+                propertiesLabel.LoadProfessionData(currentProfession.ProfessionData, Managers.Instance.VillagerSelection.SelectedVillager);
+            }
+            else {
+                propertiesLabel.ShowNotAvailableWorkplacesPanel(true);
+            }
+            
             propertiesLabel.AttachPanelToProfession(currentProfession.transform);
+            professionsGroup.UpdateElementsPosition();
         }
 
         public void ShowWorkplace(int value)
