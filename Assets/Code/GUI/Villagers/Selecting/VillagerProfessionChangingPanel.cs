@@ -87,10 +87,11 @@ namespace Code.GUI.Villagers.Selecting
         {
             foreach (UiSelectableElement selectableElement in elementsToSelect) {
                 ProfessionLabelItem labelItem = (ProfessionLabelItem) selectableElement;
+                labelItem.ResetLabel(normalLabelHeight);
                 labelItem.ClearWorkplaces();
             }
             
-            InputManager.VillagerPropertiesInputState.SetToVillagerPropertiesDisplayChildState();
+            gameObject.SetActive(false);
         }
 
         public void SetPointerOnProfession(int value)
