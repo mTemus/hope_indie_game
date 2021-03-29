@@ -21,7 +21,7 @@ namespace Code.System.PlayerInput.States
             if (Input.GetKeyDown(inputManager.Left) || Input.GetKeyDown(inputManager.LeftAlt)) 
                 acceptancePanel.MovePointer(-1);
             
-            if (Input.GetKeyDown(inputManager.Left) || Input.GetKeyDown(inputManager.LeftAlt)) 
+            if (Input.GetKeyDown(inputManager.Right) || Input.GetKeyDown(inputManager.RightAlt)) 
                 acceptancePanel.MovePointer(1);
             
             if (Input.GetKeyDown(inputManager.Action)) 
