@@ -1899,7 +1899,7 @@ MonoBehaviour:
       - m_Target: {fileID: 104695375}
         m_TargetAssemblyTypeName: Code.GUI.Villagers.Selecting.VillagerProfessionChangingPanel,
           Assembly-CSharp
-        m_MethodName: CancelTakingProfession
+        m_MethodName: CloseAcceptablePanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
