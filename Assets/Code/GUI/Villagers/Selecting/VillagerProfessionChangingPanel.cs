@@ -58,21 +58,23 @@ namespace Code.GUI.Villagers.Selecting
             
             //Initialize first selected item
             currentProfession = (ProfessionLabelItem) elementsToSelect[0];
-            pointer.SetPointerOnUiElementWithParent(currentProfession.transform);
             
-            //Initialize profession label
-            if (currentProfession.Workplaces.Length <= 0) 
-                propertiesLabel.ShowNotAvailableWorkplacesPanel(true);
-            else 
-                propertiesLabel.LoadProfessionData(currentProfession.ProfessionData, villager);
-
+            //Initialize profession properties panel
             propertiesLabel.AttachPanelToProfession(currentProfession.transform);
             professionsGroup.UpdateElementsPosition();
-
+            
+            //Initialize pointer
+            pointer.SetPointerOnUiElementWithParent(currentProfession.transform);
+            
+            // Initialize workplaces
             foreach (UiSelectableElement selectableElement in elementsToSelect) {
                 ProfessionLabelItem labelItem = (ProfessionLabelItem) selectableElement;
                 labelItem.LoadWorkplaces();
             }
+            
+            //Initialize profession label data
+            if (currentProfession.Workplaces.Length <= 0) propertiesLabel.ShowNotAvailableWorkplacesPanel(true);
+            else propertiesLabel.LoadProfessionData(currentProfession.ProfessionData, villager);
         }
 
         public void OnPanelClose()
