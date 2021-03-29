@@ -46,7 +46,7 @@ namespace Code.Map.Building
         }
 
         public bool CanBeOccupied() =>
-            maxOccupancy - currentOccupancy != 0;
+            maxOccupancy - currentOccupancy > 0;
 
         public int MAXOccupancy => maxOccupancy;
 
