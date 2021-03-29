@@ -89,7 +89,7 @@ namespace Code.GUI.Villagers.Selecting
 
         public void SetPointerOnProfession(int value)
         {
-            MovePointerWithParent(value);
+            GetNextElement(value);
             currentProfession.ResetLabel(normalLabelHeight);
             currentProfession = (ProfessionLabelItem) currentElement;
 
@@ -103,6 +103,7 @@ namespace Code.GUI.Villagers.Selecting
             
             propertiesLabel.AttachPanelToProfession(currentProfession.transform);
             professionsGroup.UpdateElementsPosition();
+            MovePointerWithParent();
         }
 
         public void ShowWorkplace(int value)
