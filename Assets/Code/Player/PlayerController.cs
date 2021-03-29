@@ -9,7 +9,6 @@ namespace Code.Player
         [Header("Player components")] 
         [SerializeField] private PlayerMovement movement;
         
-        private Villager villagerToInteract;
         
         private void OnTriggerEnter2D(Collider2D other)
         {
@@ -24,7 +23,5 @@ namespace Code.Player
                 Managers.Instance.VillagerSelection.RemoveVillagerToSelect(other.GetComponent<Villager>());
             }
         }
-
-        public Villager VillagerToInteract => villagerToInteract;
     }
 }

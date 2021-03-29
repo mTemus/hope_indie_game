@@ -20,7 +20,8 @@ namespace Code.System.PlayerInput.States
 
         public void OnStateChange()
         {
-            Managers.Instance.Player.Player.VillagerToInteract.Profession.enabled = true;
+            Managers.Instance.VillagerSelection.SelectedVillager.Profession.enabled = true;
+            Managers.Instance.VillagerSelection.DeselectVillager();
             currentChildState = null;
         }
 
