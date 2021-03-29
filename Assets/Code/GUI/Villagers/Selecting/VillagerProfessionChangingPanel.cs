@@ -90,7 +90,8 @@ namespace Code.GUI.Villagers.Selecting
                 labelItem.ResetLabel(normalLabelHeight);
                 labelItem.ClearWorkplaces();
             }
-            
+
+            currentProfessionPointer.transform.SetParent(transform);
             gameObject.SetActive(false);
         }
 
