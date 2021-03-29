@@ -41,6 +41,8 @@ namespace Code.System.PlayerInput.States
 
         public void OnStateChange()
         {
+            if (!Managers.Instance.Cameras.IsCameraOnPlayer())
+                Managers.Instance.Cameras.FocusCameraOnPlayer();
         }
     }
 }

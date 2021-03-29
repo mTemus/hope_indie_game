@@ -9,7 +9,7 @@ namespace Code.System.PlayerInput.States
         
         public void OnStateSet()
         {
-            SetToVillagerPropertiesDisplayChildState();
+            currentChildState = new VillagerPropertiesDisplayChildState();
             Managers.Instance.GUI.VillagerPropertiesPanel.gameObject.SetActive(true);
         }
 
@@ -27,16 +27,19 @@ namespace Code.System.PlayerInput.States
 
         public void SetToVillagerPropertiesDisplayChildState()
         {
+            currentChildState.OnStateChange();
             currentChildState = new VillagerPropertiesDisplayChildState();
         }
 
         public void SetToVillagerProfessionDisplayChildState(VillagerProfessionChangingPanel panel)
         {
+            currentChildState.OnStateChange();
             currentChildState = new VillagerProfessionDisplayChildInputState(panel);
         }
 
         public void SetToNewProfessionAcceptChildState(UiAcceptancePanel panel)
         {
+            currentChildState.OnStateChange();
             currentChildState = new VillagerProfessionSetAcceptanceChildInputState(panel);
         }
     }
