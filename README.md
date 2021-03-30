@@ -1,4 +1,4 @@
-#Hope
+# Hope
 Hope [TBD] is an side-scroll strategy management game similar to Kingdom, but with more advanced village/castle managing system like in Stronghold. Game is in deep prototyping stage and it is made only in free time, but it will be hopefully published someday.
 
 ## Current content
@@ -27,6 +27,6 @@ Profession can be changed through villager selecting UI, which can be displayed 
 Tasks are instructions for each profession. Most of them will be specific for a certain professions, but a Resource Delivery task is generics and will be used by all professions. At crrent moment, there are two tasks types: Building and Resource Delivery.
 
 ## Updates on youtube
-*[First update - tools and buildings](https://www.youtube.com/watch?v=laCbKncUxlc)
-*[Building selecting while building UI](https://www.youtube.com/watch?v=eGZ8UUqtYbY)
-*[Villager selection and profession changing UI](https://www.youtube.com/watch?v=rstPntP1JzQ)
+* [First update - tools and buildings](https://www.youtube.com/watch?v=laCbKncUxlc)
+* [Building selecting while building UI](https://www.youtube.com/watch?v=eGZ8UUqtYbY)
+* [Villager selection and profession changing UI](https://www.youtube.com/watch?v=rstPntP1JzQ)
