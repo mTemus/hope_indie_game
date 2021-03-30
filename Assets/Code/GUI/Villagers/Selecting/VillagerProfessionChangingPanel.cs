@@ -49,6 +49,12 @@ namespace Code.GUI.Villagers.Selecting
             }
         }
 
+        public void ReloadProfessionWorkplaces()
+        {
+            foreach (UiSelectableElement selectableElement in elementsToSelect) 
+                selectableElement.GetComponent<ProfessionLabelItem>().LoadWorkplaces();
+        }
+
         public void OnPanelOpen()
         {
             InputManager.VillagerPropertiesInputState.SetToVillagerProfessionDisplayChildState(Managers.Instance.GUI.VillagerProfessionChangingPanel);
@@ -69,10 +75,7 @@ namespace Code.GUI.Villagers.Selecting
             
             // Initialize workplaces
             rightArrow.SetActive(true);
-            foreach (UiSelectableElement selectableElement in elementsToSelect) {
-                ProfessionLabelItem labelItem = (ProfessionLabelItem) selectableElement;
-                labelItem.LoadWorkplaces();
-            }
+            ReloadProfessionWorkplaces();
             
             //Initialize profession label data
             if (currentProfession.Workplaces.Length <= 0) 
