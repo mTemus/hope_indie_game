@@ -1,5 +1,6 @@
 using Code.GUI.UIElements;
 using Code.GUI.UIElements.SelectableElement;
+using Code.Map.Building;
 using Code.System;
 using Code.System.PlayerInput;
 using Code.Villagers.Entity;
@@ -32,7 +33,7 @@ namespace Code.GUI.Villagers.Selecting
             gameObject.SetActive(false);
         }
 
-        private void UpdateCurrentWorkPointerPosition()
+        public void UpdateCurrentWorkPointerPosition()
         {
             Villager villager = Managers.Instance.VillagerSelection.SelectedVillager;
 
@@ -78,11 +79,12 @@ namespace Code.GUI.Villagers.Selecting
             ReloadProfessionWorkplaces();
             
             //Initialize profession label data
-            if (currentProfession.Workplaces.Length <= 0) 
-                propertiesLabel.ShowNotAvailableWorkplacesPanel(true);
-            else {
+            if (AreThereAnyWorkplaces()) {
                 propertiesLabel.LoadProfessionData(currentProfession.ProfessionData, villager); 
                 Managers.Instance.Cameras.FocusCameraOn(currentProfession.Workplaces[0].transform);
+            }
+            else {
+                propertiesLabel.ShowNotAvailableWorkplacesPanel(true);
             }
         }
 
@@ -104,7 +106,7 @@ namespace Code.GUI.Villagers.Selecting
             currentProfession.ResetLabel(normalLabelHeight);
             currentProfession = (ProfessionLabelItem) currentElement;
 
-            if (currentProfession.Workplaces.Length > 0) {
+            if (AreThereAnyWorkplaces()) {
                 propertiesLabel.ShowNotAvailableWorkplacesPanel(false);
                 propertiesLabel.LoadProfessionData(currentProfession.ProfessionData, Managers.Instance.VillagerSelection.SelectedVillager);
             }
@@ -130,12 +132,11 @@ namespace Code.GUI.Villagers.Selecting
             leftArrow.SetActive(workplacesIdx > 0);
             rightArrow.SetActive(workplacesIdx < currentProfession.Workplaces.Length -1);
             
-            Managers.Instance.Cameras.FocusCameraOn(currentProfession.Workplaces[workplacesIdx].transform);
+            Managers.Instance.Cameras.FocusCameraOn(CurrentWorkplace.transform);
         }
 
         public void ShowAcceptancePanel()
         {
-            if(currentProfession.Workplaces.Length == 0) return;
             acceptancePanel.gameObject.SetActive(true);
             InputManager.VillagerPropertiesInputState.SetToNewProfessionAcceptChildState(acceptancePanel);
         }
@@ -145,13 +146,10 @@ namespace Code.GUI.Villagers.Selecting
             Villager selectedVillager = Managers.Instance.VillagerSelection.SelectedVillager;
 
             if (selectedVillager.Profession.Type == currentProfession.ProfessionData.ProfessionType) {
-                if (selectedVillager.Profession.Workplace != currentProfession.Workplaces[workplacesIdx]) 
-                    selectedVillager.Profession.UpdateWorkplaceForProfession(currentProfession.Workplaces[workplacesIdx]);
+                if (selectedVillager.Profession.Workplace != CurrentWorkplace) 
+                    selectedVillager.Profession.UpdateWorkplaceForProfession(CurrentWorkplace);
             } else 
-                Managers.Instance.Professions.SetVillagerProfession(selectedVillager, currentProfession.ProfessionData.ProfessionType, currentProfession.Workplaces[workplacesIdx]);
-            
-            CloseAcceptablePanel();
-            UpdateCurrentWorkPointerPosition();
+                Managers.Instance.Professions.SetVillagerProfession(selectedVillager, currentProfession.ProfessionData.ProfessionType, CurrentWorkplace);
         }
 
         public bool AreThereAnyWorkplaces() =>
