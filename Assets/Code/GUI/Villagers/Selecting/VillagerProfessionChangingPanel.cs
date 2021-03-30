@@ -117,7 +117,8 @@ namespace Code.GUI.Villagers.Selecting
         public void ShowWorkplace(int value)
         {
             //TODO: switch arrows on available workplaces, but someday, maybe
-            if (currentProfession.Workplaces.Length <= 0) return;
+            //TODO: arrows are buggy
+            if (!AreThereAnyWorkplaces()) return;
             workplacesIdx += value;
             
             if (workplacesIdx < 0) workplacesIdx = 0;
@@ -149,6 +150,12 @@ namespace Code.GUI.Villagers.Selecting
             CloseAcceptablePanel();
             UpdateCurrentWorkPointerPosition();
         }
+
+        public bool AreThereAnyWorkplaces() =>
+            currentProfession.Workplaces.Length != 0;
+
+        public Building CurrentWorkplace =>
+            currentProfession.Workplaces[workplacesIdx];
 
         public void CloseAcceptablePanel()
         {

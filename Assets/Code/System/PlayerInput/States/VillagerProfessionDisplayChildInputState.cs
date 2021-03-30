@@ -30,8 +30,9 @@ namespace Code.System.PlayerInput.States
             if (Input.GetKeyDown(inputManager.Right) || Input.GetKeyDown(inputManager.RightAlt)) 
                 professionChangingPanel.ShowWorkplace(1);
             
-            if (Input.GetKeyDown(inputManager.Action)) 
-                professionChangingPanel.ShowAcceptancePanel();
+            if (Input.GetKeyDown(inputManager.Action))
+                if (professionChangingPanel.AreThereAnyWorkplaces()) 
+                    professionChangingPanel.ShowAcceptancePanel();
 
             if (Input.GetKeyDown(inputManager.Cancel)) {
                 professionChangingPanel.OnPanelClose();
