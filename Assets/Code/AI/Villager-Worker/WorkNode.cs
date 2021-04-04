@@ -1,3 +1,4 @@
+using System;
 using Code.Villagers.Entity;
 using Code.Villagers.Professions;
 using UnityEngine;
@@ -10,7 +11,8 @@ namespace Code.AI
         GET_TASK_TO_DO,
         DO_CURRENT_TASK,
         PAUSE_TASK_,
-        ABANDON_TASK
+        ABANDON_TASK,
+        REPORT_NO_TASK
     }
     
     public class WorkNode : Node
@@ -45,8 +47,8 @@ namespace Code.AI
                         state = NodeState.RUNNING;
                     }
                     else {
-                        currentState = WorkNodeState.GO_TO_WORKPLACE;
-                        state = NodeState.FAILURE;
+                        currentState = WorkNodeState.REPORT_NO_TASK;
+                        state = NodeState.RUNNING;
                     }
 
                     break;
@@ -56,6 +58,14 @@ namespace Code.AI
                     state = NodeState.RUNNING;
                     break;
 
+                case WorkNodeState.REPORT_NO_TASK:
+                    currentState = WorkNodeState.GO_TO_WORKPLACE;
+
+                    // TODO: call getting tasks from workplace or register as free
+
+                    state = NodeState.FAILURE;
+                    break;
+                
                 case WorkNodeState.PAUSE_TASK_:
                     profession.PauseCurrentTask();
                     state = NodeState.SUCCESS;
@@ -66,6 +76,9 @@ namespace Code.AI
                     currentState = WorkNodeState.GO_TO_WORKPLACE;
                     state = NodeState.FAILURE;
                     break;
+                
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             villager.UI.StateText.text = "Working: " + currentState;

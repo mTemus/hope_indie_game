@@ -20,8 +20,10 @@ namespace Code.AI
 
         public override NodeState Evaluate()
         {
-            if (profession.HasWorkToDo()) 
+            if (profession.HasWorkToDo()) {
+                nearPosition = Vector3.zero;
                 return NodeState.FAILURE;
+            }
 
             if (nearPosition == Vector3.zero) {
                 Vector3 workplacePos = profession.Workplace.transform.position + profession.Workplace.EntrancePivot;
