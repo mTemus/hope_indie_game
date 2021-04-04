@@ -8,6 +8,8 @@ namespace Code.System.PlayerInput.States
         public void OnStateSet()
         {
             Managers.Instance.Cameras.FocusCameraOn(BuildingSystem.CurrentBuilding.transform);
+            Managers.Instance.GUI.RequiredResourcesPanel.gameObject.SetActive(true);
+            Managers.Instance.GUI.RequiredResourcesPanel.OnPanelOpen();
         }
 
         public void HandleState(InputManager inputManager)
@@ -32,6 +34,7 @@ namespace Code.System.PlayerInput.States
         public void OnStateChange()
         {
             Managers.Instance.Cameras.FocusCameraOn(Managers.Instance.Player.PlayerGO.transform);
+            Managers.Instance.GUI.RequiredResourcesPanel.OnPanelClose();
         }
     }
 }

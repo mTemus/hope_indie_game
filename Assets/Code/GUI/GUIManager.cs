@@ -12,6 +12,7 @@ namespace Code.GUI
         [Header("Player GUI")]
         [SerializeField] private RadialToolsMenu playerToolsMenu;
         [SerializeField] private BuildingSelectingMenu buildingSelectingMenu;
+        [SerializeField] private RequiredResourcesPanel requiredResourcesPanel;
 
         [Header("Villager GUI")] 
         [SerializeField] private VillagerPropertiesPanel villagerPropertiesPanel;
@@ -25,7 +26,9 @@ namespace Code.GUI
             //TODO: this should be changed to addressables!
             return resourceIcons.Find(sprite => sprite.name == resourceType.ToString().ToLower());
         }
-        
+
+        public RequiredResourcesPanel RequiredResourcesPanel => requiredResourcesPanel;
+
         public VillagerProfessionChangingPanel VillagerProfessionChangingPanel => villagerProfessionChangingPanel;
 
         public VillagerPropertiesPanel VillagerPropertiesPanel => villagerPropertiesPanel;
