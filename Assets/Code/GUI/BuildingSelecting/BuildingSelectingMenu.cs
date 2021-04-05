@@ -19,8 +19,10 @@ namespace Code.GUI.BuildingSelecting
         [SerializeField] private Transform buildingTypesContent;
 
         [Header("Building Objects")] 
-        [SerializeField] private UiBuildingElement[] industryBuildingObjects;
+        [SerializeField] private UiBuildingElement[] resourcesBuildingObjects;
         [SerializeField] private UiBuildingElement[] villageBuildingObjects;
+        [SerializeField] private UiBuildingElement[] industryBuildingObjects;
+
 
         [Header("Building Properties")] 
         [SerializeField] private Image miniature;
@@ -37,7 +39,7 @@ namespace Code.GUI.BuildingSelecting
 
         private void Awake()
         {
-            buildingObjectsArray = industryBuildingObjects;
+            buildingObjectsArray = resourcesBuildingObjects;
             gameObject.SetActive(false);
         }
 
@@ -66,7 +68,7 @@ namespace Code.GUI.BuildingSelecting
         {
             switch (buildingTypesIdx) {
                 case 0:
-                    buildingObjectsArray = industryBuildingObjects;
+                    buildingObjectsArray = resourcesBuildingObjects;
                     break;
                 
                 case 1:
@@ -74,6 +76,7 @@ namespace Code.GUI.BuildingSelecting
                     break;
                 
                 case 2:
+                    buildingObjectsArray = industryBuildingObjects;
                     break;
             }
         }
