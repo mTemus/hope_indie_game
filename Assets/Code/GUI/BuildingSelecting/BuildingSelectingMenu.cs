@@ -54,7 +54,7 @@ namespace Code.GUI.BuildingSelecting
 
                 if (uiResource != null) {
                     uiResource.gameObject.SetActive(true);
-                    uiResource.Amount.text = resourceData.amount.ToString();
+                    uiResource.SetAmount(resourceData.amount);
                 }
                 else {
                     throw new Exception("No ui resource for type: " + resourceData.Type);

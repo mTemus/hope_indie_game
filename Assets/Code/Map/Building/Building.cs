@@ -19,17 +19,17 @@ namespace Code.Map.Building
         {
             entrancePivot = new Vector3(x, y, z);
         }
-
-        public void SetBuildingSize(float x, float y)
-        {
-            buildingSize = new Vector2Int((int) x, (int) y);
-        }
         
         public void SetEntrancePivot(Vector3 newPivot)
         {
             entrancePivot = newPivot;
         }
 
+        public void SetBuildingSize(float x, float y)
+        {
+            buildingSize = new Vector2Int((int) x, (int) y);
+        }
+        
         public void SetMaxOccupancy(int value)
         {
             maxOccupancy = value;

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Code.Map.Building;
-using Code.Resources;
 using Code.Villagers.Professions;
 using UnityEngine;
 
@@ -75,13 +74,6 @@ namespace Code.Villagers.Tasks
             construction.SetBuildingTask(bt);
             buildingTasks.Add(bt);
         }
-
-        public void CreateResourceCarryingTask(Vector3 taskPosition, ProfessionType workerType, Warehouse storage, Resource resource, Action<Resource> onResourceDelivered)
-        {
-            ResourceCarryingTask rct = new ResourceCarryingTask(0, workerType, taskPosition, storage, resource, onResourceDelivered);
-            resourceCarryingTasks.Add(rct);
-        }
-
-    
+        
     }
 }

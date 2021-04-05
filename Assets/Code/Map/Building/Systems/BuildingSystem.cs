@@ -10,11 +10,8 @@ namespace Code.Map.Building.Systems
 {
     public class BuildingSystem : MonoBehaviour
     {
-        [SerializeField] private BuildingData[] buildings;
-
         [SerializeField] private Material buildingFadeMaterial;
         
-        private int buildingIdx;
         private readonly int maxXOffset = 20;
         private Vector3Int currOffset;
 
@@ -95,5 +92,7 @@ namespace Code.Map.Building.Systems
         }
 
         public static GameObject CurrentBuilding => _currentBuilding;
+
+        public static BuildingData CurrentBuildingData => _currentBuildingData;
     }
 }
