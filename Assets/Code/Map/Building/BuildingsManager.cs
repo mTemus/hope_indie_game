@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Code.Map.Building.Buildings.Components.Resources;
-using Code.System;
 using UnityEngine;
 
 namespace Code.Map.Building
@@ -16,41 +14,54 @@ namespace Code.Map.Building
     public class BuildingsManager : MonoBehaviour
     {
         private readonly List<KeyValuePair<Type, Building>> buildings = new List<KeyValuePair<Type, Building>>();
-        
-        public void AddBuilding(Building b)
+
+        private readonly List<Building> resourcesBuildings = new List<Building>();
+        private readonly List<Building> villageBuildings = new List<Building>();
+        private readonly List<Building> industryBuildings = new List<Building>();
+
+        private List<Building> GetBuildingsByType(BuildingType buildingType)
         {
-            buildings.Add(new KeyValuePair<Type, Building>(b.GetType(), b));
+            return buildingType switch {
+                BuildingType.Resources => resourcesBuildings,
+                BuildingType.Village => villageBuildings,
+                BuildingType.Industry => industryBuildings,
+                _ => null
+            };
         }
-
-        public Building[] GetAllBuildingsOfType(Type buildingType)
+        
+        public void AddBuilding(BuildingType buildingType, Building building)
         {
-            List<Building> returnBuildings = new List<Building>();
-
-            foreach (KeyValuePair<Type, Building> building in buildings) {
-                if (building.Key == buildingType) 
-                    returnBuildings.Add(building.Value);
+            switch (buildingType) {
+                case BuildingType.Resources:
+                    resourcesBuildings.Add(building);
+                    break;
                 
+                case BuildingType.Village:
+                    villageBuildings.Add(building);
+                    break;
+                
+                case BuildingType.Industry:
+                    industryBuildings.Add(building);
+                    break;
+                
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(buildingType), buildingType, building.GetType().ToString());
             }
-            return returnBuildings.ToArray();
         }
 
-        public Building[] GetAllFreeWorkplacesOfType(Type buildingType)
+        public Building[] GetAllBuildingOfClass(BuildingType type, Type classType)
         {
-            List<Building> returnBuildings = new List<Building>();
-
-            foreach (KeyValuePair<Type, Building> building in buildings) {
-                if (building.Key != buildingType) continue;
-                if (!building.Value.CanBeOccupied()) continue;
-                returnBuildings.Add(building.Value);
-            }
-            
-            return returnBuildings.ToArray();
+            return GetBuildingsByType(type)
+                .Where(building => building.GetType() == classType)
+                .ToArray();
         }
-        
-        public Warehouse GetClosestWarehouse() =>
-            Managers.Instance.Areas.GetVillageArea().GetWarehouse();
-        
-        
-        
+
+        public Building[] GetAllFreeWorkplacesOfClass(BuildingType buildingType, Type classType)
+        {
+            return GetBuildingsByType(buildingType)
+                .Where(building => building.GetType() == classType)
+                .Where(building => building.CanBeOccupied())
+                .ToArray();
+        }
     }
 }

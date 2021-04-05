@@ -38,8 +38,8 @@ namespace Code.GUI.Villagers.Selecting
         public void LoadWorkplaces()
         {
             workplaces = professionData.ProfessionType == ProfessionType.Unemployed ? 
-                Managers.Instance.Buildings.GetAllBuildingsOfType(professionData.WorkplaceType) : 
-                Managers.Instance.Buildings.GetAllFreeWorkplacesOfType(professionData.WorkplaceType);
+                Managers.Instance.Buildings.GetAllBuildingOfClass(professionData.WorkplaceBuildingType, professionData.WorkplaceType) : 
+                Managers.Instance.Buildings.GetAllFreeWorkplacesOfClass(professionData.WorkplaceBuildingType, professionData.WorkplaceType);
         }
         
         public void ClearWorkplaces()

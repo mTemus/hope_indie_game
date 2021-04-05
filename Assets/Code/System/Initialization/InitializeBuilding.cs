@@ -16,7 +16,7 @@ namespace Code.System.Initialization
             building.SetBuildingType(buildingData.BuildingType);
             Area.Area myArea = Managers.Instance.Areas.GetAreaByCoords(Vector3Int.FloorToInt(transform.position));
             myArea.AddBuilding(building, buildingData);
-            Managers.Instance.Buildings.AddBuilding(building);
+            Managers.Instance.Buildings.AddBuilding(buildingData.BuildingType, building);
         }
     }
 }
