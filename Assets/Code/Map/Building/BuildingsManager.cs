@@ -7,6 +7,12 @@ using UnityEngine;
 
 namespace Code.Map.Building
 {
+    public enum BuildingType {
+        Resources,
+        Village,
+        Industry,
+    }
+    
     public class BuildingsManager : MonoBehaviour
     {
         private readonly List<KeyValuePair<Type, Building>> buildings = new List<KeyValuePair<Type, Building>>();

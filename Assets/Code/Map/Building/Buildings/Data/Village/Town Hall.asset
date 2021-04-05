@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3f3b576d1c44b88ae6a8184d2bfbc26, type: 3}
   m_Name: Town Hall
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  buildingType: 1
+  prefab: {fileID: 2699120673269493026, guid: 71d6fb766878d6f479c257e7fc4867fb, type: 3}
   buildingName: Town Hall
   maxOccupancy: 0
   width: 3

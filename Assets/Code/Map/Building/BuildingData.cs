@@ -7,7 +7,8 @@ namespace Code.Map.Building
     [CreateAssetMenu(fileName = "Building Data", menuName = "Game Data/Map Objects/Building Data", order = 0)]
     public class BuildingData : ScriptableObject
     {
-        [Header("Properties")]
+        [Header("Properties")] 
+        [SerializeField] private BuildingType buildingType;
         [SerializeField] private Transform prefab;
         [SerializeField] private string buildingName;
         [SerializeField] private int maxOccupancy;
@@ -33,6 +34,8 @@ namespace Code.Map.Building
 
             return offsetPositions;
         }
+
+        public BuildingType BuildingType => buildingType;
 
         public Transform Prefab => prefab;
 

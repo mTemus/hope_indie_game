@@ -1,8 +1,6 @@
-using UnityEngine;
-
-namespace Code.Map.Building.Buildings.Components
+namespace Code.Map.Building.Buildings.Components.Village
 {
-    public class House : MonoBehaviour
+    public class House : Building
     {
         // Start is called before the first frame update
         void Start()

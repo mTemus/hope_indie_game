@@ -79,6 +79,7 @@ namespace Code.Map.Building
             b.SetBuildingSize(buildingData.Width, buildingData.Height);
             b.SetEntrancePivot(positionOffset);
             b.SetMaxOccupancy(buildingData.MAXOccupancy);
+            b.SetBuildingType(buildingData.BuildingType);
         }
 
         public void CleanAfterConstruction()

@@ -1,4 +1,4 @@
-namespace Code.Map.Building.Buildings.Components
+namespace Code.Map.Building.Buildings.Components.Village
 {
     public class TownHall : Building
     {

@@ -6,8 +6,10 @@ namespace Code.Map.Building
 {
     public abstract class Building : MonoBehaviour
     {
+        private BuildingType buildingType;
         private Vector3 entrancePivot;
         private Vector2Int buildingSize;
+        
         private int maxOccupancy;
         private int currentOccupancy;
 
@@ -45,8 +47,15 @@ namespace Code.Map.Building
             currentOccupancy--;
         }
 
+        public void SetBuildingType(BuildingType newType)
+        {
+            buildingType = newType;
+        }
+
         public bool CanBeOccupied() =>
             maxOccupancy - currentOccupancy > 0;
+
+        public BuildingType BuildingType => buildingType;
 
         public int MAXOccupancy => maxOccupancy;
 
