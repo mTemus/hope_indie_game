@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: LumberjackProfession
   m_EditorClassIdentifier: 
   professionType: 2
-  workspace: {fileID: 2961238222191277132, guid: 29849b52182697849a1804d9b539db17, type: 3}
   requiredStats:
     strength: 8
     dexterity: 6
     intelligence: 3
   goldPerDay: 15
+  workplace: {fileID: 2961238222191277132, guid: 29849b52182697849a1804d9b539db17, type: 3}

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: BuilderProfession
   m_EditorClassIdentifier: 
   professionType: 1
-  workspace: {fileID: 3085277392001244628, guid: 2fa98d1e929f51c43a0ac176884a0bb3, type: 3}
   requiredStats:
     strength: 10
     dexterity: 3
     intelligence: 8
   goldPerDay: 10
+  workplace: {fileID: 1484742641791407110, guid: 27019d35ebc484b43b1d7dcad63b0dc9, type: 3}

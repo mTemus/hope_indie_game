@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: UnemployedProfession
   m_EditorClassIdentifier: 
   professionType: 0
-  workspace: {fileID: 2699120673269493026, guid: 71d6fb766878d6f479c257e7fc4867fb, type: 3}
   requiredStats:
     strength: 0
     dexterity: 0
     intelligence: 0
   goldPerDay: 0
+  workplace: {fileID: 2699120673269493026, guid: 71d6fb766878d6f479c257e7fc4867fb, type: 3}
