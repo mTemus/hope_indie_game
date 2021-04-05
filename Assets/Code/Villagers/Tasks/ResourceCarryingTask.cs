@@ -1,6 +1,5 @@
 using System;
-using Code.Map.Building;
-using Code.Map.Building.Buildings.Components;
+using Code.Map.Building.Buildings.Components.Resources;
 using Code.Resources;
 using Code.System.Properties;
 using Code.Villagers.Entity;

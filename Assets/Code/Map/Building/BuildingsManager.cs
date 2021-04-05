@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Code.Map.Building.Buildings.Components;
+using System.Linq;
+using Code.Map.Building.Buildings.Components.Resources;
 using Code.System;
 using UnityEngine;
 

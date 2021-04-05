@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Code.Map.Building;
-using Code.Map.Building.Buildings.Components;
+using Code.Map.Building.Buildings.Components.Resources;
 using Code.System.Grid;
 using Code.System.Properties;
 using Code.Villagers.Entity;
