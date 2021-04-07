@@ -11,7 +11,6 @@ namespace Code.Map.Building
         [SerializeField] private BuildingType buildingType;
         [SerializeField] private Transform prefab;
         [SerializeField] private string buildingName;
-        [SerializeField] private int maxOccupancy;
         
         [Header("Size")]
         [SerializeField] private Vector2Int size;
@@ -38,8 +37,6 @@ namespace Code.Map.Building
         public Transform Prefab => prefab;
 
         public string BuildingName => buildingName;
-
-        public int MAXOccupancy => maxOccupancy;
         
         public Vector2Int Size => size;
 

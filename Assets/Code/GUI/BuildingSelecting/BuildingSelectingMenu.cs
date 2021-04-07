@@ -90,7 +90,7 @@ namespace Code.GUI.BuildingSelecting
         public void OnMenuOpen()
         {
             currentBuilding = buildingObjectsArray[buildingObjectsIdx];
-            Systems.Instance.Building.SetBuilding(currentBuilding.Data);
+            Systems.Instance.Building.SetBuilding(currentBuilding.Data, currentBuilding.Properties);
             UpdateBuildingProperties();
         }
 
@@ -114,7 +114,7 @@ namespace Code.GUI.BuildingSelecting
             
             buildingObjectsIdx = 0;
             currentBuilding = buildingObjectsArray[buildingObjectsIdx];
-            Systems.Instance.Building.SetBuilding(currentBuilding.Data);
+            Systems.Instance.Building.SetBuilding(currentBuilding.Data, currentBuilding.Properties);
             UpdateBuildingProperties();
         }
 
@@ -125,7 +125,7 @@ namespace Code.GUI.BuildingSelecting
 
             buildingObjectsArea.ChangeValue(-value);
             currentBuilding = buildingObjectsArray[buildingObjectsIdx];
-            Systems.Instance.Building.SetBuilding(currentBuilding.Data);
+            Systems.Instance.Building.SetBuilding(currentBuilding.Data, currentBuilding.Properties);
             UpdateBuildingProperties();
         }
     }

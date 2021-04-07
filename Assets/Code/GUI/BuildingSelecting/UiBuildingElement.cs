@@ -6,6 +6,7 @@ namespace Code.GUI.BuildingSelecting
    public class UiBuildingElement : MonoBehaviour
    {
       [SerializeField] private BuildingData data;
+      [SerializeField] private WorkplaceProperties properties;
       [SerializeField] private Sprite sprite;
       [SerializeField] [TextArea] private string description;
       
@@ -14,5 +15,7 @@ namespace Code.GUI.BuildingSelecting
       public BuildingData Data => data;
 
       public Sprite Sprite => sprite;
+
+      public WorkplaceProperties Properties => properties;
    }
 }
