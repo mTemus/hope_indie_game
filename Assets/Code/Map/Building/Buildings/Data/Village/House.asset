@@ -18,6 +18,8 @@ MonoBehaviour:
   maxOccupancy: 2
   width: 6
   height: 6
+  buildingSize: {x: 6, y: 6}
+  entrancePivot: {x: 7, y: 0}
   xPivot: 7
   yPivot: 0
   requiredResources:

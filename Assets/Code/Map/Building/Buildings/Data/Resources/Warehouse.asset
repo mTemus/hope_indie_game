@@ -12,11 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3f3b576d1c44b88ae6a8184d2bfbc26, type: 3}
   m_Name: Warehouse
   m_EditorClassIdentifier: 
+  buildingType: 0
   prefab: {fileID: 3085277392001244628, guid: 2fa98d1e929f51c43a0ac176884a0bb3, type: 3}
   buildingName: Warehouse
   maxOccupancy: 4
   width: 7
   height: 8
+  buildingSize: {x: 7, y: 8}
+  entrancePivot: {x: 5.5, y: 0}
   xPivot: 5.5
   yPivot: 0
   requiredResources:

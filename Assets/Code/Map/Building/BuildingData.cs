@@ -14,11 +14,9 @@ namespace Code.Map.Building
         [SerializeField] private int maxOccupancy;
         
         [Header("Size")]
-        [SerializeField] private int width;
-        [SerializeField] private int height;
-        [SerializeField] private float xPivot;
-        [SerializeField] private float yPivot;
-        
+        [SerializeField] private Vector2Int size;
+        [SerializeField] private Vector3 entrancePivot;
+
         [Header("Resources")]
         [SerializeField] private Resource[] requiredResources;
 
@@ -26,8 +24,8 @@ namespace Code.Map.Building
         {
             List<Vector2Int> offsetPositions = new List<Vector2Int>();
 
-            for (int x = 0; x < width; x++) {
-                for (int y = 0; y < height; y++) {
+            for (int x = 0; x < size.x; x++) {
+                for (int y = 0; y < size.y; y++) {
                     offsetPositions.Add(pivot + new Vector2Int(x, y));
                 }
             }
@@ -42,14 +40,10 @@ namespace Code.Map.Building
         public string BuildingName => buildingName;
 
         public int MAXOccupancy => maxOccupancy;
+        
+        public Vector2Int Size => size;
 
-        public int Width => width;
-
-        public int Height => height;
-
-        public float XPivot => xPivot;
-
-        public float YPivot => yPivot;
+        public Vector3 EntrancePivot => entrancePivot;
 
         public Resource[] RequiredResources => requiredResources;
     }
