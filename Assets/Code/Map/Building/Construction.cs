@@ -64,8 +64,7 @@ namespace Code.Map.Building
             
             currentProgress = buildingMaterial.GetFloat(Visibility);
             
-            positionOffset = new Vector3(buildingData.XPivot, buildingData.YPivot, 0f);
-            Warehouse warehouse = Managers.Instance.Buildings.GetClosestWarehouse();
+            positionOffset = new Vector3(buildingData.EntrancePivot.x, buildingData.EntrancePivot.y, 0f);
             
             Managers.Instance.Tasks.CreateBuildingTask(this);
             
@@ -75,11 +74,7 @@ namespace Code.Map.Building
                 Managers.Instance.Tasks.CreateResourceCarryingTask(transform.position + positionOffset, ProfessionType.Builder, warehouse, requiredResource, AddResources);
             }
 
-            Building b = GetComponent<Building>();
-            b.SetBuildingSize(buildingData.Width, buildingData.Height);
-            b.SetEntrancePivot(positionOffset);
-            b.SetMaxOccupancy(buildingData.MAXOccupancy);
-            b.SetBuildingType(buildingData.BuildingType);
+            GetComponent<Building>().Data = buildingData;
         }
 
         public void CleanAfterConstruction()

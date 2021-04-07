@@ -6,34 +6,10 @@ namespace Code.Map.Building
 {
     public abstract class Building : MonoBehaviour
     {
-        private BuildingType buildingType;
-        private Vector3 entrancePivot;
-        private Vector2Int buildingSize;
-        
-        private int maxOccupancy;
+        private BuildingData data;
         private int currentOccupancy;
 
         private readonly List<Villager> residents = new List<Villager>();
-        
-        public void SetEntrancePivot(float x, float y, float z)
-        {
-            entrancePivot = new Vector3(x, y, z);
-        }
-        
-        public void SetEntrancePivot(Vector3 newPivot)
-        {
-            entrancePivot = newPivot;
-        }
-
-        public void SetBuildingSize(float x, float y)
-        {
-            buildingSize = new Vector2Int((int) x, (int) y);
-        }
-        
-        public void SetMaxOccupancy(int value)
-        {
-            maxOccupancy = value;
-        }
         
         public void Occupy(Villager resident)
         {
@@ -46,23 +22,14 @@ namespace Code.Map.Building
             residents.Remove(resident);
             currentOccupancy--;
         }
-
-        public void SetBuildingType(BuildingType newType)
-        {
-            buildingType = newType;
-        }
-
+        
         public bool CanBeOccupied() =>
-            maxOccupancy - currentOccupancy > 0;
-
-        public BuildingType BuildingType => buildingType;
-
-        public int MAXOccupancy => maxOccupancy;
-
-        public int CurrentOccupancy => currentOccupancy;
-
-        public Vector3 EntrancePivot => entrancePivot;
-
-        public Vector2Int BuildingSize => buildingSize;
+            data.MAXOccupancy - currentOccupancy > 0;
+        
+        public BuildingData Data
+        {
+            get => data;
+            set => data = value;
+        }
     }
 }

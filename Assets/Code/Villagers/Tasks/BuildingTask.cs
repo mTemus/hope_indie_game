@@ -14,7 +14,7 @@ namespace Code.Villagers.Tasks
             TaskPriority = taskPriority;
             TaskPosition = taskPosition;
             this.construction = construction;
-            constructionPosition = construction.transform.position + construction.GetComponent<Building>().EntrancePivot;
+            constructionPosition = construction.transform.position + construction.GetComponent<Building>().Data.EntrancePivot;
         }
         
         public override void OnTaskStart()

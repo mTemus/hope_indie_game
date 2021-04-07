@@ -32,7 +32,7 @@ namespace Code.AI
         {
             switch (currentState) {
                 case WorkNodeState.GO_TO_WORKPLACE:
-                    Vector3 workplacePos = profession.Workplace.transform.position + profession.Workplace.EntrancePivot;
+                    Vector3 workplacePos = profession.Workplace.transform.position + profession.Workplace.Data.EntrancePivot;
                     villager.MoveTo(workplacePos);
 
                     if (villager.IsOnPosition(workplacePos)) 
