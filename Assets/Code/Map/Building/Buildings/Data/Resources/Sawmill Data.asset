@@ -10,20 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3f3b576d1c44b88ae6a8184d2bfbc26, type: 3}
-  m_Name: Well
+  m_Name: Sawmill Data
   m_EditorClassIdentifier: 
   buildingType: 0
-  prefab: {fileID: 8793695768821999390, guid: 9d54e0cff6b04084d9810a56aa2ad2f4, type: 3}
-  buildingName: Well
-  maxOccupancy: 2
-  width: 2
-  height: 2
-  buildingSize: {x: 2, y: 2}
-  entrancePivot: {x: 1, y: 0}
-  xPivot: 1
-  yPivot: 0
+  prefab: {fileID: 2961238222191277132, guid: 29849b52182697849a1804d9b539db17, type: 3}
+  buildingName: Sawmill
+  size: {x: 7, y: 6}
+  entrancePivot: {x: 11, y: 0, z: 0}
   requiredResources:
   - type: 0
-    amount: 10
-  - type: 1
-    amount: 100
+    amount: 120
