@@ -8,6 +8,8 @@ using UnityEngine;
 
 namespace Code.Map.Building.Systems
 {
+    //TODO: Apply systems dependent on building type/building resources, when no resources, then set resources delivered in building task
+    
     public class BuildingSystem : MonoBehaviour
     {
         [SerializeField] private Material buildingFadeMaterial;
