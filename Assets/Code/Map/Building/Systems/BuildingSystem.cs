@@ -67,8 +67,8 @@ namespace Code.Map.Building.Systems
                select requiredResource)
                .Any()) return; 
 
-            Transform currBuildTransf = _currentBuilding.transform;
-            Vector3Int currBuildPos = Vector3Int.FloorToInt(currBuildTransf.localPosition);
+            Transform currBuildTransform = _currentBuilding.transform;
+            Vector3Int currBuildPos = Vector3Int.FloorToInt(currBuildTransform.localPosition);
             Area playerArea = Managers.Instance.Areas.GetPlayerArea();
             
             List<Vector2Int> buildingArea =
@@ -79,7 +79,7 @@ namespace Code.Map.Building.Systems
                 return;
             }
             
-            playerArea.FillTiles(buildingArea, currBuildTransf);
+            playerArea.FillTiles(buildingArea, currBuildTransform);
             
             _currentBuilding.GetComponent<Construction>().InitializeConstruction(_currentBuildingData, new Material(buildingFadeMaterial));
             playerArea.AddBuilding(_currentBuilding.GetComponent<Building>());
