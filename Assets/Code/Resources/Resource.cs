@@ -15,6 +15,7 @@ namespace Code.Resources
         [SerializeField] private ResourceType type;
 
         public int amount;
+        private int limit;
 
         public Resource(Resource copy)
         {
@@ -33,6 +34,15 @@ namespace Code.Resources
             this.amount = amount;
         }
 
+        public Resource(ResourceType type, int amount, int limit)
+        {
+            this.type = type;
+            this.amount = amount;
+            this.limit = limit;
+        }
+
         public ResourceType Type => type;
+
+        public int Limit => limit;
     }
 }
