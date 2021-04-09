@@ -6,6 +6,8 @@ namespace Code.Map.Building
 {
     public abstract class Building : MonoBehaviour
     {
+        [SerializeField] private BuildingStorageModule storage;
+        
         private BuildingData data;
         private int currentOccupancy;
 
@@ -31,5 +33,7 @@ namespace Code.Map.Building
             get => data;
             set => data = value;
         }
+
+        public BuildingStorageModule Storage => storage;
     }
 }
