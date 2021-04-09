@@ -6,10 +6,10 @@ namespace Code.Villagers.Tasks
 {
     public abstract class Task
     {
-        protected int TaskPriority;
-        protected Vector3 TaskPosition;
-        protected Villager Worker;
-        protected Action OnTaskCompleted;
+        protected int taskPriority;
+        protected Vector3 taskPosition;
+        protected Villager worker;
+        protected Action onTaskCompleted;
         
         public abstract void OnTaskStart();
         public abstract void OnTaskEnd();
@@ -18,10 +18,10 @@ namespace Code.Villagers.Tasks
 
         public void OnTaskTaken(Villager newWorker, params Action[] taskCompleteActions)
         {
-            Worker = newWorker;
+            worker = newWorker;
         
             foreach (Action taskCompleted in taskCompleteActions) 
-                OnTaskCompleted += taskCompleted;
+                onTaskCompleted += taskCompleted;
         }
         
         //TODO: on task abandoned
