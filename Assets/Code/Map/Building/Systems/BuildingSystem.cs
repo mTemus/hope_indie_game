@@ -60,6 +60,13 @@ namespace Code.Map.Building.Systems
 
         public void BuildBuilding()
         {
+           if ((from requiredResource 
+               in _currentBuildingData.RequiredResources 
+               let currentResource = Managers.Instance.Resources.GetResourceByType(requiredResource.Type) 
+               where currentResource.amount < requiredResource.amount 
+               select requiredResource)
+               .Any()) return; 
+
             Transform currBuildTransf = _currentBuilding.transform;
             Vector3Int currBuildPos = Vector3Int.FloorToInt(currBuildTransf.localPosition);
             Area playerArea = Managers.Instance.Areas.GetPlayerArea();
