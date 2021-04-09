@@ -10,6 +10,7 @@ namespace Code.Villagers.Tasks
 {
     public enum ResourceCarryingTaskState
     {
+        FIND_CLOSEST_STORAGE,
         GO_TO_STORAGE, 
         TAKE_RESOURCES,
         GO_ON_TASK_POSITION,
@@ -71,6 +72,15 @@ namespace Code.Villagers.Tasks
         public override void DoTask()
         {
             switch (resourceCarryingState) {
+                case ResourceCarryingTaskState.FIND_CLOSEST_STORAGE:
+                    resourceCarryingState = ResourceCarryingTaskState.GO_TO_STORAGE;
+                    
+                    if (fromStorage != null) break;
+                    fromStorage = Managers.Instance.Buildings.GetClosestBuildingOfClass(BuildingType.Resources,
+                        typeof(Warehouse), worker.transform.position);
+                    fromStoragePosition = fromStorage.PivotedPosition;
+                    break;
+                
                 case ResourceCarryingTaskState.GO_TO_STORAGE:
                     Worker.MoveTo(storagePosition);
                     
