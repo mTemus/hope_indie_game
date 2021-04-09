@@ -12,7 +12,9 @@ namespace Code.Villagers.Professions
     {
         Unemployed,
         Builder,
-        Lumberjack
+        Lumberjack,
+        WorkplaceHauler,
+        GlobalHauler,
     }
     
     public abstract class Profession : MonoBehaviour
