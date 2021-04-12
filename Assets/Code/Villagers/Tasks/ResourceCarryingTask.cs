@@ -84,7 +84,7 @@ namespace Code.Villagers.Tasks
                     
                     if (fromStorage != null) break;
                     fromStorage = Managers.Instance.Buildings.GetClosestBuildingOfClass(BuildingType.Resources,
-                        typeof(Warehouse), worker.transform.position);
+                        typeof(Warehouse), taskPosition);
                     fromStoragePosition = fromStorage.PivotedPosition;
 
                     if (reservedResources) {
