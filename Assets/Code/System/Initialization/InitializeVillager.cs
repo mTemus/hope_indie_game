@@ -27,7 +27,7 @@ namespace Code.System.Initialization
                     throw new ArgumentOutOfRangeException();
             }
             
-            villager.Profession.Workplace.Occupy(villager);
+            villager.Profession.Workplace.HireWorker(villager.Profession);
             villager.UI.ProfessionName.text = villager.Profession.Type.ToString();
         }
     }

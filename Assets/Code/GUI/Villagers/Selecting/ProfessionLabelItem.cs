@@ -11,7 +11,7 @@ namespace Code.GUI.Villagers.Selecting
     {
         [SerializeField] private ProfessionData professionData;
 
-        private Building[] workplaces = new Building[0];
+        private Workplace[] workplaces = new Workplace[0];
         
         public override void OnElementSelected()
         {
@@ -37,9 +37,15 @@ namespace Code.GUI.Villagers.Selecting
 
         public void LoadWorkplaces()
         {
-            workplaces = professionData.ProfessionType == ProfessionType.Unemployed ? 
-                Managers.Instance.Buildings.GetAllBuildingOfClass(professionData.WorkplaceBuildingType, professionData.WorkplaceType) : 
-                Managers.Instance.Buildings.GetAllFreeWorkplacesOfClass(professionData.WorkplaceBuildingType, professionData.WorkplaceType);
+            //TODO: convert to switch for workplace haulers
+
+            Building[] buildings = professionData.ProfessionType == ProfessionType.Unemployed
+                ? Managers.Instance.Buildings.GetAllBuildingOfClass(professionData.WorkplaceBuildingType,
+                    professionData.WorkplaceType)
+                : Managers.Instance.Buildings.GetAllFreeWorkplacesOfClass(professionData.WorkplaceBuildingType,
+                    professionData.WorkplaceType);
+
+            workplaces = buildings.Cast<Workplace>().ToArray();
         }
         
         public void ClearWorkplaces()
@@ -48,7 +54,7 @@ namespace Code.GUI.Villagers.Selecting
             workplaces = null;
         }
 
-        public Building[] Workplaces => workplaces;
+        public Workplace[] Workplaces => workplaces;
 
         public ProfessionData ProfessionData => professionData;
     }

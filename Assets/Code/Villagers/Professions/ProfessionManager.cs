@@ -53,7 +53,7 @@ namespace Code.Villagers.Professions
             lumberjacks.Add(villager);
         }
         
-        public void SetVillagerProfession(Villager villager, ProfessionType professionType, Building workplace)
+        public void SetVillagerProfession(Villager villager, ProfessionType professionType, Workplace workplace)
         {
             FireVillagerFromOldProfession(villager);
 
@@ -80,7 +80,7 @@ namespace Code.Villagers.Professions
             villager.Profession.InitializeWorkerAI();
             
             if (professionType != ProfessionType.Unemployed) 
-                workplace.Occupy(villager);
+                workplace.HireWorker(villager.Profession);
         }
     }
 }

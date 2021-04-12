@@ -1,5 +1,4 @@
-using System.Collections.Generic;
-using Code.Villagers.Entity;
+using Code.Map.Building.Buildings.Modules;
 using UnityEngine;
 
 namespace Code.Map.Building
@@ -9,25 +8,13 @@ namespace Code.Map.Building
         [SerializeField] private BuildingStorageModule storage;
         
         private BuildingData data;
-        private int currentOccupancy;
+        
+        public Vector3 PivotedPosition =>
+            transform.position + data.EntrancePivot;
 
-        private readonly List<Villager> residents = new List<Villager>();
-        
-        public void Occupy(Villager resident)
-        {
-            residents.Add(resident);
-            currentOccupancy++;
-        }
+        public Vector3 PivotedLocalPosition =>
+            transform.localPosition + data.EntrancePivot;
 
-        public void Vacate(Villager resident)
-        {
-            residents.Remove(resident);
-            currentOccupancy--;
-        }
-        
-        public bool CanBeOccupied() =>
-            data.MAXOccupancy - currentOccupancy > 0;
-        
         public BuildingData Data
         {
             get => data;

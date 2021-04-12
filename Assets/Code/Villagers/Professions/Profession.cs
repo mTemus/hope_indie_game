@@ -20,7 +20,7 @@ namespace Code.Villagers.Professions
     public abstract class Profession : MonoBehaviour
     {
         [SerializeField] private ProfessionType type;
-        [SerializeField] private Building workplace;
+        [SerializeField] private Workplace workplace;
 
         protected Node ProfessionAI;
         private WorkNode currentWorkNode;
@@ -66,17 +66,17 @@ namespace Code.Villagers.Professions
             currentWorkNode.StartNewTask();
         }
 
-        public void SetWorkplace(Building newWorkplace)
+        public void SetWorkplace(Workplace newWorkplace)
         {
             workplace = newWorkplace;
         }
 
-        public void UpdateWorkplaceForProfession(Building newWorkplace)
+        public void UpdateWorkplaceForProfession(Workplace newWorkplace)
         {
             Villager me = GetComponent<Villager>();
-            workplace.Vacate(me);
+            workplace.FireWorker(this);
             workplace = newWorkplace;
-            workplace.Occupy(me);
+            workplace.HireWorker(this);
         }
 
         public void UpdateProfessionType(ProfessionType t)
@@ -107,7 +107,7 @@ namespace Code.Villagers.Professions
         public bool HasWorkToDo() =>
             tasks.Count > 0 || currentTask != null;
 
-        public Building Workplace => workplace;
+        public Workplace Workplace => workplace;
 
         public ProfessionType Type => type;
         

@@ -54,11 +54,12 @@ namespace Code.Map.Building
                 .ToArray();
         }
 
-        public Building[] GetAllFreeWorkplacesOfClass(BuildingType buildingType, Type classType)
+        public Workplace[] GetAllFreeWorkplacesOfClass(BuildingType buildingType, Type classType)
         {
             return GetBuildingsByType(buildingType)
-                .Where(building => building.GetType() == classType)
-                .Where(building => building.CanBeOccupied())
+                .Cast<Workplace>()
+                .Where(workplace => workplace.GetType() == classType)
+                .Where(workplace => workplace.CanHireWorker())
                 .ToArray();
         }
 

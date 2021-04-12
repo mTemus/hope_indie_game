@@ -153,12 +153,25 @@ namespace Code.Map.Building
             RegisterWorkerWithoutTask(hauler);
             haulersCnt++;
         }
+
+        public void FireWorker(Profession profession)
+        {
+            //TODO:
+        }
+
+        public void FireHauler(Profession profession)
+        {
+            
+        }
         
         //TODO: fire hauler
         //TODO: fire worker
 
         public bool CanHireHauler() =>
             haulersCnt < properties.Haulers;
+
+        public bool CanHireWorker() =>
+            workers.Count - haulersCnt < properties.Workers;
         
         #endregion
 

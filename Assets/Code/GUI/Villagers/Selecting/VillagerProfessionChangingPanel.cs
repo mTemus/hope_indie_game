@@ -155,7 +155,7 @@ namespace Code.GUI.Villagers.Selecting
         public bool AreThereAnyWorkplaces() =>
             currentProfession.Workplaces.Length != 0;
 
-        public Building CurrentWorkplace =>
+        public Workplace CurrentWorkplace =>
             currentProfession.Workplaces[workplacesIdx];
 
         public void CloseAcceptablePanel()
