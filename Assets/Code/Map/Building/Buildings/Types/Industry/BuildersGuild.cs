@@ -37,13 +37,47 @@ namespace Code.Map.Building.Buildings.Types.Industry
 
         protected override void AddTaskToDo(Task task)
         {
-        
+            if (task.GetType() == typeof(BuildingTask)) {
+                waitingTasks.Add(task);
+                return;
+            }
+
+            if (workersWithoutTasks.Count > 0) {
+                foreach (Profession worker in workersWithoutTasks) {
+                    if (Properties.Haulers <= 0) {
+                        worker.AddTask(task);
+                        UnregisterWorkerWithoutTask(worker);
+                        return;
+                    }
+
+                    if (worker.Type != ProfessionType.WorkplaceHauler) continue;
+                    worker.AddTask(task);
+                    UnregisterWorkerWithoutTask(worker);
+                    return;
+                }
+                
+                tasksToDo.Add(task);
+            }
+            else {
+                tasksToDo.Add(task);
+            }
         }
 
-        // Update is called once per frame
-        void Update()
+        public override void SetAutomatedTask()
         {
-        
+            // No automated task at builders guild, at least yet.
         }
+        
+        public void CreateBuildingTask(Construction construction, BuildingData buildingData)
+        {
+            BuildingTask bt = new BuildingTask(0, construction.transform.position + construction.PositionOffset, construction);
+            construction.SetBuildingTask(bt);
+            AddTaskToDo(bt);
+
+            foreach (Resource resource in buildingData.RequiredResources) 
+                CreateResourceCarryingTask(resource, construction);
+        }
+
+        #endregion
     }
 }
