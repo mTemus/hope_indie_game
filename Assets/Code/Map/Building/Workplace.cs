@@ -93,12 +93,13 @@ namespace Code.Map.Building
         // TODO: find other invoking option, because invoking everytime, even empty method feels dumb
         public abstract void SetAutomatedTask();
                 
-        public Task GetTask(Profession profession)
+        public Task GetTask(Profession worker)
         {
-            if (tasksToDo.Count == 0) return null;
+            if (tasksToDo.Count == 0) 
+                return null;
         
-            if (profession.Type == ProfessionType.WorkplaceHauler) 
-                        return GetResourceCarryingTask();
+            if (worker.Type == ProfessionType.WorkplaceHauler) 
+                return GetResourceCarryingTask();
                     
             Task normalTask = GetNormalTask();
                     
