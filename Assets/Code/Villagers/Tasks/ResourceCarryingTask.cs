@@ -27,34 +27,43 @@ namespace Code.Villagers.Tasks
         private Building fromStorage;
         private Vector3 fromStoragePosition;
 
-        private readonly Func<ResourceType, int, Resource> onResourceWithdraw;
-        private readonly Func<Task, int, Resource> onReservedResourceWithdraw;
+        private Func<ResourceType, int, Resource> onResourceWithdraw;
+        private Func<Task, int, Resource> onReservedResourceWithdraw;
         private readonly Action<Resource> onResourceDelivery;
 
-        public ResourceCarryingTask(Resource requiredResource, Building toStorage, Action<Resource> onResourceDelivery, Func<ResourceType, int, Resource> onResourceWithdraw, Building fromStorage = null)
+        private ResourceCarryingTask(Resource requiredResource, Building toStorage, Action<Resource> onResourceDelivery)
         {
             this.requiredResource = requiredResource;
-            this.fromStorage = fromStorage;
             this.onResourceDelivery = onResourceDelivery;
+            
+            reservedResources = false;
+            taskPosition = toStorage.PivotedPosition;
+        }
+        
+        public ResourceCarryingTask(Resource requiredResource, Building toStorage, Action<Resource> onResourceDelivery, Func<ResourceType, int, Resource> onResourceWithdraw, Building fromStorage) 
+            : this(requiredResource, toStorage, onResourceDelivery)
+        {
+            this.fromStorage = fromStorage;
             this.onResourceWithdraw = onResourceWithdraw;
 
             reservedResources = false;
-            taskPosition = toStorage.PivotedPosition;
-
-            if (fromStorage != null) fromStoragePosition = fromStorage.PivotedPosition;
+            fromStoragePosition = fromStorage.PivotedPosition;
         }
         
-        public ResourceCarryingTask(Resource requiredResource, Building toStorage, Action<Resource> onResourceDelivery, Func<Task, int, Resource> onReservedResourceWithdraw, Building fromStorage = null)
+        public ResourceCarryingTask(Resource requiredResource, Building toStorage, Action<Resource> onResourceDelivery, Func<Task, int, Resource> onReservedResourceWithdraw, Building fromStorage)
+            : this(requiredResource, toStorage, onResourceDelivery)
         {
-            this.requiredResource = requiredResource;
             this.fromStorage = fromStorage;
-            this.onResourceDelivery = onResourceDelivery;
             this.onReservedResourceWithdraw = onReservedResourceWithdraw;
 
             reservedResources = true;
-            taskPosition = toStorage.PivotedPosition;
-            
-            if (fromStorage != null) fromStoragePosition = fromStorage.PivotedPosition;
+            fromStoragePosition = fromStorage.PivotedPosition;
+        }
+        
+        public ResourceCarryingTask(Resource requiredResource, Building toStorage, Action<Resource> onResourceDelivery, bool reservedResources)
+            : this(requiredResource, toStorage, onResourceDelivery)
+        {
+            this.reservedResources = reservedResources;
         }
 
         public override void OnTaskStart()
@@ -77,6 +86,14 @@ namespace Code.Villagers.Tasks
                     fromStorage = Managers.Instance.Buildings.GetClosestBuildingOfClass(BuildingType.Resources,
                         typeof(Warehouse), worker.transform.position);
                     fromStoragePosition = fromStorage.PivotedPosition;
+
+                    if (reservedResources) {
+                        Warehouse warehouse = (Warehouse) fromStorage;
+                        onReservedResourceWithdraw = warehouse.GetReservedResource;
+                    }
+                    else {
+                        onResourceWithdraw = fromStorage.Storage.WithdrawResource;
+                    }
                     break;
                 
                 case ResourceCarryingTaskState.GO_TO_STORAGE:
