@@ -65,12 +65,19 @@ namespace Code.Map.Building
             
             positionOffset = new Vector3(buildingData.EntrancePivot.x, buildingData.EntrancePivot.y, 0f);
             
-            Managers.Instance.Tasks.CreateBuildingTask(this);
+            BuildersGuild buildersGuild = (BuildersGuild) Managers.Instance.Buildings.GetClosestBuildingOfClass(BuildingType.Industry,
+                typeof(BuildersGuild), transform.position);
+            
+            buildersGuild.CreateBuildingTask(this, buildingData);
+            
+            // Managers.Instance.Tasks.CreateBuildingTask(this);
             
             foreach (Resource resource in buildingData.RequiredResources) {
                 Resource requiredResource = new Resource(resource);
                 SetRequiredResource(requiredResource);
-                Managers.Instance.Tasks.CreateResourceCarryingTask(transform.position + positionOffset, ProfessionType.Builder, warehouse, requiredResource, AddResources);
+                
+                // ResourceCarryingTask rct = new ResourceCarryingTask(ProfessionType.Builder, transform.position + positionOffset, requiredResource, AddResources);
+                // Managers.Instance.Resources.ReserveResources(rct, requiredResource);
             }
 
             GetComponent<Building>().Data = buildingData;
