@@ -4,7 +4,7 @@ using Code.Resources;
 using Code.System;
 using Task = Code.Villagers.Tasks.Task;
 
-namespace Code.Map.Building.Buildings.Components.Resources
+namespace Code.Map.Building.Buildings.Types.Resources
 {
     public class Warehouse : Building
     {

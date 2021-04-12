@@ -7,8 +7,7 @@ namespace Code.Villagers.Tasks
     {
         private readonly Construction construction;
         private readonly Vector3 constructionPosition;
-        public bool ResourcesDelivered;
-        
+
         public BuildingTask(int taskPriority, Vector3 taskPosition, Construction construction)
         {
             TaskPriority = taskPriority;
@@ -42,5 +41,7 @@ namespace Code.Villagers.Tasks
         public override void OnTaskPause()
         {
         }
+
+        public bool ResourcesDelivered { get; set; }
     }
 }

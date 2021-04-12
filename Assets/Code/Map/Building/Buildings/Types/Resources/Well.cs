@@ -1,4 +1,4 @@
-namespace Code.Map.Building.Buildings.Components.Resources
+namespace Code.Map.Building.Buildings.Types.Resources
 {
     public class Well : Building
     {

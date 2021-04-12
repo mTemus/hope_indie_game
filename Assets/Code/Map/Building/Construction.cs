@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Code.Resources;
 using Code.System;
-using Code.Villagers.Professions;
 using Code.Villagers.Tasks;
 using UnityEngine;
 

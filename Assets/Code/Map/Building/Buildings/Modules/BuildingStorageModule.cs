@@ -4,7 +4,7 @@ using Code.Resources;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Code.Map.Building.Buildings.Components
+namespace Code.Map.Building.Buildings.Modules
 {
     public class BuildingStorageModule : MonoBehaviour
     {

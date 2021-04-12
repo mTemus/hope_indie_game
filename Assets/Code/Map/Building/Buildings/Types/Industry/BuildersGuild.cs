@@ -1,9 +1,41 @@
-namespace Code.Map.Building.Buildings.Components.Resources
+using System.Linq;
+using Code.Resources;
+using Code.System;
+using Code.Villagers.Professions;
+using Code.Villagers.Tasks;
+
+namespace Code.Map.Building.Buildings.Types.Industry
 {
-    public class BuildersGuild : Building
+    public class BuildersGuild : Workplace
     {
-        // Start is called before the first frame update
-        void Start()
+        #region Tasks
+
+        protected override Task GetNormalTask()
+        {
+            return (from task in waitingTasks 
+                    where task.GetType() == typeof(BuildingTask) 
+                    select (BuildingTask) task)
+                .FirstOrDefault(btt => btt.ResourcesDelivered);
+        }
+
+        protected override Task GetResourceCarryingTask()
+        {
+            return (from task in tasksToDo
+                    where task.GetType() == typeof(ResourceCarryingTask)
+                    select (ResourceCarryingTask) task)
+                .FirstOrDefault();
+        }
+        
+        private void CreateResourceCarryingTask(Resource requiredResource, Construction construction)
+        {
+            ResourceCarryingTask rct = new ResourceCarryingTask(requiredResource, construction.GetComponent<Building>(),
+                construction.AddResources, true);
+            
+            Managers.Instance.Resources.ReserveResources(rct, requiredResource);
+            AddTaskToDo(rct);
+        }
+
+        protected override void AddTaskToDo(Task task)
         {
         
         }
