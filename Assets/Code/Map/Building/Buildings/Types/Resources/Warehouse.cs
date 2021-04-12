@@ -2,11 +2,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Code.Resources;
 using Code.System;
+using NotImplementedException = System.NotImplementedException;
 using Task = Code.Villagers.Tasks.Task;
 
 namespace Code.Map.Building.Buildings.Types.Resources
 {
-    public class Warehouse : Building
+    public class Warehouse : Workplace
     {
         private readonly List<Resource> storedResources = new List<Resource>();
 
@@ -42,8 +43,26 @@ namespace Code.Map.Building.Buildings.Types.Resources
             
             return takenResource;
         }
-        
-        
-        
+
+
+        protected override Task GetNormalTask()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override Task GetResourceCarryingTask()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void AddTaskToDo(Task task)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void SetAutomatedTask()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
