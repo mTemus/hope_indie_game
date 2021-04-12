@@ -10,8 +10,8 @@ namespace Code.Villagers.Tasks
 
         public BuildingTask(int taskPriority, Vector3 taskPosition, Construction construction)
         {
-            TaskPriority = taskPriority;
-            TaskPosition = taskPosition;
+            this.taskPriority = taskPriority;
+            this.taskPosition = taskPosition;
             this.construction = construction;
             constructionPosition = construction.transform.position + construction.GetComponent<Building>().Data.EntrancePivot;
         }
@@ -28,13 +28,13 @@ namespace Code.Villagers.Tasks
 
         public override void DoTask()
         {
-            if (Vector3.Distance(Worker.transform.position, constructionPosition) >= 0.1f) {
-                Worker.MoveTo(constructionPosition);
+            if (Vector3.Distance(worker.transform.position, constructionPosition) >= 0.1f) {
+                worker.MoveTo(constructionPosition);
             }
             else {
                 if (!construction.Construct()) return;
                 construction.SendMessage("CleanAfterConstruction");
-                OnTaskCompleted?.Invoke();
+                onTaskCompleted?.Invoke();
             }
         }
 
