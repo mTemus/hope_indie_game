@@ -86,7 +86,7 @@ namespace Code.Map.Building
 
         protected abstract Task GetNormalTask();
         protected abstract Task GetResourceCarryingTask();
-        public abstract void AddTaskToDo(Task task);
+        protected abstract void AddTaskToDo(Task task);
         
         // Override this method to add new task when new worker is hired,
         // Fill only if workplace has automated tasks like gathering or production       
