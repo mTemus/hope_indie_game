@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using Code.Villagers.Professions;
 using Code.Villagers.Tasks;
+using UnityEngine;
+using UnityEngine.Events;
 
 namespace Code.Map.Building
 {
@@ -12,7 +14,8 @@ namespace Code.Map.Building
         protected readonly List<Task> waitingTasks = new List<Task>();
         protected readonly List<Profession> workersWithoutTasks = new List<Profession>();
         
-        protected Action OnWorkerHired;
+        [Header("Hire event")]
+        [SerializeField] protected UnityEvent OnWorkerHired;
 
         private WorkplaceProperties properties;
         private int haulersCnt;
@@ -143,8 +146,8 @@ namespace Code.Map.Building
         public void HireWorker(Profession worker)
         {
             workers.Add(worker);
-            workersWithoutTasks.Add(worker);
             OnWorkerHired?.Invoke();
+            RegisterWorkerWithoutTask(worker);
         }
         
         public void HireHauler(Profession hauler)
