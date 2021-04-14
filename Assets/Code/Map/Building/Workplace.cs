@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Code.Villagers.Professions;
 using Code.Villagers.Tasks;
@@ -10,9 +9,9 @@ namespace Code.Map.Building
     public abstract class Workplace : Building
     {
         protected readonly List<Profession> workers = new List<Profession>();
+        protected readonly List<Profession> workersWithoutTasks = new List<Profession>();
         protected readonly List<Task> tasksToDo = new List<Task>();
         protected readonly List<Task> waitingTasks = new List<Task>();
-        protected readonly List<Profession> workersWithoutTasks = new List<Profession>();
         
         [Header("Hire event")]
         [SerializeField] protected UnityEvent OnWorkerHired;
