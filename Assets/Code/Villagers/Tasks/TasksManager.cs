@@ -1,77 +1,10 @@
-using System.Collections.Generic;
-using Code.Map.Building;
-using Code.Villagers.Professions;
 using UnityEngine;
 
 namespace Code.Villagers.Tasks
 {
     public class TasksManager : MonoBehaviour
     {
-        private readonly List<BuildingTask> buildingTasks = new List<BuildingTask>();
-        private readonly List<ResourceCarryingTask> resourceCarryingTasks = new List<ResourceCarryingTask>();
-    
-    
-        private Task GetTaskByProfession(ProfessionType professionType)
-        {
-            Task taskToGet = null;
-            
-            switch (professionType) {
-                case ProfessionType.Unemployed:
-                    break;
-                
-                case ProfessionType.Builder:
-                    taskToGet = buildingTasks.FirstOrDefault(task => task.ResourcesDelivered) ?? (Task) resourceCarryingTasks.FirstOrDefault(task =>
-                        task.ProfessionType == ProfessionType.Builder);
-                    break;
-                
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(professionType), professionType, null);
-            }
-
-            return taskToGet;
-        }
-
-        public Task GetTask(ProfessionType profession)
-        {
-            Task taskToGet = null;
-            
-            switch (profession) {
-                case ProfessionType.Unemployed:
-                    break;
-                
-                case ProfessionType.Builder:
-                    taskToGet = buildingTasks.FirstOrDefault(task => task.ResourcesDelivered);
-
-                    if (taskToGet != null) 
-                        buildingTasks.Remove((BuildingTask) taskToGet);
-
-                    else {
-                        taskToGet = resourceCarryingTasks.FirstOrDefault(task =>
-                            task.ProfessionType == ProfessionType.Builder);
-
-                        if (taskToGet != null) 
-                            resourceCarryingTasks.Remove((ResourceCarryingTask) taskToGet);
-                    }
-                
-                    break;
-
-                case ProfessionType.Lumberjack:
-                    //TODO: add lumberjack tasks
-                    break;
-                
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(profession), profession, null);
-            }
-        
-            return taskToGet;
-        }
-
-        public void CreateBuildingTask(Construction construction)
-        {
-            BuildingTask bt = new BuildingTask(0, construction.transform.position + construction.PositionOffset, construction);
-            construction.SetBuildingTask(bt);
-            buildingTasks.Add(bt);
-        }
+        //TODO: global tasks here, currently has no point
         
     }
 }
