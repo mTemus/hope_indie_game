@@ -18,4 +18,4 @@ MonoBehaviour:
     dexterity: 6
     intelligence: 3
   goldPerDay: 15
-  workplace: {fileID: 2961238222191277132, guid: 29849b52182697849a1804d9b539db17, type: 3}
+  workplace: {fileID: -2904663509067177099, guid: 29849b52182697849a1804d9b539db17, type: 3}
