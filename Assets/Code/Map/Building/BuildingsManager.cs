@@ -26,6 +26,12 @@ namespace Code.Map.Building
                 _ => null
             };
         }
+
+        private void AddWorkplacesWithoutHaulers(List<Building> listIn, List<Workplace> listOut)
+        {
+            listOut.AddRange(listIn.Cast<Workplace>()
+                .Where(workplace => workplace.CanHireHauler()));
+        }
         
         public void AddBuilding(BuildingType buildingType, Building building)
         {
@@ -54,6 +60,14 @@ namespace Code.Map.Building
                 .ToArray();
         }
 
+        public Workplace[] GetAllWorkplacesOfClass(BuildingType type, Type classType)
+        {
+            return GetBuildingsByType(type)
+                .Where(building => building.GetType() == classType)
+                .Cast<Workplace>()
+                .ToArray();
+        }
+
         public Workplace[] GetAllFreeWorkplacesOfClass(BuildingType buildingType, Type classType)
         {
             return GetBuildingsByType(buildingType)
@@ -61,6 +75,16 @@ namespace Code.Map.Building
                 .Where(workplace => workplace.GetType() == classType)
                 .Where(workplace => workplace.CanHireWorker())
                 .ToArray();
+        }
+
+        public Workplace[] GetAllWorkplacesWithHaulersToHire()
+        {
+            List<Workplace> workplaces = new List<Workplace>();
+
+            AddWorkplacesWithoutHaulers(resourcesBuildings, workplaces);
+            AddWorkplacesWithoutHaulers(industryBuildings, workplaces);
+
+            return workplaces.ToArray();
         }
 
         public Building GetClosestBuildingOfClass(BuildingType buildingType, Type classType, Vector3 position)

@@ -1,6 +1,7 @@
 using System;
 using Code.GUI.UIElements.SelectableElement;
 using Code.Map.Building;
+using Code.Map.Building.Buildings.Types.Village;
 using Code.System;
 using Code.Villagers.Professions;
 using UnityEngine;
@@ -37,15 +38,26 @@ namespace Code.GUI.Villagers.Selecting
 
         public void LoadWorkplaces()
         {
-            //TODO: convert to switch for workplace haulers
-
-            Building[] buildings = professionData.ProfessionType == ProfessionType.Unemployed
-                ? Managers.Instance.Buildings.GetAllBuildingOfClass(professionData.WorkplaceBuildingType,
-                    professionData.WorkplaceType)
-                : Managers.Instance.Buildings.GetAllFreeWorkplacesOfClass(professionData.WorkplaceBuildingType,
-                    professionData.WorkplaceType);
-
-            workplaces = buildings.Cast<Workplace>().ToArray();
+            switch (professionData.ProfessionType) {
+                case ProfessionType.Unemployed:
+                   workplaces = Managers.Instance.Buildings.GetAllWorkplacesOfClass(BuildingType.Village,
+                        typeof(TownHall));
+                   break;
+                
+                case ProfessionType.Builder:
+                case ProfessionType.Lumberjack:
+                case ProfessionType.GlobalHauler:
+                    workplaces = Managers.Instance.Buildings.GetAllFreeWorkplacesOfClass(
+                        professionData.WorkplaceBuildingType, professionData.WorkplaceType);
+                    break;
+                
+                case ProfessionType.WorkplaceHauler:
+                    workplaces = Managers.Instance.Buildings.GetAllWorkplacesWithHaulersToHire();
+                    break;
+                
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
         
         public void ClearWorkplaces()
