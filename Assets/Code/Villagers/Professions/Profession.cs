@@ -51,13 +51,7 @@ namespace Code.Villagers.Professions
 
         public void AddTask(Task task)
         {
-            if (currentTask == null) {
-                currentTask = task;
-                currentTask.OnTaskStart();
-            }
-            else {
-                tasks.Enqueue(task);
-            }
+            tasks.Enqueue(task);
         }
 
         public void PauseCurrentTask()
