@@ -149,5 +149,16 @@ namespace Code.Villagers.Tasks
         {
             
         }
+
+        public override void OnTaskAbandon()
+        {
+            //TODO: This is wrong. Resources carrying needs another rework --- if there is enough resources for current carrying - reserve and get, if not, throw task on the end of task queue or just wait for sources
+            
+            
+            if (resourceCarryingState == ResourceCarryingTaskState.DELIVER_RESOURCES) 
+                requiredResource.amount += worker.Profession.CarriedResource.amount;
+            
+            resourceCarryingState = ResourceCarryingTaskState.FIND_CLOSEST_STORAGE;
+        }
     }
 }

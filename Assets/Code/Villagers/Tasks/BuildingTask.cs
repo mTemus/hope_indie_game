@@ -42,6 +42,10 @@ namespace Code.Villagers.Tasks
         {
         }
 
+        public override void OnTaskAbandon()
+        {
+        }
+
         public bool ResourcesDelivered { get; set; }
     }
 }

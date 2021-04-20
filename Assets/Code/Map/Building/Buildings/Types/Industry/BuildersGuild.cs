@@ -3,6 +3,7 @@ using Code.Resources;
 using Code.System;
 using Code.Villagers.Professions;
 using Code.Villagers.Tasks;
+using UnityEngine;
 
 namespace Code.Map.Building.Buildings.Types.Industry
 {
@@ -67,7 +68,17 @@ namespace Code.Map.Building.Buildings.Types.Industry
         {
             // No automated task at builders guild, at least yet.
         }
-        
+
+        public override void TakeTaskBackFromWorker(Task task)
+        {
+            AddTaskToDo(task);
+        }
+
+        protected override void FireNormalWorker(Profession worker)
+        {
+            Debug.Log("Fired worker: " + worker.name + " from: " + name);
+        }
+
         public void CreateBuildingTask(Construction construction, BuildingData buildingData)
         {
             BuildingTask bt = new BuildingTask(0, construction.transform.position + construction.PositionOffset, construction);

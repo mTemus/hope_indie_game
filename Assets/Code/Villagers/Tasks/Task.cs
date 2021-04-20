@@ -15,6 +15,7 @@ namespace Code.Villagers.Tasks
         public abstract void OnTaskEnd();
         public abstract void DoTask();
         public abstract void OnTaskPause();
+        public abstract void OnTaskAbandon();
 
         public void OnTaskTaken(Villager newWorker, params Action[] taskCompleteActions)
         {

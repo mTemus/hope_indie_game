@@ -64,5 +64,15 @@ namespace Code.Map.Building.Buildings.Types.Resources
         {
             throw new NotImplementedException();
         }
+
+        public override void TakeTaskBackFromWorker(Task task)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void FireNormalWorker(Profession worker)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

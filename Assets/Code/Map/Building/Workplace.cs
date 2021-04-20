@@ -92,7 +92,7 @@ namespace Code.Map.Building
         
         // Override this method to add new task when new worker is hired,
         // Fill only if workplace has automated tasks like gathering or production       
-        // TODO: find other invoking option, because invoking everytime, even empty method feels dumb
+        // TODO: Fill in inspector -> OnWorkerHired
         public abstract void SetAutomatedTask();
                 
         public Task GetTask(Profession worker)
@@ -122,6 +122,8 @@ namespace Code.Map.Building
             waitingTasks.Remove(readyTask);
             AddTaskToDo(readyTask);
         }
+
+        public abstract void TakeTaskBackFromWorker(Task task);
                 
         #endregion
         
