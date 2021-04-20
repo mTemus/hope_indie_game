@@ -42,7 +42,7 @@ namespace Code.AI
                     break;
                 
                 case WorkNodeState.GET_TASK_TO_DO:
-                    if (profession.GetTask()) {
+                    if (profession.GetNewTask()) {
                         currentState = WorkNodeState.DO_CURRENT_TASK;
                         state = NodeState.RUNNING;
                     }
@@ -54,7 +54,7 @@ namespace Code.AI
                     break;
                 
                 case WorkNodeState.DO_CURRENT_TASK:
-                    profession.DoWork();
+                    profession.Work();
                     state = NodeState.RUNNING;
                     break;
 

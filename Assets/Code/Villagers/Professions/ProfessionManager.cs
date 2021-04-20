@@ -12,8 +12,11 @@ namespace Code.Villagers.Professions
         private readonly List<Villager> unemployed = new List<Villager>();
         private readonly List<Villager> builders = new List<Villager>();
         private readonly List<Villager> lumberjacks = new List<Villager>();
+        private readonly List<Villager> localHaulers = new List<Villager>();
+        private readonly List<Villager> globalHaulers = new List<Villager>();
 
-        private void FireVillagerFromOldProfession(Villager villager)
+
+        private void RemoveVillagerFromProfessionStructure(Villager villager)
         {
             switch (villager.Profession.Type) {
                 case ProfessionType.Unemployed:
@@ -27,30 +30,57 @@ namespace Code.Villagers.Professions
                 case ProfessionType.Lumberjack:
                     lumberjacks.Remove(villager);
                     break;
+
+                case ProfessionType.WorkplaceHauler:
+                    localHaulers.Remove(villager);
+                    break;
+                
+                case ProfessionType.GlobalHauler:
+                    globalHaulers.Remove(villager);
+                    break;
                 
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            
-            DestroyImmediate(villager.GetComponent(typeof(Profession)));
+        }
+        
+        private void FireVillagerFromOldProfession(Villager villager)
+        {
+            RemoveVillagerFromProfessionStructure(villager);
+            villager.Profession.AbandonAllTasks();
+            villager.Profession.Workplace.FireWorker(villager.Profession);
+            DestroyImmediate(villager.Profession);
+            villager.UI.ProfessionName.text = "No Profession Exception";
         }
         
         private void MakeVillagerUnemployed(Villager villager)
         {
-            villager.UpdateProfession(villager.gameObject.AddComponent<VillagerUnemployed>(), ProfessionType.Unemployed);
+            villager.SetProfession(villager.gameObject.AddComponent<VillagerUnemployed>());
             unemployed.Add(villager);
         }
         
         private void HireBuilder(Villager villager)
         {
-            villager.UpdateProfession(villager.gameObject.AddComponent<VillagerBuilder>(), ProfessionType.Builder);
+            villager.SetProfession(villager.gameObject.AddComponent<VillagerBuilder>());
             builders.Add(villager);
         }
 
         private void HireLumberjack(Villager villager)
         {
-            villager.UpdateProfession(villager.gameObject.AddComponent<VillagerLumberjack>(), ProfessionType.Lumberjack);
+            villager.SetProfession(villager.gameObject.AddComponent<VillagerLumberjack>());
             lumberjacks.Add(villager);
+        }
+
+        private void HireLocalHauler(Villager villager)
+        {
+            //TODO: add component
+            localHaulers.Add(villager);
+        }
+
+        private void HireGlobalHauler(Villager villager)
+        {
+            //TODO: add component
+            globalHaulers.Add(villager);
         }
         
         public void SetVillagerProfession(Villager villager, ProfessionType professionType, Workplace workplace)
@@ -69,18 +99,23 @@ namespace Code.Villagers.Professions
                 case ProfessionType.Lumberjack:
                     HireLumberjack(villager);
                     break;
+
+                case ProfessionType.WorkplaceHauler:
+                    HireLocalHauler(villager);
+                    break;
+                
+                case ProfessionType.GlobalHauler:
+                    HireGlobalHauler(villager);
+                    break;
                 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(professionType), professionType, null);
             }
 
+            villager.Profession.Initialize();
+            workplace.HireWorker(villager.Profession);
             villager.Profession.enabled = false;
             villager.UI.ProfessionName.text = professionType.ToString();
-            villager.Profession.SetWorkplace(workplace);
-            villager.Profession.InitializeWorkerAI();
-            
-            if (professionType != ProfessionType.Unemployed) 
-                workplace.HireWorker(villager.Profession);
         }
     }
 }

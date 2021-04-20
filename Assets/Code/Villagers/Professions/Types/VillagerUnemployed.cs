@@ -6,5 +6,12 @@ namespace Code.Villagers.Professions.Types
         {
             // ProfessionAI.Evaluate();
         }
+
+        public override void Initialize()
+        {
+            type = ProfessionType.Unemployed;
+            
+            InitializeUnemployedAI();
+        }
     }
 }

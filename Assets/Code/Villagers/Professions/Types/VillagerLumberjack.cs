@@ -4,7 +4,14 @@ namespace Code.Villagers.Professions.Types
     {
         private void Update()
         {
-            ProfessionAI.Evaluate();
+            professionAI.Evaluate();
+        }
+
+        public override void Initialize()
+        {
+            type = ProfessionType.Lumberjack;
+            
+            InitializeWorkerAI();
         }
     }
 }

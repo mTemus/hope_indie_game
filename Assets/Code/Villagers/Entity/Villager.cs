@@ -29,10 +29,9 @@ namespace Code.Villagers.Entity
             statistics = newStatistics;
         }
 
-        public void UpdateProfession(Profession newProfession, ProfessionType type)
+        public void SetProfession(Profession newProfession)
         {
             profession = newProfession;
-            profession.UpdateProfessionType(type);
         }
         
         public bool IsOnPosition(Vector3 position) =>

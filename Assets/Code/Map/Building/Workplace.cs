@@ -127,7 +127,17 @@ namespace Code.Map.Building
         
         #region Workers
 
-        public void RegisterWorkerWithoutTask(Profession worker)
+        private void HireNormalWorker()
+        {
+            OnWorkerHired?.Invoke();
+        }
+        
+        private void HireHauler()
+        {
+            haulersCnt++;
+        }
+
+        public void ReportWorkerWithoutTask(Profession worker)
         {
             Task task = GetTask(worker);
 
@@ -144,30 +154,32 @@ namespace Code.Map.Building
 
         public void HireWorker(Profession worker)
         {
-            workers.Add(worker);
-            OnWorkerHired?.Invoke();
-            RegisterWorkerWithoutTask(worker);
-        }
-        
-        public void HireHauler(Profession hauler)
-        {
-            workers.Add(hauler);
-            RegisterWorkerWithoutTask(hauler);
-            haulersCnt++;
-        }
-
-        public void FireWorker(Profession profession)
-        {
-            //TODO:
-        }
-
-        public void FireHauler(Profession profession)
-        {
+            if (worker.Type != ProfessionType.WorkplaceHauler) 
+                HireNormalWorker();
+            else 
+                HireHauler();
             
+            worker.SetWorkplace(this);
+            workers.Add(worker);
+            ReportWorkerWithoutTask(worker);
         }
-        
-        //TODO: fire hauler
-        //TODO: fire worker
+
+        public void FireWorker(Profession worker)
+        {
+            if (worker.Type == ProfessionType.WorkplaceHauler) 
+                FireHauler(worker);
+            else 
+                FireNormalWorker(worker);
+            
+            workers.Remove(worker);
+        }
+
+        private void FireHauler(Profession worker)
+        {
+            haulersCnt--;
+        }
+
+        protected abstract void FireNormalWorker(Profession worker);
 
         public bool CanHireHauler() =>
             haulersCnt < properties.Haulers;

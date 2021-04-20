@@ -146,8 +146,10 @@ namespace Code.GUI.Villagers.Selecting
             Villager selectedVillager = Managers.Instance.VillagerSelection.SelectedVillager;
 
             if (selectedVillager.Profession.Type == currentProfession.ProfessionData.ProfessionType) {
-                if (selectedVillager.Profession.Workplace != CurrentWorkplace) 
-                    selectedVillager.Profession.UpdateWorkplaceForProfession(CurrentWorkplace);
+                if (selectedVillager.Profession.Workplace == CurrentWorkplace) return;
+                selectedVillager.Profession.Workplace.FireWorker(selectedVillager.Profession);
+                CurrentWorkplace.HireWorker(selectedVillager.Profession);
+                
             } else 
                 Managers.Instance.Professions.SetVillagerProfession(selectedVillager, currentProfession.ProfessionData.ProfessionType, CurrentWorkplace);
         }
