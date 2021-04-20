@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Code.Resources;
 using Code.System;
+using Code.Villagers.Professions;
 using NotImplementedException = System.NotImplementedException;
 using Task = Code.Villagers.Tasks.Task;
 
