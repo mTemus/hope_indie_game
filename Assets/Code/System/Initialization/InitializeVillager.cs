@@ -20,11 +20,13 @@ namespace Code.System.Initialization
                 
                 case ProfessionType.Builder:
                 case ProfessionType.Lumberjack:
+                case ProfessionType.WorkplaceHauler:
+                case ProfessionType.GlobalHauler:
                     villager.Profession.Initialize();
                     break;
-                
+
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new Exception("No such profession type: " + villager.Profession.Type + " to initialize!");
             }
             
             villager.Profession.Workplace.HireWorker(villager.Profession);

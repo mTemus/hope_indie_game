@@ -15,7 +15,6 @@ namespace Code.Villagers.Professions
         private readonly List<Villager> localHaulers = new List<Villager>();
         private readonly List<Villager> globalHaulers = new List<Villager>();
 
-
         private void RemoveVillagerFromProfessionStructure(Villager villager)
         {
             switch (villager.Profession.Type) {
@@ -73,7 +72,7 @@ namespace Code.Villagers.Professions
 
         private void HireLocalHauler(Villager villager)
         {
-            //TODO: add component
+            villager.SetProfession(villager.gameObject.AddComponent<VillagerWorkplaceHauler>());
             localHaulers.Add(villager);
         }
 
