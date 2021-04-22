@@ -112,8 +112,10 @@ namespace Code.Map.Building
             if (worker.Type == ProfessionType.WorkplaceHauler) 
                 return GetResourceCarryingTask();
                     
+            Debug.Log("Trying to get normal task.");
             Task normalTask = GetNormalTask();
-                    
+            Debug.Log("Normal task not null: " + (normalTask != null));        
+            
             // TODO: Change this, because player should have an option in building UI to prioritize carryingResource tasks by normal workers
             if (normalTask == null) 
                 return haulersCnt == 0 ? null : GetResourceCarryingTask();
@@ -128,6 +130,7 @@ namespace Code.Map.Building
 
         public void SetTaskReady(Task readyTask)
         { 
+            Debug.Log("Setting " + readyTask.GetType().Name + " as ready.");
             waitingTasks.Remove(readyTask);
             AddTaskToDo(readyTask);
         }
@@ -184,6 +187,8 @@ namespace Code.Map.Building
             worker.SetWorkplace(this);
             workers.Add(worker);
             ReportWorkerWithoutTask(worker);
+            
+            Debug.LogWarning(name + " had hired: " + worker.name);
         }
 
         public void FireWorker(Profession worker)

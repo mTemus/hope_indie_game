@@ -116,6 +116,10 @@ namespace Code.Villagers.Professions
             workplace.HireWorker(villager.Profession);
             villager.Profession.enabled = false;
             villager.UI.ProfessionName.text = professionType.ToString();
+
+            if (professionType == ProfessionType.WorkplaceHauler) {
+                villager.UI.ProfessionName.text += " of " + villager.Profession.Workplace.name;
+            }
         }
     }
 }

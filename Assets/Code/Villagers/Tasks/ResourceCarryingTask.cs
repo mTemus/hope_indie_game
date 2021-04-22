@@ -141,6 +141,8 @@ namespace Code.Villagers.Tasks
                     }
                     break;
             }
+
+            worker.UI.StateText.text = "Resource carrying: " + resourceCarryingState;
         }
 
         public override void OnTaskPause()
