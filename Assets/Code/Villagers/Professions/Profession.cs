@@ -78,7 +78,12 @@ namespace Code.Villagers.Professions
             foreach (Task task in tasks) 
                 AbandonTask(task);
         }
-        
+
+        public void ClearCurrentTask()
+        {
+            currentTask = null;
+        }
+
         public void AbandonCurrentTask()
         {
             if (currentTask != null) {
@@ -96,7 +101,6 @@ namespace Code.Villagers.Professions
         public void OnTaskCompleted()
         {
             currentTask.OnTaskEnd();
-            currentTask = null;
             currentWorkNode.StartNewTask();
         }
 

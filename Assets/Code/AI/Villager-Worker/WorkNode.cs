@@ -20,7 +20,7 @@ namespace Code.AI
         private readonly Profession profession;
         private readonly Villager villager;
         
-        private WorkNodeState currentState = WorkNodeState.GO_TO_WORKPLACE;
+        private WorkNodeState currentState = WorkNodeState.GET_TASK_TO_DO;
 
         public WorkNode(Profession profession)
         {
@@ -43,14 +43,15 @@ namespace Code.AI
                 
                 case WorkNodeState.GET_TASK_TO_DO:
                     if (profession.GetNewTask()) {
+                        Debug.Log(profession.Type + " got a task.");
                         currentState = WorkNodeState.DO_CURRENT_TASK;
-                        state = NodeState.RUNNING;
                     }
                     else {
+                        Debug.Log(profession.Type + " got no task. Reporting as free.");
                         currentState = WorkNodeState.REPORT_NO_TASK;
-                        state = NodeState.RUNNING;
                     }
-
+                    
+                    state = NodeState.RUNNING;
                     break;
                 
                 case WorkNodeState.DO_CURRENT_TASK:
@@ -59,11 +60,18 @@ namespace Code.AI
                     break;
 
                 case WorkNodeState.REPORT_NO_TASK:
-                    currentState = WorkNodeState.GO_TO_WORKPLACE;
+                    Debug.LogError("Worker: " + profession.name + " reporting no tasks!");
+                    profession.ClearCurrentTask();
+                    profession.Workplace.ReportWorkerWithoutTask(profession);
 
-                    // TODO: call getting tasks from workplace or register as free
-
-                    state = NodeState.FAILURE;
+                    if (profession.HasWorkToDo()) {
+                        currentState = WorkNodeState.GET_TASK_TO_DO;
+                        state = NodeState.RUNNING;
+                    }
+                    else {
+                        currentState = WorkNodeState.GO_TO_WORKPLACE;
+                        state = NodeState.FAILURE;
+                    }
                     break;
                 
                 case WorkNodeState.PAUSE_TASK_:
@@ -85,8 +93,11 @@ namespace Code.AI
             return state;
         }
 
-        public void StartNewTask() =>
+        public void StartNewTask()
+        {
+            Debug.LogWarning("Worker: " + profession.name + " is starting new task");
             currentState = WorkNodeState.GET_TASK_TO_DO;
+        }
 
         public void PauseCurrentTask() =>
             currentState = WorkNodeState.PAUSE_TASK_;
