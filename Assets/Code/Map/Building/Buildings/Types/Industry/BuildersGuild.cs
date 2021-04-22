@@ -1,6 +1,7 @@
 using System.Linq;
 using Code.Resources;
 using Code.System;
+using Code.Villagers.Entity;
 using Code.Villagers.Professions;
 using Code.Villagers.Tasks;
 using UnityEngine;
@@ -13,18 +14,24 @@ namespace Code.Map.Building.Buildings.Types.Industry
 
         protected override Task GetNormalTask()
         {
-            return (from task in waitingTasks 
-                    where task.GetType() == typeof(BuildingTask) 
-                    select (BuildingTask) task)
+            Task nt = (from task in tasksToDo
+                    where task is BuildingTask 
+                    select task as BuildingTask)
                 .FirstOrDefault(btt => btt.ResourcesDelivered);
+
+            RemoveTaskFromTodoList(nt);
+            return nt;
         }
 
         protected override Task GetResourceCarryingTask()
         {
-            return (from task in tasksToDo
-                    where task.GetType() == typeof(ResourceCarryingTask)
-                    select (ResourceCarryingTask) task)
+            Task rct = (from task in tasksToDo
+                    where task is ResourceCarryingTask
+                    select task as ResourceCarryingTask)
                 .FirstOrDefault();
+
+            RemoveTaskFromTodoList(rct);
+            return rct;
         }
         
         private void CreateResourceCarryingTask(Resource requiredResource, Construction construction)

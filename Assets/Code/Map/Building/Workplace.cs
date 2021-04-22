@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Code.Villagers.Entity;
 using Code.Villagers.Professions;
 using Code.Villagers.Tasks;
 using UnityEngine;
@@ -96,8 +97,14 @@ namespace Code.Map.Building
         // Fill only if workplace has automated tasks like gathering or production       
         // TODO: Fill in inspector -> OnWorkerHired
         public abstract void SetAutomatedTask();
-                
-        public Task GetTask(Profession worker)
+        
+        protected void RemoveTaskFromTodoList(Task t)
+        {
+            if (t != null) 
+                tasksToDo.Remove(t);
+        }
+        
+        private Task GetTask(Profession worker)
         {
             if (tasksToDo.Count == 0) 
                 return null;
