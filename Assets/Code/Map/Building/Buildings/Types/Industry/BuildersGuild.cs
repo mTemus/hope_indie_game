@@ -102,7 +102,7 @@ namespace Code.Map.Building.Buildings.Types.Industry
             AddTaskToDo(bt);
 
             foreach (Resource resource in buildingData.RequiredResources) 
-                CreateResourceCarryingTask(resource, construction);
+                CreateResourceCarryingTask(new Resource(resource), construction);
         }
 
         #endregion
