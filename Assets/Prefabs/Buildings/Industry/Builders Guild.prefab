@@ -321,7 +321,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a37844137c4fcd409621e2513f200be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 63260f9bd399de44e843a2dca00b82a7, type: 2}
   storage: {fileID: 0}
+  properties: {fileID: 11400000, guid: 304044140962bcb42a71acc9426de255, type: 2}
+  onWorkerHired:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4711893602148995234
 GameObject:
   m_ObjectHideFlags: 0
