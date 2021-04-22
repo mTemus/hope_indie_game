@@ -24,7 +24,5 @@ namespace Code.Villagers.Tasks
             foreach (Action taskCompleted in taskCompleteActions) 
                 onTaskCompleted += taskCompleted;
         }
-        
-        //TODO: on task abandoned
     }
 }

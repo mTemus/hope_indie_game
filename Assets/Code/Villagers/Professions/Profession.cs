@@ -20,13 +20,23 @@ namespace Code.Villagers.Professions
     {
         [SerializeField] protected ProfessionType type;
         [SerializeField] private Workplace workplace;
-
-        protected Node professionAI;
-        private WorkNode currentWorkNode;
         private readonly Queue<Task> tasks = new Queue<Task>();
 
         private Resource carriedResource;
         private Task currentTask;
+        private WorkNode currentWorkNode;
+
+        protected Node professionAI;
+
+        public Workplace Workplace => workplace;
+
+        public ProfessionType Type => type;
+
+        public Resource CarriedResource
+        {
+            get => carriedResource;
+            set => carriedResource = value;
+        }
 
         public abstract void Initialize();
         
@@ -117,15 +127,5 @@ namespace Code.Villagers.Professions
 
         public bool HasWorkToDo() =>
             tasks.Count > 0 || currentTask != null;
-
-        public Workplace Workplace => workplace;
-
-        public ProfessionType Type => type;
-        
-        public Resource CarriedResource
-        {
-            get => carriedResource;
-            set => carriedResource = value;
-        }
     }
 }

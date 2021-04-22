@@ -20,7 +20,7 @@ namespace Code.Villagers.Tasks
     public class ResourceCarryingTask : Task
     {
         private readonly Resource requiredResource;
-        private ResourceCarryingTaskState resourceCarryingState = ResourceCarryingTaskState.GO_TO_STORAGE;
+        private ResourceCarryingTaskState resourceCarryingState;
 
         private readonly bool reservedResources;
         
@@ -38,6 +38,7 @@ namespace Code.Villagers.Tasks
             
             reservedResources = false;
             taskPosition = toStorage.PivotedPosition;
+            resourceCarryingState = ResourceCarryingTaskState.FIND_CLOSEST_STORAGE;
         }
         
         public ResourceCarryingTask(Resource requiredResource, Building toStorage, Action<Resource> onResourceDelivery, Func<ResourceType, int, Resource> onResourceWithdraw, Building fromStorage) 
@@ -104,9 +105,6 @@ namespace Code.Villagers.Tasks
                     break;
                 
                 case ResourceCarryingTaskState.TAKE_RESOURCES:
-                    // Worker.Profession.CarriedResource = storage.GetReservedResource(this, requiredResource.amount > GlobalProperties.MAXResourceHeld ? 
-                    //     GlobalProperties.MAXResourceHeld : requiredResource.amount);
-
                     if (reservedResources) {
                         worker.Profession.CarriedResource = onReservedResourceWithdraw.Invoke(this,
                             requiredResource.amount > GlobalProperties.MAXResourceHeld

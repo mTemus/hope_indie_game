@@ -82,9 +82,6 @@ namespace Code.AI
             }
 
             villager.UI.StateText.text = "Working: " + currentState;
-
-            // Debug.Log("WorkNode --- " + state);
-            // Debug.Log("WorkNodeState --- " + currentState);
             return state;
         }
 

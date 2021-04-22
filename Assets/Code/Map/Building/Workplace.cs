@@ -8,16 +8,18 @@ namespace Code.Map.Building
 {
     public abstract class Workplace : Building
     {
+        [Header("Properties")]
+        [SerializeField] private WorkplaceProperties properties;
+
+        [Header("Hire event")]
+        [SerializeField] protected UnityEvent onWorkerHired;
+        
         protected readonly List<Profession> workers = new List<Profession>();
         protected readonly List<Profession> workersWithoutTasks = new List<Profession>();
         protected readonly List<Task> tasksToDo = new List<Task>();
         protected readonly List<Task> waitingTasks = new List<Task>();
         
-        [Header("Hire event")]
-        [SerializeField] protected UnityEvent OnWorkerHired;
-
-        private WorkplaceProperties properties;
-        private int haulersCnt;
+        protected int haulersCnt;
 
         #region Building-AI
 
@@ -131,7 +133,7 @@ namespace Code.Map.Building
 
         private void HireNormalWorker()
         {
-            OnWorkerHired?.Invoke();
+            onWorkerHired?.Invoke();
         }
         
         private void HireHauler()

@@ -82,8 +82,9 @@ namespace Code.Map.Building.Systems
             }
             
             playerArea.FillTiles(buildingArea, currBuildTransform);
-            
-            _currentBuilding.GetComponent<Construction>().InitializeConstruction(_currentBuildingData, new Material(buildingFadeMaterial));
+
+            _currentBuilding.GetComponent<Construction>()
+                .InitializeConstruction(_currentBuildingData, new Material(buildingFadeMaterial));
             playerArea.AddBuilding(_currentBuilding.GetComponent<Building>());
 
             if (_currentWorkplaceProperties != null) {
