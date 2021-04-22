@@ -71,12 +71,10 @@ namespace Code.Map.Building.Buildings.Types.Industry
                     UnregisterWorkerWithoutTask(worker);
                     return;
                 }
-                
-                tasksToDo.Add(task);
             }
-            else {
-                tasksToDo.Add(task);
-            }
+            
+            Debug.Log("Added task as todo.");
+            tasksToDo.Add(task);
         }
 
         public override void SetAutomatedTask()
