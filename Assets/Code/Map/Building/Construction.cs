@@ -67,7 +67,6 @@ namespace Code.Map.Building
             currentProgress = buildingMaterial.GetFloat(Visibility);
             
             positionOffset = new Vector3(buildingData.EntrancePivot.x, buildingData.EntrancePivot.y, 0f);
-            GetComponent<Building>().Data = buildingData;
 
             BuildersGuild buildersGuild = (BuildersGuild) Managers.Instance.Buildings.GetClosestBuildingOfClass(BuildingType.Industry,
                 typeof(BuildersGuild), transform.position);
