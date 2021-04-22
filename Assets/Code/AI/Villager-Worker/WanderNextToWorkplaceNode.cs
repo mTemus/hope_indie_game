@@ -1,13 +1,23 @@
+using System;
 using Code.Villagers.Entity;
 using Code.Villagers.Professions;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Code.AI
 {
+    public enum WanderNextToWorkplaceNodeState
+    {
+        DRAW_WANDER_POSITION,
+        WANDER,
+        END_WANDER,
+    }
+    
     public class WanderNextToWorkplaceNode : Node
     {
         private readonly Profession profession;
         private readonly Villager villager;
+        private WanderNextToWorkplaceNodeState currentState;
         
         private Vector3 nearPosition;
         private float wanderDistance = 6f;
@@ -22,28 +32,37 @@ namespace Code.AI
         {
             if (profession.HasWorkToDo()) {
                 nearPosition = Vector3.zero;
+                currentState = WanderNextToWorkplaceNodeState.DRAW_WANDER_POSITION;
                 return NodeState.FAILURE;
             }
 
-            if (nearPosition == Vector3.zero) {
-                Vector3 workplacePos = profession.Workplace.transform.position + profession.Workplace.Data.EntrancePivot;
-                float newX = Random.Range(workplacePos.x - wanderDistance, workplacePos.x + wanderDistance);
+            switch (currentState) {
+                case WanderNextToWorkplaceNodeState.DRAW_WANDER_POSITION:
+                    Vector3 workplacePos = profession.Workplace.transform.position + profession.Workplace.Data.EntrancePivot;
+                    float newX = Random.Range(workplacePos.x - wanderDistance, workplacePos.x + wanderDistance);
+                    nearPosition = new Vector3(newX, workplacePos.y, workplacePos.z);
 
-                nearPosition = new Vector3(newX, workplacePos.y, workplacePos.z);
+                    villager.UI.StateText.text = "Wandering";
+                    currentState = WanderNextToWorkplaceNodeState.WANDER;
+                    break;
+                
+                case WanderNextToWorkplaceNodeState.WANDER:
+                    villager.MoveTo(nearPosition, 1.3f);
+
+                    if (villager.IsOnPosition(nearPosition)) 
+                        currentState = WanderNextToWorkplaceNodeState.END_WANDER;
+                    break;
+                
+                case WanderNextToWorkplaceNodeState.END_WANDER:
+                    nearPosition = Vector3.zero;
+                    currentState = WanderNextToWorkplaceNodeState.DRAW_WANDER_POSITION;
+                    break;
+                
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
             
-            villager.MoveTo(nearPosition, 2.5f);
-
-            if (villager.IsOnPosition(nearPosition)) {
-                nearPosition = Vector3.zero;
-                state = NodeState.FAILURE;
-            }
-            else {
-                state = NodeState.RUNNING;
-            }
-            
-            villager.UI.StateText.text = "Wandering";
-            return state;
+            return NodeState.RUNNING;
         }
     }
 }
