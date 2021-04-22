@@ -29,7 +29,6 @@ namespace Code.Map.Building
             buildingMaterial.SetFloat(Visibility, currentProgress);
 
             if (!(currentProgress <= 0.1f)) return false;
-            DestroyImmediate(buildingMaterial);
             GetComponent<SpriteRenderer>().material = normalMaterial;
             CleanAfterConstruction();
             return true;
@@ -82,6 +81,7 @@ namespace Code.Map.Building
 
         public void CleanAfterConstruction()
         {
+            DestroyImmediate(buildingMaterial);
             DestroyImmediate(GetComponent<Construction>());
         }
 
