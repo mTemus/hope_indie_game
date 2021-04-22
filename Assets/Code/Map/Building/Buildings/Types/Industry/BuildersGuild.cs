@@ -53,28 +53,39 @@ namespace Code.Map.Building.Buildings.Types.Industry
                 return;
             }
 
-            if (workersWithoutTasks.Count > 0) {
-                foreach (Profession worker in workersWithoutTasks) {
-                    if (haulersCnt == 0) {
-                        worker.AddTask(task);
-                        task.OnTaskTaken(worker.GetComponent<Villager>(), worker.OnTaskCompleted);
-                        UnregisterWorkerWithoutTask(worker);
+            if (workersWithoutTasks.Count == 0) {
+                tasksToDo.Add(task);
+                Debug.Log("Added task as todo.");
+                return;
+            }
+            
+            foreach (Profession worker in workersWithoutTasks) {
+                if (task is ResourceCarryingTask) {
+                    if (haulersCnt > 0) {
+                        if (worker.Type == ProfessionType.WorkplaceHauler) {
+                            GiveTaskToWorker(worker, task);
+                            Debug.Log("Added to hauler: " + worker.name);
+                            return;
+                        }
+                    }
+                    else {
+                        GiveTaskToWorker(worker, task);
                         Debug.Log("Added to: " + worker.name);
                         return;
                     }
-
-                    if (worker.Type != ProfessionType.WorkplaceHauler) continue;
-                    worker.AddTask(task);
-                    task.OnTaskTaken(worker.GetComponent<Villager>(), worker.OnTaskCompleted);
-                    Debug.Log("Added to hauler: " + worker.name);
+                }
+                else {
+                    if (worker.Type == ProfessionType.WorkplaceHauler) 
+                        continue;
                     
-                    UnregisterWorkerWithoutTask(worker);
+                    GiveTaskToWorker(worker, task);
+                    Debug.Log("Added to: " + worker.name);
                     return;
                 }
             }
             
-            Debug.Log("Added task as todo.");
             tasksToDo.Add(task);
+            Debug.Log("Added task as todo.");
         }
 
         public override void SetAutomatedTask()
