@@ -15,12 +15,12 @@ namespace Code.System.Initialization
 
             switch (villager.Profession.Type) {
                 case ProfessionType.Unemployed:
-                    villager.Profession.InitializeUnemployedAI();
+                    villager.Profession.Initialize();
                     break;
                 
                 case ProfessionType.Builder:
                 case ProfessionType.Lumberjack:
-                    villager.Profession.InitializeWorkerAI();
+                    villager.Profession.Initialize();
                     break;
                 
                 default:
