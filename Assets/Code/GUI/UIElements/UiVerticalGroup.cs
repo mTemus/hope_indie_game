@@ -4,8 +4,10 @@ namespace Code.GUI.UIElements
 {
     public abstract class UiVerticalGroup : MonoBehaviour
     {
+        [Header("Group elements")]
         [SerializeField] private RectTransform[] groupElements;
 
+        [Header("Group properties")]
         [SerializeField] private float spacing;
         [SerializeField] private float topPadding;
         
