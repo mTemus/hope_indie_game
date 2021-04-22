@@ -69,23 +69,15 @@ namespace Code.Map.Building
             currentProgress = buildingMaterial.GetFloat(Visibility);
             
             positionOffset = new Vector3(buildingData.EntrancePivot.x, buildingData.EntrancePivot.y, 0f);
-            
+            GetComponent<Building>().Data = buildingData;
+
             BuildersGuild buildersGuild = (BuildersGuild) Managers.Instance.Buildings.GetClosestBuildingOfClass(BuildingType.Industry,
                 typeof(BuildersGuild), transform.position);
             
             buildersGuild.CreateBuildingTask(this, buildingData);
             
-            // Managers.Instance.Tasks.CreateBuildingTask(this);
-            
-            foreach (Resource resource in buildingData.RequiredResources) {
-                Resource requiredResource = new Resource(resource);
-                SetRequiredResource(requiredResource);
-                
-                // ResourceCarryingTask rct = new ResourceCarryingTask(ProfessionType.Builder, transform.position + positionOffset, requiredResource, AddResources);
-                // Managers.Instance.Resources.ReserveResources(rct, requiredResource);
-            }
-
-            GetComponent<Building>().Data = buildingData;
+            foreach (Resource resource in buildingData.RequiredResources) 
+                SetRequiredResource(new Resource(resource));
         }
 
         public void CleanAfterConstruction()
