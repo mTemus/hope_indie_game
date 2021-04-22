@@ -92,6 +92,13 @@ namespace Code.Map.Building
         protected abstract Task GetNormalTask();
         protected abstract Task GetResourceCarryingTask();
         protected abstract void AddTaskToDo(Task task);
+
+        protected void GiveTaskToWorker(Profession worker, Task task)
+        {
+            worker.AddTask(task);
+            task.OnTaskTaken(worker.GetComponent<Villager>(), worker.OnTaskCompleted);
+            UnregisterWorkerWithoutTask(worker);
+        }
         
         // Override this method to add new task when new worker is hired,
         // Fill only if workplace has automated tasks like gathering or production       
