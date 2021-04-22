@@ -96,7 +96,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3ca6a25199247f4f8338fd9e80b1ad5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 50a273108191b114fa18d8f1bda2f4d8, type: 2}
   storage: {fileID: 1807201772521007745}
+  properties: {fileID: 11400000, guid: 15f754ad0ac3a9745a8db4204fa9c402, type: 2}
+  onWorkerHired:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1807201772521007745
 MonoBehaviour:
   m_ObjectHideFlags: 0

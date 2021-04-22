@@ -108,3 +108,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ae0cf99b22049f45955d236461c26d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 579187de492dba445836a30c9381df61, type: 2}
+  storage: {fileID: 0}
+  properties: {fileID: 0}
+  onWorkerHired:
+    m_PersistentCalls:
+      m_Calls: []

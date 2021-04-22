@@ -57,6 +57,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19c93c20dfdccf044aebbb09a7d94464, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 637109f6c1fc6574986b3180f53f872b, type: 2}
+  storage: {fileID: 0}
+  properties: {fileID: 11400000, guid: 947e27dc67b99a1408046896b2dad3e0, type: 2}
+  onWorkerHired:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6506938106103502012
 GameObject:
   m_ObjectHideFlags: 0
