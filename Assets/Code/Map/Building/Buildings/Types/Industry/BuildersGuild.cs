@@ -50,12 +50,17 @@ namespace Code.Map.Building.Buildings.Types.Industry
                 foreach (Profession worker in workersWithoutTasks) {
                     if (Properties.Haulers <= 0) {
                         worker.AddTask(task);
+                        task.OnTaskTaken(worker.GetComponent<Villager>(), worker.OnTaskCompleted);
                         UnregisterWorkerWithoutTask(worker);
+                        Debug.Log("Added to: " + worker.name);
                         return;
                     }
 
                     if (worker.Type != ProfessionType.WorkplaceHauler) continue;
                     worker.AddTask(task);
+                    task.OnTaskTaken(worker.GetComponent<Villager>(), worker.OnTaskCompleted);
+                    Debug.Log("Added to hauler: " + worker.name);
+                    
                     UnregisterWorkerWithoutTask(worker);
                     return;
                 }

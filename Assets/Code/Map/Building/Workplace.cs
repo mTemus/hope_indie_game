@@ -145,10 +145,15 @@ namespace Code.Map.Building
         {
             Task task = GetTask(worker);
 
-            if (task == null) 
+            if (task == null) {
+                Debug.Log("Worker: " + worker.name + " registered as worker without task in: " + name);
                 workersWithoutTasks.Add(worker);
-            else 
+            }
+            else {
+                Debug.Log("Worker: " + worker.name + " got a task: " + task.GetType().Name);
                 worker.AddTask(task);
+                task.OnTaskTaken(worker.GetComponent<Villager>(), worker.OnTaskCompleted);
+            }
         }
         
         protected void UnregisterWorkerWithoutTask(Profession worker)
