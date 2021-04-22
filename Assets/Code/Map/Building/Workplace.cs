@@ -9,10 +9,10 @@ namespace Code.Map.Building
 {
     public abstract class Workplace : Building
     {
-        [Header("Properties")]
+        [Header("Workplace Properties")]
         [SerializeField] private WorkplaceProperties properties;
 
-        [Header("Hire event")]
+        [Header("Workplace hire event")]
         [SerializeField] protected UnityEvent onWorkerHired;
         
         protected readonly List<Profession> workers = new List<Profession>();
