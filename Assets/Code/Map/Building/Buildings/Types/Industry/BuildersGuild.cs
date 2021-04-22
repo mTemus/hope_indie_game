@@ -97,6 +97,7 @@ namespace Code.Map.Building.Buildings.Types.Industry
         public void CreateBuildingTask(Construction construction, BuildingData buildingData)
         {
             BuildingTask bt = new BuildingTask(0, construction.transform.position + construction.PositionOffset, construction);
+            bt.onResourcesDelivered += SetTaskReady;
             construction.SetBuildingTask(bt);
             AddTaskToDo(bt);
 
