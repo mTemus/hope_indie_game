@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3f3b576d1c44b88ae6a8184d2bfbc26, type: 3}
-  m_Name: House
+  m_Name: House Data
   m_EditorClassIdentifier: 
   buildingType: 1
   prefab: {fileID: 2699120673269493026, guid: ea3a3f3e8e5d66a47a1eebef9e16a9be, type: 3}
