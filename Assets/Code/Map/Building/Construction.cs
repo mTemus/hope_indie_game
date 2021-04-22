@@ -49,9 +49,13 @@ namespace Code.Map.Building
         {
             Resource res = requiredResources.Single(resource => resource.Type == deliveredResource.Type);
             res.amount = Mathf.Max(0, res.amount - deliveredResource.amount);
+
+            Debug.Log("Add resources of type " + res.Type +" to construction of " + name + ". Required: " + res.amount);
             
-            if (AreResourceDelivered())
-                buildingTask.ResourcesDelivered = true;
+            if (AreResourceDelivered()) {
+                Debug.LogError("Resources delivered for: " + name);
+                buildingTask.SetResourcesAsDelivered();
+            }
         }
 
         public void InitializeConstruction(BuildingData buildingData, Material fadeMaterial)

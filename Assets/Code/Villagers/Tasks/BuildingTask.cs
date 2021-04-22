@@ -5,6 +5,8 @@ namespace Code.Villagers.Tasks
 {
     public class BuildingTask : Task
     {
+        public Action<Task> onResourcesDelivered;
+    
         private readonly Construction construction;
         private readonly Vector3 constructionPosition;
 
@@ -38,6 +40,12 @@ namespace Code.Villagers.Tasks
             }
         }
 
+        public void SetResourcesAsDelivered()
+        {
+            ResourcesDelivered = true;
+            onResourcesDelivered.Invoke(this);
+        }
+        
         public override void OnTaskPause()
         {
         }

@@ -38,8 +38,11 @@ namespace Code.Map.Building.Buildings.Types.Industry
 
         protected override void AddTaskToDo(Task task)
         {
-            if (task.GetType() == typeof(BuildingTask)) {
-                waitingTasks.Add(task);
+            Debug.Log("Adding task as to do: " + task.GetType().Name);
+
+            if (task is BuildingTask {ResourcesDelivered: false}) {
+                Debug.Log("Added as waiting.");
+                SetTaskWaiting(task);
                 return;
             }
 
