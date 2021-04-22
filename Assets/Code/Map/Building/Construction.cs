@@ -30,7 +30,6 @@ namespace Code.Map.Building
 
             if (!(currentProgress <= 0.1f)) return false;
             GetComponent<SpriteRenderer>().material = normalMaterial;
-            CleanAfterConstruction();
             return true;
         }
 

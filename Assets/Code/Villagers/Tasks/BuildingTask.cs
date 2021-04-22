@@ -35,8 +35,8 @@ namespace Code.Villagers.Tasks
             }
             else {
                 if (!construction.Construct()) return;
-                construction.SendMessage("CleanAfterConstruction");
-                onTaskCompleted?.Invoke();
+                onTaskCompleted.Invoke();
+                construction.CleanAfterConstruction();
             }
         }
 
