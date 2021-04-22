@@ -55,7 +55,7 @@ namespace Code.Map.Building.Buildings.Types.Industry
 
             if (workersWithoutTasks.Count > 0) {
                 foreach (Profession worker in workersWithoutTasks) {
-                    if (Properties.Haulers <= 0) {
+                    if (haulersCnt == 0) {
                         worker.AddTask(task);
                         task.OnTaskTaken(worker.GetComponent<Villager>(), worker.OnTaskCompleted);
                         UnregisterWorkerWithoutTask(worker);
