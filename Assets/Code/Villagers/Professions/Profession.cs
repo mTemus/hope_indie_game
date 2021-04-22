@@ -111,12 +111,10 @@ namespace Code.Villagers.Professions
 
         public void InitializeWorkerAI()
         {
-            TryToGetTaskNode tryToGetTask = new TryToGetTaskNode(this);
             WanderNextToWorkplaceNode wanderNextToWorkplace = new WanderNextToWorkplaceNode(this);
             CanWorkNode canWork = new CanWorkNode();
             WorkNode workNode = new WorkNode(this);
 
-            // Selector findTasks = new Selector(new List<Node> { tryToGetTask, wanderNextToWorkplace });
             Sequence doTasks = new Sequence(new List<Node>{ canWork, workNode });
             Selector workerAI = new Selector(new List<Node> { wanderNextToWorkplace, doTasks });
 
