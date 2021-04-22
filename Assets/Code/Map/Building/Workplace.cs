@@ -150,6 +150,12 @@ namespace Code.Map.Building
 
         public void ReportWorkerWithoutTask(Profession worker)
         {
+            Debug.Log("Registering " + worker.name + " as free.");
+            
+            if (workersWithoutTasks.Contains(worker)) 
+                return;
+            
+            Debug.Log("Getting task for " + worker.name + ".");
             Task task = GetTask(worker);
 
             if (task == null) {
