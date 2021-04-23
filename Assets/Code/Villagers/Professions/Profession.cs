@@ -73,6 +73,9 @@ namespace Code.Villagers.Professions
 
         public void AbandonAllTasks()
         {
+            if (!HasWorkToDo()) 
+                return;
+
             AbandonTask(currentTask);
             
             foreach (Task task in tasks) 

@@ -33,7 +33,7 @@ namespace Code.Map.Building.Buildings.Types.Village
 
         protected override void FireNormalWorker(Profession worker)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
