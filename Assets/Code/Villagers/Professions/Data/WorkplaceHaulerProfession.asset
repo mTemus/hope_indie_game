@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fdcff92d2176f44d81a669526e801c4, type: 3}
   m_Name: WorkplaceHaulerProfession
   m_EditorClassIdentifier: 
-  professionType: 0
+  professionType: 3
   requiredStats:
     strength: 0
     dexterity: 0
