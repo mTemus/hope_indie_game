@@ -222,11 +222,5 @@ namespace Code.Map.Building
             workers.Count - haulersCnt < properties.Workers;
         
         #endregion
-
-        public WorkplaceProperties Properties
-        {
-            get => properties;
-            set => properties = value;
-        }
     }
 }
