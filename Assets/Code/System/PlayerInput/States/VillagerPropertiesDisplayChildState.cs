@@ -25,6 +25,7 @@ namespace Code.System.PlayerInput.States
 
             if (Input.GetKeyDown(inputManager.Cancel)) {
                 Managers.Instance.GUI.VillagerPropertiesPanel.gameObject.SetActive(false);
+                Managers.Instance.Cameras.FocusCameraOnPlayer();
                 Managers.Instance.Input.SetState(InputManager.MovingInputState);
             }
         }
