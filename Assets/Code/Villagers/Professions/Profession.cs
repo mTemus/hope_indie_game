@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Code.AI;
 using Code.Map.Building;
 using Code.Resources;
+using Code.Villagers.Entity;
 using Code.Villagers.Tasks;
 using UnityEngine;
 
@@ -114,9 +115,11 @@ namespace Code.Villagers.Professions
 
         public void InitializeWorkerAI()
         {
-            WanderNextToWorkplaceNode wanderNextToWorkplace = new WanderNextToWorkplaceNode(this);
+            Villager worker = GetComponent<Villager>();
+            
+            WanderNextToWorkplaceNode wanderNextToWorkplace = new WanderNextToWorkplaceNode(worker);
             CanWorkNode canWork = new CanWorkNode();
-            WorkNode workNode = new WorkNode(this);
+            WorkNode workNode = new WorkNode(worker);
 
             Sequence doTasks = new Sequence(new List<Node>{ canWork, workNode });
             Selector workerAI = new Selector(new List<Node> { wanderNextToWorkplace, doTasks });

@@ -29,7 +29,7 @@ namespace Code.System.Initialization
                     throw new Exception("No such profession type: " + villager.Profession.Type + " to initialize!");
             }
             
-            villager.Profession.Workplace.HireWorker(villager.Profession);
+            villager.Profession.Workplace.HireWorker(villager);
             villager.UI.ProfessionName.text = villager.Profession.Type.ToString();
         }
     }

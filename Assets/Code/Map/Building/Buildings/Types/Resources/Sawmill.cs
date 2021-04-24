@@ -1,4 +1,4 @@
-using Code.Villagers.Professions;
+using Code.Villagers.Entity;
 using Code.Villagers.Tasks;
 using NotImplementedException = System.NotImplementedException;
 
@@ -31,7 +31,7 @@ namespace Code.Map.Building.Buildings.Types.Resources
             throw new NotImplementedException();
         }
 
-        protected override void FireNormalWorker(Profession worker)
+        protected override void FireNormalWorker(Villager worker)
         {
             throw new NotImplementedException();
         }

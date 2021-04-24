@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Code.Resources;
 using Code.System;
-using Code.Villagers.Professions;
+using Code.Villagers.Entity;
 using NotImplementedException = System.NotImplementedException;
 using Task = Code.Villagers.Tasks.Task;
 
@@ -71,7 +71,7 @@ namespace Code.Map.Building.Buildings.Types.Resources
             throw new NotImplementedException();
         }
 
-        protected override void FireNormalWorker(Profession worker)
+        protected override void FireNormalWorker(Villager worker)
         {
             throw new NotImplementedException();
         }

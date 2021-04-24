@@ -147,8 +147,8 @@ namespace Code.GUI.Villagers.Selecting
 
             if (selectedVillager.Profession.Type == currentProfession.ProfessionData.ProfessionType) {
                 if (selectedVillager.Profession.Workplace == CurrentWorkplace) return;
-                selectedVillager.Profession.Workplace.FireWorker(selectedVillager.Profession);
-                CurrentWorkplace.HireWorker(selectedVillager.Profession);
+                selectedVillager.Profession.Workplace.FireWorker(selectedVillager);
+                CurrentWorkplace.HireWorker(selectedVillager);
                 
             } else 
                 Managers.Instance.Professions.SetVillagerProfession(selectedVillager, currentProfession.ProfessionData.ProfessionType, CurrentWorkplace);

@@ -47,7 +47,7 @@ namespace Code.Villagers.Professions
         {
             RemoveVillagerFromProfessionStructure(villager);
             villager.Profession.AbandonAllTasks();
-            villager.Profession.Workplace.FireWorker(villager.Profession);
+            villager.Profession.Workplace.FireWorker(villager);
             DestroyImmediate(villager.Profession);
             villager.UI.ProfessionName.text = "No Profession Exception";
         }
@@ -112,7 +112,7 @@ namespace Code.Villagers.Professions
             }
 
             villager.Profession.Initialize();
-            workplace.HireWorker(villager.Profession);
+            workplace.HireWorker(villager);
             villager.Profession.enabled = false;
             villager.UI.ProfessionName.text = professionType.ToString();
 

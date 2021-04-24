@@ -15,8 +15,8 @@ namespace Code.Map.Building
         [Header("Workplace hire event")]
         [SerializeField] protected UnityEvent onWorkerHired;
         
-        protected readonly List<Profession> workers = new List<Profession>();
-        protected readonly List<Profession> workersWithoutTasks = new List<Profession>();
+        protected readonly List<Villager> workers = new List<Villager>();
+        protected readonly List<Villager> workersWithoutTasks = new List<Villager>();
         protected readonly List<Task> tasksToDo = new List<Task>();
         protected readonly List<Task> waitingTasks = new List<Task>();
         
@@ -93,10 +93,10 @@ namespace Code.Map.Building
         protected abstract Task GetResourceCarryingTask();
         protected abstract void AddTaskToDo(Task task);
 
-        protected void GiveTaskToWorker(Profession worker, Task task)
+        protected void GiveTaskToWorker(Villager worker, Task task)
         {
-            worker.AddTask(task);
-            task.OnTaskTaken(worker.GetComponent<Villager>(), worker.OnTaskCompleted);
+            worker.Profession.AddTask(task);
+            task.OnTaskTaken(worker, worker.Profession.OnTaskCompleted);
             UnregisterWorkerWithoutTask(worker);
         }
         
@@ -111,12 +111,12 @@ namespace Code.Map.Building
                 tasksToDo.Remove(t);
         }
         
-        private Task GetTask(Profession worker)
+        private Task GetTask(Villager worker)
         {
             if (tasksToDo.Count == 0) 
                 return null;
         
-            if (worker.Type == ProfessionType.WorkplaceHauler) 
+            if (worker.Profession.Type == ProfessionType.WorkplaceHauler) 
                 return GetResourceCarryingTask();
                     
             Debug.Log("Trying to get normal task.");
@@ -158,7 +158,7 @@ namespace Code.Map.Building
             haulersCnt++;
         }
 
-        public void ReportWorkerWithoutTask(Profession worker)
+        public void ReportWorkerWithoutTask(Villager worker)
         {
             Debug.Log("Registering " + worker.name + " as free.");
             
@@ -174,33 +174,33 @@ namespace Code.Map.Building
             }
             else {
                 Debug.Log("Worker: " + worker.name + " got a task: " + task.GetType().Name);
-                worker.AddTask(task);
-                task.OnTaskTaken(worker.GetComponent<Villager>(), worker.OnTaskCompleted);
+                worker.Profession.AddTask(task);
+                task.OnTaskTaken(worker.GetComponent<Villager>(), worker.Profession.OnTaskCompleted);
             }
         }
         
-        protected void UnregisterWorkerWithoutTask(Profession worker)
+        protected void UnregisterWorkerWithoutTask(Villager worker)
         {
             workersWithoutTasks.Remove(worker);
         }
 
-        public void HireWorker(Profession worker)
+        public void HireWorker(Villager worker)
         {
-            if (worker.Type != ProfessionType.WorkplaceHauler) 
+            if (worker.Profession.Type != ProfessionType.WorkplaceHauler) 
                 HireNormalWorker();
             else 
                 HireHauler();
             
-            worker.SetWorkplace(this);
+            worker.Profession.SetWorkplace(this);
             workers.Add(worker);
             ReportWorkerWithoutTask(worker);
             
             Debug.LogWarning(name + " had hired: " + worker.name);
         }
 
-        public void FireWorker(Profession worker)
+        public void FireWorker(Villager worker)
         {
-            if (worker.Type == ProfessionType.WorkplaceHauler) 
+            if (worker.Profession.Type == ProfessionType.WorkplaceHauler) 
                 FireHauler(worker);
             else 
                 FireNormalWorker(worker);
@@ -208,12 +208,12 @@ namespace Code.Map.Building
             workers.Remove(worker);
         }
 
-        private void FireHauler(Profession worker)
+        private void FireHauler(Villager worker)
         {
             haulersCnt--;
         }
 
-        protected abstract void FireNormalWorker(Profession worker);
+        protected abstract void FireNormalWorker(Villager worker);
 
         public bool CanHireHauler() =>
             haulersCnt < properties.Haulers;

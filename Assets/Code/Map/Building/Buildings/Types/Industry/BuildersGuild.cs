@@ -59,10 +59,10 @@ namespace Code.Map.Building.Buildings.Types.Industry
                 return;
             }
             
-            foreach (Profession worker in workersWithoutTasks) {
+            foreach (Villager worker in workersWithoutTasks) {
                 if (task is ResourceCarryingTask) {
                     if (haulersCnt > 0) {
-                        if (worker.Type == ProfessionType.WorkplaceHauler) {
+                        if (worker.Profession.Type == ProfessionType.WorkplaceHauler) {
                             GiveTaskToWorker(worker, task);
                             Debug.Log("Added to hauler: " + worker.name);
                             return;
@@ -75,7 +75,7 @@ namespace Code.Map.Building.Buildings.Types.Industry
                     }
                 }
                 else {
-                    if (worker.Type == ProfessionType.WorkplaceHauler) 
+                    if (worker.Profession.Type == ProfessionType.WorkplaceHauler) 
                         continue;
                     
                     GiveTaskToWorker(worker, task);
@@ -98,7 +98,7 @@ namespace Code.Map.Building.Buildings.Types.Industry
             AddTaskToDo(task);
         }
 
-        protected override void FireNormalWorker(Profession worker)
+        protected override void FireNormalWorker(Villager worker)
         {
             Debug.Log("Fired worker: " + worker.name + " from: " + name);
         }
