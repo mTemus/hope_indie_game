@@ -16,7 +16,8 @@ namespace Code.GUI.Villagers.Selecting
         
         [Header("Villager Status")] 
         [SerializeField] private Transform status;
-
+        
+        [Header("Villager Statistics")] 
         [SerializeField] private TextMeshProUGUI strengthValue;
         [SerializeField] private TextMeshProUGUI dexterity;
         [SerializeField] private TextMeshProUGUI intelligenceValue;
