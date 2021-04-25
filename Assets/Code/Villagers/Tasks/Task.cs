@@ -11,6 +11,8 @@ namespace Code.Villagers.Tasks
         protected Villager worker;
         protected Action onTaskCompleted;
         
+        public Action<Task> onTaskSetReady;
+        
         public abstract void OnTaskStart();
         public abstract void OnTaskEnd();
         public abstract void DoTask();

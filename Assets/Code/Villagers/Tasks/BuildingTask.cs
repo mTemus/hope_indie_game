@@ -44,7 +44,7 @@ namespace Code.Villagers.Tasks
         public void SetResourcesAsDelivered()
         {
             ResourcesDelivered = true;
-            onResourcesDelivered.Invoke(this);
+            onTaskSetReady.Invoke(this);
         }
         
         public override void OnTaskPause()
