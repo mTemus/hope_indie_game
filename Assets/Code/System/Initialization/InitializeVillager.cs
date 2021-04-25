@@ -9,6 +9,12 @@ namespace Code.System.Initialization
     {
         [SerializeField] private ProfessionType professionType;
         [SerializeField] private Workplace workplace;
+
+        public Workplace Workplace
+        {
+            get => workplace;
+            set => workplace = value;
+        }
         
         public override void InitializeMe()
         {
