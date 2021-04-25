@@ -150,8 +150,11 @@ namespace Code.GUI.Villagers.Selecting
                 selectedVillager.Profession.Workplace.FireWorker(selectedVillager);
                 CurrentWorkplace.HireWorker(selectedVillager);
                 
-            } else 
-                Managers.Instance.Professions.SetVillagerProfession(selectedVillager, currentProfession.ProfessionData.ProfessionType, CurrentWorkplace);
+            } else {
+                Managers.Instance.Professions.FireVillagerFromOldProfession(selectedVillager);
+                Managers.Instance.Professions.SetVillagerProfession(selectedVillager,
+                    currentProfession.ProfessionData.ProfessionType, CurrentWorkplace);
+            }
         }
 
         public bool AreThereAnyWorkplaces() =>

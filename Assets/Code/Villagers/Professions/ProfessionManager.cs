@@ -42,16 +42,7 @@ namespace Code.Villagers.Professions
                     throw new ArgumentOutOfRangeException();
             }
         }
-        
-        private void FireVillagerFromOldProfession(Villager villager)
-        {
-            RemoveVillagerFromProfessionStructure(villager);
-            villager.Profession.AbandonAllTasks();
-            villager.Profession.Workplace.FireWorker(villager);
-            DestroyImmediate(villager.Profession);
-            villager.UI.ProfessionName.text = "No Profession Exception";
-        }
-        
+
         private void MakeVillagerUnemployed(Villager villager)
         {
             villager.SetProfession(villager.gameObject.AddComponent<VillagerUnemployed>());
@@ -82,10 +73,17 @@ namespace Code.Villagers.Professions
             globalHaulers.Add(villager);
         }
         
+        public void FireVillagerFromOldProfession(Villager villager)
+        {
+            RemoveVillagerFromProfessionStructure(villager);
+            villager.Profession.AbandonAllTasks();
+            villager.Profession.Workplace.FireWorker(villager);
+            DestroyImmediate(villager.Profession);
+            villager.UI.ProfessionName.text = "No Profession Exception";
+        }
+        
         public void SetVillagerProfession(Villager villager, ProfessionType professionType, Workplace workplace)
         {
-            FireVillagerFromOldProfession(villager);
-
             switch (professionType) {
                 case ProfessionType.Unemployed:
                     MakeVillagerUnemployed(villager);
