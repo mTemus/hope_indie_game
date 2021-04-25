@@ -10,6 +10,7 @@ namespace Code.Resources
       private static readonly Resource Wood = new Resource(ResourceType.WOOD, 300);
       private static readonly Resource Stone = new Resource(ResourceType.STONE, 300);
 
+      private readonly Dictionary<Task, Resource> tasksWaitingForResources = new Dictionary<Task, Resource>();
       private readonly Dictionary<Task, Resource> reservedResources = new Dictionary<Task, Resource>();
       
       private int maxStorage = 100;
@@ -26,9 +27,21 @@ namespace Code.Resources
          };
       }
 
-      public void StoreResource(ResourceType resource, int amount)
+      public void StoreResource(ResourceType resourceType, int amount)
       {
-         GetResourceByType(resource).amount += amount;
+         GetResourceByType(resourceType).amount += amount;
+
+         Dictionary<Task, Resource> tmpWaitingTasks = new Dictionary<Task, Resource>(tasksWaitingForResources);
+
+         foreach (Task waitingTask in tmpWaitingTasks.Keys) {
+            Resource awaitedResource = tasksWaitingForResources[waitingTask];
+
+            if (resourceType != awaitedResource.Type) continue;
+            if (!CanReserveResource(awaitedResource)) continue;
+            ReserveResources(waitingTask, awaitedResource);
+            tasksWaitingForResources.Remove(waitingTask);
+            waitingTask.onTaskSetReady.Invoke(waitingTask);
+         }
       }
 
       public void IncreaseStorage(int value)
@@ -53,9 +66,25 @@ namespace Code.Resources
       public void ClearReservedResource(Task tKey)
       {
          Debug.LogWarning("Cleared: " + reservedResources[tKey].Type + " for: " + tKey.GetType());
+         Resource reservedResource = reservedResources[tKey];
+         GetResourceByType(reservedResource.Type).amount += reservedResource.amount;
          reservedResources.Remove(tKey);
       }
+
+      public bool IsResourceReserved(Task keyTask) =>
+         reservedResources.ContainsKey(keyTask);
+
+      public bool CanReserveResource(Resource resource) =>
+         GetResourceByType(resource.Type).amount - resource.amount >= 0;
+
+      public bool CanWithdrawReserved(Task t, Resource r) =>
+         reservedResources[t].amount - r.amount >= 0;
       
+      public void AddWaitingTask(Task t, Resource r)
+      {
+         tasksWaitingForResources[t] = r;
+      }
+
       public int MAXStorage => maxStorage;
    }
 }

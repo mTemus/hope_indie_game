@@ -1,4 +1,3 @@
-using System;
 using Code.Map.Building;
 using UnityEngine;
 
@@ -6,11 +5,11 @@ namespace Code.Villagers.Tasks
 {
     public class BuildingTask : Task
     {
-        public Action<Task> onResourcesDelivered;
-    
         private readonly Construction construction;
         private readonly Vector3 constructionPosition;
 
+        public bool ResourcesDelivered { get; private set; }
+        
         public BuildingTask(int taskPriority, Vector3 taskPosition, Construction construction)
         {
             this.taskPriority = taskPriority;
@@ -54,7 +53,5 @@ namespace Code.Villagers.Tasks
         public override void OnTaskAbandon()
         {
         }
-
-        public bool ResourcesDelivered { get; set; }
     }
 }

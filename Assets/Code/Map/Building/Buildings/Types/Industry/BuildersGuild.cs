@@ -95,7 +95,32 @@ namespace Code.Map.Building.Buildings.Types.Industry
 
         public override void TakeTaskBackFromWorker(Task task)
         {
-            AddTaskToDo(task);
+            if (task is ResourceCarryingTask rct) {
+                if (Managers.Instance.Resources.IsResourceReserved(rct)) {
+                    if (!Managers.Instance.Resources.CanWithdrawReserved(rct, rct.RequiredResource)) 
+                        Managers.Instance.Resources.ClearReservedResource(rct);
+                    else {
+                        AddTaskToDo(rct);
+                        return;
+                    }
+                }
+
+                // If task still exist but resources are not reserved it's always mean that it was abandoned
+                // while carrying resource state, so it need to have resource reserved again
+                
+                if (Managers.Instance.Resources.CanReserveResource(rct.RequiredResource)) {
+                    Managers.Instance.Resources.ReserveResources(rct, rct.RequiredResource);
+                    AddTaskToDo(rct);
+                }
+                else {
+                    Managers.Instance.Resources.AddWaitingTask(rct, rct.RequiredResource);
+                    rct.onTaskSetReady += SetTaskReady;
+                    SetTaskWaiting(rct);
+                }
+            }
+            else {
+                AddTaskToDo(task);
+            }
         }
 
         protected override void FireNormalWorker(Villager worker)

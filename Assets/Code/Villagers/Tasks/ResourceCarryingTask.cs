@@ -31,6 +31,8 @@ namespace Code.Villagers.Tasks
         private Func<Task, int, Resource> onReservedResourceWithdraw;
         private readonly Action<Resource> onResourceDelivery;
 
+        public Resource RequiredResource => requiredResource;
+
         private ResourceCarryingTask(Resource requiredResource, Building toStorage, Action<Resource> onResourceDelivery)
         {
             this.requiredResource = requiredResource;
@@ -152,9 +154,6 @@ namespace Code.Villagers.Tasks
 
         public override void OnTaskAbandon()
         {
-            //TODO: This is wrong. Resources carrying needs another rework --- if there is enough resources for current carrying - reserve and get, if not, throw task on the end of task queue or just wait for sources
-            
-            
             if (resourceCarryingState == ResourceCarryingTaskState.DELIVER_RESOURCES) 
                 requiredResource.amount += worker.Profession.CarriedResource.amount;
             
