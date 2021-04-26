@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Code.System;
 using Code.System.Area;
-using Code.System.PlayerInput;
+using Code.System.GameInput;
 using Code.System.Properties;
 using UnityEngine;
 
