@@ -1,4 +1,4 @@
-﻿namespace Code.System.PlayerInput
+﻿namespace Code.System.GameInput
 {
     public interface IInputState
     {

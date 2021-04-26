@@ -1,7 +1,7 @@
 ﻿using Code.Map.Building.Systems;
 using UnityEngine;
 
-namespace Code.System.PlayerInput.States
+namespace Code.System.GameInput.States
 {
     public class BuildingPlacingInputState :IInputState
     {

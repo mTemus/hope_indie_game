@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Code.System.PlayerInput.States
+namespace Code.System.GameInput.States
 {
     public class BuildingSelectingInputState :IInputState
     {

@@ -1,7 +1,7 @@
 using Code.GUI.UIElements.SelectableElement;
 using Code.GUI.Villagers.Selecting;
 
-namespace Code.System.PlayerInput.States
+namespace Code.System.GameInput.States
 {
     public class VillagerPropertiesInputState : IInputState
     {

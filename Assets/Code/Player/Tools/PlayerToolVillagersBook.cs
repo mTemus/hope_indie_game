@@ -1,5 +1,5 @@
 using Code.System;
-using Code.System.PlayerInput;
+using Code.System.GameInput;
 
 namespace Code.Player.Tools
 {

@@ -1,6 +1,6 @@
 using Code.System;
 using Code.System.Area;
-using Code.System.PlayerInput;
+using Code.System.GameInput;
 using UnityEngine;
 
 namespace Code.Player.Tools
