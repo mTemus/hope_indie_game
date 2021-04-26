@@ -10,6 +10,7 @@ namespace Code.System
    {
       [Header("Villagers")] 
       [SerializeField] private GameObject[] villagerPrefabs;
+      [SerializeField] private ProfessionData[] professionData;
 
       [Header("Buildings")] 
       [SerializeField] private GameObject[] buildingPrefabs;
@@ -51,6 +52,16 @@ namespace Code.System
          if (p == null) 
             throw new Exception("ASSET STORAGE ----- CAN'T FIND PREFAB FOR VILLAGER: " + buildingName);
 
+         return p;
+      }
+
+      public ProfessionData GetProfessionDataForProfessionType(ProfessionType professionType)
+      {
+         ProfessionData p = Array.Find(professionData, data => data.ProfessionType == professionType);
+
+         if (p == null)
+            throw new Exception("ASSET STORAGE ----- CAN'T FIND DATA FOR PROFESSION: " + professionType);
+         
          return p;
       }
       
