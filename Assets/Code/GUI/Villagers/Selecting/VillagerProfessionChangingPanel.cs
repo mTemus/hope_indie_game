@@ -2,7 +2,7 @@ using Code.GUI.UIElements;
 using Code.GUI.UIElements.SelectableElement;
 using Code.Map.Building;
 using Code.System;
-using Code.System.PlayerInput;
+using Code.System.GameInput;
 using Code.Villagers.Entity;
 using UnityEngine;
 using UnityEngine.UI;
