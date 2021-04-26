@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Code.Map.Building.Buildings.Types.Village;
+using Code.System;
+using Code.Villagers.Professions;
 using UnityEngine;
 
 namespace Code.Map.Building
@@ -87,9 +90,61 @@ namespace Code.Map.Building
             return workplaces.ToArray();
         }
 
+        public Workplace[] GetAllFreeWorkplacesForProfession(ProfessionData professionData)
+        {
+            Workplace[] workplaces;
+            
+            switch (professionData.ProfessionType) {
+                case ProfessionType.Unemployed:
+                    workplaces = Managers.Instance.Buildings.GetAllWorkplacesOfClass(BuildingType.Village,
+                        typeof(TownHall));
+                    break;
+                
+                case ProfessionType.Builder:
+                case ProfessionType.Lumberjack:
+                case ProfessionType.GlobalHauler:
+                    workplaces = Managers.Instance.Buildings.GetAllFreeWorkplacesOfClass(
+                        professionData.WorkplaceBuildingType, professionData.WorkplaceType);
+                    break;
+                
+                case ProfessionType.WorkplaceHauler:
+                    workplaces = Managers.Instance.Buildings.GetAllWorkplacesWithHaulersToHire();
+                    break;
+                
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            return workplaces;
+        }
+
+        public Workplace GetClosestFreeWorkplaceForProfession(ProfessionData professionData, Vector3 position)
+        {
+            Workplace[] freeWorkplaces = GetAllFreeWorkplacesForProfession(professionData);
+
+            if (freeWorkplaces.Length == 0) 
+                return null;
+            
+            Workplace closestWorkplace = freeWorkplaces[0];
+            float bestDistance = Vector3.Distance(closestWorkplace.transform.position, position);
+            
+            for (int i = 1; i < freeWorkplaces.Length; i++) {
+                float distance = Vector3.Distance(freeWorkplaces[i].transform.position, position);
+                
+                if (distance > bestDistance) continue;
+                bestDistance = distance;
+                closestWorkplace = freeWorkplaces[i];
+            }
+            return closestWorkplace;
+        }
+
         public Building GetClosestBuildingOfClass(BuildingType buildingType, Type classType, Vector3 position)
         {
             List<Building> buildings = new List<Building>(GetAllBuildingOfClass(buildingType, classType));
+            
+            if (buildings.Count == 0) 
+                return null;
+            
             Building closestBuilding = buildings[0];
             float bestDistance = Vector3.Distance(closestBuilding.transform.position, position);
 

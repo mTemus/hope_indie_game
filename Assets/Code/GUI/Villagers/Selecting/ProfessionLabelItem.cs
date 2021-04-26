@@ -38,26 +38,7 @@ namespace Code.GUI.Villagers.Selecting
 
         public void LoadWorkplaces()
         {
-            switch (professionData.ProfessionType) {
-                case ProfessionType.Unemployed:
-                   workplaces = Managers.Instance.Buildings.GetAllWorkplacesOfClass(BuildingType.Village,
-                        typeof(TownHall));
-                   break;
-                
-                case ProfessionType.Builder:
-                case ProfessionType.Lumberjack:
-                case ProfessionType.GlobalHauler:
-                    workplaces = Managers.Instance.Buildings.GetAllFreeWorkplacesOfClass(
-                        professionData.WorkplaceBuildingType, professionData.WorkplaceType);
-                    break;
-                
-                case ProfessionType.WorkplaceHauler:
-                    workplaces = Managers.Instance.Buildings.GetAllWorkplacesWithHaulersToHire();
-                    break;
-                
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            workplaces = Managers.Instance.Buildings.GetAllFreeWorkplacesForProfession(professionData);
         }
         
         public void ClearWorkplaces()
