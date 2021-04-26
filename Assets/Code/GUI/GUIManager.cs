@@ -17,15 +17,6 @@ namespace Code.GUI
         [Header("Villager GUI")] 
         [SerializeField] private VillagerPropertiesPanel villagerPropertiesPanel;
         [SerializeField] private VillagerProfessionChangingPanel villagerProfessionChangingPanel;
-        
-        [Header("Other")]
-        [SerializeField] private List<Sprite> resourceIcons;
-
-        public Sprite GetResourceIcon(ResourceType resourceType)
-        {
-            //TODO: this should be changed to addressables!
-            return resourceIcons.Find(sprite => sprite.name == resourceType.ToString().ToLower());
-        }
 
         public RequiredResourcesPanel RequiredResourcesPanel => requiredResourcesPanel;
 

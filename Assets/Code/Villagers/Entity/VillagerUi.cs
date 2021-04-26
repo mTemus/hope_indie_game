@@ -17,7 +17,7 @@ namespace Code.Villagers.Entity
         {
             if (visible) {
                 resourceImage.gameObject.SetActive(true);
-                resourceImage.sprite = Managers.Instance.GUI.GetResourceIcon(carriedResource);
+                resourceImage.sprite = AssetsStorage.I.GetResourceIcon(carriedResource);
             }
             else {
                 resourceImage.sprite = null;
