@@ -30,3 +30,5 @@ Tasks are instructions for each profession. Most of them will be specific for a 
 * [First update - tools and buildings](https://www.youtube.com/watch?v=laCbKncUxlc)
 * [Building selecting while building UI](https://www.youtube.com/watch?v=eGZ8UUqtYbY)
 * [Villager selection and profession changing UI](https://www.youtube.com/watch?v=rstPntP1JzQ)
+* [Workplace Hauler profession implementation](https://www.youtube.com/watch?v=pYRBg31MNkk)
+* [Developer console implementation](https://www.youtube.com/watch?v=r-kNdXYLJPA)
