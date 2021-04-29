@@ -6,9 +6,11 @@ namespace Code.System.Initialization
     {
         [SerializeField] private InitializeObject[] buildings;
         [SerializeField] private InitializeObject[] villagers;
+        [SerializeField] private InitializeObject[] resourcesToGather;
 
         private void Start()
         {
+            InitializeObjects(resourcesToGather);
             InitializeObjects(buildings);
             InitializeObjects(villagers);
         }
