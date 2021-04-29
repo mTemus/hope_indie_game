@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fdcff92d2176f44d81a669526e801c4, type: 3}
   m_Name: BuilderProfession
   m_EditorClassIdentifier: 
-  professionType: 1
-  requiredStats:
-    strength: 10
-    dexterity: 3
-    intelligence: 8
+  type: 1
+  requiredStatistics:
+    strength: 8
+    dexterity: 5
+    intelligence: 2
+  resourceCarryingLimit: 10
   goldPerDay: 10
-  workplace: {fileID: 7631306087601245034, guid: 27019d35ebc484b43b1d7dcad63b0dc9, type: 3}
+  workplaceBuildingData: {fileID: 11400000, guid: 63260f9bd399de44e843a2dca00b82a7, type: 2}

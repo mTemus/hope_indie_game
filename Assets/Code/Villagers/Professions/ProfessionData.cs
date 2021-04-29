@@ -13,20 +13,16 @@ namespace Code.Villagers.Professions
         [SerializeField] private VillagersStatistics requiredStats;
         [SerializeField] private int goldPerDay;
 
-        [Header("Workplace data")]
-        [SerializeField] private Workplace workplace;
+        [Header("Workplace data")] 
+        [SerializeField] private BuildingData workplaceBuildingData;
 
         public void SetGoldPerDay(int amount) =>
             goldPerDay = amount;
 
-        public Type WorkplaceType => workplace.GetType();
-        
-        public BuildingType WorkplaceBuildingType => workplace.Data.BuildingType;
-        
-        public ProfessionType ProfessionType => professionType;
-
-        public VillagersStatistics RequiredStats => requiredStats;
-
+        public Type WorkplaceType => workplaceBuildingData.Prefab.GetComponent<Workplace>().GetType();
+        public BuildingType WorkplaceBuildingType => workplaceBuildingData.BuildingType;
+        public ProfessionType Type => type;
+        public VillagersStatistics RequiredStatistics => requiredStatistics;
         public int GoldPerDay => goldPerDay;
     }
 }

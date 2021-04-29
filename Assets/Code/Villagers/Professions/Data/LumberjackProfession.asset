@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fdcff92d2176f44d81a669526e801c4, type: 3}
   m_Name: LumberjackProfession
   m_EditorClassIdentifier: 
-  professionType: 2
-  requiredStats:
+  type: 2
+  requiredStatistics:
     strength: 8
-    dexterity: 6
+    dexterity: 3
     intelligence: 3
+  resourceCarryingLimit: 10
   goldPerDay: 15
-  workplace: {fileID: -2904663509067177099, guid: 29849b52182697849a1804d9b539db17, type: 3}
+  workplaceBuildingData: {fileID: 11400000, guid: 50a273108191b114fa18d8f1bda2f4d8, type: 2}

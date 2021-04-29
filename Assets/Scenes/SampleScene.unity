@@ -11123,7 +11123,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 637620839319365273, guid: 5290f3692b8766b4a9efb28e5aaed7bb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 637620839319365273, guid: 5290f3692b8766b4a9efb28e5aaed7bb, type: 3}
       propertyPath: m_LocalPosition.y
@@ -13168,6 +13168,10 @@ PrefabInstance:
       propertyPath: workplace
       value: 
       objectReference: {fileID: 4788841643943952100}
+    - target: {fileID: 1668639820441404006, guid: 2a138a1612712074fbbb1771cff30524, type: 3}
+      propertyPath: professionData
+      value: 
+      objectReference: {fileID: 11400000, guid: a2885f04ce261c44aa06498491a958cd, type: 2}
     - target: {fileID: 1668639820441404011, guid: 2a138a1612712074fbbb1771cff30524, type: 3}
       propertyPath: m_Name
       value: WorkplaceHauler
@@ -15209,7 +15213,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 470}
-  m_SizeDelta: {x: 1895, y: 1010}
+  m_SizeDelta: {x: 1895, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1767448188
 MonoBehaviour:
@@ -15511,6 +15515,10 @@ PrefabInstance:
       propertyPath: workplace
       value: 
       objectReference: {fileID: 2050027554}
+    - target: {fileID: 1668639820441404006, guid: bcff622657a8e8142a9627662aa48815, type: 3}
+      propertyPath: professionData
+      value: 
+      objectReference: {fileID: 11400000, guid: 7e3ee87b2faabad46bacc7f0b5868e17, type: 2}
     - target: {fileID: 1668639820441404011, guid: bcff622657a8e8142a9627662aa48815, type: 3}
       propertyPath: m_Name
       value: Unemployed
@@ -21582,7 +21590,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 637620839319365273, guid: 5290f3692b8766b4a9efb28e5aaed7bb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 637620839319365273, guid: 5290f3692b8766b4a9efb28e5aaed7bb, type: 3}
       propertyPath: m_LocalPosition.y
@@ -22282,7 +22290,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 637620839319365273, guid: 5290f3692b8766b4a9efb28e5aaed7bb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 637620839319365273, guid: 5290f3692b8766b4a9efb28e5aaed7bb, type: 3}
       propertyPath: m_LocalPosition.y
@@ -22408,6 +22416,10 @@ PrefabInstance:
       propertyPath: workplace
       value: 
       objectReference: {fileID: 4788841643943952100}
+    - target: {fileID: 1668639820441404006, guid: 8996624bdbdbedb46a19b102c9a6ee5b, type: 3}
+      propertyPath: professionData
+      value: 
+      objectReference: {fileID: 11400000, guid: 0f02c7c9f06ef5743b159a3867ef2051, type: 2}
     - target: {fileID: 1668639820441404007, guid: 8996624bdbdbedb46a19b102c9a6ee5b, type: 3}
       propertyPath: statistics.dexterity
       value: 2

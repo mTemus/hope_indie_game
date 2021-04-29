@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fdcff92d2176f44d81a669526e801c4, type: 3}
   m_Name: WorkplaceHaulerProfession
   m_EditorClassIdentifier: 
-  professionType: 3
-  requiredStats:
-    strength: 0
-    dexterity: 0
-    intelligence: 0
+  type: 3
+  requiredStatistics:
+    strength: 8
+    dexterity: 2
+    intelligence: 2
+  resourceCarryingLimit: 25
   goldPerDay: 0
-  workplace: {fileID: 0}
+  workplaceBuildingData: {fileID: 0}

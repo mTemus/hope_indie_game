@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fdcff92d2176f44d81a669526e801c4, type: 3}
   m_Name: UnemployedProfession
   m_EditorClassIdentifier: 
-  professionType: 0
-  requiredStats:
+  type: 0
+  requiredStatistics:
     strength: 0
     dexterity: 0
     intelligence: 0
+  resourceCarryingLimit: 0
   goldPerDay: 0
-  workplace: {fileID: 2699120673269493026, guid: 71d6fb766878d6f479c257e7fc4867fb, type: 3}
+  workplaceBuildingData: {fileID: 11400000, guid: 579187de492dba445836a30c9381df61, type: 2}
