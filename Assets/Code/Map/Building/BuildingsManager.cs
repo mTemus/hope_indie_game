@@ -94,7 +94,7 @@ namespace Code.Map.Building
         {
             Workplace[] workplaces;
             
-            switch (professionData.ProfessionType) {
+            switch (professionData.Type) {
                 case ProfessionType.Unemployed:
                     workplaces = Managers.Instance.Buildings.GetAllWorkplacesOfClass(BuildingType.Village,
                         typeof(TownHall));

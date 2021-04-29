@@ -1,5 +1,4 @@
 using Code.Map.Building;
-using Code.System.Areas;
 using Code.Villagers.Entity;
 using Code.Villagers.Professions;
 using UnityEngine;
@@ -8,7 +7,7 @@ namespace Code.System.Initialization
 {
     public class InitializeVillager : InitializeObject
     {
-        [SerializeField] private ProfessionType professionType;
+        [SerializeField] private ProfessionData professionData;
         [SerializeField] private Workplace workplace;
 
         public Workplace Workplace
@@ -22,7 +21,7 @@ namespace Code.System.Initialization
             Villager villager = GetComponent<Villager>();
             Managers.Instance.Areas.GetAreaByCoords(Vector3Int.FloorToInt(transform.position))
                 .AddVillager(villager);
-            Managers.Instance.Professions.SetVillagerProfession(villager, professionType, workplace);
+            Managers.Instance.Professions.SetVillagerProfession(villager, professionData, workplace);
             villager.Profession.enabled = true;
         }
     }

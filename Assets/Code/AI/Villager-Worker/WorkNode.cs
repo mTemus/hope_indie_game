@@ -40,11 +40,11 @@ namespace Code.AI
                 
                 case WorkNodeState.GET_TASK_TO_DO:
                     if (worker.Profession.GetNewTask()) {
-                        Debug.Log(worker.Profession.Type + " got a task.");
+                        Debug.Log(worker.Profession.Data.Type + " got a task.");
                         currentState = WorkNodeState.DO_CURRENT_TASK;
                     }
                     else {
-                        Debug.Log(worker.Profession.Type + " got no task. Reporting as free.");
+                        Debug.Log(worker.Profession.Data.Type + " got no task. Reporting as free.");
                         currentState = WorkNodeState.REPORT_NO_TASK;
                     }
                     

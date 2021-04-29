@@ -40,7 +40,7 @@ namespace Code.GUI.Villagers.Selecting
             foreach (UiSelectableElement element in elementsToSelect) {
                 ProfessionLabelItem currItem = (ProfessionLabelItem) element;
                 
-                if (currItem.ProfessionData.ProfessionType != villager.Profession.Type) continue;
+                if (currItem.ProfessionData.Type != villager.Profession.Data.Type) continue;
                 RectTransform pointerRect = currentProfessionPointer.GetComponent<RectTransform>();
                 currentProfessionPointer.transform.SetParent(element.transform);
                 
@@ -145,7 +145,7 @@ namespace Code.GUI.Villagers.Selecting
         {
             Villager selectedVillager = Managers.Instance.VillagerSelection.SelectedVillager;
 
-            if (selectedVillager.Profession.Type == currentProfession.ProfessionData.ProfessionType) {
+            if (selectedVillager.Profession.Data.Type == currentProfession.ProfessionData.Type) {
                 if (selectedVillager.Profession.Workplace == CurrentWorkplace) return;
                 selectedVillager.Profession.Workplace.FireWorker(selectedVillager);
                 CurrentWorkplace.HireWorker(selectedVillager);
@@ -153,7 +153,7 @@ namespace Code.GUI.Villagers.Selecting
             } else {
                 Managers.Instance.Professions.FireVillagerFromOldProfession(selectedVillager);
                 Managers.Instance.Professions.SetVillagerProfession(selectedVillager,
-                    currentProfession.ProfessionData.ProfessionType, CurrentWorkplace);
+                    currentProfession.ProfessionData, CurrentWorkplace);
             }
         }
 

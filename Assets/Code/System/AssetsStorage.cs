@@ -57,7 +57,7 @@ namespace Code.System
 
       public ProfessionData GetProfessionDataForProfessionType(ProfessionType professionType)
       {
-         ProfessionData p = Array.Find(professionData, data => data.ProfessionType == professionType);
+         ProfessionData p = Array.Find(professionData, data => data.Type == professionType);
 
          if (p == null)
             throw new Exception("ASSET STORAGE ----- CAN'T FIND DATA FOR PROFESSION: " + professionType);

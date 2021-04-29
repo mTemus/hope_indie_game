@@ -116,7 +116,7 @@ namespace Code.Map.Building
             if (tasksToDo.Count == 0) 
                 return null;
         
-            if (worker.Profession.Type == ProfessionType.WorkplaceHauler) 
+            if (worker.Profession.Data.Type == ProfessionType.WorkplaceHauler) 
                 return GetResourceCarryingTask();
                     
             Debug.Log("Trying to get normal task.");
@@ -186,7 +186,7 @@ namespace Code.Map.Building
 
         public void HireWorker(Villager worker)
         {
-            if (worker.Profession.Type != ProfessionType.WorkplaceHauler) 
+            if (worker.Profession.Data.Type != ProfessionType.WorkplaceHauler) 
                 HireNormalWorker();
             else 
                 HireHauler();
@@ -200,7 +200,7 @@ namespace Code.Map.Building
 
         public void FireWorker(Villager worker)
         {
-            if (worker.Profession.Type == ProfessionType.WorkplaceHauler) 
+            if (worker.Profession.Data.Type == ProfessionType.WorkplaceHauler) 
                 FireHauler(worker);
             else 
                 FireNormalWorker(worker);

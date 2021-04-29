@@ -64,13 +64,13 @@ namespace Code.GUI.Villagers.Selecting
 
         public void LoadProfessionData(ProfessionData professionData, Villager villager)
         {
-            SetProfessionText(strengthValueProfession, professionData.RequiredStats.Strength);
-            SetProfessionText(dexterityValueProfession, professionData.RequiredStats.Dexterity);
-            SetProfessionText(intelligenceValueProfession, professionData.RequiredStats.Intelligence);
+            SetProfessionText(strengthValueProfession, professionData.RequiredStatistics.Strength);
+            SetProfessionText(dexterityValueProfession, professionData.RequiredStatistics.Dexterity);
+            SetProfessionText(intelligenceValueProfession, professionData.RequiredStatistics.Intelligence);
             
-            SetVillagerText(strengthValueVillager, villager.Statistics.Strength, professionData.RequiredStats.Strength);
-            SetVillagerText(dexterityValueVillager, villager.Statistics.Dexterity, professionData.RequiredStats.Dexterity);
-            SetVillagerText(intelligenceValueVillager, villager.Statistics.Intelligence, professionData.RequiredStats.Intelligence);
+            SetVillagerText(strengthValueVillager, villager.Statistics.Strength, professionData.RequiredStatistics.Strength);
+            SetVillagerText(dexterityValueVillager, villager.Statistics.Dexterity, professionData.RequiredStatistics.Dexterity);
+            SetVillagerText(intelligenceValueVillager, villager.Statistics.Intelligence, professionData.RequiredStatistics.Intelligence);
 
             goldValue.text = professionData.GoldPerDay.ToString();
         }

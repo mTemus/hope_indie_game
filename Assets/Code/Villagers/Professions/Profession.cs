@@ -19,8 +19,9 @@ namespace Code.Villagers.Professions
     
     public abstract class Profession : MonoBehaviour
     {
-        [SerializeField] protected ProfessionType type;
-        [SerializeField] private Workplace workplace;
+        private ProfessionData data;
+        private Workplace workplace;
+        
         private readonly Queue<Task> tasks = new Queue<Task>();
 
         private Resource carriedResource;
@@ -30,8 +31,7 @@ namespace Code.Villagers.Professions
         protected Node professionAI;
 
         public Workplace Workplace => workplace;
-
-        public ProfessionType Type => type;
+        public ProfessionData Data => data;
 
         public Resource CarriedResource
         {
@@ -133,6 +133,11 @@ namespace Code.Villagers.Professions
             
         }
 
+        public void SetProfessionData(ProfessionData professionData)
+        {
+            data = professionData;
+        }
+        
         public bool HasWorkToDo() =>
             tasks.Count > 0 || currentTask != null;
     }

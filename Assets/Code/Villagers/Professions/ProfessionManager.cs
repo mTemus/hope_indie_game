@@ -17,7 +17,7 @@ namespace Code.Villagers.Professions
 
         private void RemoveVillagerFromProfessionStructure(Villager villager)
         {
-            switch (villager.Profession.Type) {
+            switch (villager.Profession.Data.Type) {
                 case ProfessionType.Unemployed:
                     unemployed.Remove(villager);
                     break;
@@ -82,9 +82,9 @@ namespace Code.Villagers.Professions
             villager.UI.ProfessionName.text = "No Profession Exception";
         }
         
-        public void SetVillagerProfession(Villager villager, ProfessionType professionType, Workplace workplace)
+        public void SetVillagerProfession(Villager villager, ProfessionData professionData, Workplace workplace)
         {
-            switch (professionType) {
+            switch (professionData.Type) {
                 case ProfessionType.Unemployed:
                     MakeVillagerUnemployed(villager);
                     break;
@@ -106,17 +106,18 @@ namespace Code.Villagers.Professions
                     break;
                 
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(professionType), professionType, null);
+                    throw new ArgumentOutOfRangeException(nameof(professionData.Type), professionData.Type, null);
             }
-
+            
+            villager.Profession.SetProfessionData(professionData);
             villager.Profession.Initialize();
             workplace.HireWorker(villager);
             villager.Profession.enabled = false;
             
-            if (professionType == ProfessionType.WorkplaceHauler) 
-                villager.UI.ProfessionName.text = professionType + " of " + villager.Profession.Workplace.name;
+            if (professionData.Type == ProfessionType.WorkplaceHauler) 
+                villager.UI.ProfessionName.text = professionData.Type + " of " + villager.Profession.Workplace.name;
             else 
-                villager.UI.ProfessionName.text = professionType.ToString();
+                villager.UI.ProfessionName.text = professionData.Type.ToString();
         }
     }
 }

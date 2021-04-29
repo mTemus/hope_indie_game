@@ -62,7 +62,7 @@ namespace Code.Map.Building.Buildings.Types.Industry
             foreach (Villager worker in workersWithoutTasks) {
                 if (task is ResourceCarryingTask) {
                     if (haulersCnt > 0) {
-                        if (worker.Profession.Type == ProfessionType.WorkplaceHauler) {
+                        if (worker.Profession.Data.Type == ProfessionType.WorkplaceHauler) {
                             GiveTaskToWorker(worker, task);
                             Debug.Log("Added to hauler: " + worker.name);
                             return;
@@ -75,7 +75,7 @@ namespace Code.Map.Building.Buildings.Types.Industry
                     }
                 }
                 else {
-                    if (worker.Profession.Type == ProfessionType.WorkplaceHauler) 
+                    if (worker.Profession.Data.Type == ProfessionType.WorkplaceHauler) 
                         continue;
                     
                     GiveTaskToWorker(worker, task);

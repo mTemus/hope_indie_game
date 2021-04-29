@@ -9,8 +9,11 @@ namespace Code.Villagers.Professions
     public class ProfessionData : ScriptableObject
     {
         [Header("Profession data")]
-        [SerializeField] private ProfessionType professionType;
-        [SerializeField] private VillagersStatistics requiredStats;
+        [SerializeField] private ProfessionType type;
+        [SerializeField] private VillagersStatistics requiredStatistics;
+        [SerializeField] private int resourceCarryingLimit;
+        
+        //TODO: this wont work, it need to be moved to "profession.cs"
         [SerializeField] private int goldPerDay;
 
         [Header("Workplace data")] 

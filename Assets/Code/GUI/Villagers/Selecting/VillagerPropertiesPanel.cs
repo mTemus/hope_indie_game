@@ -37,7 +37,7 @@ namespace Code.GUI.Villagers.Selecting
         public void OpenPropertiesPanel(Villager villager)
         {
             villagerNameText.text = villager.name;
-            villagerProfessionText.text = villager.Profession.Type.ToString();
+            villagerProfessionText.text = villager.Profession.Data.Type.ToString();
             strengthValue.text = villager.Statistics.Strength.ToString();
             dexterity.text = villager.Statistics.Dexterity.ToString();
             intelligenceValue.text = villager.Statistics.Intelligence.ToString();

@@ -9,8 +9,6 @@ namespace Code.Villagers.Professions.Types
 
         public override void Initialize()
         {
-            type = ProfessionType.Unemployed;
-            
             InitializeUnemployedAI();
         }
     }
