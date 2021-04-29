@@ -1,4 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
+using Code.Map.Building;
+using Code.Map.Resources.ResourceToGather;
 using Code.System.Properties;
 using UnityEngine;
 
@@ -69,6 +72,20 @@ namespace Code.System.Grid
             return y  <= height && y >= 0 && x + objectWidth <= width && x >= 0;
         }
 
+        public void SetBuildingValueAtArea(List<Vector2Int> area, Building building)
+        {
+            foreach (var cell in area
+                .Select(cellPos => GetCellAt(cellPos.x, cellPos.y))) 
+            { cell.buildingData = building; }
+        }
+
+        public void SetResourceToGatherValueAtArea(List<Vector2Int> area, ResourceToGather resourceToGather)
+        {
+            foreach (var cell in area
+                .Select(cellPos => GetCellAt(cellPos.x, cellPos.y))) 
+            { cell.resourceToGatherData = resourceToGather; }
+        }
+        
         public int CellSize => cellSize;
 
         public Cell[,] Cells => cells;

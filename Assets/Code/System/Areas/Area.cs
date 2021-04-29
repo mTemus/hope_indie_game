@@ -30,6 +30,11 @@ namespace Code.System.Areas
         private GameObject playerObject;
         private GridMap gridMap;
         
+        public GridMap GridMap => gridMap;
+        public AreaType Type => type;
+        public float Width => width;
+        public float Height => height;
+        
         void Awake()
         {
             int widthTileCnt = (int) (width / GlobalProperties.WorldTileSize);
@@ -63,8 +68,7 @@ namespace Code.System.Areas
             building.transform.SetParent(transform);
             buildings.Add(building);
         }
-        
-        
+
         public void AddBuilding(Building building, BuildingData buildingData)
         {
             Transform buildingTransform = building.transform;
@@ -72,15 +76,16 @@ namespace Code.System.Areas
             
             Vector3Int currBuildPos = Vector3Int.FloorToInt(buildingTransform.localPosition);
             
-            List<Vector2Int> buildingArea =
-                gridMap.GetTileWithNeighbours(new Vector2Int(currBuildPos.x / GlobalProperties.WorldTileSize, currBuildPos.y), new Vector2Int(buildingData.Size.x, buildingData.Size.y));
+            List<Vector2Int> buildingArea = gridMap.GetTileWithNeighbours(
+                new Vector2Int(currBuildPos.x / GlobalProperties.WorldTileSize, currBuildPos.y), 
+                    new Vector2Int(buildingData.Size.x, buildingData.Size.y));
             
             gridMap.SetBuildingValueAtArea(buildingArea, building);
             buildings.Add(building);
             Debug.Log("Add building " + building.name + "  to area "+ gameObject.name + ".");
         }
-
-        public void AddResourceToGather(ResourceToGather resourceToGather)
+        
+         public void AddResourceToGather(ResourceToGather resourceToGather)
         {
             Transform resourceTransform = resourceToGather.transform;
             resourceTransform.SetParent(transform);
@@ -121,6 +126,7 @@ namespace Code.System.Areas
                 gridMap.GetCellAt(tilePos.x, tilePos.y).buildingData = b;
         }
 
+
         public void AddVillager(Villager villager)
         {
             villager.transform.SetParent(transform);
@@ -128,13 +134,5 @@ namespace Code.System.Areas
             
             Debug.Log("Add building " + villager.name + "  to area "+ gameObject.name + ".");
         }
-
-        public GridMap GridMap => gridMap;
-
-        public AreaType Type => type;
-
-        public float Width => width;
-
-        public float Height => height;
     }
 }
