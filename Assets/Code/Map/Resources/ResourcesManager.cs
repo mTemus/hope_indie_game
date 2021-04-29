@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Code.Villagers.Tasks;
 using UnityEngine;
 
-namespace Code.Resources
+namespace Code.Map.Resources
 {
    public class ResourcesManager : MonoBehaviour
    {

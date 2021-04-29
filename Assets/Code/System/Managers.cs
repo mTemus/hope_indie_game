@@ -1,8 +1,8 @@
 using Code.GUI;
 using Code.Map.Building;
+using Code.Map.Resources;
 using Code.Player;
 using Code.Player.Tools;
-using Code.Resources;
 using Code.System.Area;
 using Code.System.Camera;
 using Code.System.GameInput;

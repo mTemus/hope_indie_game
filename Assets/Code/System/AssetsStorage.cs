@@ -1,5 +1,5 @@
 using System;
-using Code.Resources;
+using Code.Map.Resources;
 using Code.Villagers.Professions;
 using UnityEngine;
 

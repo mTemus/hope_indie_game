@@ -1,7 +1,7 @@
 using System;
 using Code.Map.Building;
 using Code.Map.Building.Buildings.Types.Resources;
-using Code.Resources;
+using Code.Map.Resources;
 using Code.System;
 using Code.System.Properties;
 using UnityEngine;

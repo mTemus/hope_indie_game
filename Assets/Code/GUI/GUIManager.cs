@@ -1,8 +1,6 @@
-using System.Collections.Generic;
 using Code.GUI.BuildingSelecting;
 using Code.GUI.PlayerToolsMenu;
 using Code.GUI.Villagers.Selecting;
-using Code.Resources;
 using UnityEngine;
 
 namespace Code.GUI

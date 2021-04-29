@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Code.Resources;
+using Code.Map.Resources;
 using UnityEngine;
 
 namespace Code.Map.Building

@@ -1,7 +1,6 @@
-using System;
 using System.Linq;
 using Code.Map.Building.Systems;
-using Code.Resources;
+using Code.Map.Resources;
 using UnityEngine;
 using UnityEngine.UI;
 

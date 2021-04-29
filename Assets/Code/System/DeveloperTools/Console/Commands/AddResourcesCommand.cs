@@ -1,5 +1,5 @@
 using System;
-using Code.Resources;
+using Code.Map.Resources;
 using UnityEngine;
 
 namespace Code.System.DeveloperTools.Console.Commands

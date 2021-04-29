@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Code.Resources
+namespace Code.Map.Resources
 {
     [Serializable]
     public enum ResourceType

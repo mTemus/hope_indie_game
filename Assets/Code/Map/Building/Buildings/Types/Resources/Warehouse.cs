@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using Code.Resources;
+using Code.Map.Resources;
 using Code.System;
 using Code.Villagers.Entity;
 using NotImplementedException = System.NotImplementedException;

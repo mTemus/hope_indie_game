@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using Code.GUI.UIElements;
-using Code.Resources;
+using Code.Map.Resources;
 using Code.System;
 using TMPro;
 using UnityEngine;
