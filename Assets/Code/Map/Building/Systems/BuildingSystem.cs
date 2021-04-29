@@ -79,11 +79,9 @@ namespace Code.Map.Building.Systems
                 return;
             }
             
-            playerArea.FillTiles(buildingArea, currBuildTransform);
-
             _currentBuilding.GetComponent<Construction>()
                 .InitializeConstruction(_currentBuildingData, new Material(buildingFadeMaterial));
-            playerArea.AddBuilding(_currentBuilding.GetComponent<Building>());
+            playerArea.AddBuilding(_currentBuilding.GetComponent<Building>(), _currentBuildingData);
             
             _currentBuilding = null;
             _currentBuildingData = null;

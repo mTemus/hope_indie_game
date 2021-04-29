@@ -62,13 +62,7 @@ namespace Code.System.Areas
             playerObject.transform.SetParent(transform.root);
             playerObject = null;
         }
-
-        public void AddBuilding(Building building)
-        {
-            building.transform.SetParent(transform);
-            buildings.Add(building);
-        }
-
+        
         public void AddBuilding(Building building, BuildingData buildingData)
         {
             Transform buildingTransform = building.transform;
@@ -118,15 +112,6 @@ namespace Code.System.Areas
                 .Select(tilePos => gridMap.GetCellAt(tilePos.x, tilePos.y))
                 .All(cell => cell.CanBuild());
         
-        public void FillTiles(List<Vector2Int> buildingArea, Transform building)
-        {
-            Building b = building.GetComponent<Building>();
-            
-            foreach (Vector2Int tilePos in buildingArea) 
-                gridMap.GetCellAt(tilePos.x, tilePos.y).buildingData = b;
-        }
-
-
         public void AddVillager(Villager villager)
         {
             villager.transform.SetParent(transform);
