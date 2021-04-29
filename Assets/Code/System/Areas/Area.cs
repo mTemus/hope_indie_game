@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using Code.Map.Building;
-using Code.Map.Building.Buildings.Types.Resources;
+using Code.Map.Resources.ResourceToGather;
 using Code.System.Grid;
 using Code.System.Properties;
 using Code.Villagers.Entity;
 using UnityEngine;
 
-namespace Code.System.Area
+namespace Code.System.Areas
 {
     public enum AreaType
     {
@@ -25,6 +25,8 @@ namespace Code.System.Area
 
         private readonly List<Villager> villagers = new List<Villager>();
         private readonly List<Building> buildings = new List<Building>();
+        private readonly List<ResourceToGather> resourcesToGather = new List<ResourceToGather>();
+        
         private GameObject playerObject;
         private GridMap gridMap;
         
@@ -73,15 +75,39 @@ namespace Code.System.Area
             List<Vector2Int> buildingArea =
                 gridMap.GetTileWithNeighbours(new Vector2Int(currBuildPos.x / GlobalProperties.WorldTileSize, currBuildPos.y), new Vector2Int(buildingData.Size.x, buildingData.Size.y));
             
-            foreach (Vector2Int tilePos in buildingArea) {
-                Cell cell = gridMap.GetCellAt(tilePos.x, tilePos.y);
-                cell.SetBuildingAtCell(building);
-            }
-            
+            gridMap.SetBuildingValueAtArea(buildingArea, building);
             buildings.Add(building);
             Debug.Log("Add building " + building.name + "  to area "+ gameObject.name + ".");
         }
 
+        public void AddResourceToGather(ResourceToGather resourceToGather)
+        {
+            Transform resourceTransform = resourceToGather.transform;
+            resourceTransform.SetParent(transform);
+
+            Vector3Int currResourcePos = Vector3Int.FloorToInt(resourceTransform.localPosition);
+
+            List<Vector2Int> resourceArea = gridMap.GetTileWithNeighbours(
+                new Vector2Int(currResourcePos.x / GlobalProperties.WorldTileSize, currResourcePos.y),
+                new Vector2Int(resourceToGather.Size.x, resourceToGather.Size.y));
+
+            gridMap.SetResourceToGatherValueAtArea(resourceArea, resourceToGather);
+            resourcesToGather.Add(resourceToGather);
+            Debug.Log("Add resource " + resourceToGather.name + "  to area "+ gameObject.name + ".");
+        }
+
+        public void RemoveResourceToGather(ResourceToGather resourceToGather)
+        {
+            Vector3Int currResourcePos = Vector3Int.FloorToInt(resourceToGather.transform.localPosition);
+            List<Vector2Int> resourceArea = gridMap.GetTileWithNeighbours(
+                new Vector2Int(currResourcePos.x / GlobalProperties.WorldTileSize, currResourcePos.y),
+                new Vector2Int(resourceToGather.Size.x, resourceToGather.Size.y));
+
+            gridMap.SetResourceToGatherValueAtArea(resourceArea, null);
+            resourcesToGather.Remove(resourceToGather);
+            Debug.LogError("Remove resource " + resourceToGather.name + "  to area "+ gameObject.name + ".");
+        }
+        
         public bool CanPlaceBuilding(List<Vector2Int> buildingArea) =>
             buildingArea
                 .Select(tilePos => gridMap.GetCellAt(tilePos.x, tilePos.y))
@@ -89,8 +115,10 @@ namespace Code.System.Area
         
         public void FillTiles(List<Vector2Int> buildingArea, Transform building)
         {
+            Building b = building.GetComponent<Building>();
+            
             foreach (Vector2Int tilePos in buildingArea) 
-                gridMap.GetCellAt(tilePos.x, tilePos.y).SetBuildingAtCell(building.GetComponent<Building>());
+                gridMap.GetCellAt(tilePos.x, tilePos.y).buildingData = b;
         }
 
         public void AddVillager(Villager villager)
@@ -99,15 +127,6 @@ namespace Code.System.Area
             villagers.Add(villager);
             
             Debug.Log("Add building " + villager.name + "  to area "+ gameObject.name + ".");
-        }
-
-        public Warehouse GetWarehouse()
-        {
-            foreach (Building building in buildings) 
-                if (building.TryGetComponent(out Warehouse w)) 
-                    return w;
-            
-            return null;
         }
 
         public GridMap GridMap => gridMap;

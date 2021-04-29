@@ -1,5 +1,5 @@
 using Code.System;
-using Code.System.Area;
+using Code.System.Areas;
 using Code.System.GameInput;
 using UnityEngine;
 

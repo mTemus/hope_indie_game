@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Code.Utilities;
 using UnityEngine;
 
-namespace Code.System.Area
+namespace Code.System.Areas
 {
     public class AreaDebug : MonoBehaviour
     {

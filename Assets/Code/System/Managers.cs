@@ -3,7 +3,7 @@ using Code.Map.Building;
 using Code.Map.Resources;
 using Code.Player;
 using Code.Player.Tools;
-using Code.System.Area;
+using Code.System.Areas;
 using Code.System.Camera;
 using Code.System.GameInput;
 using Code.System.Initialization;

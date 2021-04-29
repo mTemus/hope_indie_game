@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Code.System.Area
+namespace Code.System.Areas
 {
     public class AreaEdge : MonoBehaviour
     {

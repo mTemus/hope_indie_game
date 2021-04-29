@@ -1,4 +1,4 @@
-namespace Code.System.Area.Types
+namespace Code.System.Areas.Types
 {
     public class ForestArea : Area
     {

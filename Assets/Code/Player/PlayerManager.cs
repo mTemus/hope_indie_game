@@ -1,5 +1,5 @@
 using Code.System;
-using Code.System.Area;
+using Code.System.Areas;
 using UnityEngine;
 
 namespace Code.Player

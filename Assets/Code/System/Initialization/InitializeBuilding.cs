@@ -1,4 +1,5 @@
 using Code.Map.Building;
+using Code.System.Areas;
 using UnityEngine;
 
 namespace Code.System.Initialization
@@ -8,7 +9,7 @@ namespace Code.System.Initialization
         public override void InitializeMe()
         {
             Building building = GetComponent<Building>();
-            Area.Area myArea = Managers.Instance.Areas.GetAreaByCoords(Vector3Int.FloorToInt(transform.position));
+            Area myArea = Managers.Instance.Areas.GetAreaByCoords(Vector3Int.FloorToInt(transform.position));
             myArea.AddBuilding(building, building.Data);
             Managers.Instance.Buildings.AddBuilding(building.Data.BuildingType, building);
         }

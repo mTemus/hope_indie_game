@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace Code.System.Area
+namespace Code.System.Areas
 {
     public class AreaManager : MonoBehaviour
     {
