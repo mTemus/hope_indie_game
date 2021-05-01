@@ -1,19 +1,32 @@
-using UnityEngine;
+using Code.Villagers.Entity;
 
 namespace Code.Map.Resources.ResourceToGather.ResourcesToGather
 {
-    public class WoodToGather : MonoBehaviour
+    public class WoodToGather : ResourceToGather
     {
-        // Start is called before the first frame update
-        void Start()
+        public override void OnGatherStart(Villager worker)
         {
-        
+            if (worker.Profession.CarriedResource != null) return;
+            worker.Profession.CarriedResource = new Resource(resource.Type, 0);
         }
 
-        // Update is called once per frame
-        void Update()
+        public override bool Gather(Villager worker, int socketId)
         {
-        
+            float gatheringFormula = 1f + 0.1f * worker.Statistics.Strength + 0.6f * worker.Statistics.Dexterity;
+            gatheringSockets[socketId].GatherResource(gatheringFormula, worker.Profession);
+
+            return worker.Profession.CarriedResource.amount != worker.Profession.Data.ResourceCarryingLimit;
+        }
+
+        protected override void OnResourceDepleted()
+        {
+            foreach (Villager gatherer in gatherers.Keys) 
+                gatherers[gatherer].OnCurrentResourceDepleted();
+
+            foreach (Villager gatherer in gatherers.Keys) 
+                UnregisterGatherer(gatherer);
+
+            StartCoroutine(ClearResource());
         }
     }
 }
