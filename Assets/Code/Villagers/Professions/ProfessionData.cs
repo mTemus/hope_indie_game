@@ -27,5 +27,6 @@ namespace Code.Villagers.Professions
         public ProfessionType Type => type;
         public VillagersStatistics RequiredStatistics => requiredStatistics;
         public int GoldPerDay => goldPerDay;
+        public int ResourceCarryingLimit => resourceCarryingLimit;
     }
 }
