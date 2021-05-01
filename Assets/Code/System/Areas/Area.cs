@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Code.Map.Building;
+using Code.Map.Resources;
 using Code.Map.Resources.ResourceToGather;
 using Code.System.Grid;
 using Code.System.Properties;
@@ -111,6 +112,28 @@ namespace Code.System.Areas
             buildingArea
                 .Select(tilePos => gridMap.GetCellAt(tilePos.x, tilePos.y))
                 .All(cell => cell.CanBuild());
+
+        public ResourceToGather GetClosestResourceToGatherByType(Vector3 position, ResourceType resourceType)
+        {
+            List<ResourceToGather> resources = resourcesToGather
+                .Where(resourceToGather => resourceToGather.Resource.Type == resourceType)
+                .ToList();
+
+            ResourceToGather closestResource = resources[0];
+            float bestDistance = Vector3.Distance(position, closestResource.transform.position);
+
+            foreach (ResourceToGather resource in resources) {
+                float distance = Vector3.Distance(position, resource.transform.position);
+
+                if (bestDistance < distance) continue;
+                if (!resource.CanGather()) continue;
+                bestDistance = distance;
+                closestResource = resource;
+            }
+
+            return closestResource;
+        }
+        
         
         public void AddVillager(Villager villager)
         {
