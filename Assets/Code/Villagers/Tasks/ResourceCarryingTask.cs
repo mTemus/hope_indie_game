@@ -19,7 +19,7 @@ namespace Code.Villagers.Tasks
 
     public class ResourceCarryingTask : Task
     {
-        private readonly Resource requiredResource;
+        private readonly Resource carriedResource;
         private readonly bool reservedResources;
 
         private Building fromStorage;
@@ -30,11 +30,11 @@ namespace Code.Villagers.Tasks
         private Func<Task, int, Resource> onReservedResourceWithdraw;
         private readonly Action<Resource> onResourceDelivery;
 
-        public Resource RequiredResource => requiredResource;
+        public Resource CarriedResource => carriedResource;
 
-        private ResourceCarryingTask(Resource requiredResource, Building toStorage, Action<Resource> onResourceDelivery)
+        private ResourceCarryingTask(Resource carriedResource, Building toStorage, Action<Resource> onResourceDelivery)
         {
-            this.requiredResource = requiredResource;
+            this.carriedResource = carriedResource;
             this.onResourceDelivery = onResourceDelivery;
             
             reservedResources = false;
@@ -42,8 +42,8 @@ namespace Code.Villagers.Tasks
             resourceCarryingState = ResourceCarryingTaskState.FIND_CLOSEST_STORAGE;
         }
         
-        public ResourceCarryingTask(Resource requiredResource, Building toStorage, Action<Resource> onResourceDelivery, Func<ResourceType, int, Resource> onResourceWithdraw, Building fromStorage) 
-            : this(requiredResource, toStorage, onResourceDelivery)
+        public ResourceCarryingTask(Resource carriedResource, Building toStorage, Action<Resource> onResourceDelivery, Func<ResourceType, int, Resource> onResourceWithdraw, Building fromStorage) 
+            : this(carriedResource, toStorage, onResourceDelivery)
         {
             this.fromStorage = fromStorage;
             this.onResourceWithdraw = onResourceWithdraw;
@@ -52,8 +52,8 @@ namespace Code.Villagers.Tasks
             fromStoragePosition = fromStorage.PivotedPosition;
         }
         
-        public ResourceCarryingTask(Resource requiredResource, Building toStorage, Action<Resource> onResourceDelivery, Func<Task, int, Resource> onReservedResourceWithdraw, Building fromStorage)
-            : this(requiredResource, toStorage, onResourceDelivery)
+        public ResourceCarryingTask(Resource carriedResource, Building toStorage, Action<Resource> onResourceDelivery, Func<Task, int, Resource> onReservedResourceWithdraw, Building fromStorage)
+            : this(carriedResource, toStorage, onResourceDelivery)
         {
             this.fromStorage = fromStorage;
             this.onReservedResourceWithdraw = onReservedResourceWithdraw;
@@ -62,8 +62,8 @@ namespace Code.Villagers.Tasks
             fromStoragePosition = fromStorage.PivotedPosition;
         }
         
-        public ResourceCarryingTask(Resource requiredResource, Building toStorage, Action<Resource> onResourceDelivery, bool reservedResources)
-            : this(requiredResource, toStorage, onResourceDelivery)
+        public ResourceCarryingTask(Resource carriedResource, Building toStorage, Action<Resource> onResourceDelivery, bool reservedResources)
+            : this(carriedResource, toStorage, onResourceDelivery)
         {
             this.reservedResources = reservedResources;
         }
@@ -108,20 +108,20 @@ namespace Code.Villagers.Tasks
                 case ResourceCarryingTaskState.TAKE_RESOURCES:
                     if (reservedResources) {
                         worker.Profession.CarriedResource = onReservedResourceWithdraw.Invoke(this,
-                            requiredResource.amount > GlobalProperties.MAXResourceHeld
+                            carriedResource.amount > GlobalProperties.MAXResourceHeld
                                 ? GlobalProperties.MAXResourceHeld
-                                : requiredResource.amount);
+                                : carriedResource.amount);
                     }
                     else {
                         worker.Profession.CarriedResource = onResourceWithdraw.Invoke(
-                            requiredResource.Type,
-                            requiredResource.amount > GlobalProperties.MAXResourceHeld
+                            carriedResource.Type,
+                            carriedResource.amount > GlobalProperties.MAXResourceHeld
                                 ? GlobalProperties.MAXResourceHeld
-                                : requiredResource.amount);
+                                : carriedResource.amount);
                     }
                     
-                    worker.UI.SetResourceIcon(true, requiredResource.Type);
-                    requiredResource.amount -= worker.Profession.CarriedResource.amount;
+                    worker.UI.SetResourceIcon(true, carriedResource.Type);
+                    carriedResource.amount -= worker.Profession.CarriedResource.amount;
                     resourceCarryingState = ResourceCarryingTaskState.GO_ON_TASK_POSITION;
                     break;
                 
@@ -133,9 +133,9 @@ namespace Code.Villagers.Tasks
                 
                 case ResourceCarryingTaskState.DELIVER_RESOURCES:
                     onResourceDelivery?.Invoke(worker.Profession.CarriedResource);
-                    worker.UI.SetResourceIcon(false, requiredResource.Type);
+                    worker.UI.SetResourceIcon(false, carriedResource.Type);
 
-                    if (requiredResource.amount != 0) 
+                    if (carriedResource.amount != 0) 
                         resourceCarryingState = ResourceCarryingTaskState.GO_TO_STORAGE;
                     else {
                         onTaskCompleted.Invoke();
@@ -154,7 +154,7 @@ namespace Code.Villagers.Tasks
         public override void OnTaskAbandon()
         {
             if (resourceCarryingState == ResourceCarryingTaskState.DELIVER_RESOURCES) 
-                requiredResource.amount += worker.Profession.CarriedResource.amount;
+                carriedResource.amount += worker.Profession.CarriedResource.amount;
             
             resourceCarryingState = ResourceCarryingTaskState.FIND_CLOSEST_STORAGE;
         }

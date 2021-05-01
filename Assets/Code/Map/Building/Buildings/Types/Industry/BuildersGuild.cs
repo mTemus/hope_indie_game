@@ -97,7 +97,7 @@ namespace Code.Map.Building.Buildings.Types.Industry
         {
             if (task is ResourceCarryingTask rct) {
                 if (Managers.Instance.Resources.IsResourceReserved(rct)) {
-                    if (!Managers.Instance.Resources.CanWithdrawReserved(rct, rct.RequiredResource)) 
+                    if (!Managers.Instance.Resources.CanWithdrawReserved(rct, rct.CarriedResource)) 
                         Managers.Instance.Resources.ClearReservedResource(rct);
                     else {
                         AddTaskToDo(rct);
@@ -108,12 +108,12 @@ namespace Code.Map.Building.Buildings.Types.Industry
                 // If task still exist but resources are not reserved it's always mean that it was abandoned
                 // while carrying resource state, so it need to have resource reserved again
                 
-                if (Managers.Instance.Resources.CanReserveResource(rct.RequiredResource)) {
-                    Managers.Instance.Resources.ReserveResources(rct, rct.RequiredResource);
+                if (Managers.Instance.Resources.CanReserveResource(rct.CarriedResource)) {
+                    Managers.Instance.Resources.ReserveResources(rct, rct.CarriedResource);
                     AddTaskToDo(rct);
                 }
                 else {
-                    Managers.Instance.Resources.AddWaitingTask(rct, rct.RequiredResource);
+                    Managers.Instance.Resources.AddWaitingTask(rct, rct.CarriedResource);
                     rct.onTaskSetReady += SetTaskReady;
                     SetTaskWaiting(rct);
                 }
