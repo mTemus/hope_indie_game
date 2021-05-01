@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Code.Map.Resources;
 using Code.Villagers.Professions;
 using UnityEngine;
@@ -27,7 +28,7 @@ namespace Code.System
    
       public Sprite GetResourceIcon(ResourceType resourceType)
       {
-         Sprite s = Array.Find(resourceIcons, sprite => sprite.name == resourceType.ToString().ToLower());
+         Sprite s = resourceIcons.FirstOrDefault(sprite => sprite.name == resourceType.ToString().ToLower());
 
          if (s == null) 
             throw new Exception("ASSET STORAGE ----- CAN'T FIND SPRITE FOR RESOURCE: " + resourceType);
@@ -37,7 +38,7 @@ namespace Code.System
 
       public GameObject GetVillagerPrefab(ProfessionType villagerType)
       {
-         GameObject p = Array.Find(villagerPrefabs, villager => villager.name == villagerType.ToString());
+         GameObject p = villagerPrefabs.FirstOrDefault(villager => villager.name == villagerType.ToString());
          
          if (p == null) 
             throw new Exception("ASSET STORAGE ----- CAN'T FIND PREFAB FOR VILLAGER: " + villagerType);
@@ -47,7 +48,7 @@ namespace Code.System
       
       public GameObject GetBuildingPrefab(string buildingName)
       {
-         GameObject p = Array.Find(villagerPrefabs, building => building.name == buildingName);
+         GameObject p = buildingPrefabs.FirstOrDefault( building => building.name == buildingName);
          
          if (p == null) 
             throw new Exception("ASSET STORAGE ----- CAN'T FIND PREFAB FOR VILLAGER: " + buildingName);
@@ -57,7 +58,7 @@ namespace Code.System
 
       public ProfessionData GetProfessionDataForProfessionType(ProfessionType professionType)
       {
-         ProfessionData p = Array.Find(professionData, data => data.Type == professionType);
+         ProfessionData p = professionData.FirstOrDefault(data => data.Type == professionType);
 
          if (p == null)
             throw new Exception("ASSET STORAGE ----- CAN'T FIND DATA FOR PROFESSION: " + professionType);
