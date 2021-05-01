@@ -101,7 +101,7 @@ namespace Code.Map.Building.Buildings.Types.Resources
         {
             if (IsGatheringTaskTodo()) return;
             ResourceToGatherData rtgd = AssetsStorage.I.GetResourceToGatherDataByResourceType(ResourceType.WOOD);
-            ResourceGatheringTask rgt = new ResourceGatheringTask(GetComponent<Building>().Storage, rtgd.ResourceType, rtgd.OccurAreas);
+            ResourceGatheringTask rgt = new ResourceGatheringTask(Storage, rtgd.ResourceType, rtgd.OccurAreas);
             AddTaskToDo(rgt);
             
             Debug.LogError("Created automated task in: " + name);
