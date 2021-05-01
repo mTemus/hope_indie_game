@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ad2fdbc79a96414b9a1dbd1a003cdf7, type: 3}
   m_Name: Sawmill Properties
   m_EditorClassIdentifier: 
-  workers: 2
+  workers: 3
   haulers: 1
