@@ -3,6 +3,7 @@ using System.Linq;
 using Code.Map.Resources;
 using Code.System;
 using Code.Villagers.Entity;
+using UnityEngine;
 using NotImplementedException = System.NotImplementedException;
 using Task = Code.Villagers.Tasks.Task;
 
@@ -29,6 +30,8 @@ namespace Code.Map.Building.Buildings.Types.Resources
                 storedResources.Add(resourceToStore);
             else 
                 storedResource.amount += resourceToStore.amount;
+            
+            Debug.LogWarning("Stored: " + resourceToStore.amount + " " + resourceToStore.Type);
         }
         
         public Resource GetReservedResource(Task tKey, int amount)

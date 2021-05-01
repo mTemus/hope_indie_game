@@ -17,7 +17,20 @@ namespace Code.Map.Building.Buildings.Modules
 
         public int ResourceLimit => resourceLimit;
         
-        private Resource GetResource(ResourceType type) =>
+        private bool CanWithdraw(ResourceType resourceType, int resourceAmount)
+        {
+            Resource storedResource = GetResourceByType(resourceType);
+            
+            if (storedResource == null) 
+                return false;
+
+            if (storedResource.amount < resourceAmount) 
+                return false;
+
+            return true;
+        }
+        
+        public Resource GetResourceByType(ResourceType type) =>
             resources.FirstOrDefault(resource => resource.Type == type);
         
         public void StoreResource(Resource newResource)
@@ -30,19 +43,19 @@ namespace Code.Map.Building.Buildings.Modules
                 if (newAmount > storedResource.Limit) {
                     int overflow = newAmount - storedResource.Limit;
                     storedResource.amount = newAmount - overflow;
-                    onResourceStored?.Invoke(storedResource);
                     
                     //TODO: Throw overflow on the ground
                     Resource overflowResource = new Resource(storedResource.Type, overflow);
                 }
                 else {
                     storedResource.amount += newResource.amount;
-                    onResourceStored?.Invoke(storedResource);
                 }
             }
             else {
                 resources.Add(new Resource(newResource.Type, newResource.amount, 500));
             }
+            
+            onResourceStored?.Invoke(resources.FirstOrDefault(resource => resource.Type == newResource.Type));
         }
 
         public Resource WithdrawResource(ResourceType resourceType, int resourceAmount)
@@ -54,24 +67,18 @@ namespace Code.Map.Building.Buildings.Modules
                 return withdrawnResource;
             }
 
-            Resource storedResource = GetResource(resourceType);
+            Resource storedResource = GetResourceByType(resourceType);
             storedResource.amount -= resourceAmount;
             withdrawnResource.amount = resourceAmount;
             
             return withdrawnResource;
         }
 
-        private bool CanWithdraw(ResourceType resourceType, int resourceAmount)
+        public Resource WithdrawResourceContinuously(ResourceType resourceType, int resourceAmount)
         {
-            Resource storedResource = GetResource(resourceType);
-            
-            if (storedResource == null) 
-                return false;
-
-            if (storedResource.amount < resourceAmount) 
-                return false;
-
-            return true;
+            return !CanWithdraw(resourceType, resourceAmount) ? null : GetResourceByType(resourceType);
         }
+
+        
     }
 }
