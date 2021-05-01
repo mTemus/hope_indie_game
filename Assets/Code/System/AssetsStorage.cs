@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Code.Map.Resources;
+using Code.Map.Resources.ResourceToGather;
 using Code.Villagers.Professions;
 using UnityEngine;
 
@@ -15,6 +16,9 @@ namespace Code.System
 
       [Header("Buildings")] 
       [SerializeField] private GameObject[] buildingPrefabs;
+
+      [Header("Resources")] 
+      [SerializeField] private ResourceToGatherData[] resourcesToGatherData;
       
       [Header("Sprites")]
       [SerializeField] private Sprite[] resourceIcons;
@@ -64,6 +68,17 @@ namespace Code.System
             throw new Exception("ASSET STORAGE ----- CAN'T FIND DATA FOR PROFESSION: " + professionType);
          
          return p;
+      }
+
+      public ResourceToGatherData GetResourceToGatherDataByResourceType(ResourceType resourceType)
+      {
+         ResourceToGatherData r =
+            resourcesToGatherData.FirstOrDefault(resource => resource.ResourceType == resourceType);
+         
+         if (r == null)
+            throw new Exception("ASSET STORAGE ----- CAN'T FIND DATA FOR PROFESSION: " + resourceType);
+
+         return r;
       }
       
    }
