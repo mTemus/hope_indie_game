@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: WoodToGather Data
   m_EditorClassIdentifier: 
   resourceType: 0
+  resourceToGatherType: 0
   amount: 300
   maximumGatherers: 2
+  occurAreas: 01000000
