@@ -12,7 +12,7 @@ Building system is based currently on a 2D grid, which helps to snap buildings o
 
 ### Villagers System
 #### Villagers AI
-Villagers AI is based currently on a Behaviour tree. There is only one behaviour tree. It was created for all working villagers independly on their current profession. The worker is wandering close to its workplace and it's trying to get a task of type specified to his profession.
+Villagers AI is based currently on a Behaviour tree. There is only one behaviour tree. It was created for all working villagers independently on their current profession. The worker is wandering close to its workplace and it's trying to get a task of type specified to his profession.
 Whole tree is shown [HERE](https://drive.google.com/file/d/1rWhAOH2TzJkVR03YYvBP-NTEdC9Znux7/) - yellow rectangles are implemented, white ones are planned.
 
 #### Professions
@@ -26,6 +26,9 @@ Profession can be changed through villager selecting UI, which can be displayed 
 
 #### Tasks system
 Tasks are instructions for each profession. Most of them will be specific for a certain professions, but a Resource Delivery task is generics and will be used by all professions. At crrent moment, there are two tasks types: Building and Resource Delivery.
+
+#### Resources Gathering System
+Villagers can now gather resources (now wood only). Lumberjacks are searching for closest resource to gather. Gathered resource is delivered to workplace, where if workplace hauler is hired, automated resource carrying task is made to deliver resources straight into warehouse to count them as a global resources.
 
 ## Updates on youtube
 * [First update - tools and buildings](https://www.youtube.com/watch?v=laCbKncUxlc)
