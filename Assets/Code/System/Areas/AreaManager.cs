@@ -27,9 +27,9 @@ namespace Code.System.Areas
 
         private void Update()
         {
-            if (debugAreas) 
-                foreach (AreaDebug area in dAreas) 
-                    area.ShowGrid(); 
+            if (!debugAreas) return;
+            foreach (AreaDebug area in dAreas) 
+                area.ShowGrid();
         }
 
         private void ToggleGridText()
@@ -46,8 +46,7 @@ namespace Code.System.Areas
 
         public Area GetPlayerArea() => 
             areas.FirstOrDefault(area => area.IsPlayerInArea());
-         
-
+        
         public Area GetAreaByCoords(Vector3Int coordinates) =>
             (from area in areas let areaPosInt = Vector3Int.FloorToInt(area.transform.position) 
                 let xAreaStart = areaPosInt.x 
