@@ -13,12 +13,12 @@ namespace Code.Map.Resources.ResourceToGather.ResourcesToGather
             throw new NotImplementedException();
         }
 
-        public override void OnGatherEnd(Villager worker)
+        public override bool Gather(Villager worker, int socketId)
         {
             throw new NotImplementedException();
         }
 
-        public override void Gather(Villager worker)
+        protected override void OnResourceDepleted()
         {
             throw new NotImplementedException();
         }
