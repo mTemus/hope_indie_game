@@ -49,6 +49,7 @@ namespace Code.Villagers.Tasks
 
             reservedResources = false;
             fromStoragePosition = fromStorage.PivotedPosition;
+            resourceCarryingState = ResourceCarryingTaskState.GO_TO_STORAGE;
         }
         
         public ResourceCarryingTask(Resource resourceToCarry, Building toStorage, Action<Resource> onResourceDelivery, Func<Task, int, Resource> onReservedResourceWithdraw, Building fromStorage)
@@ -59,6 +60,7 @@ namespace Code.Villagers.Tasks
 
             reservedResources = true;
             fromStoragePosition = fromStorage.PivotedPosition;
+            resourceCarryingState = ResourceCarryingTaskState.GO_TO_STORAGE;
         }
         
         public ResourceCarryingTask(Resource resourceToCarry, Building toStorage, Action<Resource> onResourceDelivery, bool reservedResources)
@@ -139,6 +141,9 @@ namespace Code.Villagers.Tasks
                     else 
                         onTaskCompleted.Invoke();
                     break;
+                
+                default:
+                    throw new Exception("TASK CARRYING STATE NOT SET");
             }
 
             worker.UI.StateText.text = "Resource carrying: " + resourceCarryingState;
