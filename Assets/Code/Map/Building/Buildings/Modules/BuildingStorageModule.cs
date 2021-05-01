@@ -15,6 +15,8 @@ namespace Code.Map.Building.Buildings.Modules
         
         private readonly List<Resource> resources = new List<Resource>();
 
+        public int ResourceLimit => resourceLimit;
+        
         private Resource GetResource(ResourceType type) =>
             resources.FirstOrDefault(resource => resource.Type == type);
         
@@ -71,7 +73,5 @@ namespace Code.Map.Building.Buildings.Modules
 
             return true;
         }
-
-        public int ResourceLimit => resourceLimit;
     }
 }
