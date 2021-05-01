@@ -3,7 +3,6 @@ using Code.Map.Building;
 using Code.Map.Building.Buildings.Types.Resources;
 using Code.Map.Resources;
 using Code.System;
-using Code.System.Properties;
 using UnityEngine;
 
 namespace Code.Villagers.Tasks
@@ -108,15 +107,15 @@ namespace Code.Villagers.Tasks
                 case ResourceCarryingTaskState.TAKE_RESOURCES:
                     if (reservedResources) {
                         worker.Profession.CarriedResource = onReservedResourceWithdraw.Invoke(this,
-                            carriedResource.amount > GlobalProperties.MAXResourceHeld
-                                ? GlobalProperties.MAXResourceHeld
+                            carriedResource.amount > worker.Profession.Data.ResourceCarryingLimit
+                                ? worker.Profession.Data.ResourceCarryingLimit
                                 : carriedResource.amount);
                     }
                     else {
                         worker.Profession.CarriedResource = onResourceWithdraw.Invoke(
                             carriedResource.Type,
-                            carriedResource.amount > GlobalProperties.MAXResourceHeld
-                                ? GlobalProperties.MAXResourceHeld
+                            carriedResource.amount > worker.Profession.Data.ResourceCarryingLimit
+                                ? worker.Profession.Data.ResourceCarryingLimit
                                 : carriedResource.amount);
                     }
                     
