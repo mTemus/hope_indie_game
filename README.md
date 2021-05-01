@@ -16,12 +16,13 @@ Villagers AI is based currently on a Behaviour tree. There is only one behaviour
 Whole tree is shown [HERE](https://drive.google.com/file/d/1rWhAOH2TzJkVR03YYvBP-NTEdC9Znux7/) - yellow rectangles are implemented, white ones are planned.
 
 #### Professions
-Currently, there are only three professions implemented: Unemployed, Builder and Lumberjack.
-*Unemployed - Villager without job is mean to wander close to Town Hall (currently not implemented).
-*Builder - Villager who delivery  resources from a warehouse to construction site and build constructions when they have enough resources.
-*Lumberjack - Villager gathering wood (currently not implemented)
+Currently, there are only four professions implemented: Unemployed, Builder and Lumberjack.
+* **Unemployed** - Villager without job is mean to wander close to Town Hall (currently not implemented).
+* **Builder** - Villager who delivery  resources from a warehouse to construction site and build constructions when they have enough resources.
+* **Lumberjack** - Villager who is gathering wood.
+* **Workplace Hauler** - a villager, who is handling resource delivering tasks, if hired in a workplace, he is prioritized to get these task types. He is also delivering resources from a gathering workplace (for example sawmill) to global warehouse storage.
 
-Profession can be changed through villager selecting UI, which can be displayed using a Vilalgers Book tool from Tools Radial Menu.
+Profession can be changed through villager selecting UI, which can be displayed using a Villagers Book tool from Tools Radial Menu.
 
 #### Tasks system
 Tasks are instructions for each profession. Most of them will be specific for a certain professions, but a Resource Delivery task is generics and will be used by all professions. At crrent moment, there are two tasks types: Building and Resource Delivery.
@@ -32,3 +33,4 @@ Tasks are instructions for each profession. Most of them will be specific for a 
 * [Villager selection and profession changing UI](https://www.youtube.com/watch?v=rstPntP1JzQ)
 * [Workplace Hauler profession implementation](https://www.youtube.com/watch?v=pYRBg31MNkk)
 * [Developer console implementation](https://www.youtube.com/watch?v=r-kNdXYLJPA)
+* [Resource Gathering - wood](https://www.youtube.com/watch?v=hXsnhwjksXg)
