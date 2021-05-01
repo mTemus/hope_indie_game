@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Code.Map.Resources;
 using Code.Villagers.Entity;
 using Code.Villagers.Professions;
 using Code.Villagers.Tasks;
@@ -92,7 +93,7 @@ namespace Code.Map.Building
         protected abstract Task GetNormalTask();
         protected abstract Task GetResourceCarryingTask();
         protected abstract void AddTaskToDo(Task task);
-
+        
         protected void GiveTaskToWorker(Villager worker, Task task)
         {
             worker.Profession.AddTask(task);
@@ -221,6 +222,12 @@ namespace Code.Map.Building
         public bool CanHireWorker() =>
             workers.Count - haulersCnt < properties.Workers;
         
+        #endregion
+
+        #region Resources
+
+        public abstract void DeliverStoredResources(Resource storedResource);
+
         #endregion
     }
 }

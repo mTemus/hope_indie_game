@@ -1,3 +1,4 @@
+using Code.Map.Resources;
 using Code.Villagers.Entity;
 using Code.Villagers.Tasks;
 using NotImplementedException = System.NotImplementedException;
@@ -34,6 +35,11 @@ namespace Code.Map.Building.Buildings.Types.Village
         protected override void FireNormalWorker(Villager worker)
         {
             
+        }
+
+        public override void DeliverStoredResources(Resource storedResource)
+        {
+            throw new NotImplementedException();
         }
     }
 }

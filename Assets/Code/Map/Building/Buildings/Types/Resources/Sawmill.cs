@@ -88,6 +88,15 @@ namespace Code.Map.Building.Buildings.Types.Resources
             throw new NotImplementedException();
         }
 
+        public override void DeliverStoredResources(Resource storedResource)
+        {
+            
+            
+            
+            
+            
+        }
+
         private void CreateResourceGatheringTask()
         {
             if (IsGatheringTaskTodo()) return;

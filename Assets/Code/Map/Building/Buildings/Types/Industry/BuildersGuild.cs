@@ -5,6 +5,7 @@ using Code.Villagers.Entity;
 using Code.Villagers.Professions;
 using Code.Villagers.Tasks;
 using UnityEngine;
+using NotImplementedException = System.NotImplementedException;
 
 namespace Code.Map.Building.Buildings.Types.Industry
 {
@@ -126,6 +127,11 @@ namespace Code.Map.Building.Buildings.Types.Industry
         protected override void FireNormalWorker(Villager worker)
         {
             Debug.Log("Fired worker: " + worker.name + " from: " + name);
+        }
+
+        public override void DeliverStoredResources(Resource storedResource)
+        {
+            throw new NotImplementedException();
         }
 
         public void CreateBuildingTask(Construction construction, BuildingData buildingData)
