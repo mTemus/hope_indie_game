@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Code.System;
+using Code.System.Areas;
 using Code.Villagers.Entity;
 using Code.Villagers.Tasks;
 using UnityEngine;
@@ -38,8 +40,10 @@ namespace Code.Map.Resources.ResourceToGather
         protected IEnumerator ClearResource()
         {
             yield return new WaitForSeconds(5f);
-            
-            //TODO: remove resource data from it's area!
+
+            Managers.Instance.Areas
+                .GetAreaByCoords(Vector3Int.FloorToInt(transform.position))
+                .RemoveResourceToGather(this);
             DestroyImmediate(gameObject);
         }
         
