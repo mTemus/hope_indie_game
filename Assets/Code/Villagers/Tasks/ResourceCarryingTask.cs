@@ -20,13 +20,12 @@ namespace Code.Villagers.Tasks
     public class ResourceCarryingTask : Task
     {
         private readonly Resource requiredResource;
-        private ResourceCarryingTaskState resourceCarryingState;
-
         private readonly bool reservedResources;
-        
+
         private Building fromStorage;
         private Vector3 fromStoragePosition;
-
+        private ResourceCarryingTaskState resourceCarryingState;
+        
         private Func<ResourceType, int, Resource> onResourceWithdraw;
         private Func<Task, int, Resource> onReservedResourceWithdraw;
         private readonly Action<Resource> onResourceDelivery;
