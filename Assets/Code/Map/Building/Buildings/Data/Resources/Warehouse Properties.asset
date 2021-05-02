@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   workers: 6
   haulers: 0
+  type: 2
