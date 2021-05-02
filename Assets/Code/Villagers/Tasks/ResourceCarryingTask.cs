@@ -107,18 +107,17 @@ namespace Code.Villagers.Tasks
                     break;
                 
                 case ResourceCarryingTaskState.TAKE_RESOURCES:
+                    int currResAmount = resourceToCarry.amount;
+                    int maxResourceAmount = worker.Profession.Data.ResourceCarryingLimit;
+                
                     if (reservedResources) {
                         worker.Profession.CarriedResource = onReservedResourceWithdraw.Invoke(this,
-                            resourceToCarry.amount > worker.Profession.Data.ResourceCarryingLimit
-                                ? worker.Profession.Data.ResourceCarryingLimit
-                                : resourceToCarry.amount);
+                            currResAmount > maxResourceAmount ? maxResourceAmount : currResAmount);
                     }
                     else {
-                        worker.Profession.CarriedResource = onResourceWithdraw.Invoke(
+                        worker.Profession.CarriedResource =onResourceWithdraw.Invoke(
                             resourceToCarry.Type,
-                            resourceToCarry.amount > worker.Profession.Data.ResourceCarryingLimit
-                                ? worker.Profession.Data.ResourceCarryingLimit
-                                : resourceToCarry.amount);
+                            currResAmount > maxResourceAmount ? maxResourceAmount : currResAmount) ;
                     }
                     
                     worker.UI.SetResourceIcon(true, resourceToCarry.Type);

@@ -78,9 +78,15 @@ namespace Code.Map.Building.Buildings.Modules
 
         public Resource WithdrawResourceContinuously(ResourceType resourceType, int resourceAmount)
         {
-            return !CanWithdraw(resourceType, resourceAmount) ? null : GetResourceByType(resourceType);
-        }
+            Resource withdrawnResource = new Resource(resourceType);
 
-        
+            if (!CanWithdraw(resourceType, resourceAmount)) {
+                withdrawnResource.amount = 0;
+                return withdrawnResource;
+            }
+            
+            withdrawnResource.amount = resourceAmount;
+            return withdrawnResource;
+        }
     }
 }
