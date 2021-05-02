@@ -115,7 +115,7 @@ namespace Code.Villagers.Tasks
                             currResAmount > maxResourceAmount ? maxResourceAmount : currResAmount);
                     }
                     else {
-                        worker.Profession.CarriedResource =onResourceWithdraw.Invoke(
+                        worker.Profession.CarriedResource = onResourceWithdraw.Invoke(
                             resourceToCarry.Type,
                             currResAmount > maxResourceAmount ? maxResourceAmount : currResAmount) ;
                     }
