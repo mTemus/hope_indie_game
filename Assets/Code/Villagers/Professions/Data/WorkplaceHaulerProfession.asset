@@ -17,6 +17,6 @@ MonoBehaviour:
     strength: 8
     dexterity: 2
     intelligence: 2
-  resourceCarryingLimit: 25
+  resourceCarryingLimit: 40
   goldPerDay: 0
   workplaceBuildingData: {fileID: 0}
