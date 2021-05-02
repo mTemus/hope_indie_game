@@ -91,8 +91,6 @@ namespace Code.Map.Building.Buildings.Types.Resources
 
         public override void DeliverStoredResources(Resource storedResource)
         {
-            Debug.LogError("Deliver to storage: " + storedResource.amount + " " + storedResource.Type);
-            
             if (!workersWithoutTasks.Any(worker => worker.Profession is VillagerWorkplaceHauler)) return;
             if (!(Managers.Instance.Buildings.GetClosestBuildingOfClass(BuildingType.Resources, typeof(Warehouse),
                 transform.position) is Warehouse w)) return;
