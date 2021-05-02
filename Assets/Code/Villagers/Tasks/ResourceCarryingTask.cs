@@ -135,6 +135,8 @@ namespace Code.Villagers.Tasks
                 case ResourceCarryingTaskState.DELIVER_RESOURCES:
                     onResourceDelivery?.Invoke(worker.Profession.CarriedResource);
                     worker.UI.SetResourceIcon(false, resourceToCarry.Type);
+                    Debug.LogWarning(worker.name + " has delivered: " + worker.Profession.CarriedResource.amount + " " + worker.Profession.CarriedResource.Type);
+                    worker.Profession.CarriedResource = null;
 
                     if (resourceToCarry.amount != 0) 
                         resourceCarryingState = ResourceCarryingTaskState.GO_TO_STORAGE;

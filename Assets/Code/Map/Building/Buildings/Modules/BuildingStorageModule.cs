@@ -13,7 +13,8 @@ namespace Code.Map.Building.Buildings.Modules
         [SerializeField] private UnityEvent<Resource> onResourceStored;
         [SerializeField] private UnityEvent<Resource> onResourceWithdraw;
         
-        private readonly List<Resource> resources = new List<Resource>();
+        [Header("Debug")]
+        [SerializeField] private List<Resource> resources = new List<Resource>();
 
         public int ResourceLimit => resourceLimit;
         
@@ -55,6 +56,7 @@ namespace Code.Map.Building.Buildings.Modules
                 resources.Add(new Resource(newResource.Type, newResource.amount, 500));
             }
             
+            Debug.LogWarning("Stored: " + newResource.amount + " " + newResource.Type + " in " + name);
             onResourceStored?.Invoke(resources.FirstOrDefault(resource => resource.Type == newResource.Type));
         }
 
