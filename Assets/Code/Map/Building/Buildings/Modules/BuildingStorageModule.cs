@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Code.Map.Resources;
+using Code.System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -30,13 +31,13 @@ namespace Code.Map.Building.Buildings.Modules
 
             return true;
         }
-        
-        public Resource GetResourceByType(ResourceType type) =>
+
+        private Resource GetResourceByType(ResourceType type) =>
             resources.FirstOrDefault(resource => resource.Type == type);
         
         public void StoreResource(Resource newResource)
         {
-            Resource storedResource = resources.FirstOrDefault(resource => resource.Type == newResource.Type);
+            Resource storedResource = GetResourceByType(newResource.Type);
 
             if (storedResource != null) {
                 int newAmount = storedResource.amount + newResource.amount;
@@ -45,12 +46,12 @@ namespace Code.Map.Building.Buildings.Modules
                     int overflow = newAmount - storedResource.Limit;
                     storedResource.amount = newAmount - overflow;
                     
-                    //TODO: Throw overflow on the ground
                     Resource overflowResource = new Resource(storedResource.Type, overflow);
+                    AssetsStorage.I.ThrowResourceOnTheGround(overflowResource, GetComponent<Building>().PivotedPosition.x);
+                    return;
                 }
-                else {
-                    storedResource.amount += newResource.amount;
-                }
+                
+                storedResource.amount += newResource.amount;
             }
             else {
                 resources.Add(new Resource(newResource.Type, newResource.amount, 500));

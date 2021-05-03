@@ -3,6 +3,7 @@ using System.Linq;
 using Code.Map.Resources;
 using Code.Map.Resources.ResourceToGather;
 using Code.Villagers.Professions;
+using ThirdParty.LeanTween.Framework;
 using UnityEngine;
 
 //TODO: whole class should be deleted and all assets should be available through adressables
@@ -22,12 +23,16 @@ namespace Code.System
       
       [Header("Sprites")]
       [SerializeField] private Sprite[] resourceIcons;
-   
+
+      [Header("Other")] 
+      [SerializeField] private GameObject resourceOnGround;
+      
       public static AssetsStorage I { get; private set; }
    
       private void Awake()
       {
          I = this;
+         LeanTween.init(100);
       }
    
       public Sprite GetResourceIcon(ResourceType resourceType)
@@ -80,6 +85,12 @@ namespace Code.System
 
          return r;
       }
-      
+
+      public void ThrowResourceOnTheGround(Resource resource, float mapX)
+      {
+         Instantiate(resourceOnGround, new Vector3(mapX, 2f, 0f), Quaternion.identity)
+            .GetComponent<ResourceToPickUp>()
+            .Initialize(resource, mapX);
+      }
    }
 }

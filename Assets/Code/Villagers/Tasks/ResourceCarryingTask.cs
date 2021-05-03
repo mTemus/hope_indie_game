@@ -52,6 +52,17 @@ namespace Code.Villagers.Tasks
             resourceCarryingState = ResourceCarryingTaskState.GO_TO_STORAGE;
         }
         
+        //TODO: delete it <- it's for carrying up resources from ground, but they need own task type
+        public ResourceCarryingTask(Resource resourceToCarry, Building toStorage, Action<Resource> onResourceDelivery, Func<ResourceType, int, Resource> onResourceWithdraw, Vector3 fromStoragePosition) 
+            : this(resourceToCarry, toStorage, onResourceDelivery)
+        {
+            this.onResourceWithdraw = onResourceWithdraw;
+
+            reservedResources = false;
+            this.fromStoragePosition = fromStoragePosition;
+            resourceCarryingState = ResourceCarryingTaskState.GO_TO_STORAGE;
+        }
+        
         public ResourceCarryingTask(Resource resourceToCarry, Building toStorage, Action<Resource> onResourceDelivery, Func<Task, int, Resource> onReservedResourceWithdraw, Building fromStorage)
             : this(resourceToCarry, toStorage, onResourceDelivery)
         {
