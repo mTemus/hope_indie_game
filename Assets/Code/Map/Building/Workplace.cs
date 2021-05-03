@@ -93,6 +93,9 @@ namespace Code.Map.Building
         protected abstract Task GetNormalTask();
         protected abstract Task GetResourceCarryingTask();
         protected abstract void AddTaskToDo(Task task);
+
+        public bool RemoveTaskToDo(Task task) =>
+            tasksToDo.Remove(task);
         
         protected void GiveTaskToWorker(Villager worker, Task task)
         {

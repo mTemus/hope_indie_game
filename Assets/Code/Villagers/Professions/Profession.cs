@@ -102,6 +102,16 @@ namespace Code.Villagers.Professions
             //TODO: should get new task or respond for AI!
         }
 
+        public void CancelCurrentTask()
+        {
+            if (currentTask is ResourceCarryingTask rct) {
+                if (!rct.IsResourceInDelivery()) return;
+                rct.ThrowResourceOnGround();
+            }
+            
+            currentTask = null;
+        }
+
         public void OnTaskCompleted()
         {
             currentTask.OnTaskEnd();
