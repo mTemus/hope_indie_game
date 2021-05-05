@@ -8508,6 +8508,18 @@ PrefabInstance:
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1807201772521007745, guid: 29849b52182697849a1804d9b539db17, type: 3}
+      propertyPath: resources.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1807201772521007745, guid: 29849b52182697849a1804d9b539db17, type: 3}
+      propertyPath: resources.Array.data[0].limit
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1807201772521007745, guid: 29849b52182697849a1804d9b539db17, type: 3}
+      propertyPath: resources.Array.data[0].amount
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1807201772521007745, guid: 29849b52182697849a1804d9b539db17, type: 3}
       propertyPath: onResourceStored.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 0
       objectReference: {fileID: 0}
@@ -10388,6 +10400,7 @@ MonoBehaviour:
   resourceIcons:
   - {fileID: -7470800371356827753, guid: a07ef64005c9148469dec01b4531ea58, type: 3}
   - {fileID: 5281326655419403437, guid: a07ef64005c9148469dec01b4531ea58, type: 3}
+  resourceOnGround: {fileID: 8039996828542303674, guid: 0eec1714cc7eb7e459bfd69e0d596ffd, type: 3}
 --- !u!1 &856498297
 GameObject:
   m_ObjectHideFlags: 0
