@@ -48,7 +48,6 @@ namespace Code.Map.Building.Buildings.Types.Resources
             return takenResource;
         }
 
-
         protected override Task GetNormalTask()
         {
             throw new NotImplementedException();

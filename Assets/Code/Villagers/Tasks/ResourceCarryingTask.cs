@@ -28,7 +28,11 @@ namespace Code.Villagers.Tasks
         private Func<ResourceType, int, Resource> onResourceWithdraw;
         private Func<Task, int, Resource> onReservedResourceWithdraw;
         private readonly Action<Resource> onResourceDelivery;
-
+        
+        private bool isResourceInDelivery =>
+            resourceCarryingState == ResourceCarryingTaskState.DELIVER_RESOURCES ||
+            resourceCarryingState == ResourceCarryingTaskState.GO_TO_STORAGE && worker.Profession.CarriedResource != null;
+        
         public Resource ResourceToCarry => resourceToCarry;
 
         private ResourceCarryingTask(Resource resourceToCarry, Building toStorage, Action<Resource> onResourceDelivery)
@@ -168,7 +172,7 @@ namespace Code.Villagers.Tasks
 
         public override void OnTaskAbandon()
         {
-            if (IsResourceInDelivery()) {
+            if (isResourceInDelivery) {
                 resourceToCarry.amount += worker.Profession.CarriedResource.amount;
                 ThrowResourceOnGround();
             }
