@@ -19,15 +19,6 @@ namespace Code.Villagers.Tasks
         public abstract void OnTaskPause();
         public abstract void OnTaskAbandon();
 
-        public bool CancelTask()
-        {
-            if (worker == null) 
-                return false;
-
-            worker.Profession.CancelCurrentTask();
-            return true;
-        }
-        
         public void OnTaskTaken(Villager newWorker, params Action[] taskCompleteActions)
         {
             worker = newWorker;
