@@ -15,6 +15,8 @@ namespace Code.Villagers.Entity
         
         public void SetResourceIcon(bool visible, ResourceType carriedResource)
         {
+            //TODO: rework this, its a mess
+            if (resourceImage.gameObject.activeSelf && visible) return;
             if (visible) {
                 resourceImage.gameObject.SetActive(true);
                 resourceImage.sprite = AssetsStorage.I.GetResourceIcon(carriedResource);
