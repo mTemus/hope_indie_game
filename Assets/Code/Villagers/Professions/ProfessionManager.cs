@@ -69,7 +69,7 @@ namespace Code.Villagers.Professions
 
         private void HireGlobalHauler(Villager villager)
         {
-            //TODO: add component
+            villager.SetProfession(villager.gameObject.AddComponent<VillagerGlobalHauler>());
             globalHaulers.Add(villager);
         }
         
