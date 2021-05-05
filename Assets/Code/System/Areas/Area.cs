@@ -140,7 +140,7 @@ namespace Code.System.Areas
             villager.transform.SetParent(transform);
             villagers.Add(villager);
             
-            Debug.Log("Add building " + villager.name + "  to area "+ gameObject.name + ".");
+            Debug.Log("Add villager " + villager.name + "  to area "+ gameObject.name + ".");
         }
     }
 }
