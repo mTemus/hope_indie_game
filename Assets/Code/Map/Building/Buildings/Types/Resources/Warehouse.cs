@@ -5,7 +5,6 @@ using Code.System;
 using Code.Villagers.Entity;
 using Code.Villagers.Tasks;
 using UnityEngine;
-using NotImplementedException = System.NotImplementedException;
 using Task = Code.Villagers.Tasks.Task;
 
 namespace Code.Map.Building.Buildings.Types.Resources
@@ -94,37 +93,46 @@ namespace Code.Map.Building.Buildings.Types.Resources
 
         protected override Task GetNormalTask()
         {
-            throw new NotImplementedException();
+            Task nt = tasksToDo.FirstOrDefault(task => !(task is ResourceCarryingTask));
+            RemoveTaskFromTodoList(nt);
+            return nt;
         }
 
         protected override Task GetResourceCarryingTask()
         {
-            throw new NotImplementedException();
+            Task rct = tasksToDo.FirstOrDefault(task => task is ResourceCarryingTask);
+            RemoveTaskFromTodoList(rct);
+            return rct;
         }
 
         protected override void AddTaskToDo(Task task)
         {
-            throw new NotImplementedException();
+            if (workersWithoutTasks.Count == 0) {
+                tasksToDo.Add(task);
+                Debug.Log("Added task as todo.");
+                return;
+            }
+
+            Villager worker = workersWithoutTasks[0];
+            GiveTaskToWorker(worker, task);
         }
 
         public override void SetAutomatedTask()
         {
-            throw new NotImplementedException();
+            
         }
 
         public override void TakeTaskBackFromWorker(Task task)
         {
-            throw new NotImplementedException();
+            AddTaskToDo(task);
         }
 
         protected override void FireNormalWorker(Villager worker)
         {
-            throw new NotImplementedException();
         }
 
         public override void DeliverStoredResources(Resource storedResource)
         {
-            throw new NotImplementedException();
         }
     }
 }
