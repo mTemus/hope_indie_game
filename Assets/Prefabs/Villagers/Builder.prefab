@@ -368,7 +368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initializeMode: 0
-  professionType: 1
+  professionData: {fileID: 11400000, guid: 0f02c7c9f06ef5743b159a3867ef2051, type: 2}
   workplace: {fileID: 0}
 --- !u!1 &1668639820504831476
 GameObject:
