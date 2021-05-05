@@ -117,7 +117,7 @@ namespace Code.Villagers.Tasks
                     if (warehouse == null) 
                         throw new Exception("CAN'T GET WAREHOUSE REFERENCE FROM WORKER " + worker.name + " IN TASK " + GetType());
 
-                    currentPickupState = ResourcePickUpTaskState.GO_TO_STORAGE;
+                    currentPickupState = ResourcePickUpTaskState.GET_RESOURCES_DATA;
                     break;
                 
                 case ResourcePickUpTaskState.GO_TO_STORAGE:
