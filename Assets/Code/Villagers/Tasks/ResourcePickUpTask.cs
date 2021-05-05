@@ -145,6 +145,7 @@ namespace Code.Villagers.Tasks
                     break;
                 
                 case ResourcePickUpTaskState.COLLECT_RESOURCE:
+                    worker.UI.SetResourceIcon(true, currentResource.StoredResource.Type);
                     Resource collectedResource = currentResource.WithdrawResource();
                     Resource workerResource = worker.Profession.CarriedResource;
 
@@ -163,6 +164,8 @@ namespace Code.Villagers.Tasks
                     if (warehouseDeliver != null) {
                         warehouseDeliver.StoreResource(worker.Profession.CarriedResource);
                         worker.Profession.CarriedResource = null;
+                        worker.UI.SetResourceIcon(false, currentResource.StoredResource.Type);
+
                         worker.Profession.OnTaskCompleted();
                     }
                     else {
