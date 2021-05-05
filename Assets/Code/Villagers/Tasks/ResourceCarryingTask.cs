@@ -175,15 +175,5 @@ namespace Code.Villagers.Tasks
             
             resourceCarryingState = ResourceCarryingTaskState.FIND_CLOSEST_STORAGE;
         }
-
-        public bool IsResourceInDelivery() => 
-            resourceCarryingState == ResourceCarryingTaskState.DELIVER_RESOURCES;
-
-        public void ThrowResourceOnGround()
-        {
-            worker.UI.SetResourceIcon(false, resourceToCarry.Type);
-            AssetsStorage.I.ThrowResourceOnTheGround(worker.Profession.CarriedResource, worker.transform.position.x);
-            worker.Profession.CarriedResource = null;
-        }
     }
 }
