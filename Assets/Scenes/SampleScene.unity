@@ -10389,6 +10389,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0f02c7c9f06ef5743b159a3867ef2051, type: 2}
   - {fileID: 11400000, guid: a2885f04ce261c44aa06498491a958cd, type: 2}
   - {fileID: 11400000, guid: 7e3ee87b2faabad46bacc7f0b5868e17, type: 2}
+  - {fileID: 11400000, guid: 729ccf1de0ec43d43972d55e06d654b2, type: 2}
   buildingPrefabs:
   - {fileID: 4451268907026413094, guid: 27019d35ebc484b43b1d7dcad63b0dc9, type: 3}
   - {fileID: 2961238222191277134, guid: 29849b52182697849a1804d9b539db17, type: 3}

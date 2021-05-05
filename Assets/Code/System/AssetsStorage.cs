@@ -88,9 +88,24 @@ namespace Code.System
 
       public void ThrowResourceOnTheGround(Resource resource, float mapX)
       {
-         Instantiate(resourceOnGround, new Vector3(mapX, 2f, 0f), Quaternion.identity)
-            .GetComponent<ResourceToPickUp>()
-            .Initialize(resource, mapX);
+         ProfessionData haulerData = GetProfessionDataForProfessionType(ProfessionType.GlobalHauler);
+         int resourceCnt =  Mathf.FloorToInt(resource.amount / haulerData.ResourceCarryingLimit) + (resource.amount % haulerData.ResourceCarryingLimit > 0 ? 1 : 0);
+         int currentAmount = resource.amount;
+         
+         for (int i = 0; i < resourceCnt; i++) {
+            Resource r;
+            if (currentAmount > haulerData.ResourceCarryingLimit ) {
+               currentAmount = resource.amount - haulerData.ResourceCarryingLimit;
+               resource.amount = currentAmount;
+               r = new Resource(resource.Type, haulerData.ResourceCarryingLimit);
+            }
+            else 
+               r = new Resource(resource.Type, resource.amount);
+            
+            Instantiate(resourceOnGround, new Vector3(mapX, 2f, 0f), Quaternion.identity)
+               .GetComponent<ResourceToPickUp>()
+               .Initialize(r, mapX);
+         }
       }
    }
 }
