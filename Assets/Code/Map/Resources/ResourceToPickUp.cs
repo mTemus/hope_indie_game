@@ -42,7 +42,7 @@ namespace Code.Map.Resources
         private IEnumerator DestroyOnDelay()
         {
             StopCoroutine(Decay());
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.01f);
             DestroyImmediate(gameObject);
         }
         
