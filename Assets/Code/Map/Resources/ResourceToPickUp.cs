@@ -14,7 +14,7 @@ namespace Code.Map.Resources
         [SerializeField] private SpriteRenderer resourceImage;
         
         [SerializeField] private Resource storedResource;
-        private ResourceCarryingTask rct;
+        private ResourcePickUpTask rput;
         private Warehouse warehouse;
         
         private float fallingTime = 1.2f;
@@ -22,6 +22,39 @@ namespace Code.Map.Resources
 
         private float newMapX;
         
+        public Resource StoredResource => storedResource;
+
+        public bool IsRegisteredToPickUp => rput != null;
+
+        private void OnResourceOnGround()
+        {
+            Debug.LogWarning(
+                "Resource: " + storedResource.Type + " " + storedResource.amount + " is on the ground.");
+            
+            if (!(Managers.Instance.Buildings.GetClosestBuildingOfClass(BuildingType.Resources, typeof(Warehouse),
+                transform.position) is Warehouse w)) return;
+
+            warehouse = w;
+            warehouse.RegisterResourceToPickUp(this);
+            StartCoroutine(Decay());
+        }
+
+        private IEnumerator DestroyOnDelay()
+        {
+            StopCoroutine(Decay());
+            yield return new WaitForSeconds(0.3f);
+            DestroyImmediate(gameObject);
+        }
+        
+        private IEnumerator Decay()
+        {
+            yield return new WaitForSeconds(decayTimeSeconds);
+            warehouse.UnregisterResourceToPickUp(this);
+            rput.RemoveResourceBeforePickUp(this);
+            
+            DestroyImmediate(gameObject);
+        }
+
         public void Initialize(Resource resource, float mapX)
         {
             newMapX = Random.Range(mapX - 2, mapX + 2);
@@ -38,39 +71,13 @@ namespace Code.Map.Resources
             gameObject.LeanMove(newGroundPosition, fallingTime)
                 .setEaseOutBounce();
         }
-
-        private void OnResourceOnGround()
-        {
-            Debug.LogWarning(
-                "Resource: " + storedResource.Type + " " + storedResource.amount + " is on the ground.");
-            
-            // initialize task
-            // add to warehouse
-            if (!(Managers.Instance.Buildings.GetClosestBuildingOfClass(BuildingType.Resources, typeof(Warehouse),
-                transform.position) is Warehouse w)) return;
-
-            warehouse = w;
-            rct = new ResourceCarryingTask(storedResource, warehouse, warehouse.StoreResource, WithdrawResource, transform.position);
-            warehouse.AddGlobalCarryingTask(rct);
-            StartCoroutine(Decay());
-        }
-
-        private IEnumerator DestroyOnDelay()
-        {
-            yield return new WaitForSeconds(0.3f);
-            DestroyImmediate(gameObject);
-        }
         
-        private IEnumerator Decay()
+        public void OnResourceRegisterToPickUp(ResourcePickUpTask rputt)
         {
-            yield return new WaitForSeconds(decayTimeSeconds);
-            if (!rct.CancelTask())
-                warehouse.RemoveTaskToDo(rct);
-            
-            DestroyImmediate(gameObject);
+            rput = rputt;
         }
 
-        public Resource WithdrawResource(ResourceType resourceType, int resourceAmount)
+        public Resource WithdrawResource()
         {
             StartCoroutine(DestroyOnDelay());
             return new Resource(storedResource);
