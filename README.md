@@ -37,3 +37,4 @@ Villagers can now gather resources (now wood only). Lumberjacks are searching fo
 * [Workplace Hauler profession implementation](https://www.youtube.com/watch?v=pYRBg31MNkk)
 * [Developer console implementation](https://www.youtube.com/watch?v=r-kNdXYLJPA)
 * [Resource Gathering - wood](https://www.youtube.com/watch?v=hXsnhwjksXg)
+* [Resources on ground](https://www.youtube.com/watch?v=osgqHBOloio)
