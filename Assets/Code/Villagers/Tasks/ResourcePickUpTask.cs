@@ -100,12 +100,12 @@ namespace Code.Villagers.Tasks
 
         public override void OnTaskStart()
         {
-            throw new NotImplementedException();
+            
         }
 
         public override void OnTaskEnd()
         {
-            throw new NotImplementedException();
+            
         }
 
         public override void DoTask()
@@ -153,6 +153,8 @@ namespace Code.Villagers.Tasks
                         worker.Profession.CarriedResource = collectedResource;
                     else 
                         workerResource.amount += collectedResource.amount;
+                    
+                    Debug.Log("Pickuped: " + currentResource.StoredResource.amount + " " + currentResource.StoredResource.Type);
                     
                     warehouse.UnregisterResourceToPickUp(currentResource);
                     GetNextResource();
