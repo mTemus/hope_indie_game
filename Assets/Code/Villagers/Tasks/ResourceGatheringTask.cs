@@ -19,11 +19,11 @@ namespace Code.Villagers.Tasks
     
     public class ResourceGatheringTask : Task
     {
-        private ResourceGatheringTaskState currentGatheringState = ResourceGatheringTaskState.FIND_CLOSEST_RESOURCE;
-        private ResourceToGather resourceToGather;
         private readonly BuildingStorageModule storage;
         private readonly ResourceType resourceType;
         private readonly AreaType[] gatherAreas;
+        private ResourceGatheringTaskState currentGatheringState;
+        private ResourceToGather resourceToGather;
         private int gatheringSocketId;
         private Vector3 resourcePosition;
         
@@ -34,15 +34,9 @@ namespace Code.Villagers.Tasks
             this.gatherAreas = gatherAreas;
         }
         
-        public ResourceGatheringTask(ResourceToGather resourceToGather, BuildingStorageModule storage, ResourceType resourceType, AreaType[] gatherAreas) 
-            :this(storage, resourceType, gatherAreas)
-        {
-            this.resourceToGather = resourceToGather;
-            currentGatheringState = ResourceGatheringTaskState.GO_TO_RESOURCE;
-        }
-
         public override void StartTask()
         {
+            currentGatheringState = ResourceGatheringTaskState.FIND_CLOSEST_RESOURCE;
         }
 
         public override void EndTask()
@@ -53,9 +47,7 @@ namespace Code.Villagers.Tasks
         {
             switch (currentGatheringState) {
                 case ResourceGatheringTaskState.GO_TO_WORKPLACE:
-                    worker.MoveTo(worker.Profession.Workplace.PivotedPosition);
-                    
-                    if (Vector3.Distance(worker.transform.position, worker.Profession.Workplace.PivotedPosition) >= 0.1f) break;
+                    if (!worker.MoveTo(worker.Profession.Workplace.PivotedPosition)) break;
                     currentGatheringState = worker.Profession.CarriedResource != null ? 
                         ResourceGatheringTaskState.DELIVER_RESOURCE_TO_WORKPLACE : ResourceGatheringTaskState.FIND_CLOSEST_RESOURCE;
                     break;
@@ -85,9 +77,7 @@ namespace Code.Villagers.Tasks
                     break;
                 
                 case ResourceGatheringTaskState.GO_TO_RESOURCE:
-                    worker.MoveTo(resourcePosition);
-                    
-                    if (Vector3.Distance(worker.transform.position, resourcePosition) >= 0.1f) break;
+                    if (!worker.MoveTo(resourcePosition)) break;
                     resourceToGather.OnGatherStart(worker);
                     currentGatheringState = ResourceGatheringTaskState.GATHER_RESOURCE;
                     break;

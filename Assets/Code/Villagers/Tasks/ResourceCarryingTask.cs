@@ -114,9 +114,7 @@ namespace Code.Villagers.Tasks
                     break;
                 
                 case ResourceCarryingTaskState.GO_TO_STORAGE:
-                    worker.MoveTo(fromStoragePosition);
-                    
-                    if (Vector3.Distance(worker.transform.position, fromStoragePosition) <= 0.1f)
+                    if (!worker.MoveTo(fromStoragePosition))
                         resourceCarryingState = ResourceCarryingTaskState.TAKE_RESOURCES;
                     break;
                 
@@ -140,8 +138,7 @@ namespace Code.Villagers.Tasks
                     break;
                 
                 case ResourceCarryingTaskState.GO_ON_TASK_POSITION:
-                    worker.MoveTo(taskPosition);
-                    if (Vector3.Distance(worker.transform.position, taskPosition) <= 0.1f)
+                    if (!worker.MoveTo(taskPosition))
                         resourceCarryingState = ResourceCarryingTaskState.DELIVER_RESOURCES;
                     break;
                 

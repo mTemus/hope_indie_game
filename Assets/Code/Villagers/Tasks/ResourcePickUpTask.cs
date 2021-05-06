@@ -121,10 +121,7 @@ namespace Code.Villagers.Tasks
                     break;
                 
                 case ResourcePickUpTaskState.GO_TO_STORAGE:
-                    Vector3 workplacePos = warehouse.PivotedPosition;
-                    worker.MoveTo(workplacePos);
-
-                    if (worker.transform.position == workplacePos) 
+                    if (worker.MoveTo(warehouse.PivotedPosition)) 
                         currentPickupState = worker.Profession.CarriedResource != null ? 
                             ResourcePickUpTaskState.DELIVER_RESOURCE : ResourcePickUpTaskState.GET_RESOURCES_DATA;
                     break;
@@ -136,11 +133,7 @@ namespace Code.Villagers.Tasks
                     break;
                 
                 case ResourcePickUpTaskState.GO_TO_RESOURCE:
-                    Vector3 resourcePos = currentResource.transform.position;
-                    
-                    worker.MoveTo(resourcePos);
-
-                    if (worker.transform.position == resourcePos)
+                    if (worker.MoveTo(currentResource.transform.position))
                         currentPickupState = ResourcePickUpTaskState.COLLECT_RESOURCE;
                     break;
                 

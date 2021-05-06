@@ -14,14 +14,24 @@ namespace Code.Villagers.Entity
         [SerializeField] private Profession profession;
         [SerializeField] private VillagerUi ui;
         
-        public void MoveTo(Vector3 position)
+        public bool MoveTo(Vector3 position)
         {
-            transform.position = Vector3.MoveTowards(transform.position , position, speed * Time.deltaTime);
+            Vector3 villagerPosition = transform.position;
+            villagerPosition = Vector3.MoveTowards(villagerPosition , position, speed * Time.deltaTime);
+            
+            transform.position = villagerPosition;
+
+            return villagerPosition == position;
         }
         
-        public void MoveTo(Vector3 position, float villagerSpeed)
+        public bool MoveTo(Vector3 position, float villagerSpeed)
         {
-            transform.position = Vector3.MoveTowards(transform.position , position, villagerSpeed * Time.deltaTime);
+            Vector3 villagerPosition = transform.position;
+            villagerPosition = Vector3.MoveTowards(villagerPosition , position, villagerSpeed * Time.deltaTime);
+            
+            transform.position = villagerPosition;
+
+            return villagerPosition == position;
         }
 
         public void SetStatistics(VillagersStatistics newStatistics)
@@ -34,9 +44,6 @@ namespace Code.Villagers.Entity
             profession = newProfession;
         }
         
-        public bool IsOnPosition(Vector3 position) =>
-            transform.position == position;
-
         public VillagersStatistics Statistics => statistics;
 
         public Profession Profession => profession;

@@ -29,14 +29,10 @@ namespace Code.Villagers.Tasks
 
         public override void DoTask()
         {
-            if (Vector3.Distance(worker.transform.position, constructionPosition) >= 0.1f) {
-                worker.MoveTo(constructionPosition);
-            }
-            else {
-                if (!construction.Construct()) return;
-                onTaskCompleted.Invoke();
-                construction.CleanAfterConstruction();
-            }
+            if (!worker.MoveTo(constructionPosition)) return;
+            if (!construction.Construct()) return;
+            onTaskCompleted.Invoke();
+            construction.CleanAfterConstruction();
         }
 
         public void SetResourcesAsDelivered()

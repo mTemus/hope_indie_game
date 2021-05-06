@@ -29,10 +29,7 @@ namespace Code.AI
         {
             switch (currentState) {
                 case WorkNodeState.GO_TO_WORKPLACE:
-                    Vector3 workplacePos = worker.Profession.Workplace.transform.position + worker.Profession.Workplace.Data.EntrancePivot;
-                    worker.MoveTo(workplacePos);
-
-                    if (worker.IsOnPosition(workplacePos)) 
+                    if (worker.MoveTo(worker.Profession.Workplace.PivotedPosition)) 
                         currentState = WorkNodeState.GET_TASK_TO_DO;
                     
                     state = NodeState.RUNNING;

@@ -44,9 +44,7 @@ namespace Code.AI
                     break;
                 
                 case WanderNextToWorkplaceNodeState.WANDER:
-                    worker.MoveTo(nearPosition, 1.3f);
-
-                    if (worker.IsOnPosition(nearPosition)) 
+                    if (worker.MoveTo(nearPosition, 1.3f)) 
                         currentState = WanderNextToWorkplaceNodeState.END_WANDER;
                     break;
                 
