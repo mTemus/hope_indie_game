@@ -15,6 +15,7 @@ namespace Code.Map.Building
 
         [Header("Workplace hire event")]
         [SerializeField] protected UnityEvent onWorkerHired;
+        [SerializeField] protected UnityEvent onHaulerHired;
         
         protected readonly List<Villager> workers = new List<Villager>();
         protected readonly List<Villager> workersWithoutTasks = new List<Villager>();
@@ -157,6 +158,7 @@ namespace Code.Map.Building
         
         private void HireHauler()
         {
+            onHaulerHired?.Invoke();
             haulersCnt++;
         }
 
@@ -219,6 +221,9 @@ namespace Code.Map.Building
         public bool CanHireHauler() =>
             haulersCnt < properties.Haulers;
 
+        public bool HasHiredHaulers =>
+            haulersCnt > 0;
+        
         public bool CanHireWorker() =>
             workers.Count - haulersCnt < properties.Workers;
         

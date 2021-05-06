@@ -13,23 +13,22 @@ namespace Code.Map.Building.Buildings.Types.Resources
     {
         private readonly List<Resource> storedResources = new List<Resource>();
         private readonly List<ResourceToPickUp> resourcesToPickUp = new List<ResourceToPickUp>();
+        private readonly Dictionary<Workplace, List<Task>> externalTasks = new Dictionary<Workplace, List<Task>>();
         
         private void Start()
         {
             StoreResource(new Resource(ResourceType.WOOD, 300));
             StoreResource(new Resource(ResourceType.STONE, 300));
         }
-        
-        private Resource GetResource(ResourceType resource) =>
-            storedResources.FirstOrDefault(res => res.Type == resource);
+
+        #region ResourcesToPickUp
 
         public void RegisterResourceToPickUp(ResourceToPickUp resource)
         {
             ResourcePickUpTask rtpt = null;
             
             foreach (Task task in tasksToDo) {
-                if (!(task is ResourcePickUpTask rpt)) continue;
-                if (!rpt.HasWorker) continue;
+                if (!(task is ResourcePickUpTask {HasWorker: true} rpt)) continue;
                 if (rpt.IsResourceInDelivery) continue;
                 if (rpt.CanStoreResources) {
                     if (rpt.AddResourceToPickUp(resource)) 
@@ -65,6 +64,13 @@ namespace Code.Map.Building.Buildings.Types.Resources
             }
         }
 
+        #endregion
+
+        #region NormalResources
+
+        private Resource GetResource(ResourceType resource) =>
+            storedResources.FirstOrDefault(res => res.Type == resource);
+        
         public void StoreResource(Resource resourceToStore)
         {
             Resource storedResource = GetResource(resourceToStore.Type);
@@ -95,16 +101,59 @@ namespace Code.Map.Building.Buildings.Types.Resources
             return takenResource;
         }
 
+        #endregion
+
+        #region ExternalTasks
+
+        private Task GetExternalTask()
+        {
+            List<Workplace> keys = externalTasks.Keys.ToList();
+            Task et = externalTasks[keys[0]][0];
+            externalTasks[keys[0]].Remove(et);
+
+            if (externalTasks[keys[0]].Count == 0) 
+                externalTasks.Remove(keys[0]);
+
+            return et;
+        }
+        
+        public bool HasExternalTasksFromWorkplace(Workplace workplace) =>
+            externalTasks.ContainsKey(workplace);
+        
+        public void RegisterExternalTask(Workplace workplace, Task task)
+        {
+            if (workersWithoutTasks.Count > 0) {
+                GiveTaskToWorker(workersWithoutTasks[0], task);
+                return;
+            }
+            
+            if (externalTasks.ContainsKey(workplace)) 
+                externalTasks[workplace].Add(task);
+            else 
+                externalTasks[workplace] = new List<Task> { task };
+        }
+
+        public List<Task> GetExternalTasksBackToWorkplace(Workplace workplace)
+        {
+            List<Task> tasks = new List<Task>(externalTasks[workplace]);
+            externalTasks.Remove(workplace);
+            return tasks;
+        }
+
+        #endregion
+        
+        #region Tasks
+
         protected override Task GetNormalTask()
         {
-            Task nt = tasksToDo.FirstOrDefault(task => !(task is ResourceCarryingTask));
+            Task nt = tasksToDo[0];
             RemoveTaskFromTodoList(nt);
             return nt;
         }
 
         protected override Task GetResourceCarryingTask()
         {
-            Task rct = tasksToDo.FirstOrDefault(task => task is ResourceCarryingTask);
+            Task rct = GetExternalTask();
             RemoveTaskFromTodoList(rct);
             return rct;
         }
@@ -131,6 +180,10 @@ namespace Code.Map.Building.Buildings.Types.Resources
             AddTaskToDo(task);
         }
 
+        #endregion
+
+        #region Workers
+
         protected override void FireNormalWorker(Villager worker)
         {
         }
@@ -138,5 +191,8 @@ namespace Code.Map.Building.Buildings.Types.Resources
         public override void DeliverStoredResources(Resource storedResource)
         {
         }
+
+        #endregion
+        
     }
 }
