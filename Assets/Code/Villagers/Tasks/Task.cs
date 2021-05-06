@@ -7,11 +7,11 @@ namespace Code.Villagers.Tasks
 {
     public abstract class Task
     {
-        protected int taskPriority;
         protected Vector3 taskPosition;
         protected Villager worker;
-        protected Action onTaskCompleted;
         
+        public Action onTaskCompleted;
+        public Action onTaskCancel;
         public Action<Task> onTaskSetReady;
         
         public abstract void StartTask();
