@@ -14,6 +14,16 @@ namespace Code.Villagers.Entity
         [SerializeField] private Profession profession;
         [SerializeField] private VillagerUi ui;
         
+        public VillagersStatistics Statistics => statistics;
+
+        public Profession Profession
+        {
+            get => profession;
+            set => profession = value;
+        }
+
+        public VillagerUi UI => ui;
+        
         public bool MoveTo(Vector3 position)
         {
             Vector3 villagerPosition = transform.position;
@@ -33,21 +43,5 @@ namespace Code.Villagers.Entity
 
             return villagerPosition == position;
         }
-
-        public void SetStatistics(VillagersStatistics newStatistics)
-        {
-            statistics = newStatistics;
-        }
-
-        public void SetProfession(Profession newProfession)
-        {
-            profession = newProfession;
-        }
-        
-        public VillagersStatistics Statistics => statistics;
-
-        public Profession Profession => profession;
-
-        public VillagerUi UI => ui;
     }
 }
