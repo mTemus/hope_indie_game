@@ -77,7 +77,7 @@ namespace Code.GUI.PlayerToolsMenu
 
         public void SelectTool()
         {
-            Managers.Instance.Tools.SelectTool(currentMenuToolIndex);
+            Managers.I.Tools.SelectTool(currentMenuToolIndex);
         }
 
         private void RefreshInformalCenter()

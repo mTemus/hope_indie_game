@@ -23,7 +23,7 @@ namespace Code.System.DeveloperTools.Console.Commands
                 return false;
             }
             
-            Managers.Instance.Resources.StoreResource(resourceType, resourceAmount);
+            Managers.I.Resources.StoreResource(resourceType, resourceAmount);
             return true;
         }   
     }

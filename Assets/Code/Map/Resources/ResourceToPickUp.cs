@@ -31,7 +31,7 @@ namespace Code.Map.Resources
             Debug.LogWarning(
                 "Resource: " + storedResource.Type + " " + storedResource.amount + " is on the ground.");
             
-            if (!(Managers.Instance.Buildings.GetClosestBuildingOfClass(BuildingType.Resources, typeof(Warehouse),
+            if (!(Managers.I.Buildings.GetClosestBuildingOfClass(BuildingType.Resources, typeof(Warehouse),
                 transform.position) is Warehouse w)) return;
 
             warehouse = w;

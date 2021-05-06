@@ -64,7 +64,7 @@ namespace Code.Villagers.Tasks
                     Vector3 currWorkerPosition = worker.transform.position;
                     
                     Area resourceArea =
-                        Managers.Instance.Areas.FindClosestAreaOfTypes(currWorkerPosition, gatherAreas);
+                        Managers.I.Areas.FindClosestAreaOfTypes(currWorkerPosition, gatherAreas);
                     resourceToGather =
                         resourceArea.GetClosestResourceToGatherByType(currWorkerPosition, resourceType);
 

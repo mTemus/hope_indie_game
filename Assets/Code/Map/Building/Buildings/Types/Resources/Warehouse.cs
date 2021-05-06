@@ -89,14 +89,14 @@ namespace Code.Map.Building.Buildings.Types.Resources
 
         public static Resource GetReservedResource(Task tKey, int amount)
         {
-            Resource reservedResource = Managers.Instance.Resources.WithdrawReservedResource(tKey);
+            Resource reservedResource = Managers.I.Resources.WithdrawReservedResource(tKey);
             Resource takenResource = new Resource(reservedResource.Type);
             
             reservedResource.amount -= amount;
             takenResource.amount = amount;
 
             if (reservedResource.amount == 0) 
-                Managers.Instance.Resources.ClearReservedResource(tKey);
+                Managers.I.Resources.ClearReservedResource(tKey);
             
             return takenResource;
         }

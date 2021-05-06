@@ -96,19 +96,19 @@ namespace Code.Map.Building
             
             switch (professionData.Type) {
                 case ProfessionType.Unemployed:
-                    workplaces = Managers.Instance.Buildings.GetAllWorkplacesOfClass(BuildingType.Village,
+                    workplaces = Managers.I.Buildings.GetAllWorkplacesOfClass(BuildingType.Village,
                         typeof(TownHall));
                     break;
                 
                 case ProfessionType.Builder:
                 case ProfessionType.Lumberjack:
                 case ProfessionType.GlobalHauler:
-                    workplaces = Managers.Instance.Buildings.GetAllFreeWorkplacesOfClass(
+                    workplaces = Managers.I.Buildings.GetAllFreeWorkplacesOfClass(
                         professionData.WorkplaceBuildingType, professionData.WorkplaceType);
                     break;
                 
                 case ProfessionType.WorkplaceHauler:
-                    workplaces = Managers.Instance.Buildings.GetAllWorkplacesWithHaulersToHire();
+                    workplaces = Managers.I.Buildings.GetAllWorkplacesWithHaulersToHire();
                     break;
                 
                 default:

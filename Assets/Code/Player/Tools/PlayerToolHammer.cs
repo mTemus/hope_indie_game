@@ -9,12 +9,12 @@ namespace Code.Player.Tools
     {
         public override void UseTool()
         {
-            if (Managers.Instance.Areas.GetPlayerArea().Type != AreaType.VILLAGE) {
+            if (Managers.I.Areas.GetPlayerArea().Type != AreaType.VILLAGE) {
                 Debug.LogError("Can't build outside village!");
                 return;
             }
             
-            Managers.Instance.Input.SetState(InputManager.BuildingSelectingInputState);
+            Managers.I.Input.SetState(InputManager.BuildingSelectingInputState);
         }
     }
 }

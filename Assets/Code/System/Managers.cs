@@ -39,39 +39,25 @@ namespace Code.System
       [Header("GUI")]
       [SerializeField] private GUIManager gui;
 
-      private static Managers _instance;
+      public static Managers I { get; private set; }
 
+      public InputManager Input => input;
+      public PlayerToolsManager Tools => tools;
+      public PlayerManager Player => player;
+      public CameraManager Cameras => cameras;
+      public AreaManager Areas => areas;
+      public VillagersManager Villagers => villagers;
+      public BuildingsManager Buildings => buildings;
+      public TasksManager Tasks => tasks;
+      public ResourcesManager Resources => resources;
+      public ProfessionManager Professions => professions;
+      public InitializationManager Initialization => initialization;
+      public VillagerSelectionManager VillagerSelection => villagerSelection;
+      public GUIManager GUI => gui;
+      
       private void Awake()
       {
-         _instance = this;
+         I = this;
       }
-      
-      public InputManager Input => input;
-
-      public PlayerToolsManager Tools => tools;
-
-      public PlayerManager Player => player;
-      
-      public CameraManager Cameras => cameras;
-
-      public AreaManager Areas => areas;
-
-      public VillagersManager Villagers => villagers;
-
-      public BuildingsManager Buildings => buildings;
-
-      public TasksManager Tasks => tasks;
-
-      public ResourcesManager Resources => resources;
-
-      public ProfessionManager Professions => professions;
-
-      public InitializationManager Initialization => initialization;
-
-      public VillagerSelectionManager VillagerSelection => villagerSelection;
-
-      public GUIManager GUI => gui;
-
-      public static Managers Instance => _instance;
    }
 }

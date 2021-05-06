@@ -20,7 +20,7 @@ namespace Code.GUI.BuildingSelecting
 
         public void UpdateRequired()
         {
-            int currentAmount = Managers.Instance.Resources.GetResourceByType(type).amount;
+            int currentAmount = Managers.I.Resources.GetResourceByType(type).amount;
             current.text = "(" + currentAmount + ")";
             current.color = currentAmount - requiredAmount < 0 ? Color.red : Color.white;
         }

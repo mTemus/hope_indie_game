@@ -10,7 +10,7 @@ namespace Code.Player
         
         private void Start()
         {
-            Area area = Managers.Instance.Areas.GetAreaByCoords(Vector3Int.FloorToInt(player.transform.position));
+            Area area = Managers.I.Areas.GetAreaByCoords(Vector3Int.FloorToInt(player.transform.position));
             Debug.LogWarning("Start area: " + area.name);
             area.SetPlayerToArea(player.gameObject);
         }

@@ -41,7 +41,7 @@ namespace Code.Map.Resources.ResourceToGather
         {
             yield return new WaitForSeconds(5f);
 
-            Managers.Instance.Areas
+            Managers.I.Areas
                 .GetAreaByCoords(Vector3Int.FloorToInt(transform.position))
                 .RemoveResourceToGather(this);
             DestroyImmediate(gameObject);

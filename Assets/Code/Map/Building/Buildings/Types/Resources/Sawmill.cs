@@ -41,7 +41,7 @@ namespace Code.Map.Building.Buildings.Types.Resources
 
             if (task is ResourceCarryingTask rct) {
                 if (!HasHiredHaulers) {
-                    Warehouse warehouse = Managers.Instance.Buildings
+                    Warehouse warehouse = Managers.I.Buildings
                         .GetClosestBuildingOfClass(BuildingType.Resources, typeof(Warehouse), PivotedPosition) as Warehouse;
 
                     if (warehouse != null) 
@@ -106,7 +106,7 @@ namespace Code.Map.Building.Buildings.Types.Resources
         public override void DeliverStoredResources(Resource storedResource)
         {
             // if (!workersWithoutTasks.Any(worker => worker.Profession is VillagerWorkplaceHauler)) return;
-            if (!(Managers.Instance.Buildings.GetClosestBuildingOfClass(BuildingType.Resources, typeof(Warehouse),
+            if (!(Managers.I.Buildings.GetClosestBuildingOfClass(BuildingType.Resources, typeof(Warehouse),
                 transform.position) is Warehouse w)) return;
 
             ResourceCarryingTask rct;
@@ -137,7 +137,7 @@ namespace Code.Map.Building.Buildings.Types.Resources
 
         public void TakeTasksBackFromWarehouse()
         {
-            List<Warehouse> warehouses = Managers.Instance.Buildings
+            List<Warehouse> warehouses = Managers.I.Buildings
                 .GetAllBuildingOfClass(BuildingType.Resources, typeof(Warehouse)).Cast<Warehouse>().ToList();
 
             List<Task> externalTasks = new List<Task>();

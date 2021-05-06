@@ -19,9 +19,9 @@ namespace Code.System.Initialization
         public override void InitializeMe()
         {
             Villager villager = GetComponent<Villager>();
-            Managers.Instance.Areas.GetAreaByCoords(Vector3Int.FloorToInt(transform.position))
+            Managers.I.Areas.GetAreaByCoords(Vector3Int.FloorToInt(transform.position))
                 .AddVillager(villager);
-            Managers.Instance.Professions.SetVillagerProfession(villager, professionData, workplace);
+            Managers.I.Professions.SetVillagerProfession(villager, professionData, workplace);
             villager.Profession.enabled = true;
         }
     }

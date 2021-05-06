@@ -17,7 +17,7 @@ namespace Code.GUI.Villagers.Selecting
         public override void OnElementSelected()
         {
             if (workplaces.Length <= 0) return; 
-            Managers.Instance.Cameras.FocusCameraOn(workplaces[0].transform);
+            Managers.I.Cameras.FocusCameraOn(workplaces[0].transform);
         }
 
         public override void OnElementDeselected()
@@ -38,7 +38,7 @@ namespace Code.GUI.Villagers.Selecting
 
         public void LoadWorkplaces()
         {
-            workplaces = Managers.Instance.Buildings.GetAllFreeWorkplacesForProfession(professionData);
+            workplaces = Managers.I.Buildings.GetAllFreeWorkplacesForProfession(professionData);
         }
         
         public void ClearWorkplaces()

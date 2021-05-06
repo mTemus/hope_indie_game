@@ -22,7 +22,7 @@ namespace Code.System.DeveloperTools.Console.Commands
                 return false;
             }
             
-            AssetsStorage.I.ThrowResourceOnTheGround(new Resource(resourceType, resourceAmount), Managers.Instance.Player.GetPlayerPosition().x);
+            AssetsStorage.I.ThrowResourceOnTheGround(new Resource(resourceType, resourceAmount), Managers.I.Player.GetPlayerPosition().x);
             return true;
         }
     }

@@ -29,7 +29,7 @@ namespace Code.System.GameInput.States
 
             if (Input.GetKeyDown(inputManager.Cancel)) {
                 acceptancePanel.gameObject.SetActive(false);
-                InputManager.VillagerPropertiesInputState.SetToVillagerProfessionDisplayChildState(Managers.Instance.GUI.VillagerProfessionChangingPanel);
+                InputManager.VillagerPropertiesInputState.SetToVillagerProfessionDisplayChildState(Managers.I.GUI.VillagerProfessionChangingPanel);
             }
             
         }

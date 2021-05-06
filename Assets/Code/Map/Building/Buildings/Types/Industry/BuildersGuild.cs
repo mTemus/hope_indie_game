@@ -40,7 +40,7 @@ namespace Code.Map.Building.Buildings.Types.Industry
             ResourceCarryingTask rct = new ResourceCarryingTask(requiredResource, construction.GetComponent<Building>(),
                 construction.AddResources, true);
             
-            Managers.Instance.Resources.ReserveResources(rct, requiredResource);
+            Managers.I.Resources.ReserveResources(rct, requiredResource);
             AddTaskToDo(rct);
         }
 
@@ -97,9 +97,9 @@ namespace Code.Map.Building.Buildings.Types.Industry
         public override void TakeTaskBackFromWorker(Task task)
         {
             if (task is ResourceCarryingTask rct) {
-                if (Managers.Instance.Resources.IsResourceReserved(rct)) {
-                    if (!Managers.Instance.Resources.CanWithdrawReserved(rct, rct.ResourceToCarry)) 
-                        Managers.Instance.Resources.ClearReservedResource(rct);
+                if (Managers.I.Resources.IsResourceReserved(rct)) {
+                    if (!Managers.I.Resources.CanWithdrawReserved(rct, rct.ResourceToCarry)) 
+                        Managers.I.Resources.ClearReservedResource(rct);
                     else {
                         AddTaskToDo(rct);
                         return;
@@ -109,12 +109,12 @@ namespace Code.Map.Building.Buildings.Types.Industry
                 // If task still exist but resources are not reserved it's always mean that it was abandoned
                 // while carrying resource state, so it need to have resource reserved again
                 
-                if (Managers.Instance.Resources.CanReserveResource(rct.ResourceToCarry)) {
-                    Managers.Instance.Resources.ReserveResources(rct, rct.ResourceToCarry);
+                if (Managers.I.Resources.CanReserveResource(rct.ResourceToCarry)) {
+                    Managers.I.Resources.ReserveResources(rct, rct.ResourceToCarry);
                     AddTaskToDo(rct);
                 }
                 else {
-                    Managers.Instance.Resources.AddWaitingTask(rct, rct.ResourceToCarry);
+                    Managers.I.Resources.AddWaitingTask(rct, rct.ResourceToCarry);
                     rct.onTaskSetReady += SetTaskReady;
                     SetTaskWaiting(rct);
                 }

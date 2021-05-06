@@ -101,7 +101,7 @@ namespace Code.Villagers.Tasks
                     resourceCarryingState = ResourceCarryingTaskState.GO_TO_STORAGE;
                     
                     if (fromStorage != null) break;
-                    fromStorage = Managers.Instance.Buildings.GetClosestBuildingOfClass(BuildingType.Resources,
+                    fromStorage = Managers.I.Buildings.GetClosestBuildingOfClass(BuildingType.Resources,
                         typeof(Warehouse), taskPosition);
                     fromStoragePosition = fromStorage.PivotedPosition;
 

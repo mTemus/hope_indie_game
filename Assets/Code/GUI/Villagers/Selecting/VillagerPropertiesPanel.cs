@@ -45,7 +45,7 @@ namespace Code.GUI.Villagers.Selecting
     
         public void FocusCameraOnVillagerWorkplace()
         {
-            Managers.Instance.Cameras.FocusCameraOn(Managers.Instance.VillagerSelection.SelectedVillager.Profession.Workplace.transform);
+            Managers.I.Cameras.FocusCameraOn(Managers.I.VillagerSelection.SelectedVillager.Profession.Workplace.transform);
         }
 
         public void FocusCameraOnVillagerHouse()

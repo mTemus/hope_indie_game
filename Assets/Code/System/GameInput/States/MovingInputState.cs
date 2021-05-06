@@ -18,10 +18,10 @@ namespace Code.System.GameInput.States
                 inputManager.Movement.Move(Vector3.right);
 
             if (Input.GetKeyDown(inputManager.Action)) 
-                Managers.Instance.Tools.UseCurrentTool();
+                Managers.I.Tools.UseCurrentTool();
             
             if (Input.GetKeyDown(inputManager.Tools)) 
-                Managers.Instance.Input.SetState(InputManager.ToolSelectingInputState);
+                Managers.I.Input.SetState(InputManager.ToolSelectingInputState);
         }
 
         public void OnStateChange()

@@ -7,11 +7,11 @@ namespace Code.Player.Tools
     {
         public override void UseTool()
         {
-            if (Managers.Instance.VillagerSelection.SelectedVillager != null) return;
-            if (!Managers.Instance.VillagerSelection.AreVillagersNearby()) return;
-            Managers.Instance.VillagerSelection.SelectVillager();
-            Managers.Instance.VillagerSelection.SelectedVillager.Profession.enabled = false;
-            Managers.Instance.Input.SetState(InputManager.VillagerPropertiesInputState);
+            if (Managers.I.VillagerSelection.SelectedVillager != null) return;
+            if (!Managers.I.VillagerSelection.AreVillagersNearby()) return;
+            Managers.I.VillagerSelection.SelectVillager();
+            Managers.I.VillagerSelection.SelectedVillager.Profession.enabled = false;
+            Managers.I.Input.SetState(InputManager.VillagerPropertiesInputState);
         }
     }
 }

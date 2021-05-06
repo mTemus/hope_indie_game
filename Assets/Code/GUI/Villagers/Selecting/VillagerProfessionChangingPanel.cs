@@ -35,7 +35,7 @@ namespace Code.GUI.Villagers.Selecting
 
         public void UpdateCurrentWorkPointerPosition()
         {
-            Villager villager = Managers.Instance.VillagerSelection.SelectedVillager;
+            Villager villager = Managers.I.VillagerSelection.SelectedVillager;
 
             foreach (UiSelectableElement element in elementsToSelect) {
                 ProfessionLabelItem currItem = (ProfessionLabelItem) element;
@@ -58,8 +58,8 @@ namespace Code.GUI.Villagers.Selecting
 
         public void OnPanelOpen()
         {
-            InputManager.VillagerPropertiesInputState.SetToVillagerProfessionDisplayChildState(Managers.Instance.GUI.VillagerProfessionChangingPanel);
-            Villager villager = Managers.Instance.VillagerSelection.SelectedVillager;
+            InputManager.VillagerPropertiesInputState.SetToVillagerProfessionDisplayChildState(Managers.I.GUI.VillagerProfessionChangingPanel);
+            Villager villager = Managers.I.VillagerSelection.SelectedVillager;
             
             //Initialize profession pointer pos
             UpdateCurrentWorkPointerPosition();
@@ -81,7 +81,7 @@ namespace Code.GUI.Villagers.Selecting
             //Initialize profession label data
             if (AreThereAnyWorkplaces()) {
                 propertiesLabel.LoadProfessionData(currentProfession.ProfessionData, villager); 
-                Managers.Instance.Cameras.FocusCameraOn(currentProfession.Workplaces[0].transform);
+                Managers.I.Cameras.FocusCameraOn(currentProfession.Workplaces[0].transform);
             }
             else {
                 propertiesLabel.ShowNotAvailableWorkplacesPanel(true);
@@ -108,7 +108,7 @@ namespace Code.GUI.Villagers.Selecting
 
             if (AreThereAnyWorkplaces()) {
                 propertiesLabel.ShowNotAvailableWorkplacesPanel(false);
-                propertiesLabel.LoadProfessionData(currentProfession.ProfessionData, Managers.Instance.VillagerSelection.SelectedVillager);
+                propertiesLabel.LoadProfessionData(currentProfession.ProfessionData, Managers.I.VillagerSelection.SelectedVillager);
             }
             else {
                 propertiesLabel.ShowNotAvailableWorkplacesPanel(true);
@@ -132,7 +132,7 @@ namespace Code.GUI.Villagers.Selecting
             leftArrow.SetActive(workplacesIdx > 0);
             rightArrow.SetActive(workplacesIdx < currentProfession.Workplaces.Length -1);
             
-            Managers.Instance.Cameras.FocusCameraOn(CurrentWorkplace.transform);
+            Managers.I.Cameras.FocusCameraOn(CurrentWorkplace.transform);
         }
 
         public void ShowAcceptancePanel()
@@ -143,7 +143,7 @@ namespace Code.GUI.Villagers.Selecting
         
         public void TakeProfession()
         {
-            Villager selectedVillager = Managers.Instance.VillagerSelection.SelectedVillager;
+            Villager selectedVillager = Managers.I.VillagerSelection.SelectedVillager;
 
             if (selectedVillager.Profession.Data.Type == currentProfession.ProfessionData.Type) {
                 if (selectedVillager.Profession.Workplace == CurrentWorkplace) return;
@@ -151,8 +151,8 @@ namespace Code.GUI.Villagers.Selecting
                 CurrentWorkplace.HireWorker(selectedVillager);
                 
             } else {
-                Managers.Instance.Professions.FireVillagerFromOldProfession(selectedVillager);
-                Managers.Instance.Professions.SetVillagerProfession(selectedVillager,
+                Managers.I.Professions.FireVillagerFromOldProfession(selectedVillager);
+                Managers.I.Professions.SetVillagerProfession(selectedVillager,
                     currentProfession.ProfessionData, CurrentWorkplace);
             }
         }
@@ -166,7 +166,7 @@ namespace Code.GUI.Villagers.Selecting
         public void CloseAcceptablePanel()
         {
             acceptancePanel.gameObject.SetActive(false);
-            InputManager.VillagerPropertiesInputState.SetToVillagerProfessionDisplayChildState(Managers.Instance.GUI.VillagerProfessionChangingPanel);
+            InputManager.VillagerPropertiesInputState.SetToVillagerProfessionDisplayChildState(Managers.I.GUI.VillagerProfessionChangingPanel);
         }
     }
 }

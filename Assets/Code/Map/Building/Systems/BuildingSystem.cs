@@ -26,8 +26,8 @@ namespace Code.Map.Building.Systems
                 DestroyImmediate(_currentBuilding.gameObject);
             
             //TODO: CLEAN THIS CODE
-            Vector2 playerPos = Managers.Instance.Player.GetPlayerLocalPosition();
-            Area playerArea = Managers.Instance.Areas.GetPlayerArea();
+            Vector2 playerPos = Managers.I.Player.GetPlayerLocalPosition();
+            Area playerArea = Managers.I.Areas.GetPlayerArea();
             playerArea.GridMap.GetXY(playerPos, out int x, out int y);
             _currentBuildingData = buildingData;
 
@@ -51,8 +51,8 @@ namespace Code.Map.Building.Systems
             direction *= GlobalProperties.WorldTileSize;
             
             if (Mathf.Abs(currOffset.x + direction.x) > maxXOffset) return;
-            if (!Managers.Instance.Areas.GetPlayerArea().GridMap.IsTileInRange(currBuildPos.x + direction.x, currBuildPos.y)) return;
-            if (!Managers.Instance.Areas.GetPlayerArea().GridMap.IsTileInRange(currBuildPos.x + direction.x, currBuildPos.y, _currentBuildingData.Size.x)) return;
+            if (!Managers.I.Areas.GetPlayerArea().GridMap.IsTileInRange(currBuildPos.x + direction.x, currBuildPos.y)) return;
+            if (!Managers.I.Areas.GetPlayerArea().GridMap.IsTileInRange(currBuildPos.x + direction.x, currBuildPos.y, _currentBuildingData.Size.x)) return;
             
             currOffset += direction;
             _currentBuilding.transform.localPosition += direction;
@@ -62,14 +62,14 @@ namespace Code.Map.Building.Systems
         {
            if ((from requiredResource 
                in _currentBuildingData.RequiredResources 
-               let currentResource = Managers.Instance.Resources.GetResourceByType(requiredResource.Type) 
+               let currentResource = Managers.I.Resources.GetResourceByType(requiredResource.Type) 
                where currentResource.amount < requiredResource.amount 
                select requiredResource)
                .Any()) return; 
 
             Transform currBuildTransform = _currentBuilding.transform;
             Vector3Int currBuildPos = Vector3Int.FloorToInt(currBuildTransform.localPosition);
-            Area playerArea = Managers.Instance.Areas.GetPlayerArea();
+            Area playerArea = Managers.I.Areas.GetPlayerArea();
             
             List<Vector2Int> buildingArea =
                 playerArea.GridMap.GetTileWithNeighbours(new Vector2Int(currBuildPos.x / GlobalProperties.WorldTileSize, currBuildPos.y), new Vector2Int(_currentBuildingData.Size.x, _currentBuildingData.Size.y));
@@ -87,7 +87,7 @@ namespace Code.Map.Building.Systems
             _currentBuildingData = null;
             currOffset = Vector3Int.zero;
             
-            Managers.Instance.Input.SetState(InputManager.MovingInputState);
+            Managers.I.Input.SetState(InputManager.MovingInputState);
         }
 
         public void CancelBuilding()

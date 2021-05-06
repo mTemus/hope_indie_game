@@ -10,7 +10,7 @@ namespace Code.System.GameInput.States
         public void OnStateSet()
         {
             currentChildState = new VillagerPropertiesDisplayChildState();
-            Managers.Instance.GUI.VillagerPropertiesPanel.gameObject.SetActive(true);
+            Managers.I.GUI.VillagerPropertiesPanel.gameObject.SetActive(true);
         }
 
         public void HandleState(InputManager inputManager)
@@ -20,8 +20,8 @@ namespace Code.System.GameInput.States
 
         public void OnStateChange()
         {
-            Managers.Instance.VillagerSelection.SelectedVillager.Profession.enabled = true;
-            Managers.Instance.VillagerSelection.DeselectVillager();
+            Managers.I.VillagerSelection.SelectedVillager.Profession.enabled = true;
+            Managers.I.VillagerSelection.DeselectVillager();
             currentChildState = null;
         }
 

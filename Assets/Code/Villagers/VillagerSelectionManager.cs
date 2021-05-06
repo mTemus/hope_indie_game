@@ -25,7 +25,7 @@ namespace Code.Villagers
 
         public void SelectVillager()
         {
-            Vector3 playerPos = Managers.Instance.Player.GetPlayerPosition();
+            Vector3 playerPos = Managers.I.Player.GetPlayerPosition();
             float closestDistance = Vector3.Distance(villagersToSelect[0].transform.position, playerPos);
         
             foreach (Villager villager in villagersToSelect) {
@@ -36,7 +36,7 @@ namespace Code.Villagers
                 selectedVillager = villager;
             }
         
-            Managers.Instance.GUI.VillagerPropertiesPanel.OpenPropertiesPanel(selectedVillager);
+            Managers.I.GUI.VillagerPropertiesPanel.OpenPropertiesPanel(selectedVillager);
         }
         
         public void DeselectVillager()

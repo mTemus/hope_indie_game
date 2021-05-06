@@ -12,7 +12,7 @@ namespace Code.System.Initialization
             ResourceToGather rtg = GetComponent<ResourceToGather>();
             rtg.Initialize(resourceToGatherData);
             
-            Managers.Instance.Areas.GetAreaByCoords(Vector3Int.FloorToInt(transform.position))
+            Managers.I.Areas.GetAreaByCoords(Vector3Int.FloorToInt(transform.position))
                 .AddResourceToGather(rtg);
         }
     }

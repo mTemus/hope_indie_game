@@ -68,7 +68,7 @@ namespace Code.Map.Building
             
             positionOffset = new Vector3(buildingData.EntrancePivot.x, buildingData.EntrancePivot.y, 0f);
 
-            BuildersGuild buildersGuild = (BuildersGuild) Managers.Instance.Buildings.GetClosestBuildingOfClass(BuildingType.Industry,
+            BuildersGuild buildersGuild = (BuildersGuild) Managers.I.Buildings.GetClosestBuildingOfClass(BuildingType.Industry,
                 typeof(BuildersGuild), transform.position);
             
             buildersGuild.CreateBuildingTask(this, buildingData);

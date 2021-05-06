@@ -21,9 +21,9 @@ namespace Code.System.DeveloperTools.Console.Commands
                 return false;
             }
 
-            Vector3 villagerPosition = new Vector3(Managers.Instance.Player.GetPlayerPosition().x, 0, 0);
+            Vector3 villagerPosition = new Vector3(Managers.I.Player.GetPlayerPosition().x, 0, 0);
             Workplace workplace =
-                Managers.Instance.Buildings.GetClosestFreeWorkplaceForProfession(
+                Managers.I.Buildings.GetClosestFreeWorkplaceForProfession(
                     AssetsStorage.I.GetProfessionDataForProfessionType(professionType), villagerPosition);
 
             if (workplace == null) {

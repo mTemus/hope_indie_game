@@ -15,18 +15,18 @@ namespace Code.System.GameInput.States
             // Exit -> reset camera -> end state
             
             if (Input.GetKeyDown(inputManager.Left) || Input.GetKeyDown(inputManager.LeftAlt)) 
-                Managers.Instance.GUI.VillagerPropertiesPanel.MovePointer(-1);
+                Managers.I.GUI.VillagerPropertiesPanel.MovePointer(-1);
         
             if (Input.GetKeyDown(inputManager.Right) || Input.GetKeyDown(inputManager.RightAlt)) 
-                Managers.Instance.GUI.VillagerPropertiesPanel.MovePointer(1);
+                Managers.I.GUI.VillagerPropertiesPanel.MovePointer(1);
         
             if (Input.GetKeyDown(inputManager.Action)) 
-                Managers.Instance.GUI.VillagerPropertiesPanel.UseSelectedElement();
+                Managers.I.GUI.VillagerPropertiesPanel.UseSelectedElement();
 
             if (Input.GetKeyDown(inputManager.Cancel)) {
-                Managers.Instance.GUI.VillagerPropertiesPanel.gameObject.SetActive(false);
-                Managers.Instance.Cameras.FocusCameraOnPlayer();
-                Managers.Instance.Input.SetState(InputManager.MovingInputState);
+                Managers.I.GUI.VillagerPropertiesPanel.gameObject.SetActive(false);
+                Managers.I.Cameras.FocusCameraOnPlayer();
+                Managers.I.Input.SetState(InputManager.MovingInputState);
             }
         }
 

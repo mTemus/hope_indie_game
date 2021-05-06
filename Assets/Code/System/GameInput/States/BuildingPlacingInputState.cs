@@ -7,9 +7,9 @@ namespace Code.System.GameInput.States
     {
         public void OnStateSet()
         {
-            Managers.Instance.Cameras.FocusCameraOn(BuildingSystem.CurrentBuilding.transform);
-            Managers.Instance.GUI.RequiredResourcesPanel.gameObject.SetActive(true);
-            Managers.Instance.GUI.RequiredResourcesPanel.OnPanelOpen();
+            Managers.I.Cameras.FocusCameraOn(BuildingSystem.CurrentBuilding.transform);
+            Managers.I.GUI.RequiredResourcesPanel.gameObject.SetActive(true);
+            Managers.I.GUI.RequiredResourcesPanel.OnPanelOpen();
         }
 
         public void HandleState(InputManager inputManager)
@@ -26,15 +26,15 @@ namespace Code.System.GameInput.States
 
             if (Input.GetKeyDown(inputManager.Cancel)) {
                 Systems.Instance.Building.CancelBuilding();
-                Managers.Instance.Cameras.FocusCameraOn(Managers.Instance.Player.PlayerGO.transform);
-                Managers.Instance.Input.SetState(InputManager.MovingInputState);
+                Managers.I.Cameras.FocusCameraOn(Managers.I.Player.PlayerGO.transform);
+                Managers.I.Input.SetState(InputManager.MovingInputState);
             }
         }
 
         public void OnStateChange()
         {
-            Managers.Instance.Cameras.FocusCameraOn(Managers.Instance.Player.PlayerGO.transform);
-            Managers.Instance.GUI.RequiredResourcesPanel.OnPanelClose();
+            Managers.I.Cameras.FocusCameraOn(Managers.I.Player.PlayerGO.transform);
+            Managers.I.GUI.RequiredResourcesPanel.OnPanelClose();
         }
     }
 }

@@ -13,14 +13,14 @@ namespace Code.Player
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.CompareTag("Villager")) {
-                Managers.Instance.VillagerSelection.AddVillagerToSelect(other.gameObject.GetComponent<Villager>());
+                Managers.I.VillagerSelection.AddVillagerToSelect(other.gameObject.GetComponent<Villager>());
             }
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
             if (other.CompareTag("Villager")) {
-                Managers.Instance.VillagerSelection.RemoveVillagerToSelect(other.GetComponent<Villager>());
+                Managers.I.VillagerSelection.RemoveVillagerToSelect(other.GetComponent<Villager>());
             }
         }
     }
