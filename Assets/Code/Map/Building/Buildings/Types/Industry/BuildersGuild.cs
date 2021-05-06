@@ -37,8 +37,8 @@ namespace Code.Map.Building.Buildings.Types.Industry
         
         private void CreateResourceCarryingTask(Resource requiredResource, Construction construction)
         {
-            ResourceCarryingTask rct = new ResourceCarryingTask(requiredResource, construction.GetComponent<Building>(),
-                construction.AddResources, true);
+            ResourceCarryingTask rct = new ResourceCarryingTask(requiredResource, construction.GetComponent<Building>(), true);
+            rct.onResourceDelivery += construction.AddResources;
             
             Managers.I.Resources.ReserveResources(rct, requiredResource);
             AddTaskToDo(rct);

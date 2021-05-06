@@ -21,67 +21,41 @@ namespace Code.Villagers.Tasks
         private readonly Resource resourceToCarry;
         private readonly bool reservedResources;
 
-        private Building fromStorage;
         private Vector3 fromStoragePosition;
         private ResourceCarryingTaskState resourceCarryingState;
         
-        private Func<ResourceType, int, Resource> onResourceWithdraw;
-        private Func<Task, int, Resource> onReservedResourceWithdraw;
-        private readonly Action<Resource> onResourceDelivery;
-        
-        private bool isResourceInDelivery =>
+        private bool IsResourceInDelivery =>
             resourceCarryingState == ResourceCarryingTaskState.DELIVER_RESOURCES ||
             resourceCarryingState == ResourceCarryingTaskState.GO_TO_STORAGE && worker.Profession.CarriedResource != null;
         
+        public Func<ResourceType, int, Resource> onResourceWithdraw;
+        public Func<Task, int, Resource> onReservedResourceWithdraw;
+        public Action<Resource> onResourceDelivery;
+
         public Resource ResourceToCarry => resourceToCarry;
 
-        private ResourceCarryingTask(Resource resourceToCarry, Building toStorage, Action<Resource> onResourceDelivery)
+        private ResourceCarryingTask(Resource resourceToCarry, Building toStorage)
         {
             this.resourceToCarry = resourceToCarry;
-            this.onResourceDelivery = onResourceDelivery;
             
             reservedResources = false;
             taskPosition = toStorage.PivotedPosition;
             resourceCarryingState = ResourceCarryingTaskState.FIND_CLOSEST_STORAGE;
         }
-        
-        public ResourceCarryingTask(Resource resourceToCarry, Building toStorage, Action<Resource> onResourceDelivery, Func<ResourceType, int, Resource> onResourceWithdraw, Building fromStorage) 
-            : this(resourceToCarry, toStorage, onResourceDelivery)
-        {
-            this.fromStorage = fromStorage;
-            this.onResourceWithdraw = onResourceWithdraw;
 
-            reservedResources = false;
-            fromStoragePosition = fromStorage.PivotedPosition;
-            resourceCarryingState = ResourceCarryingTaskState.GO_TO_STORAGE;
-        }
-        
-        //TODO: delete it <- it's for carrying up resources from ground, but they need own task type
-        public ResourceCarryingTask(Resource resourceToCarry, Building toStorage, Action<Resource> onResourceDelivery, Func<ResourceType, int, Resource> onResourceWithdraw, Vector3 fromStoragePosition) 
-            : this(resourceToCarry, toStorage, onResourceDelivery)
-        {
-            this.onResourceWithdraw = onResourceWithdraw;
-
-            reservedResources = false;
-            this.fromStoragePosition = fromStoragePosition;
-            resourceCarryingState = ResourceCarryingTaskState.GO_TO_STORAGE;
-        }
-        
-        public ResourceCarryingTask(Resource resourceToCarry, Building toStorage, Action<Resource> onResourceDelivery, Func<Task, int, Resource> onReservedResourceWithdraw, Building fromStorage)
-            : this(resourceToCarry, toStorage, onResourceDelivery)
-        {
-            this.fromStorage = fromStorage;
-            this.onReservedResourceWithdraw = onReservedResourceWithdraw;
-
-            reservedResources = true;
-            fromStoragePosition = fromStorage.PivotedPosition;
-            resourceCarryingState = ResourceCarryingTaskState.GO_TO_STORAGE;
-        }
-        
-        public ResourceCarryingTask(Resource resourceToCarry, Building toStorage, Action<Resource> onResourceDelivery, bool reservedResources)
-            : this(resourceToCarry, toStorage, onResourceDelivery)
+        public ResourceCarryingTask(Resource resourceToCarry, Building toStorage, Building fromStorage, bool reservedResources)
+            : this(resourceToCarry, toStorage)
         {
             this.reservedResources = reservedResources;
+            fromStoragePosition = fromStorage.PivotedPosition;
+            resourceCarryingState = reservedResources ? ResourceCarryingTaskState.FIND_CLOSEST_STORAGE : ResourceCarryingTaskState.GO_TO_STORAGE;
+        }
+        
+        public ResourceCarryingTask(Resource resourceToCarry, Building toStorage, bool reservedResources)
+            : this(resourceToCarry, toStorage)
+        {
+            this.reservedResources = reservedResources;
+            resourceCarryingState = ResourceCarryingTaskState.FIND_CLOSEST_STORAGE;
         }
 
         public override void StartTask()
@@ -98,19 +72,16 @@ namespace Code.Villagers.Tasks
         {
             switch (resourceCarryingState) {
                 case ResourceCarryingTaskState.FIND_CLOSEST_STORAGE:
-                    resourceCarryingState = ResourceCarryingTaskState.GO_TO_STORAGE;
-                    
-                    if (fromStorage != null) break;
-                    fromStorage = Managers.I.Buildings.GetClosestBuildingOfClass(BuildingType.Resources,
-                        typeof(Warehouse), taskPosition);
+                    Building fromStorage = Managers.I.Buildings
+                        .GetClosestBuildingOfClass(BuildingType.Resources, typeof(Warehouse), taskPosition);
                     fromStoragePosition = fromStorage.PivotedPosition;
 
-                    if (reservedResources) {
-                        onReservedResourceWithdraw = Warehouse.GetReservedResource;
-                    }
-                    else {
-                        onResourceWithdraw = fromStorage.Storage.WithdrawResource;
-                    }
+                    if (reservedResources) 
+                        onReservedResourceWithdraw += Warehouse.GetReservedResource;
+                    else 
+                        onResourceWithdraw += fromStorage.Storage.WithdrawResource;
+                    
+                    resourceCarryingState = ResourceCarryingTaskState.GO_TO_STORAGE;
                     break;
                 
                 case ResourceCarryingTaskState.GO_TO_STORAGE:
@@ -168,7 +139,7 @@ namespace Code.Villagers.Tasks
 
         public override void AbandonTask()
         {
-            if (isResourceInDelivery) {
+            if (IsResourceInDelivery) {
                 resourceToCarry.amount += worker.Profession.CarriedResource.amount;
                 ThrowResourceOnGround();
             }

@@ -112,15 +112,16 @@ namespace Code.Map.Building.Buildings.Types.Resources
             ResourceCarryingTask rct;
             
             if (HasHiredHaulers) {
-                rct = new ResourceCarryingTask(storedResource, w,
-                    w.StoreResource, Storage.WithdrawResourceContinuously, this);
+                rct = new ResourceCarryingTask(storedResource, warehouse, this, false);
+                rct.onResourceDelivery += warehouse.StoreResource;
+                rct.onResourceWithdraw += Storage.WithdrawResourceContinuously;
                 AddTaskToDo(rct);
             }
             else {
-                if (storedResource.amount < AssetsStorage.I
-                    .GetProfessionDataForProfessionType(ProfessionType.GlobalHauler).ResourceCarryingLimit) return;
-                rct = new ResourceCarryingTask(new Resource(storedResource), w,
-                    w.StoreResource, Storage.WithdrawResource, this);
+                if (storedResource.amount < AssetsStorage.I.GetProfessionDataForProfessionType(ProfessionType.GlobalHauler).ResourceCarryingLimit) return;
+                rct = new ResourceCarryingTask(new Resource(storedResource), warehouse, this, false);
+                rct.onResourceDelivery += warehouse.StoreResource;
+                rct.onResourceWithdraw += Storage.WithdrawResource;
                 AddTaskToDo(rct);
             }
         }
