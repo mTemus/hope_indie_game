@@ -12660,8 +12660,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1307042239}
-  - component: {fileID: 1307042240}
-  - component: {fileID: 1307042238}
   - component: {fileID: 1307042241}
   - component: {fileID: 1307042242}
   m_Layer: 0
@@ -12671,18 +12669,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1307042238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1307042237}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d42756eca616f2747b99c5a950fb8339, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1307042239
 Transform:
   m_ObjectHideFlags: 0
@@ -12697,18 +12683,6 @@ Transform:
   m_Father: {fileID: 1579721258}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1307042240
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1307042237}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 440944c31e7710545b1009611be71cf5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1307042241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14403,8 +14377,6 @@ MonoBehaviour:
   areas: {fileID: 1483205193}
   buildings: {fileID: 1483205192}
   resources: {fileID: 1483205190}
-  villagers: {fileID: 1307042240}
-  tasks: {fileID: 1307042238}
   professions: {fileID: 1307042241}
   villagerSelection: {fileID: 1307042242}
   gui: {fileID: 503572590}

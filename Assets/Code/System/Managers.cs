@@ -31,8 +31,6 @@ namespace Code.System
       [SerializeField] private ResourcesManager resources;
 
       [Header("Villagers")]
-      [SerializeField] private VillagersManager villagers;
-      [SerializeField] private TasksManager tasks;
       [SerializeField] private ProfessionManager professions;
       [SerializeField] private VillagerSelectionManager villagerSelection;
       
@@ -46,9 +44,7 @@ namespace Code.System
       public PlayerManager Player => player;
       public CameraManager Cameras => cameras;
       public AreaManager Areas => areas;
-      public VillagersManager Villagers => villagers;
       public BuildingsManager Buildings => buildings;
-      public TasksManager Tasks => tasks;
       public ResourcesManager Resources => resources;
       public ProfessionManager Professions => professions;
       public InitializationManager Initialization => initialization;
