@@ -18,12 +18,12 @@ namespace Code.Villagers.Tasks
             constructionPosition = construction.transform.position + construction.GetComponent<Building>().Data.EntrancePivot;
         }
         
-        public override void OnTaskStart()
+        public override void StartTask()
         {
             
         }
 
-        public override void OnTaskEnd()
+        public override void EndTask()
         {
             
         }
@@ -46,11 +46,11 @@ namespace Code.Villagers.Tasks
             onTaskSetReady.Invoke(this);
         }
         
-        public override void OnTaskPause()
+        public override void PauseTask()
         {
         }
 
-        public override void OnTaskAbandon()
+        public override void AbandonTask()
         {
         }
     }

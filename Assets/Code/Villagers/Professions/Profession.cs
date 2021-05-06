@@ -43,7 +43,7 @@ namespace Code.Villagers.Professions
         
         private void AbandonTask(Task t)
         {
-            t.OnTaskAbandon();
+            t.AbandonTask();
             workplace.TakeTaskBackFromWorker(t);
         }
         
@@ -56,7 +56,7 @@ namespace Code.Villagers.Professions
         {
             if (tasks.Count <= 0) return false;
             currentTask = tasks.Dequeue();
-            currentTask.OnTaskStart();
+            currentTask.StartTask();
             return true;
         }
 
@@ -67,7 +67,7 @@ namespace Code.Villagers.Professions
 
         public void PauseCurrentTask()
         {
-            currentTask.OnTaskPause();
+            currentTask.PauseTask();
             tasks.Enqueue(currentTask);
             currentTask = null;
         }
@@ -104,7 +104,7 @@ namespace Code.Villagers.Professions
 
         public void OnTaskCompleted()
         {
-            currentTask.OnTaskEnd();
+            currentTask.EndTask();
             currentWorkNode.StartNewTask();
         }
 

@@ -14,13 +14,13 @@ namespace Code.Villagers.Tasks
         
         public Action<Task> onTaskSetReady;
         
-        public abstract void OnTaskStart();
-        public abstract void OnTaskEnd();
+        public abstract void StartTask();
+        public abstract void EndTask();
         public abstract void DoTask();
-        public abstract void OnTaskPause();
-        public abstract void OnTaskAbandon();
+        public abstract void PauseTask();
+        public abstract void AbandonTask();
 
-        public void OnTaskTaken(Villager newWorker, params Action[] taskCompleteActions)
+        public void TakeTask(Villager newWorker, params Action[] taskCompleteActions)
         {
             worker = newWorker;
         

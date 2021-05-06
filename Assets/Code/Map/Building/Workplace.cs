@@ -101,7 +101,7 @@ namespace Code.Map.Building
         protected void GiveTaskToWorker(Villager worker, Task task)
         {
             worker.Profession.AddTask(task);
-            task.OnTaskTaken(worker, worker.Profession.OnTaskCompleted);
+            task.TakeTask(worker, worker.Profession.OnTaskCompleted);
             UnregisterWorkerWithoutTask(worker);
         }
         

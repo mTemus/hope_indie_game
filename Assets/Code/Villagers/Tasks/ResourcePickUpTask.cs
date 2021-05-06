@@ -98,12 +98,12 @@ namespace Code.Villagers.Tasks
             resources = new Queue<ResourceToPickUp>(resourcesList);
         }
 
-        public override void OnTaskStart()
+        public override void StartTask()
         {
             
         }
 
-        public override void OnTaskEnd()
+        public override void EndTask()
         {
             
         }
@@ -180,12 +180,12 @@ namespace Code.Villagers.Tasks
             }
         }
 
-        public override void OnTaskPause()
+        public override void PauseTask()
         {
             throw new NotImplementedException();
         }
 
-        public override void OnTaskAbandon()
+        public override void AbandonTask()
         {
             throw new NotImplementedException();
         }

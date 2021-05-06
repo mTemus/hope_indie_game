@@ -84,12 +84,12 @@ namespace Code.Villagers.Tasks
             this.reservedResources = reservedResources;
         }
 
-        public override void OnTaskStart()
+        public override void StartTask()
         {
            
         }
 
-        public override void OnTaskEnd()
+        public override void EndTask()
         {
             
         }
@@ -164,12 +164,12 @@ namespace Code.Villagers.Tasks
             worker.UI.StateText.text = "Resource carrying: " + resourceCarryingState;
         }
 
-        public override void OnTaskPause()
+        public override void PauseTask()
         {
             
         }
 
-        public override void OnTaskAbandon()
+        public override void AbandonTask()
         {
             if (isResourceInDelivery) {
                 resourceToCarry.amount += worker.Profession.CarriedResource.amount;

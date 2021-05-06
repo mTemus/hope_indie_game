@@ -41,11 +41,11 @@ namespace Code.Villagers.Tasks
             currentGatheringState = ResourceGatheringTaskState.GO_TO_RESOURCE;
         }
 
-        public override void OnTaskStart()
+        public override void StartTask()
         {
         }
 
-        public override void OnTaskEnd()
+        public override void EndTask()
         {
         }
 
@@ -114,11 +114,11 @@ namespace Code.Villagers.Tasks
             }
         }
 
-        public override void OnTaskPause()
+        public override void PauseTask()
         {
         }
 
-        public override void OnTaskAbandon()
+        public override void AbandonTask()
         {
         }
 
