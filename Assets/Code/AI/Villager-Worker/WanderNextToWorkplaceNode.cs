@@ -27,7 +27,7 @@ namespace Code.AI
 
         public override NodeState Evaluate()
         {
-            if (worker.Profession.HasWorkToDo()) {
+            if (worker.Profession.HasWorkToDo) {
                 nearPosition = Vector3.zero;
                 currentState = WanderNextToWorkplaceNodeState.DRAW_WANDER_POSITION;
                 return NodeState.FAILURE;

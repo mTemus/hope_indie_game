@@ -55,10 +55,9 @@ namespace Code.AI
 
                 case WorkNodeState.REPORT_NO_TASK:
                     Debug.LogError("Worker: " + worker.Profession.name + " reporting no tasks!");
-                    worker.Profession.ClearCurrentTask();
                     worker.Profession.Workplace.ReportWorkerWithoutTask(worker);
 
-                    if (worker.Profession.HasWorkToDo()) {
+                    if (worker.Profession.HasWorkToDo) {
                         currentState = WorkNodeState.GET_TASK_TO_DO;
                         state = NodeState.RUNNING;
                     }

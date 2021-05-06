@@ -109,7 +109,7 @@ namespace Code.Villagers.Professions
                     throw new ArgumentOutOfRangeException(nameof(professionData.Type), professionData.Type, null);
             }
             
-            villager.Profession.SetProfessionData(professionData);
+            villager.Profession.Data = professionData;
             villager.Profession.Initialize();
             workplace.HireWorker(villager);
             villager.Profession.enabled = false;

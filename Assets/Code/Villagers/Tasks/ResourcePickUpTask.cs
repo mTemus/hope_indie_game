@@ -72,7 +72,7 @@ namespace Code.Villagers.Tasks
                 if (worker.Profession.CarriedResource != null) 
                     currentPickupState = ResourcePickUpTaskState.GO_TO_STORAGE;
                 else 
-                    worker.Profession.OnTaskCompleted();
+                    worker.Profession.CompleteTask();
             }
         }
 
@@ -161,7 +161,7 @@ namespace Code.Villagers.Tasks
                         worker.Profession.CarriedResource = null;
                         worker.UI.SetResourceIcon(false, currentResource.StoredResource.Type);
 
-                        worker.Profession.OnTaskCompleted();
+                        worker.Profession.CompleteTask();
                     }
                     else {
                         throw new Exception("NO WAREHOUSE TO STORE RESOURCES FOR TASK: " + GetType());

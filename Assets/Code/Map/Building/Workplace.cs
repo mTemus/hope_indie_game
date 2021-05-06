@@ -101,7 +101,7 @@ namespace Code.Map.Building
         protected void GiveTaskToWorker(Villager worker, Task task)
         {
             worker.Profession.AddTask(task);
-            task.TakeTask(worker, worker.Profession.OnTaskCompleted);
+            task.TakeTask(worker, worker.Profession.CompleteTask);
             UnregisterWorkerWithoutTask(worker);
         }
         
@@ -193,8 +193,8 @@ namespace Code.Map.Building
                 HireNormalWorker();
             else 
                 HireHauler();
-            
-            worker.Profession.SetWorkplace(this);
+
+            worker.Profession.Workplace = this;
             workers.Add(worker);
             ReportWorkerWithoutTask(worker);
             
