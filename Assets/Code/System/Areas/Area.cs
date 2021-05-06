@@ -35,7 +35,9 @@ namespace Code.System.Areas
         public AreaType Type => type;
         public float Width => width;
         public float Height => height;
-        
+        public Vector3 AreaWorldPosition => transform.position;
+        public bool IsPlayerInArea => playerObject != null;
+
         void Awake()
         {
             int widthTileCnt = (int) (width / GlobalProperties.WorldTileSize);
@@ -44,13 +46,7 @@ namespace Code.System.Areas
             gridMap = new GridMap(widthTileCnt, heightTileCnt, GlobalProperties.WorldTileSize);
         }
 
-        public bool IsPlayerInArea() 
-        {
-            return playerObject != null;
-        }
-
-        public Vector3 GetAreaWorldPosition 
-            => transform.position;
+        #region Player
         
         public void SetPlayerToArea(GameObject player)
         {
@@ -63,7 +59,11 @@ namespace Code.System.Areas
             playerObject.transform.SetParent(transform.root);
             playerObject = null;
         }
-        
+
+        #endregion
+
+        #region Buildings
+
         public void AddBuilding(Building building, BuildingData buildingData)
         {
             Transform buildingTransform = building.transform;
@@ -73,14 +73,23 @@ namespace Code.System.Areas
             
             List<Vector2Int> buildingArea = gridMap.GetTileWithNeighbours(
                 new Vector2Int(currBuildPos.x / GlobalProperties.WorldTileSize, currBuildPos.y), 
-                    new Vector2Int(buildingData.Size.x, buildingData.Size.y));
+                new Vector2Int(buildingData.Size.x, buildingData.Size.y));
             
             gridMap.SetBuildingValueAtArea(buildingArea, building);
             buildings.Add(building);
             Debug.Log("Add building " + building.name + "  to area "+ gameObject.name + ".");
         }
         
-         public void AddResourceToGather(ResourceToGather resourceToGather)
+        public bool CanPlaceBuilding(List<Vector2Int> buildingArea) =>
+            buildingArea
+                .Select(tilePos => gridMap.GetCellAt(tilePos.x, tilePos.y))
+                .All(cell => cell.CanBuild());
+
+        #endregion
+
+        #region Resources to Gather
+
+        public void AddResourceToGather(ResourceToGather resourceToGather)
         {
             Transform resourceTransform = resourceToGather.transform;
             resourceTransform.SetParent(transform);
@@ -108,11 +117,6 @@ namespace Code.System.Areas
             Debug.LogError("Remove resource " + resourceToGather.name + "  to area "+ gameObject.name + ".");
         }
         
-        public bool CanPlaceBuilding(List<Vector2Int> buildingArea) =>
-            buildingArea
-                .Select(tilePos => gridMap.GetCellAt(tilePos.x, tilePos.y))
-                .All(cell => cell.CanBuild());
-
         public ResourceToGather GetClosestResourceToGatherByType(Vector3 position, ResourceType resourceType)
         {
             List<ResourceToGather> resources = resourcesToGather
@@ -133,7 +137,12 @@ namespace Code.System.Areas
 
             return closestResource;
         }
-        
+
+        #endregion
+
+        #region Villagers
+
+        //TODO: update adding villagers between areas
         
         public void AddVillager(Villager villager)
         {
@@ -142,5 +151,7 @@ namespace Code.System.Areas
             
             Debug.Log("Add villager " + villager.name + "  to area "+ gameObject.name + ".");
         }
+
+        #endregion
     }
 }

@@ -20,7 +20,7 @@ namespace Code.System.Areas
             
             switch (visitor.tag) {
                 case "Player":
-                    if (area.IsPlayerInArea()) return;
+                    if (area.IsPlayerInArea) return;
                     Managers.I.Areas.SetPlayerToArea(area, visitor.gameObject);
                     visitors.Remove(visitor.gameObject);
                     break;

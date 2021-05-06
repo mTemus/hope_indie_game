@@ -47,7 +47,7 @@ namespace Code.System.Areas
         }
 
         public Area GetPlayerArea() => 
-            areas.FirstOrDefault(area => area.IsPlayerInArea());
+            areas.FirstOrDefault(area => area.IsPlayerInArea);
         
         public Area GetAreaByCoords(Vector3Int coordinates) =>
             (from area in areas let areaPosInt = Vector3Int.FloorToInt(area.transform.position) 
