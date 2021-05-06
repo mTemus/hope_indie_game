@@ -126,7 +126,7 @@ namespace Code.System.Areas
                 float distance = Vector3.Distance(position, resource.transform.position);
 
                 if (bestDistance < distance) continue;
-                if (!resource.CanGather()) continue;
+                if (!resource.CanGather) continue;
                 bestDistance = distance;
                 closestResource = resource;
             }

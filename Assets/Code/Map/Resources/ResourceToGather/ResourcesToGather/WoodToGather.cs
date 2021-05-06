@@ -4,7 +4,7 @@ namespace Code.Map.Resources.ResourceToGather.ResourcesToGather
 {
     public class WoodToGather : ResourceToGather
     {
-        public override void OnGatherStart(Villager worker)
+        public override void StartGathering(Villager worker)
         {
             if (worker.Profession.CarriedResource != null) return;
             worker.Profession.CarriedResource = new Resource(resource.Type, 0);
@@ -18,7 +18,7 @@ namespace Code.Map.Resources.ResourceToGather.ResourcesToGather
             return worker.Profession.CarriedResource.amount != worker.Profession.Data.ResourceCarryingLimit;
         }
 
-        protected override void OnResourceDepleted()
+        protected override void DepleteResource()
         {
             foreach (Villager gatherer in gatherers.Keys) 
                 gatherers[gatherer].OnCurrentResourceDepleted();

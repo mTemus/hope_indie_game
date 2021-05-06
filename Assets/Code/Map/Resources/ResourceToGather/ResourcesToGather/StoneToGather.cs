@@ -8,7 +8,7 @@ namespace Code.Map.Resources.ResourceToGather.ResourcesToGather
     {
         private Workplace workplace;
 
-        public override void OnGatherStart(Villager worker)
+        public override void StartGathering(Villager worker)
         {
             throw new NotImplementedException();
         }
@@ -18,7 +18,7 @@ namespace Code.Map.Resources.ResourceToGather.ResourcesToGather
             throw new NotImplementedException();
         }
 
-        protected override void OnResourceDepleted()
+        protected override void DepleteResource()
         {
             throw new NotImplementedException();
         }

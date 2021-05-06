@@ -32,10 +32,29 @@ namespace Code.Map.Resources.ResourceToGather
         public Vector3 PivotedPosition => transform.position + pivot;
         public ResourceToGatherType Type => type;
         public Resource Resource => resource;
+        public bool CanGather =>
+            gatherers.Keys.Count < maximumGatherers;
 
-        public abstract void OnGatherStart(Villager worker);
+        #region AI
+
+        public abstract void StartGathering(Villager worker);
         public abstract bool Gather(Villager worker, int socketId);
-        protected abstract void OnResourceDepleted();
+        protected abstract void DepleteResource();
+
+        public void Initialize(ResourceToGatherData resourceToGatherData)
+        {
+            resource = new Resource(resourceToGatherData.ResourceType, resourceToGatherData.Amount);
+            type = resourceToGatherData.ResourceToGatherType;
+            maximumGatherers = resourceToGatherData.MaximumGatherers;
+            gatheringSockets = new GatheringSocket[maximumGatherers];
+            
+            for (int i = 0; i < gatheringSockets.Length; i++) 
+                gatheringSockets[i] = new GatheringSocket(resource, DepleteResource);
+        }
+        
+        #endregion
+
+        #region Gathering
 
         protected IEnumerator ClearResource()
         {
@@ -47,30 +66,19 @@ namespace Code.Map.Resources.ResourceToGather
             DestroyImmediate(gameObject);
         }
         
-        public void Initialize(ResourceToGatherData resourceToGatherData)
+        protected void UnregisterGatherer(Villager worker)
         {
-            resource = new Resource(resourceToGatherData.ResourceType, resourceToGatherData.Amount);
-            type = resourceToGatherData.ResourceToGatherType;
-            maximumGatherers = resourceToGatherData.MaximumGatherers;
-            gatheringSockets = new GatheringSocket[maximumGatherers];
-            
-            for (int i = 0; i < gatheringSockets.Length; i++) 
-                gatheringSockets[i] = new GatheringSocket(resource, OnResourceDepleted);
+            gatheringSockets[gatherers.Keys.ToList().IndexOf(worker)].ResetGathering();
+            gatherers.Remove(worker);
         }
+
         
         public int RegisterGatherer(Villager worker, ResourceGatheringTask task)
         {
             gatherers[worker] = task;
             return gatherers.Keys.ToList().IndexOf(worker);
         }
-
-        public void UnregisterGatherer(Villager worker)
-        {
-            gatheringSockets[gatherers.Keys.ToList().IndexOf(worker)].ResetGathering();
-            gatherers.Remove(worker);
-        }
         
-        public bool CanGather() =>
-            gatherers.Keys.Count < maximumGatherers;
+        #endregion
     }
 }
