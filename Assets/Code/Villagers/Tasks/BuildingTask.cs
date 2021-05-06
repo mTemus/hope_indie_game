@@ -10,9 +10,8 @@ namespace Code.Villagers.Tasks
 
         public bool ResourcesDelivered { get; private set; }
         
-        public BuildingTask(int taskPriority, Vector3 taskPosition, Construction construction)
+        public BuildingTask(Vector3 taskPosition, Construction construction)
         {
-            this.taskPriority = taskPriority;
             this.taskPosition = taskPosition;
             this.construction = construction;
             constructionPosition = construction.transform.position + construction.GetComponent<Building>().Data.EntrancePivot;
