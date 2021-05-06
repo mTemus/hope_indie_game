@@ -26,7 +26,7 @@ namespace Code.Villagers.Tasks
         
         private bool IsResourceInDelivery =>
             resourceCarryingState == ResourceCarryingTaskState.DELIVER_RESOURCES ||
-            resourceCarryingState == ResourceCarryingTaskState.GO_TO_STORAGE && worker.Profession.CarriedResource != null;
+            resourceCarryingState == ResourceCarryingTaskState.GO_TO_STORAGE && worker.Profession.IsCarryingResource;
         
         public Func<ResourceType, int, Resource> onResourceWithdraw;
         public Func<Task, int, Resource> onReservedResourceWithdraw;

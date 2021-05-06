@@ -39,7 +39,7 @@ namespace Code.Villagers.Tasks
 
         public bool IsResourceInDelivery =>
             currentPickupState == ResourcePickUpTaskState.DELIVER_RESOURCE || 
-            currentPickupState == ResourcePickUpTaskState.GO_TO_STORAGE && worker.Profession.CarriedResource != null;
+            currentPickupState == ResourcePickUpTaskState.GO_TO_STORAGE && worker.Profession.IsCarryingResource;
         
         private void SortResources()
         {
@@ -69,7 +69,7 @@ namespace Code.Villagers.Tasks
                 currentPickupState = ResourcePickUpTaskState.GO_TO_RESOURCE;
             }
             else {
-                if (worker.Profession.CarriedResource != null) 
+                if (worker.Profession.IsCarryingResource) 
                     currentPickupState = ResourcePickUpTaskState.GO_TO_STORAGE;
                 else 
                     worker.Profession.CompleteTask();

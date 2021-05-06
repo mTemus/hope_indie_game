@@ -32,6 +32,7 @@ namespace Code.Villagers.Professions
         public ProfessionData Data { get; set; }
         public bool HasWorkToDo =>
             tasks.Count > 0 || currentTask != null;
+        public bool IsCarryingResource => CarriedResource != null && CarriedResource.amount > 0;
         
         #region AI
 
@@ -103,7 +104,7 @@ namespace Code.Villagers.Professions
                 currentTask = null;
             }
 
-            if (CarriedResource == null) return;
+            if (!IsCarryingResource) return;
             AssetsStorage.I.ThrowResourceOnTheGround(CarriedResource, transform.position.x);
             CarriedResource = null;
         }

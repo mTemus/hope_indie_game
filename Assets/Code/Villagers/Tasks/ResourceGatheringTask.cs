@@ -48,7 +48,7 @@ namespace Code.Villagers.Tasks
             switch (currentGatheringState) {
                 case ResourceGatheringTaskState.GO_TO_WORKPLACE:
                     if (!worker.MoveTo(worker.Profession.Workplace.PivotedPosition)) break;
-                    currentGatheringState = worker.Profession.CarriedResource != null ? 
+                    currentGatheringState = worker.Profession.IsCarryingResource ? 
                         ResourceGatheringTaskState.DELIVER_RESOURCE_TO_WORKPLACE : ResourceGatheringTaskState.FIND_CLOSEST_RESOURCE;
                     break;
                 
@@ -61,7 +61,7 @@ namespace Code.Villagers.Tasks
                         resourceArea.GetClosestResourceToGatherByType(currWorkerPosition, resourceType);
 
                     if (resourceToGather == null) {
-                        if (worker.Profession.CarriedResource != null && worker.Profession.CarriedResource.amount > 0) {
+                        if (worker.Profession.IsCarryingResource) {
                             currentGatheringState = ResourceGatheringTaskState.GO_TO_WORKPLACE;
                         }
                         else {

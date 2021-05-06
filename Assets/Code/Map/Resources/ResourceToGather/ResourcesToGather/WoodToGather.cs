@@ -6,7 +6,7 @@ namespace Code.Map.Resources.ResourceToGather.ResourcesToGather
     {
         public override void StartGathering(Villager worker)
         {
-            if (worker.Profession.CarriedResource != null) return;
+            if (worker.Profession.IsCarryingResource) return;
             worker.Profession.CarriedResource = new Resource(resource.Type, 0);
         }
 
