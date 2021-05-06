@@ -76,8 +76,12 @@ namespace Code.Map.Building.Buildings.Types.Resources
             
             Debug.LogWarning("Stored: " + resourceToStore.amount + " " + resourceToStore.Type);
         }
-        
-        public Resource GetReservedResource(Task tKey, int amount)
+
+        #endregion
+
+        #region ReservedResources
+
+        public static Resource GetReservedResource(Task tKey, int amount)
         {
             Resource reservedResource = Managers.Instance.Resources.WithdrawReservedResource(tKey);
             Resource takenResource = new Resource(reservedResource.Type);

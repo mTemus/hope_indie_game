@@ -106,8 +106,7 @@ namespace Code.Villagers.Tasks
                     fromStoragePosition = fromStorage.PivotedPosition;
 
                     if (reservedResources) {
-                        Warehouse warehouse = (Warehouse) fromStorage;
-                        onReservedResourceWithdraw = warehouse.GetReservedResource;
+                        onReservedResourceWithdraw = Warehouse.GetReservedResource;
                     }
                     else {
                         onResourceWithdraw = fromStorage.Storage.WithdrawResource;
