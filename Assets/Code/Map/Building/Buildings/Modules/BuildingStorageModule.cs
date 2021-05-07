@@ -54,7 +54,7 @@ namespace Code.Map.Building.Buildings.Modules
                 storedResource.amount += newResource.amount;
             }
             else {
-                resources.Add(new Resource(newResource.Type, newResource.amount, 500));
+                resources.Add(new Resource(newResource.Type, newResource.amount, resourceLimit));
             }
             
             Debug.LogWarning("Stored: " + newResource.amount + " " + newResource.Type + " in " + name);
