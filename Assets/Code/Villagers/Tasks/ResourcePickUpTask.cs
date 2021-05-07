@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Code.Map.Building.Buildings.Types.Resources;
 using Code.Map.Resources;
 using UnityEngine;
-using NotImplementedException = System.NotImplementedException;
 
 namespace Code.Villagers.Tasks
 {
@@ -19,40 +18,37 @@ namespace Code.Villagers.Tasks
     
     public class ResourcePickUpTask : Task
     {
-        private ResourcePickUpTaskState currentPickupState = ResourcePickUpTaskState.GET_STORAGE;
         private Queue<ResourceToPickUp> resources = new Queue<ResourceToPickUp>();
-        private int resourceAmount;
 
-        private readonly ResourceType storedResourceType;
+        private ResourcePickUpTaskState currentPickupState;
         private ResourceToPickUp currentResource;
         private Warehouse warehouse;
-        
+
+        private int resourceAmount;
+
+        public ResourceType StoredResourceType { get; }
         public bool HasWorker => worker != null;
         public bool CanStoreResources => resourceAmount < worker.Profession.Data.ResourceCarryingLimit;
-        
-        public ResourcePickUpTask(ResourceType storedResourceType)
-        {
-            this.storedResourceType = storedResourceType;
-        }
-        
-        public ResourceType StoredResourceType => storedResourceType;
-
         public bool IsResourceInDelivery =>
             currentPickupState == ResourcePickUpTaskState.DELIVER_RESOURCE || 
             currentPickupState == ResourcePickUpTaskState.GO_TO_STORAGE && worker.Profession.IsCarryingResource;
         
+        public ResourcePickUpTask(ResourceType storedResourceType)
+        {
+            StoredResourceType = storedResourceType;
+        }
+        
         private void SortResources()
         {
             Vector3 workerPosition = worker.transform.position;
-
             List<ResourceToPickUp> resourcesList = new List<ResourceToPickUp>(resources);
 
             for (int i = 0; i < resourcesList.Count; i++) {
                 for (int sort = 0; sort < resourcesList.Count - 1; sort++) {
-                    float distanceOne = Vector3.Distance(workerPosition, resourcesList[sort].transform.position);
-                    float distanceTwo = Vector3.Distance(workerPosition, resourcesList[sort + 1].transform.position);
+                    float distanceToResource = Vector3.Distance(workerPosition, resourcesList[sort].transform.position);
+                    float distanceToNextResource = Vector3.Distance(workerPosition, resourcesList[sort + 1].transform.position);
 
-                    if (!(distanceOne > distanceTwo)) continue;
+                    if (distanceToResource <= distanceToNextResource) continue;
                     ResourceToPickUp tmp = resourcesList[sort + 1];
                     resourcesList[sort + 1] = resourcesList[sort];
                     resourcesList[sort + 1] = tmp;
@@ -72,16 +68,17 @@ namespace Code.Villagers.Tasks
                 if (worker.Profession.IsCarryingResource) 
                     currentPickupState = ResourcePickUpTaskState.GO_TO_STORAGE;
                 else 
-                    worker.Profession.CompleteTask();
+                    onTaskCompleted.Invoke();
             }
         }
 
         public bool AddResourceToPickUp(ResourceToPickUp resource)
         {
-            if (resourceAmount + resource.StoredResource.amount > worker.Profession.Data.ResourceCarryingLimit)
+            int newAmount = resourceAmount + resource.StoredResource.amount;
+            if (newAmount > worker.Profession.Data.ResourceCarryingLimit)
                 return false;
             
-            resourceAmount += resource.StoredResource.amount;
+            resourceAmount = newAmount;
             resources.Enqueue(resource);
             SortResources();
             return true;
@@ -100,12 +97,7 @@ namespace Code.Villagers.Tasks
 
         public override void StartTask()
         {
-            
-        }
-
-        public override void EndTask()
-        {
-            
+            currentPickupState = ResourcePickUpTaskState.GET_STORAGE;
         }
 
         public override void DoTask()
@@ -154,33 +146,19 @@ namespace Code.Villagers.Tasks
                     break;
                 
                 case ResourcePickUpTaskState.DELIVER_RESOURCE:
-                    Warehouse warehouseDeliver = worker.Profession.Workplace as Warehouse;
-
-                    if (warehouseDeliver != null) {
-                        warehouseDeliver.StoreResource(worker.Profession.CarriedResource);
-                        worker.Profession.CarriedResource = null;
-                        worker.UI.SetResourceIcon(false, currentResource.StoredResource.Type);
-
-                        worker.Profession.CompleteTask();
-                    }
-                    else {
-                        throw new Exception("NO WAREHOUSE TO STORE RESOURCES FOR TASK: " + GetType());
-                    }
+                    warehouse.StoreResource(worker.Profession.CarriedResource);
+                    worker.UI.SetResourceIcon(false,  worker.Profession.CarriedResource.Type);
+                    worker.Profession.CarriedResource = null;
+                    onTaskCompleted.Invoke();
                     break;
                 
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new Exception("NO SUCH STATE FOR RESOURCE PICK UP TASK");
             }
         }
-
-        public override void PauseTask()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void AbandonTask()
-        {
-            throw new NotImplementedException();
-        }
+        
+        public override void EndTask() {}
+        public override void PauseTask() {}
+        public override void AbandonTask() { }
     }
 }
