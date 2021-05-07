@@ -111,14 +111,13 @@ namespace Code.Map.Building.Buildings.Types.Resources
             ResourceCarryingTask rct;
             
             if (HasHiredHaulers) {
-                rct = new ResourceCarryingTask(storedResource, warehouse, this, false);
+                rct = new ResourceCarryingTask(storedResource, false, warehouse, this);
                 rct.onResourceDelivery += warehouse.StoreResource;
                 rct.onResourceWithdraw += Storage.WithdrawResourceContinuously;
                 AddTaskToDo(rct);
             }
-            else {
-                if (storedResource.amount < AssetsStorage.I.GetProfessionDataForProfessionType(ProfessionType.GlobalHauler).ResourceCarryingLimit) return;
-                rct = new ResourceCarryingTask(new Resource(storedResource), warehouse, this, false);
+            else if (storedResource.amount >= AssetsStorage.I.GetProfessionDataForProfessionType(ProfessionType.GlobalHauler).ResourceCarryingLimit) {
+                rct = new ResourceCarryingTask(storedResource, false, warehouse, this);
                 rct.onResourceDelivery += warehouse.StoreResource;
                 rct.onResourceWithdraw += Storage.WithdrawResource;
                 AddTaskToDo(rct);

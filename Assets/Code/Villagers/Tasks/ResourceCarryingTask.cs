@@ -34,38 +34,20 @@ namespace Code.Villagers.Tasks
 
         public Resource ResourceToCarry => resourceToCarry;
 
-        private ResourceCarryingTask(Resource resourceToCarry, Building toStorage)
+        public ResourceCarryingTask(Resource resourceToCarry, bool reservedResources, Building toStorage, Building fromStorage = null)
         {
             this.resourceToCarry = resourceToCarry;
-            
-            reservedResources = false;
+            this.reservedResources = reservedResources;
+
             taskPosition = toStorage.PivotedPosition;
-            resourceCarryingState = ResourceCarryingTaskState.FIND_CLOSEST_STORAGE;
-        }
 
-        public ResourceCarryingTask(Resource resourceToCarry, Building toStorage, Building fromStorage, bool reservedResources)
-            : this(resourceToCarry, toStorage)
-        {
-            this.reservedResources = reservedResources;
-            fromStoragePosition = fromStorage.PivotedPosition;
-            resourceCarryingState = reservedResources ? ResourceCarryingTaskState.FIND_CLOSEST_STORAGE : ResourceCarryingTaskState.GO_TO_STORAGE;
-        }
-        
-        public ResourceCarryingTask(Resource resourceToCarry, Building toStorage, bool reservedResources)
-            : this(resourceToCarry, toStorage)
-        {
-            this.reservedResources = reservedResources;
-            resourceCarryingState = ResourceCarryingTaskState.FIND_CLOSEST_STORAGE;
-        }
-
-        public override void StartTask()
-        {
-           
-        }
-
-        public override void EndTask()
-        {
-            
+            if (fromStorage != null) {
+                fromStoragePosition = fromStorage.PivotedPosition;
+                resourceCarryingState = ResourceCarryingTaskState.GO_TO_STORAGE;
+            }
+            else {
+                resourceCarryingState = ResourceCarryingTaskState.FIND_CLOSEST_STORAGE;
+            }
         }
 
         public override void DoTask()
@@ -132,10 +114,9 @@ namespace Code.Villagers.Tasks
             worker.UI.StateText.text = "Resource carrying: " + resourceCarryingState;
         }
 
-        public override void PauseTask()
-        {
-            
-        }
+        public override void StartTask() {}
+        public override void EndTask() {}
+        public override void PauseTask() {}
 
         public override void AbandonTask()
         {
