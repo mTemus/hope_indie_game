@@ -105,9 +105,8 @@ namespace Code.Map.Building.Buildings.Types.Resources
 
         public override void DeliverStoredResources(Resource storedResource)
         {
-            // if (!workersWithoutTasks.Any(worker => worker.Profession is VillagerWorkplaceHauler)) return;
             if (!(Managers.I.Buildings.GetClosestBuildingOfClass(BuildingType.Resources, typeof(Warehouse),
-                transform.position) is Warehouse w)) return;
+                transform.position) is Warehouse warehouse)) return;
 
             ResourceCarryingTask rct;
             
@@ -130,7 +129,8 @@ namespace Code.Map.Building.Buildings.Types.Resources
         {
             if (IsGatheringTaskTodo()) return;
             ResourceToGatherData rtgd = AssetsStorage.I.GetResourceToGatherDataByResourceType(ResourceType.WOOD);
-            ResourceGatheringTask rgt = new ResourceGatheringTask(Storage, rtgd.ResourceType, rtgd.OccurAreas);
+            ResourceGatheringTask rgt = new ResourceGatheringTask(rtgd.ResourceType, rtgd.OccurAreas);
+            rgt.onResourceDelivery += Storage.StoreResource;
             AddTaskToDo(rgt);
             
             Debug.LogError("Created automated task in: " + name);

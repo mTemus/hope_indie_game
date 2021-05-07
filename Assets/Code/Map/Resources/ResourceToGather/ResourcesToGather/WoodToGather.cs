@@ -21,7 +21,7 @@ namespace Code.Map.Resources.ResourceToGather.ResourcesToGather
         protected override void DepleteResource()
         {
             foreach (Villager gatherer in gatherers.Keys) 
-                gatherers[gatherer].OnCurrentResourceDepleted();
+                gatherers[gatherer].DepleteCurrentResource();
 
             foreach (Villager gatherer in gatherers.Keys) 
                 UnregisterGatherer(gatherer);
