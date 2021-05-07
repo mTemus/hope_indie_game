@@ -31,8 +31,8 @@ namespace Code.Map.Building.Buildings.Types.Resources
                 if (!(task is ResourcePickUpTask {HasWorker: true} rpt)) continue;
                 if (rpt.IsResourceInDelivery) continue;
                 if (rpt.CanStoreResources) {
-                    if (rpt.AddResourceToPickUp(resource)) 
-                        resource.OnResourceRegisterToPickUp(rpt);
+                    if (rpt.AddResourceToPickUp(resource))
+                        resource.ResourcePickUpTask = rpt;
                 }
                 else {
                     rtpt = new ResourcePickUpTask(resource.StoredResource.Type);
@@ -58,8 +58,8 @@ namespace Code.Map.Building.Buildings.Types.Resources
             foreach (var resource in resourcesToPickUp
                 .Where(resource => resource.StoredResource.Type == rput.StoredResourceType)
                 .Where(resource => !resource.IsRegisteredToPickUp)) {
-                if (rput.AddResourceToPickUp(resource)) 
-                    resource.OnResourceRegisterToPickUp(rput);
+                if (rput.AddResourceToPickUp(resource))
+                    resource.ResourcePickUpTask = rput;
                 if (!rput.CanStoreResources) break;
             }
         }

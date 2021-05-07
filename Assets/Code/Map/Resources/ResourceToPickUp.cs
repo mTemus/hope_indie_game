@@ -11,10 +11,10 @@ namespace Code.Map.Resources
 {
     public class ResourceToPickUp : MonoBehaviour
     {
+        [Header("Resource asset elements")]
         [SerializeField] private SpriteRenderer resourceImage;
         
-        [SerializeField] private Resource storedResource;
-        private ResourcePickUpTask rput;
+        private Resource storedResource;
         private Warehouse warehouse;
         
         private float fallingTime = 1.2f;
@@ -22,11 +22,12 @@ namespace Code.Map.Resources
 
         private float newMapX;
         
+        public ResourcePickUpTask ResourcePickUpTask { get; set; }
         public Resource StoredResource => storedResource;
+        
+        public bool IsRegisteredToPickUp => ResourcePickUpTask != null;
 
-        public bool IsRegisteredToPickUp => rput != null;
-
-        private void OnResourceOnGround()
+        private void RegisterResourceOnGround()
         {
             Debug.LogWarning(
                 "Resource: " + storedResource.Type + " " + storedResource.amount + " is on the ground.");
@@ -50,7 +51,7 @@ namespace Code.Map.Resources
         {
             yield return new WaitForSeconds(decayTimeSeconds);
             warehouse.UnregisterResourceToPickUp(this);
-            rput.RemoveResourceBeforePickUp(this);
+            ResourcePickUpTask.RemoveResourceBeforePickUp(this);
             
             DestroyImmediate(gameObject);
         }
@@ -58,25 +59,17 @@ namespace Code.Map.Resources
         public void Initialize(Resource resource, float mapX)
         {
             newMapX = Random.Range(mapX - 2, mapX + 2);
-            Vector3 groundPosition = new Vector3(mapX, 0f, 0f);
-            Vector3 newGroundPosition = new Vector3(newMapX, 0, 0f);
-            
             storedResource = new Resource(resource);
             resourceImage.sprite = AssetsStorage.I.GetResourceIcon(storedResource.Type);
 
-            gameObject.LeanMove(groundPosition, fallingTime)
+            gameObject.LeanMove(new Vector3(mapX, 0f, 0f), fallingTime)
                 .setEaseInQuart()
-                .setOnComplete(OnResourceOnGround);
+                .setOnComplete(RegisterResourceOnGround);
 
-            gameObject.LeanMove(newGroundPosition, fallingTime)
+            gameObject.LeanMove(new Vector3(newMapX, 0, 0f), fallingTime)
                 .setEaseOutBounce();
         }
         
-        public void OnResourceRegisterToPickUp(ResourcePickUpTask rputt)
-        {
-            rput = rputt;
-        }
-
         public Resource WithdrawResource()
         {
             StartCoroutine(DestroyOnDelay());
