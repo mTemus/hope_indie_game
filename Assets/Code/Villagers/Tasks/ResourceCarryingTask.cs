@@ -85,7 +85,7 @@ namespace Code.Villagers.Tasks
                             currResAmount > maxResourceAmount ? maxResourceAmount : currResAmount) ;
                     }
                     
-                    worker.UI.SetResourceIcon(true, resourceToCarry.Type);
+                    worker.UI.SetResourceIcon(resourceToCarry.Type);
                     resourceToCarry.amount -= worker.Profession.CarriedResource.amount;
                     resourceCarryingState = ResourceCarryingTaskState.GO_ON_TASK_POSITION;
                     break;
@@ -97,7 +97,7 @@ namespace Code.Villagers.Tasks
                 
                 case ResourceCarryingTaskState.DELIVER_RESOURCES:
                     onResourceDelivery?.Invoke(worker.Profession.CarriedResource);
-                    worker.UI.SetResourceIcon(false, resourceToCarry.Type);
+                    worker.UI.ClearResourceIcon();
                     Debug.LogWarning(worker.name + " has delivered: " + worker.Profession.CarriedResource.amount + " " + worker.Profession.CarriedResource.Type);
                     worker.Profession.CarriedResource = null;
 

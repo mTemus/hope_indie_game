@@ -30,7 +30,7 @@ namespace Code.Villagers.Tasks
 
         protected void ThrowResourceOnGround()
         {
-            worker.UI.SetResourceIcon(false, worker.Profession.CarriedResource.Type);
+            worker.UI.ClearResourceIcon();
             AssetsStorage.I.ThrowResourceOnTheGround(worker.Profession.CarriedResource, worker.transform.position.x);
             worker.Profession.CarriedResource = null;
         }

@@ -13,18 +13,17 @@ namespace Code.Villagers.Entity
         [SerializeField] private TextMeshProUGUI stateText;
         [SerializeField] private Image resourceImage;
         
-        public void SetResourceIcon(bool visible, ResourceType carriedResource)
+        public void SetResourceIcon(ResourceType carriedResource)
         {
-            //TODO: rework this, its a mess
-            if (resourceImage.gameObject.activeSelf && visible) return;
-            if (visible) {
-                resourceImage.gameObject.SetActive(true);
-                resourceImage.sprite = AssetsStorage.I.GetResourceIcon(carriedResource);
-            }
-            else {
-                resourceImage.sprite = null;
-                resourceImage.gameObject.SetActive(false);
-            }
+            if (resourceImage.gameObject.activeSelf) return;
+            resourceImage.sprite = AssetsStorage.I.GetResourceIcon(carriedResource);
+            resourceImage.gameObject.SetActive(true);
+        }
+
+        public void ClearResourceIcon()
+        {
+            resourceImage.sprite = null;
+            resourceImage.gameObject.SetActive(false);
         }
 
         public TextMeshProUGUI ProfessionName => professionName;

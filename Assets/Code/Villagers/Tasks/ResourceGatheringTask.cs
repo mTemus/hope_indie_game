@@ -81,13 +81,13 @@ namespace Code.Villagers.Tasks
                 
                 case ResourceGatheringTaskState.GATHER_RESOURCE:
                     if (resourceToGather.Gather(worker, gatheringSocketId)) break;
-                        worker.UI.SetResourceIcon(true, worker.Profession.CarriedResource.Type);
+                        worker.UI.SetResourceIcon(worker.Profession.CarriedResource.Type);
                         currentGatheringState = ResourceGatheringTaskState.GO_TO_WORKPLACE;
                     break;
                 
                 case ResourceGatheringTaskState.DELIVER_RESOURCE_TO_WORKPLACE:
                     onResourceDelivery.Invoke(worker.Profession.CarriedResource);
-                    worker.UI.SetResourceIcon(false, worker.Profession.CarriedResource.Type);
+                    worker.UI.ClearResourceIcon();
                     worker.Profession.CarriedResource = null;
                     
                     currentGatheringState = resourceToGather != null ? 
