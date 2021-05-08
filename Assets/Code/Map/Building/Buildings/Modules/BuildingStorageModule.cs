@@ -23,13 +23,8 @@ namespace Code.Map.Building.Buildings.Modules
         {
             Resource storedResource = GetResourceByType(resourceType);
             
-            if (storedResource == null) 
-                return false;
-
-            if (storedResource.amount < resourceAmount) 
-                return false;
-
-            return true;
+            if (storedResource == null) return false;
+            return storedResource.amount >= resourceAmount;
         }
 
         private Resource GetResourceByType(ResourceType type) =>
