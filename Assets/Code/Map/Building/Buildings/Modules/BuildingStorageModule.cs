@@ -57,7 +57,7 @@ namespace Code.Map.Building.Buildings.Modules
                 resources.Add(new Resource(newResource.Type, newResource.amount, resourceLimit));
             }
             
-            Debug.LogWarning("Stored: " + newResource.amount + " " + newResource.Type + " in " + name);
+            // Debug.LogWarning("Stored: " + newResource.amount + " " + newResource.Type + " in " + name);
             onResourceStored?.Invoke(resources.FirstOrDefault(resource => resource.Type == newResource.Type));
         }
 

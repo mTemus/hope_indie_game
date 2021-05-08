@@ -45,7 +45,7 @@ namespace Code.Map.Resources.ResourceToGather
                 onResourceDepleted.Invoke();
             }
             
-            Debug.LogError(worker.name + " gathered: " + gatheredResource + ". [" + worker.CarriedResource.amount + "/" + worker.Data.ResourceCarryingLimit + "]");
+            // Debug.LogError(worker.name + " gathered: " + gatheredResource + ". [" + worker.CarriedResource.amount + "/" + worker.Data.ResourceCarryingLimit + "]");
         }
 
         public void ResetGathering()
