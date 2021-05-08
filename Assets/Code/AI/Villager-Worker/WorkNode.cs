@@ -42,6 +42,10 @@ namespace Code.AI
                     }
                     else {
                         Debug.Log(worker.Profession.Data.Type + " got no task. Reporting as free.");
+                        
+                        //TODO: current AI is shit, so this is a patch, cause worker don't want to take new tasks after
+                        //TODO: having done a task
+                        worker.Profession.Workplace.ReportWorkerWithoutTask(worker);
                         currentState = WorkNodeState.REPORT_NO_TASK;
                     }
                     
