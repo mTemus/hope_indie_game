@@ -9,7 +9,7 @@ namespace Code.Map.Building.Buildings.Types.Resources
 {
     public class Sawmill : GatheringWorkplace
     {
-        protected override void Initialize()
+        public override void Initialize()
         {
             gatheringResourceType = ResourceType.WOOD;
             onWorkerHired.AddListener(CreateResourceGatheringTask);

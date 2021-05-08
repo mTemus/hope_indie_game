@@ -15,8 +15,8 @@ namespace Code.Map.Building.Buildings.Types.Resources
         private readonly List<Resource> storedResources = new List<Resource>();
         private readonly List<ResourceToPickUp> resourcesToPickUp = new List<ResourceToPickUp>();
         private readonly Dictionary<Workplace, List<Task>> externalTasks = new Dictionary<Workplace, List<Task>>();
-        
-        protected override void Initialize()
+
+        public override void Initialize()
         {
             StoreResource(new Resource(ResourceType.WOOD, 300));
             StoreResource(new Resource(ResourceType.STONE, 300));

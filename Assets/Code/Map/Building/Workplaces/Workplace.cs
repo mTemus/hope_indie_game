@@ -23,13 +23,6 @@ namespace Code.Map.Building.Workplaces
         
         protected int haulersCnt;
 
-        private void Awake()
-        {
-            Initialize();
-        }
-
-        protected abstract void Initialize();
-
         #region Workplace-AI
 
         // ----------------------- ADD TASK (task t)

@@ -1,3 +1,5 @@
+using NotImplementedException = System.NotImplementedException;
+
 namespace Code.Map.Building.Buildings.Types.Village
 {
     public class House : Building
@@ -12,6 +14,11 @@ namespace Code.Map.Building.Buildings.Types.Village
         void Update()
         {
         
+        }
+
+        public override void Initialize()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Code.Map.Building.Buildings.Types.Industry
 {
     public class BuildersGuild : ServicesWorkplace
     {
-        protected override void Initialize() {}
+        public override void Initialize() {}
         
         #region Tasks
 

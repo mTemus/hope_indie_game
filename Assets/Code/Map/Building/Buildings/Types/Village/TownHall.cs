@@ -7,7 +7,7 @@ namespace Code.Map.Building.Buildings.Types.Village
 {
     public class TownHall : Workplace
     {
-        protected override void Initialize()
+        public override void Initialize()
         {
             
         }
