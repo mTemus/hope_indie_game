@@ -22,11 +22,6 @@ namespace Code.Map.Building.Buildings.Types.Village
             throw new NotImplementedException();
         }
 
-        public override void SetAutomatedTask()
-        {
-            throw new NotImplementedException();
-        }
-
         public override void TakeTaskBackFromWorker(Task task)
         {
             throw new NotImplementedException();

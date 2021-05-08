@@ -119,7 +119,7 @@ namespace Code.Villagers.Tasks
                     break;
                 
                 case ResourcePickUpTaskState.GET_RESOURCES_DATA:
-                    warehouse.GetResourcesToPickUp(this);
+                    warehouse.GetResourcesToPickUpByType(this);
                     GetNextResource();
                     currentPickupState = ResourcePickUpTaskState.GO_TO_RESOURCE;
                     break;

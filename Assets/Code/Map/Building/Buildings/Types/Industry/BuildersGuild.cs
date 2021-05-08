@@ -65,35 +65,27 @@ namespace Code.Map.Building.Buildings.Types.Industry
             foreach (Villager worker in workersWithoutTasks) {
                 if (task is ResourceCarryingTask) {
                     if (haulersCnt > 0) {
-                        if (worker.Profession.Data.Type == ProfessionType.WorkplaceHauler) {
-                            GiveTaskToWorker(worker, task);
-                            Debug.Log("Added to hauler: " + worker.name);
-                            return;
-                        }
-                    }
-                    else {
+                        if (worker.Profession.Data.Type != ProfessionType.WorkplaceHauler) continue;
                         GiveTaskToWorker(worker, task);
-                        Debug.Log("Added to: " + worker.name);
+                        Debug.Log("Added to hauler: " + worker.name);
                         return;
                     }
-                }
-                else {
-                    if (worker.Profession.Data.Type == ProfessionType.WorkplaceHauler) 
-                        continue;
                     
                     GiveTaskToWorker(worker, task);
                     Debug.Log("Added to: " + worker.name);
                     return;
                 }
+                
+                if (worker.Profession.Data.Type == ProfessionType.WorkplaceHauler) 
+                    continue;
+                    
+                GiveTaskToWorker(worker, task);
+                Debug.Log("Added to: " + worker.name);
+                return;
             }
             
             tasksToDo.Add(task);
             Debug.Log("Added task as todo.");
-        }
-
-        public override void SetAutomatedTask()
-        {
-            // No automated task at builders guild, at least yet.
         }
 
         public override void TakeTaskBackFromWorker(Task task)

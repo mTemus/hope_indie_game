@@ -77,7 +77,7 @@ namespace Code.Map.Building
             return GetBuildingsByType(buildingType)
                 .Cast<Workplace>()
                 .Where(workplace => workplace.GetType() == classType)
-                .Where(workplace => workplace.CanHireWorker())
+                .Where(workplace => workplace.CanHireWorker)
                 .ToArray();
         }
 

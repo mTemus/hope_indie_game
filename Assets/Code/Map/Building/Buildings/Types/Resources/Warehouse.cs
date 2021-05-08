@@ -54,7 +54,7 @@ namespace Code.Map.Building.Buildings.Types.Resources
             resourcesToPickUp.Remove(resource);
         }
 
-        public void GetResourcesToPickUp(ResourcePickUpTask rput)
+        public void GetResourcesToPickUpByType(ResourcePickUpTask rput)
         {
             foreach (var resource in resourcesToPickUp
                 .Where(resource => resource.StoredResource.Type == rput.StoredResourceType)
@@ -169,11 +169,6 @@ namespace Code.Map.Building.Buildings.Types.Resources
 
             Villager worker = workersWithoutTasks[0];
             GiveTaskToWorker(worker, task);
-        }
-
-        public override void SetAutomatedTask()
-        {
-            
         }
 
         public override void TakeTaskBackFromWorker(Task task)
