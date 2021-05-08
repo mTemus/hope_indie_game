@@ -6,12 +6,13 @@ using Code.Villagers.Entity;
 using Code.Villagers.Professions;
 using Code.Villagers.Tasks;
 using UnityEngine;
-using NotImplementedException = System.NotImplementedException;
 
 namespace Code.Map.Building.Buildings.Types.Industry
 {
-    public class BuildersGuild : Workplace
+    public class BuildersGuild : ServicesWorkplace
     {
+        protected override void Initialize() {}
+        
         #region Tasks
 
         protected override Task GetNormalTask()
@@ -36,7 +37,7 @@ namespace Code.Map.Building.Buildings.Types.Industry
             return rct;
         }
         
-        private void CreateResourceCarryingTask(Resource requiredResource, Construction construction)
+        private void DeliverResourcesToConstruction(Resource requiredResource, Construction construction)
         {
             ResourceCarryingTask rct =
                 new ResourceCarryingTask(requiredResource, true, construction.GetComponent<Building>());
@@ -118,16 +119,6 @@ namespace Code.Map.Building.Buildings.Types.Industry
             }
         }
 
-        protected override void FireNormalWorker(Villager worker)
-        {
-            Debug.Log("Fired worker: " + worker.name + " from: " + name);
-        }
-
-        public override void DeliverStoredResources(Resource storedResource)
-        {
-            throw new NotImplementedException();
-        }
-
         public void CreateBuildingTask(Construction construction, BuildingData buildingData)
         {
             BuildingTask bt = new BuildingTask(construction.transform.position + construction.PositionOffset, construction);
@@ -136,7 +127,16 @@ namespace Code.Map.Building.Buildings.Types.Industry
             AddTaskToDo(bt);
 
             foreach (Resource resource in buildingData.RequiredResources) 
-                CreateResourceCarryingTask(new Resource(resource), construction);
+                DeliverResourcesToConstruction(new Resource(resource), construction);
+        }
+
+        #endregion
+
+        #region Workers
+
+        protected override void FireNormalWorker(Villager worker)
+        {
+            Debug.Log("Fired worker: " + worker.name + " from: " + name);
         }
 
         #endregion

@@ -7,6 +7,11 @@ namespace Code.Map.Building.Buildings.Types.Village
 {
     public class TownHall : Workplace
     {
+        protected override void Initialize()
+        {
+            
+        }
+
         protected override Task GetNormalTask()
         {
             throw new NotImplementedException();
@@ -30,11 +35,6 @@ namespace Code.Map.Building.Buildings.Types.Village
         protected override void FireNormalWorker(Villager worker)
         {
             
-        }
-
-        public override void DeliverStoredResources(Resource storedResource)
-        {
-            throw new NotImplementedException();
         }
     }
 }
