@@ -12,8 +12,11 @@ namespace Code.Map.Building.Buildings.Types.Resources
         public override void Initialize()
         {
             gatheringResourceType = ResourceType.WOOD;
+            
             onWorkerHired.AddListener(CreateResourceGatheringTask);
             onHaulerHired.AddListener(TakeTasksBackFromWarehouse);
+            Storage.onResourceStored.AddListener(DeliverStoredResources);
+            Storage.onResourceLimitReach.AddListener(StopAllTasks);
         }
         
         #region Tasks

@@ -63,6 +63,26 @@ namespace Code.Map.Building.Workplaces
             tasksToDo.Add(task);
             Debug.Log("Added task as todo.");
         }
+
+        //TODO: stopping/recovering tasks should get an update when worker AI will be updated
+        protected void StopAllTasks()
+        {
+            foreach (var worker in workers
+                .Where(worker => worker.Profession.Data.Type != ProfessionType.WorkplaceHauler)) 
+            { worker.Profession.CompleteTask(); }
+            
+            
+            Storage.onResourceLimitReset.AddListener(RecoverAllTasks);
+            Storage.onResourceLimitReset.AddListener(() => Storage.onResourceLimitReset.RemoveAllListeners());
+        }
+
+        private void RecoverAllTasks()
+        {
+            int tasksNeeded = workersWithoutTasks.Count(worker => worker.Profession.Data.Type != ProfessionType.WorkplaceHauler);
+
+            for (int i = 0; i < tasksNeeded; i++) 
+                CreateResourceGatheringTask();
+        }
         
         #endregion
         

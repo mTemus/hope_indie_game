@@ -11,8 +11,12 @@ namespace Code.Map.Building.Buildings.Modules
     {
         [Header("Resources")]
         [SerializeField] private int resourceLimit;
-        [SerializeField] private UnityEvent<Resource> onResourceStored;
-        [SerializeField] private UnityEvent<Resource> onResourceWithdraw;
+        
+        [Header("Observers")]
+        public UnityEvent<Resource> onResourceStored;
+        public UnityEvent<Resource> onResourceWithdraw;
+        public UnityEvent onResourceLimitReach;
+        public UnityEvent onResourceLimitReset;
         
         [Header("Debug")]
         [SerializeField] private List<Resource> resources = new List<Resource>();
@@ -43,6 +47,7 @@ namespace Code.Map.Building.Buildings.Modules
                     
                     Resource overflowResource = new Resource(storedResource.Type, overflow);
                     AssetsStorage.I.ThrowResourceOnTheGround(overflowResource, GetComponent<Building>().PivotedPosition.x);
+                    onResourceLimitReach.Invoke();
                     return;
                 }
                 
@@ -79,6 +84,10 @@ namespace Code.Map.Building.Buildings.Modules
             if (!CanWithdraw(resourceType, resourceAmount)) {
                 withdrawnResource.amount = 0;
                 return withdrawnResource;
+            }
+
+            if (withdrawnResource.amount <= resourceLimit / 2) {
+                onResourceLimitReset?.Invoke();
             }
             
             withdrawnResource.amount = resourceAmount;
