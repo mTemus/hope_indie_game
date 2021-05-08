@@ -6,9 +6,9 @@ using Code.Villagers.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Code.Map.Building
+namespace Code.Map.Building.Workplaces
 {
-    public abstract class Workplace : Building
+    public abstract class OldWorkplace : Building
     {
         [Header("Workplace Properties")]
         [SerializeField] private WorkplaceProperties properties;
@@ -194,7 +194,7 @@ namespace Code.Map.Building
             else 
                 HireHauler();
 
-            worker.Profession.Workplace = this;
+            // worker.Profession.Workplace = this;
             workers.Add(worker);
             ReportWorkerWithoutTask(worker);
             
