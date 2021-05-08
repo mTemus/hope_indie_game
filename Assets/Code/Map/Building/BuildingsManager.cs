@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Code.Map.Building.Buildings.Types.Village;
+using Code.Map.Building.Workplaces;
 using Code.System;
 using Code.Villagers.Professions;
 using UnityEngine;

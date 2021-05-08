@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Code.AI;
-using Code.Map.Building;
+using Code.Map.Building.Workplaces;
 using Code.Map.Resources;
 using Code.System;
 using Code.Villagers.Entity;

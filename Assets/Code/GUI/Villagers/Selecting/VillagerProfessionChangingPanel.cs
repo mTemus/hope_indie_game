@@ -1,6 +1,6 @@
 using Code.GUI.UIElements;
 using Code.GUI.UIElements.SelectableElement;
-using Code.Map.Building;
+using Code.Map.Building.Workplaces;
 using Code.System;
 using Code.System.GameInput;
 using Code.Villagers.Entity;

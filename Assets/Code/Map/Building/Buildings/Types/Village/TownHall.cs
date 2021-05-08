@@ -1,4 +1,4 @@
-using Code.Map.Resources;
+using Code.Map.Building.Workplaces;
 using Code.Villagers.Entity;
 using Code.Villagers.Tasks;
 using NotImplementedException = System.NotImplementedException;

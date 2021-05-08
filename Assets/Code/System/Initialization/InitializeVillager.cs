@@ -1,4 +1,4 @@
-using Code.Map.Building;
+using Code.Map.Building.Workplaces;
 using Code.Villagers.Entity;
 using Code.Villagers.Professions;
 using UnityEngine;

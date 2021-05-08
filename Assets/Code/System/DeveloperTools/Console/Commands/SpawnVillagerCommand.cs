@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using Code.Map.Building;
+using Code.Map.Building.Workplaces;
 using Code.System.Initialization;
 using Code.Villagers.Professions;
 using UnityEngine;

@@ -1,7 +1,6 @@
 using System;
 using Code.GUI.UIElements.SelectableElement;
-using Code.Map.Building;
-using Code.Map.Building.Buildings.Types.Village;
+using Code.Map.Building.Workplaces;
 using Code.System;
 using Code.Villagers.Professions;
 using UnityEngine;

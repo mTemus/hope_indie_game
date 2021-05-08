@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Code.System;
-using Code.System.Areas;
 using Code.Villagers.Entity;
 using Code.Villagers.Tasks;
 using UnityEngine;

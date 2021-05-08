@@ -1,13 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using Code.Map.Building.Workplaces;
 using Code.Map.Resources;
-using Code.Map.Resources.ResourceToGather;
-using Code.System;
 using Code.Villagers.Entity;
-using Code.Villagers.Professions;
 using Code.Villagers.Tasks;
-using UnityEngine;
 
 namespace Code.Map.Building.Buildings.Types.Resources
 {
