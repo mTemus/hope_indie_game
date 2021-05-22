@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Code.Villagers.Tasks
 {
-    public enum ResourceGatheringTaskState
+    public enum Task_ResourceGathering_State
     {
         GO_TO_WORKPLACE,
         FIND_CLOSEST_RESOURCE,
@@ -16,12 +16,12 @@ namespace Code.Villagers.Tasks
         DELIVER_RESOURCE_TO_WORKPLACE
     }
     
-    public class ResourceGatheringTask : Task
+    public class Task_ResourceGathering : Task
     {
         private readonly ResourceType resourceType;
         private readonly AreaType[] gatherAreas;
         
-        private ResourceGatheringTaskState currentGatheringState;
+        private Task_ResourceGathering_State currentGatheringState;
         private ResourceToGather resourceToGather;
         private Vector3 resourcePosition;
         
@@ -29,7 +29,7 @@ namespace Code.Villagers.Tasks
 
         public Action<Resource> onResourceDelivery;
         
-        public ResourceGatheringTask(ResourceType resourceType, AreaType[] gatherAreas)
+        public Task_ResourceGathering(ResourceType resourceType, AreaType[] gatherAreas)
         {
             this.resourceType = resourceType;
             this.gatherAreas = gatherAreas;
@@ -37,19 +37,19 @@ namespace Code.Villagers.Tasks
         
         public override void StartTask()
         {
-            currentGatheringState = ResourceGatheringTaskState.FIND_CLOSEST_RESOURCE;
+            currentGatheringState = Task_ResourceGathering_State.FIND_CLOSEST_RESOURCE;
         }
         
         public override void DoTask()
         {
             switch (currentGatheringState) {
-                case ResourceGatheringTaskState.GO_TO_WORKPLACE:
+                case Task_ResourceGathering_State.GO_TO_WORKPLACE:
                     if (!worker.MoveTo(worker.Profession.Workplace.PivotedPosition)) break;
                     currentGatheringState = worker.Profession.IsCarryingResource ? 
-                        ResourceGatheringTaskState.DELIVER_RESOURCE_TO_WORKPLACE : ResourceGatheringTaskState.FIND_CLOSEST_RESOURCE;
+                        Task_ResourceGathering_State.DELIVER_RESOURCE_TO_WORKPLACE : Task_ResourceGathering_State.FIND_CLOSEST_RESOURCE;
                     break;
                 
-                case ResourceGatheringTaskState.FIND_CLOSEST_RESOURCE:
+                case Task_ResourceGathering_State.FIND_CLOSEST_RESOURCE:
                     Vector3 currWorkerPosition = worker.transform.position;
                     
                     Area resourceArea =
@@ -59,7 +59,7 @@ namespace Code.Villagers.Tasks
 
                     if (resourceToGather == null) {
                         if (worker.Profession.IsCarryingResource) {
-                            currentGatheringState = ResourceGatheringTaskState.GO_TO_WORKPLACE;
+                            currentGatheringState = Task_ResourceGathering_State.GO_TO_WORKPLACE;
                         }
                         else {
                             worker.Profession.CarriedResource = null;
@@ -70,28 +70,28 @@ namespace Code.Villagers.Tasks
                     
                     gatheringSocketId = resourceToGather.RegisterGatherer(worker, this);
                     resourcePosition = resourceToGather.PivotedPosition;
-                    currentGatheringState = ResourceGatheringTaskState.GO_TO_RESOURCE;
+                    currentGatheringState = Task_ResourceGathering_State.GO_TO_RESOURCE;
                     break;
                 
-                case ResourceGatheringTaskState.GO_TO_RESOURCE:
+                case Task_ResourceGathering_State.GO_TO_RESOURCE:
                     if (!worker.MoveTo(resourcePosition)) break;
                     resourceToGather.StartGathering(worker);
-                    currentGatheringState = ResourceGatheringTaskState.GATHER_RESOURCE;
+                    currentGatheringState = Task_ResourceGathering_State.GATHER_RESOURCE;
                     break;
                 
-                case ResourceGatheringTaskState.GATHER_RESOURCE:
+                case Task_ResourceGathering_State.GATHER_RESOURCE:
                     if (resourceToGather.Gather(worker, gatheringSocketId)) break;
                         worker.UI.SetResourceIcon(worker.Profession.CarriedResource.Type);
-                        currentGatheringState = ResourceGatheringTaskState.GO_TO_WORKPLACE;
+                        currentGatheringState = Task_ResourceGathering_State.GO_TO_WORKPLACE;
                     break;
                 
-                case ResourceGatheringTaskState.DELIVER_RESOURCE_TO_WORKPLACE:
+                case Task_ResourceGathering_State.DELIVER_RESOURCE_TO_WORKPLACE:
                     onResourceDelivery.Invoke(worker.Profession.CarriedResource);
                     worker.UI.ClearResourceIcon();
                     worker.Profession.CarriedResource = null;
                     
                     currentGatheringState = resourceToGather != null ? 
-                        ResourceGatheringTaskState.GO_TO_RESOURCE : ResourceGatheringTaskState.FIND_CLOSEST_RESOURCE;
+                        Task_ResourceGathering_State.GO_TO_RESOURCE : Task_ResourceGathering_State.FIND_CLOSEST_RESOURCE;
                     break;
                 
                 default:
@@ -105,8 +105,8 @@ namespace Code.Villagers.Tasks
 
         public void DepleteCurrentResource()
         {
-            if (currentGatheringState != ResourceGatheringTaskState.GO_TO_WORKPLACE) 
-                currentGatheringState = ResourceGatheringTaskState.FIND_CLOSEST_RESOURCE;
+            if (currentGatheringState != Task_ResourceGathering_State.GO_TO_WORKPLACE) 
+                currentGatheringState = Task_ResourceGathering_State.FIND_CLOSEST_RESOURCE;
 
             resourceToGather = null; 
         }

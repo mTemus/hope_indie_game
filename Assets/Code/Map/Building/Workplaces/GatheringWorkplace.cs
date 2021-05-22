@@ -17,7 +17,7 @@ namespace Code.Map.Building.Workplaces
         protected ResourceType gatheringResourceType;
         
         private bool IsGatheringTaskTodo =>
-            tasksToDo.Any(task => task is ResourceGatheringTask);
+            tasksToDo.Any(task => task is Task_ResourceGathering);
         
         #region Tasks
 
@@ -35,7 +35,7 @@ namespace Code.Map.Building.Workplaces
         
         protected override void AddTaskToDo(Task task)
         {
-            if (task is ResourceCarryingTask && !HasHiredHaulers) {
+            if (task is Task_ResourceCarrying && !HasHiredHaulers) {
                 RegisterTaskAsExternal(task);
                 return;
             }
@@ -47,7 +47,7 @@ namespace Code.Map.Building.Workplaces
             }
             
             foreach (Villager worker in workersWithoutTasks) {
-                if (task is ResourceCarryingTask) {
+                if (task is Task_ResourceCarrying) {
                     if (worker.Profession.Data.Type != ProfessionType.WorkplaceHauler) continue;
                     GiveTaskToWorker(worker, task);
                     Debug.Log("Added to hauler: " + worker.name);
@@ -92,7 +92,7 @@ namespace Code.Map.Building.Workplaces
         {
             if (IsGatheringTaskTodo) return;
             ResourceToGatherData rtgd = AssetsStorage.I.GetResourceToGatherDataByResourceType(gatheringResourceType);
-            ResourceGatheringTask rgt = new ResourceGatheringTask(rtgd.ResourceType, rtgd.OccurAreas);
+            Task_ResourceGathering rgt = new Task_ResourceGathering(rtgd.ResourceType, rtgd.OccurAreas);
             rgt.onResourceDelivery += Storage.StoreResource;
             AddTaskToDo(rgt);
             
@@ -104,16 +104,16 @@ namespace Code.Map.Building.Workplaces
             if (!(Managers.I.Buildings.GetClosestBuildingOfClass(BuildingType.Resources, typeof(Warehouse),
                 transform.position) is Warehouse warehouse)) return;
 
-            ResourceCarryingTask rct;
+            Task_ResourceCarrying rct;
             
             if (HasHiredHaulers) {
-                rct = new ResourceCarryingTask(storedResource, false, warehouse, this);
+                rct = new Task_ResourceCarrying(storedResource, false, warehouse, this);
                 rct.onResourceDelivery += warehouse.StoreResource;
                 rct.onResourceWithdraw += Storage.WithdrawResourceContinuously;
                 AddTaskToDo(rct);
             }
             else if (storedResource.amount >= AssetsStorage.I.GetProfessionDataForProfessionType(ProfessionType.GlobalHauler).ResourceCarryingLimit) {
-                rct = new ResourceCarryingTask(storedResource, false, warehouse, this);
+                rct = new Task_ResourceCarrying(storedResource, false, warehouse, this);
                 rct.onResourceDelivery += warehouse.StoreResource;
                 rct.onResourceWithdraw += Storage.WithdrawResource;
                 AddTaskToDo(rct);

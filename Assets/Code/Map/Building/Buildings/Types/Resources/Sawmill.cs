@@ -24,8 +24,8 @@ namespace Code.Map.Building.Buildings.Types.Resources
         protected override Task GetNormalTask() 
         {
             Task rct = (from task in tasksToDo
-                    where task is ResourceGatheringTask
-                    select task as ResourceGatheringTask)
+                    where task is Task_ResourceGathering
+                    select task as Task_ResourceGathering)
                 .FirstOrDefault();
 
             RemoveTaskFromTodoList(rct);
@@ -35,8 +35,8 @@ namespace Code.Map.Building.Buildings.Types.Resources
         protected override Task GetResourceCarryingTask()
         {
             Task rct = (from task in tasksToDo
-                    where task is ResourceCarryingTask
-                    select task as ResourceCarryingTask)
+                    where task is Task_ResourceCarrying
+                    select task as Task_ResourceCarrying)
                 .FirstOrDefault();
 
             RemoveTaskFromTodoList(rct);

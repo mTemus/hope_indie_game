@@ -22,7 +22,7 @@ namespace Code.Map.Resources.ResourceToGather
         
         protected Resource resource;
         protected GatheringSocket[] gatheringSockets;
-        protected Dictionary<Villager, ResourceGatheringTask> gatherers = new Dictionary<Villager, ResourceGatheringTask>();
+        protected Dictionary<Villager, Task_ResourceGathering> gatherers = new Dictionary<Villager, Task_ResourceGathering>();
 
         private ResourceToGatherType type;
         private int maximumGatherers;
@@ -72,7 +72,7 @@ namespace Code.Map.Resources.ResourceToGather
         }
 
         
-        public int RegisterGatherer(Villager worker, ResourceGatheringTask task)
+        public int RegisterGatherer(Villager worker, Task_ResourceGathering task)
         {
             gatherers[worker] = task;
             return gatherers.Keys.ToList().IndexOf(worker);

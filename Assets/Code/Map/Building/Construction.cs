@@ -12,7 +12,7 @@ namespace Code.Map.Building
     {
         private readonly List<Resource> requiredResources = new List<Resource>();
         private float currentProgress;
-        private BuildingTask buildingTask;
+        private Task_Building taskBuilding;
         private Vector3 positionOffset;
 
         private Material normalMaterial;
@@ -39,9 +39,9 @@ namespace Code.Map.Building
             requiredResources.Add(resource);
         }
 
-        public void SetBuildingTask(BuildingTask thisTask)
+        public void SetBuildingTask(Task_Building @this)
         {
-            buildingTask = thisTask;
+            taskBuilding = @this;
         }
         
         public void AddResources(Resource deliveredResource)
@@ -53,7 +53,7 @@ namespace Code.Map.Building
             
             if (AreResourceDelivered()) {
                 Debug.LogError("Resources delivered for: " + name);
-                buildingTask.SetResourcesAsDelivered();
+                taskBuilding.SetResourcesAsDelivered();
             }
         }
 

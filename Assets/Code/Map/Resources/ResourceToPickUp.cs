@@ -22,10 +22,10 @@ namespace Code.Map.Resources
 
         private float newMapX;
         
-        public ResourcePickUpTask ResourcePickUpTask { get; set; }
+        public Task_ResourcePickUp TaskResourcePickUp { get; set; }
         public Resource StoredResource => storedResource;
         
-        public bool IsRegisteredToPickUp => ResourcePickUpTask != null;
+        public bool IsRegisteredToPickUp => TaskResourcePickUp != null;
 
         private void RegisterResourceOnGround()
         {
@@ -51,7 +51,7 @@ namespace Code.Map.Resources
         {
             yield return new WaitForSeconds(decayTimeSeconds);
             warehouse.UnregisterResourceToPickUp(this);
-            ResourcePickUpTask.RemoveResourceBeforePickUp(this);
+            TaskResourcePickUp.RemoveResourceBeforePickUp(this);
             
             DestroyImmediate(gameObject);
         }

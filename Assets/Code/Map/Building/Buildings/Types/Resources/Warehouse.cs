@@ -26,23 +26,23 @@ namespace Code.Map.Building.Buildings.Types.Resources
 
         public void RegisterResourceToPickUp(ResourceToPickUp resource)
         {
-            ResourcePickUpTask rtpt = null;
+            Task_ResourcePickUp rtpt = null;
             
             foreach (Task task in tasksToDo) {
-                if (!(task is ResourcePickUpTask {HasWorker: true} rpt)) continue;
+                if (!(task is Task_ResourcePickUp {HasWorker: true} rpt)) continue;
                 if (rpt.IsResourceInDelivery) continue;
                 if (rpt.CanStoreResources) {
                     if (rpt.AddResourceToPickUp(resource))
-                        resource.ResourcePickUpTask = rpt;
+                        resource.TaskResourcePickUp = rpt;
                 }
                 else {
-                    rtpt = new ResourcePickUpTask(resource.StoredResource.Type);
+                    rtpt = new Task_ResourcePickUp(resource.StoredResource.Type);
                     AddTaskToDo(rtpt); 
                 }
             }
 
             if (rtpt == null) {
-                rtpt = new ResourcePickUpTask(resource.StoredResource.Type);
+                rtpt = new Task_ResourcePickUp(resource.StoredResource.Type);
                 AddTaskToDo(rtpt); 
             }
             
@@ -54,13 +54,13 @@ namespace Code.Map.Building.Buildings.Types.Resources
             resourcesToPickUp.Remove(resource);
         }
 
-        public void GetResourcesToPickUpByType(ResourcePickUpTask rput)
+        public void GetResourcesToPickUpByType(Task_ResourcePickUp rput)
         {
             foreach (var resource in resourcesToPickUp
                 .Where(resource => resource.StoredResource.Type == rput.StoredResourceType)
                 .Where(resource => !resource.IsRegisteredToPickUp)) {
                 if (rput.AddResourceToPickUp(resource))
-                    resource.ResourcePickUpTask = rput;
+                    resource.TaskResourcePickUp = rput;
                 if (!rput.CanStoreResources) break;
             }
         }

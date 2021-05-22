@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Code.Villagers.Tasks
 {
-    public enum ResourcePickUpTaskState 
+    public enum Task_ResourcePickUp_State 
     {
         GET_STORAGE,
         GO_TO_STORAGE,
@@ -16,11 +16,11 @@ namespace Code.Villagers.Tasks
         DELIVER_RESOURCE
     }
     
-    public class ResourcePickUpTask : Task
+    public class Task_ResourcePickUp : Task
     {
         private Queue<ResourceToPickUp> resources = new Queue<ResourceToPickUp>();
 
-        private ResourcePickUpTaskState currentPickupState;
+        private Task_ResourcePickUp_State currentPickupResourcePickUpState;
         private ResourceToPickUp currentResource;
         private Warehouse warehouse;
 
@@ -30,10 +30,10 @@ namespace Code.Villagers.Tasks
         public bool HasWorker => worker != null;
         public bool CanStoreResources => resourceAmount < worker.Profession.Data.ResourceCarryingLimit;
         public bool IsResourceInDelivery =>
-            currentPickupState == ResourcePickUpTaskState.DELIVER_RESOURCE || 
-            currentPickupState == ResourcePickUpTaskState.GO_TO_STORAGE && worker.Profession.IsCarryingResource;
+            currentPickupResourcePickUpState == Task_ResourcePickUp_State.DELIVER_RESOURCE || 
+            currentPickupResourcePickUpState == Task_ResourcePickUp_State.GO_TO_STORAGE && worker.Profession.IsCarryingResource;
         
-        public ResourcePickUpTask(ResourceType storedResourceType)
+        public Task_ResourcePickUp(ResourceType storedResourceType)
         {
             StoredResourceType = storedResourceType;
         }
@@ -62,11 +62,11 @@ namespace Code.Villagers.Tasks
         {
             if (resources.Count > 0) {
                 currentResource = resources.Dequeue();
-                currentPickupState = ResourcePickUpTaskState.GO_TO_RESOURCE;
+                currentPickupResourcePickUpState = Task_ResourcePickUp_State.GO_TO_RESOURCE;
             }
             else {
                 if (worker.Profession.IsCarryingResource) 
-                    currentPickupState = ResourcePickUpTaskState.GO_TO_STORAGE;
+                    currentPickupResourcePickUpState = Task_ResourcePickUp_State.GO_TO_STORAGE;
                 else 
                     onTaskCompleted.Invoke();
             }
@@ -97,39 +97,39 @@ namespace Code.Villagers.Tasks
 
         public override void StartTask()
         {
-            currentPickupState = ResourcePickUpTaskState.GET_STORAGE;
+            currentPickupResourcePickUpState = Task_ResourcePickUp_State.GET_STORAGE;
         }
 
         public override void DoTask()
         {
-            switch (currentPickupState) {
-                case ResourcePickUpTaskState.GET_STORAGE:
+            switch (currentPickupResourcePickUpState) {
+                case Task_ResourcePickUp_State.GET_STORAGE:
                     warehouse = worker.Profession.Workplace as Warehouse;
                     
                     if (warehouse == null) 
                         throw new Exception("CAN'T GET WAREHOUSE REFERENCE FROM WORKER " + worker.name + " IN TASK " + GetType());
 
-                    currentPickupState = ResourcePickUpTaskState.GET_RESOURCES_DATA;
+                    currentPickupResourcePickUpState = Task_ResourcePickUp_State.GET_RESOURCES_DATA;
                     break;
                 
-                case ResourcePickUpTaskState.GO_TO_STORAGE:
+                case Task_ResourcePickUp_State.GO_TO_STORAGE:
                     if (worker.MoveTo(warehouse.PivotedPosition)) 
-                        currentPickupState = worker.Profession.CarriedResource != null ? 
-                            ResourcePickUpTaskState.DELIVER_RESOURCE : ResourcePickUpTaskState.GET_RESOURCES_DATA;
+                        currentPickupResourcePickUpState = worker.Profession.CarriedResource != null ? 
+                            Task_ResourcePickUp_State.DELIVER_RESOURCE : Task_ResourcePickUp_State.GET_RESOURCES_DATA;
                     break;
                 
-                case ResourcePickUpTaskState.GET_RESOURCES_DATA:
+                case Task_ResourcePickUp_State.GET_RESOURCES_DATA:
                     warehouse.GetResourcesToPickUpByType(this);
                     GetNextResource();
-                    currentPickupState = ResourcePickUpTaskState.GO_TO_RESOURCE;
+                    currentPickupResourcePickUpState = Task_ResourcePickUp_State.GO_TO_RESOURCE;
                     break;
                 
-                case ResourcePickUpTaskState.GO_TO_RESOURCE:
+                case Task_ResourcePickUp_State.GO_TO_RESOURCE:
                     if (worker.MoveTo(currentResource.transform.position))
-                        currentPickupState = ResourcePickUpTaskState.COLLECT_RESOURCE;
+                        currentPickupResourcePickUpState = Task_ResourcePickUp_State.COLLECT_RESOURCE;
                     break;
                 
-                case ResourcePickUpTaskState.COLLECT_RESOURCE:
+                case Task_ResourcePickUp_State.COLLECT_RESOURCE:
                     worker.UI.SetResourceIcon(currentResource.StoredResource.Type);
                     Resource collectedResource = currentResource.WithdrawResource();
                     Resource workerResource = worker.Profession.CarriedResource;
@@ -145,7 +145,7 @@ namespace Code.Villagers.Tasks
                     GetNextResource();
                     break;
                 
-                case ResourcePickUpTaskState.DELIVER_RESOURCE:
+                case Task_ResourcePickUp_State.DELIVER_RESOURCE:
                     warehouse.StoreResource(worker.Profession.CarriedResource);
                     worker.UI.ClearResourceIcon();
                     worker.Profession.CarriedResource = null;

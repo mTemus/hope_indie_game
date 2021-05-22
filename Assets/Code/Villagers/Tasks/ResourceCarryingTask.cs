@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Code.Villagers.Tasks
 {
-    public enum ResourceCarryingTaskState
+    public enum Task_ResourceCarrying_State
     {
         FIND_CLOSEST_STORAGE,
         GO_TO_STORAGE, 
@@ -16,17 +16,17 @@ namespace Code.Villagers.Tasks
         DELIVER_RESOURCES
     }
 
-    public class ResourceCarryingTask : Task
+    public class Task_ResourceCarrying : Task
     {
         private readonly Resource resourceToCarry;
         private readonly bool reservedResources;
 
         private Vector3 fromStoragePosition;
-        private ResourceCarryingTaskState resourceCarryingState;
+        private Task_ResourceCarrying_State taskResourceCarryingState;
         
         private bool IsResourceInDelivery =>
-            resourceCarryingState == ResourceCarryingTaskState.DELIVER_RESOURCES ||
-            resourceCarryingState == ResourceCarryingTaskState.GO_TO_STORAGE && worker.Profession.IsCarryingResource;
+            taskResourceCarryingState == Task_ResourceCarrying_State.DELIVER_RESOURCES ||
+            taskResourceCarryingState == Task_ResourceCarrying_State.GO_TO_STORAGE && worker.Profession.IsCarryingResource;
         
         public Func<ResourceType, int, Resource> onResourceWithdraw;
         public Func<Task, int, Resource> onReservedResourceWithdraw;
@@ -34,7 +34,7 @@ namespace Code.Villagers.Tasks
 
         public Resource ResourceToCarry => resourceToCarry;
 
-        public ResourceCarryingTask(Resource resourceToCarry, bool reservedResources, Building toStorage, Building fromStorage = null)
+        public Task_ResourceCarrying(Resource resourceToCarry, bool reservedResources, Building toStorage, Building fromStorage = null)
         {
             this.resourceToCarry = resourceToCarry;
             this.reservedResources = reservedResources;
@@ -43,17 +43,17 @@ namespace Code.Villagers.Tasks
 
             if (fromStorage != null) {
                 fromStoragePosition = fromStorage.PivotedPosition;
-                resourceCarryingState = ResourceCarryingTaskState.GO_TO_STORAGE;
+                taskResourceCarryingState = Task_ResourceCarrying_State.GO_TO_STORAGE;
             }
             else {
-                resourceCarryingState = ResourceCarryingTaskState.FIND_CLOSEST_STORAGE;
+                taskResourceCarryingState = Task_ResourceCarrying_State.FIND_CLOSEST_STORAGE;
             }
         }
 
         public override void DoTask()
         {
-            switch (resourceCarryingState) {
-                case ResourceCarryingTaskState.FIND_CLOSEST_STORAGE:
+            switch (taskResourceCarryingState) {
+                case Task_ResourceCarrying_State.FIND_CLOSEST_STORAGE:
                     Building fromStorage = Managers.I.Buildings
                         .GetClosestBuildingOfClass(BuildingType.Resources, typeof(Warehouse), taskPosition);
                     fromStoragePosition = fromStorage.PivotedPosition;
@@ -63,15 +63,15 @@ namespace Code.Villagers.Tasks
                     else 
                         onResourceWithdraw += fromStorage.Storage.WithdrawResource;
                     
-                    resourceCarryingState = ResourceCarryingTaskState.GO_TO_STORAGE;
+                    taskResourceCarryingState = Task_ResourceCarrying_State.GO_TO_STORAGE;
                     break;
                 
-                case ResourceCarryingTaskState.GO_TO_STORAGE:
+                case Task_ResourceCarrying_State.GO_TO_STORAGE:
                     if (worker.MoveTo(fromStoragePosition))
-                        resourceCarryingState = ResourceCarryingTaskState.TAKE_RESOURCES;
+                        taskResourceCarryingState = Task_ResourceCarrying_State.TAKE_RESOURCES;
                     break;
                 
-                case ResourceCarryingTaskState.TAKE_RESOURCES:
+                case Task_ResourceCarrying_State.TAKE_RESOURCES:
                     int currResAmount = resourceToCarry.amount;
                     int maxResourceAmount = worker.Profession.Data.ResourceCarryingLimit;
                 
@@ -87,22 +87,22 @@ namespace Code.Villagers.Tasks
                     
                     worker.UI.SetResourceIcon(resourceToCarry.Type);
                     resourceToCarry.amount -= worker.Profession.CarriedResource.amount;
-                    resourceCarryingState = ResourceCarryingTaskState.GO_ON_TASK_POSITION;
+                    taskResourceCarryingState = Task_ResourceCarrying_State.GO_ON_TASK_POSITION;
                     break;
                 
-                case ResourceCarryingTaskState.GO_ON_TASK_POSITION:
+                case Task_ResourceCarrying_State.GO_ON_TASK_POSITION:
                     if (worker.MoveTo(taskPosition))
-                        resourceCarryingState = ResourceCarryingTaskState.DELIVER_RESOURCES;
+                        taskResourceCarryingState = Task_ResourceCarrying_State.DELIVER_RESOURCES;
                     break;
                 
-                case ResourceCarryingTaskState.DELIVER_RESOURCES:
+                case Task_ResourceCarrying_State.DELIVER_RESOURCES:
                     onResourceDelivery?.Invoke(worker.Profession.CarriedResource);
                     worker.UI.ClearResourceIcon();
                     Debug.LogWarning(worker.name + " has delivered: " + worker.Profession.CarriedResource.amount + " " + worker.Profession.CarriedResource.Type);
                     worker.Profession.CarriedResource = null;
 
                     if (resourceToCarry.amount != 0) 
-                        resourceCarryingState = ResourceCarryingTaskState.GO_TO_STORAGE;
+                        taskResourceCarryingState = Task_ResourceCarrying_State.GO_TO_STORAGE;
                     else 
                         onTaskCompleted.Invoke();
                     break;
@@ -111,7 +111,7 @@ namespace Code.Villagers.Tasks
                     throw new Exception("TASK CARRYING STATE NOT SET");
             }
 
-            worker.UI.StateText.text = "Resource carrying: " + resourceCarryingState;
+            worker.UI.StateText.text = "Resource carrying: " + taskResourceCarryingState;
         }
 
         public override void StartTask() {}
@@ -125,7 +125,7 @@ namespace Code.Villagers.Tasks
                 ThrowResourceOnGround();
             }
             
-            resourceCarryingState = ResourceCarryingTaskState.FIND_CLOSEST_STORAGE;
+            taskResourceCarryingState = Task_ResourceCarrying_State.FIND_CLOSEST_STORAGE;
         }
     }
 }

@@ -3,14 +3,14 @@ using UnityEngine;
 
 namespace Code.Villagers.Tasks
 {
-    public class BuildingTask : Task
+    public class Task_Building : Task
     {
         private readonly Construction construction;
         private readonly Vector3 constructionPosition;
 
         public bool ResourcesDelivered { get; private set; }
         
-        public BuildingTask(Vector3 taskPosition, Construction construction)
+        public Task_Building(Vector3 taskPosition, Construction construction)
         {
             this.taskPosition = taskPosition;
             this.construction = construction;

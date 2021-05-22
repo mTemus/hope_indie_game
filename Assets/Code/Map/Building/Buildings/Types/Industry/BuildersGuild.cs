@@ -18,8 +18,8 @@ namespace Code.Map.Building.Buildings.Types.Industry
         protected override Task GetNormalTask()
         {
             Task nt = (from task in tasksToDo
-                    where task is BuildingTask 
-                    select task as BuildingTask)
+                    where task is Task_Building 
+                    select task as Task_Building)
                 .FirstOrDefault(btt => btt.ResourcesDelivered);
 
             RemoveTaskFromTodoList(nt);
@@ -29,8 +29,8 @@ namespace Code.Map.Building.Buildings.Types.Industry
         protected override Task GetResourceCarryingTask()
         {
             Task rct = (from task in tasksToDo
-                    where task is ResourceCarryingTask
-                    select task as ResourceCarryingTask)
+                    where task is Task_ResourceCarrying
+                    select task as Task_ResourceCarrying)
                 .FirstOrDefault();
 
             RemoveTaskFromTodoList(rct);
@@ -39,8 +39,8 @@ namespace Code.Map.Building.Buildings.Types.Industry
         
         private void DeliverResourcesToConstruction(Resource requiredResource, Construction construction)
         {
-            ResourceCarryingTask rct =
-                new ResourceCarryingTask(requiredResource, true, construction.GetComponent<Building>());
+            Task_ResourceCarrying rct =
+                new Task_ResourceCarrying(requiredResource, true, construction.GetComponent<Building>());
             rct.onResourceDelivery += construction.AddResources;
             
             Managers.I.Resources.ReserveResources(rct, requiredResource);
@@ -51,7 +51,7 @@ namespace Code.Map.Building.Buildings.Types.Industry
         {
             Debug.Log("Adding task as to do: " + task.GetType().Name);
 
-            if (task is BuildingTask {ResourcesDelivered: false}) {
+            if (task is Task_Building {ResourcesDelivered: false}) {
                 Debug.Log("Added as waiting.");
                 SetTaskWaiting(task);
                 return;
@@ -64,7 +64,7 @@ namespace Code.Map.Building.Buildings.Types.Industry
             }
             
             foreach (Villager worker in workersWithoutTasks) {
-                if (task is ResourceCarryingTask) {
+                if (task is Task_ResourceCarrying) {
                     if (haulersCnt > 0) {
                         if (worker.Profession.Data.Type != ProfessionType.WorkplaceHauler) continue;
                         GiveTaskToWorker(worker, task);
@@ -91,7 +91,7 @@ namespace Code.Map.Building.Buildings.Types.Industry
 
         public override void TakeTaskBackFromWorker(Task task)
         {
-            if (task is ResourceCarryingTask rct) {
+            if (task is Task_ResourceCarrying rct) {
                 if (Managers.I.Resources.IsResourceReserved(rct)) {
                     if (!Managers.I.Resources.CanWithdrawReserved(rct, rct.ResourceToCarry)) 
                         Managers.I.Resources.ClearReservedResource(rct);
@@ -121,7 +121,7 @@ namespace Code.Map.Building.Buildings.Types.Industry
 
         public void CreateBuildingTask(Construction construction, BuildingData buildingData)
         {
-            BuildingTask bt = new BuildingTask(construction.transform.position + construction.PositionOffset, construction);
+            Task_Building bt = new Task_Building(construction.transform.position + construction.PositionOffset, construction);
             bt.onTaskSetReady += SetTaskReady;
             construction.SetBuildingTask(bt);
             AddTaskToDo(bt);
