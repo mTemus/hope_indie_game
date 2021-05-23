@@ -3,12 +3,25 @@ using Code.System;
 using Code.Villagers.Entity;
 using UnityEngine;
 
+public enum TaskState
+{
+    NEW,
+    WAITING,
+    RUNNING,
+    INTERRUPTED,
+    PAUSED,
+    ABORTED,
+    COMPLETED
+}
+
 namespace Code.Villagers.Tasks
 {
     public abstract class Task
     {
         protected Vector3 taskPosition;
         protected Villager worker;
+
+        public TaskState state = TaskState.NEW;
         
         public Action onTaskCompleted;
         public Action onTaskCancel;

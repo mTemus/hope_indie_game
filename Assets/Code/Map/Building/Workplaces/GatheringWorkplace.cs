@@ -15,10 +15,7 @@ namespace Code.Map.Building.Workplaces
     public abstract class GatheringWorkplace : Workplace
     {
         protected ResourceType gatheringResourceType;
-        
-        private bool IsGatheringTaskTodo =>
-            tasksToDo.Any(task => task is Task_ResourceGathering);
-        
+
         #region Tasks
 
         private void RegisterTaskAsExternal(Task task)
@@ -90,7 +87,6 @@ namespace Code.Map.Building.Workplaces
 
         protected virtual void CreateResourceGatheringTask()
         {
-            if (IsGatheringTaskTodo) return;
             ResourceToGatherData rtgd = AssetsStorage.I.GetResourceToGatherDataByResourceType(gatheringResourceType);
             Task_ResourceGathering rgt = new Task_ResourceGathering(rtgd.ResourceType, rtgd.OccurAreas);
             rgt.onResourceDelivery += Storage.StoreResource;

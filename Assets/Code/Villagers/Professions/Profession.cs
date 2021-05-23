@@ -5,7 +5,11 @@ using Code.Map.Resources;
 using Code.System;
 using Code.Villagers.Entity;
 using Code.Villagers.Tasks;
+using NodeCanvas.BehaviourTrees;
 using UnityEngine;
+using Blackboard = NodeCanvas.Framework.Blackboard;
+using Node = Code.AI.Node;
+using Selector = Code.AI.Selector;
 
 namespace Code.Villagers.Professions
 {
@@ -27,12 +31,16 @@ namespace Code.Villagers.Professions
 
         protected Node professionAI;
 
+        protected BehaviourTreeOwner BTO;
+        protected Blackboard blackboard;
+        
         public Workplace Workplace { get; set; }
         public Resource CarriedResource { get; set; }
         public ProfessionData Data { get; set; }
-        public bool HasWorkToDo =>
-            tasks.Count > 0 || currentTask != null;
+        public bool HasWorkToDo => tasks.Count > 0 || currentTask != null || currentTask != null && currentTask.state != TaskState.COMPLETED;
+        public bool TaskComplete => currentTask.state == TaskState.COMPLETED;
         public bool IsCarryingResource => CarriedResource != null && CarriedResource.amount > 0;
+
         
         #region AI
 

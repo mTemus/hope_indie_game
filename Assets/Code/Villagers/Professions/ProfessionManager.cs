@@ -110,8 +110,8 @@ namespace Code.Villagers.Professions
             }
             
             villager.Profession.Data = professionData;
-            villager.Profession.Initialize();
             workplace.HireWorker(villager);
+            villager.Profession.Initialize();
             villager.Profession.enabled = false;
             
             if (professionData.Type == ProfessionType.WorkplaceHauler || professionData.Type == ProfessionType.GlobalHauler) 

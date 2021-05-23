@@ -1,15 +1,24 @@
+using NodeCanvas.BehaviourTrees;
+using NodeCanvas.Framework;
+
 namespace Code.Villagers.Professions.Types
 {
     public class VillagerLumberjack : Profession
     {
         private void Update()
         {
-            professionAI.Evaluate();
+            BTO.Tick();
         }
 
         public override void Initialize()
         {
-            InitializeWorkerAI();
+            BTO = GetComponent<BehaviourTreeOwner>();
+            blackboard = GetComponent<Blackboard>();
+            blackboard.SetVariableValue("myWorkplace", Workplace);
+            blackboard.SetVariableValue("workplacePos", Workplace.PivotedPosition);
+            
+            blackboard.InitializePropertiesBinding(BTO.blackboard.propertiesBindTarget, false);
+            BTO.StartBehaviour();
         }
     }
 }

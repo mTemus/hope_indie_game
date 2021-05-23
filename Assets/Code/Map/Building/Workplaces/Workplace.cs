@@ -186,8 +186,6 @@ namespace Code.Map.Building.Workplaces
 
             worker.Profession.Workplace = this;
             workers.Add(worker);
-            ReportWorkerWithoutTask(worker);
-            
             // Debug.LogWarning(name + " had hired: " + worker.name);
         }
 
