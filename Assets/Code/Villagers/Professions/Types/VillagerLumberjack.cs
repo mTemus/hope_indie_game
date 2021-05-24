@@ -1,6 +1,3 @@
-using NodeCanvas.BehaviourTrees;
-using NodeCanvas.Framework;
-
 namespace Code.Villagers.Professions.Types
 {
     public class VillagerLumberjack : Profession
@@ -12,13 +9,10 @@ namespace Code.Villagers.Professions.Types
 
         public override void Initialize()
         {
-            BTO = GetComponent<BehaviourTreeOwner>();
-            blackboard = GetComponent<Blackboard>();
-            blackboard.SetVariableValue("myWorkplace", Workplace);
-            blackboard.SetVariableValue("workplacePos", Workplace.PivotedPosition);
+            InitializeWorkerAI();
             
-            blackboard.InitializePropertiesBinding(BTO.blackboard.propertiesBindTarget, false);
-            BTO.StartBehaviour();
+            // blackboard.InitializePropertiesBinding(BTO.blackboard.propertiesBindTarget, false);
+            // BTO.StartBehaviour();
         }
     }
 }

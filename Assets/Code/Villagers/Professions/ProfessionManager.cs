@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
 using Code.Map.Building.Workplaces;
+using Code.System;
 using Code.Villagers.Entity;
 using Code.Villagers.Professions.Types;
+using NodeCanvas.BehaviourTrees;
+using NodeCanvas.Framework;
 using UnityEngine;
 
 namespace Code.Villagers.Professions
@@ -72,13 +75,43 @@ namespace Code.Villagers.Professions
             villager.Profession = villager.gameObject.AddComponent<VillagerGlobalHauler>();
             globalHaulers.Add(villager);
         }
+
+        private void AddBehaviourTreeAIComponents(AIType aiType, GameObject destinationObject)
+        {
+            //TODO: unemployed AI not implemented yet
+            if (aiType == AIType.villager_unemployed) {
+                return;
+            }
+            
+            BehaviourTree bt = AssetsStorage.I.GetBehaviourTreeForAIType(aiType);
+            BehaviourTreeOwner bto = destinationObject.AddComponent<BehaviourTreeOwner>();
+            bto.firstActivation = GraphOwner.FirstActivation.OnEnable;
+            bto.enableAction = GraphOwner.EnableAction.DoNothing;
+            bto.disableAction = GraphOwner.DisableAction.DisableBehaviour;
+            bto.updateMode = Graph.UpdateMode.Manual;
+         
+            Blackboard blackboard = destinationObject.AddComponent<Blackboard>();
+            Dictionary<string, Variable> variablesToCopy = AssetsStorage.I.GetBlackboardForAIType(aiType).GetRoot().variables;
+
+            foreach (string variableName in variablesToCopy.Keys) 
+                variablesToCopy[variableName].Duplicate(blackboard);
+
+            bto.blackboard = blackboard;
+            bto.graph = bt;
+         
+            blackboard.InitializePropertiesBinding(bto.blackboard.propertiesBindTarget, false);
+        }
         
         public void FireVillagerFromOldProfession(Villager villager)
         {
             RemoveVillagerFromProfessionStructure(villager);
             villager.Profession.AbandonAllTasks();
             villager.Profession.Workplace.FireWorker(villager);
+            villager.Profession.BTO.StopBehaviour();
             DestroyImmediate(villager.Profession);
+            
+            //TODO: clear BTO instead of destroying and adding -> add one clear bto to villager prefab, but clear whole blackboard
+            
             villager.UI.ProfessionName.text = "No Profession Exception";
         }
         
@@ -111,13 +144,17 @@ namespace Code.Villagers.Professions
             
             villager.Profession.Data = professionData;
             workplace.HireWorker(villager);
-            villager.Profession.Initialize();
-            villager.Profession.enabled = false;
+            AddBehaviourTreeAIComponents(
+                villager.Profession.Data.Type == ProfessionType.Unemployed
+                    ? AIType.villager_unemployed
+                    : AIType.villager_worker, villager.gameObject);
             
-            if (professionData.Type == ProfessionType.WorkplaceHauler || professionData.Type == ProfessionType.GlobalHauler) 
-                villager.UI.ProfessionName.text = professionData.Type + " of " + villager.Profession.Workplace.name;
-            else 
-                villager.UI.ProfessionName.text = professionData.Type.ToString();
+            villager.Profession.enabled = false;
+            villager.Profession.Initialize();
+            villager.UI.ProfessionName.text = professionData.Type + " of " + villager.Profession.Workplace.name;
+
+            if (villager.Profession.Data.Type != ProfessionType.Unemployed) 
+                villager.Profession.BTO.StartBehaviour();
         }
     }
 }

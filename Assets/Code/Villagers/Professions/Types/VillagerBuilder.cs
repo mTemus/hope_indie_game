@@ -4,7 +4,7 @@ namespace Code.Villagers.Professions.Types
     {
         private void Update()
         {
-            professionAI?.Evaluate();
+            BTO.Tick();
         }
 
         public override void Initialize()

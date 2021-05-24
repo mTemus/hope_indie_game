@@ -3,13 +3,11 @@ using Code.AI;
 using Code.Map.Building.Workplaces;
 using Code.Map.Resources;
 using Code.System;
-using Code.Villagers.Entity;
 using Code.Villagers.Tasks;
 using NodeCanvas.BehaviourTrees;
 using UnityEngine;
 using Blackboard = NodeCanvas.Framework.Blackboard;
 using Node = Code.AI.Node;
-using Selector = Code.AI.Selector;
 
 namespace Code.Villagers.Professions
 {
@@ -31,7 +29,7 @@ namespace Code.Villagers.Professions
 
         protected Node professionAI;
 
-        protected BehaviourTreeOwner BTO;
+        public BehaviourTreeOwner BTO;
         protected Blackboard blackboard;
         
         public Workplace Workplace { get; set; }
@@ -53,17 +51,10 @@ namespace Code.Villagers.Professions
 
         protected void InitializeWorkerAI()
         {
-            Villager worker = GetComponent<Villager>();
-            
-            WanderNextToWorkplaceNode wanderNextToWorkplace = new WanderNextToWorkplaceNode(worker);
-            CanWorkNode canWork = new CanWorkNode();
-            WorkNode workNode = new WorkNode(worker);
-
-            Sequence doTasks = new Sequence(new List<Node>{ canWork, workNode });
-            Selector workerAI = new Selector(new List<Node> { wanderNextToWorkplace, doTasks });
-
-            professionAI = workerAI;
-            currentWorkNode = workNode;
+            BTO = GetComponent<BehaviourTreeOwner>();
+            blackboard = GetComponent<Blackboard>();
+            blackboard.SetVariableValue("myWorkplace", Workplace);
+            blackboard.SetVariableValue("workplacePos", Workplace.PivotedPosition);
         }
 
         protected void InitializeUnemployedAI()
@@ -131,7 +122,6 @@ namespace Code.Villagers.Professions
         public void CompleteTask()
         {
             currentTask.EndTask();
-            currentWorkNode.StartNewTask();
         }
 
         #endregion
