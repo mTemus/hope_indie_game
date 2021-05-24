@@ -3,12 +3,21 @@ using System.Linq;
 using Code.Map.Resources;
 using Code.Map.Resources.ResourceToGather;
 using Code.Villagers.Professions;
+using NodeCanvas.BehaviourTrees;
+using NodeCanvas.Framework;
 using ThirdParty.LeanTween.Framework;
 using UnityEngine;
 
-//TODO: whole class should be deleted and all assets should be available through adressables
+//TODO: whole class should be deleted and all assets should be available through addressables
 namespace Code.System
 {
+   //TODO: move this somewhere else
+   public enum AIType
+   {
+      villager_worker,
+      villager_unemployed
+   }
+   
    public class AssetsStorage : MonoBehaviour
    {
       [Header("Villagers")] 
@@ -24,6 +33,10 @@ namespace Code.System
       [Header("Sprites")]
       [SerializeField] private Sprite[] resourceIcons;
 
+      [Header("Behaviour Trees")] 
+      [SerializeField] private Blackboard[] blackboards;
+      [SerializeField] private BehaviourTree[] behaviourTrees;
+      
       [Header("Other")] 
       [SerializeField] private GameObject resourceOnGround;
       
@@ -86,6 +99,29 @@ namespace Code.System
          return r;
       }
 
+      public BehaviourTree GetBehaviourTreeForAIType(AIType aiType)
+      {
+         BehaviourTree bt = behaviourTrees.FirstOrDefault(tree => tree.name.Contains(aiType.ToString()));
+
+         if (bt == null)
+            throw new Exception("ASSET STORAGE ----- CAN'T FIND BT FOR AI TYPE: " + aiType);
+
+         return bt;
+      }
+
+      public Blackboard GetBlackboardForAIType(AIType aiType)
+      {
+         Blackboard blackboard = blackboards.FirstOrDefault(board => board.name.Contains(aiType.ToString()));
+
+         if (blackboard == null)
+            throw new Exception("ASSET STORAGE ----- CAN'T FIND BLACKBOARD FOR AI TYPE: " + aiType);
+
+         return blackboard;
+      }
+      
+      
+      //TODO: these should be added somewhere else
+      
       public void ThrowResourceOnTheGround(Resource resource, float mapX)
       {
          ProfessionData haulerData = GetProfessionDataForProfessionType(ProfessionType.GlobalHauler);
