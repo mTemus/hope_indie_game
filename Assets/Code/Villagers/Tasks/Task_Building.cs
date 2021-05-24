@@ -24,7 +24,7 @@ namespace Code.Villagers.Tasks
 
         public override void EndTask()
         {
-            
+            state = TaskState.COMPLETED;
         }
 
         public override void DoTask()

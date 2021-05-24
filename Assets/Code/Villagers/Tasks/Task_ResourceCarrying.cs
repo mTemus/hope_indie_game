@@ -115,7 +115,11 @@ namespace Code.Villagers.Tasks
         }
 
         public override void StartTask() {}
-        public override void EndTask() {}
+
+        public override void EndTask()
+        {
+            state = TaskState.COMPLETED;
+        }
         public override void PauseTask() {}
 
         public override void AbandonTask()
