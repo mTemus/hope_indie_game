@@ -31,7 +31,6 @@ namespace Code.Villagers.Professions
         protected Node professionAI;
 
         public BehaviourTreeOwner BTO;
-        public Blackboard blackboard;
         
         public Workplace Workplace { get; set; }
         public Resource CarriedResource { get; set; }
@@ -55,8 +54,6 @@ namespace Code.Villagers.Professions
             //TODO: this to public method
             
             BTO = GetComponent<BehaviourTreeOwner>();
-            blackboard = GetComponent<Blackboard>();
-            
         }
 
         protected void InitializeUnemployedAI()
@@ -64,13 +61,12 @@ namespace Code.Villagers.Professions
             
         }
 
-
         //TODO: this to brain
         public void ClearAIComponents()
         {
             BTO.StopBehaviour();
+            BTO.blackboard.variables.Clear();
             BTO.graph = null;
-            blackboard.GetRoot().variables.Clear();
         }
         
         #endregion
