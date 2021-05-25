@@ -60,7 +60,7 @@ namespace Code.System
 
       public GameObject GetVillagerPrefab(ProfessionType villagerType)
       {
-         GameObject p = villagerPrefabs.FirstOrDefault(villager => villager.name == villagerType.ToString());
+         GameObject p = villagerPrefabs.FirstOrDefault(villager => villager.name.Contains(villagerType.ToString()));
          
          if (p == null) 
             throw new Exception("ASSET STORAGE ----- CAN'T FIND PREFAB FOR VILLAGER: " + villagerType);

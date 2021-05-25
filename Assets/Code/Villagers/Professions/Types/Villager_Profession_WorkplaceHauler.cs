@@ -1,15 +1,15 @@
 namespace Code.Villagers.Professions.Types
 {
-    public class VillagerUnemployed : Profession
+    public class Villager_Profession_WorkplaceHauler : Profession
     {
         private void Update()
         {
-            // ProfessionAI.Evaluate();
+            BTO.Tick();
         }
 
         public override void Initialize()
         {
-            InitializeUnemployedAI();
+            InitializeWorkerAI();
         }
     }
 }

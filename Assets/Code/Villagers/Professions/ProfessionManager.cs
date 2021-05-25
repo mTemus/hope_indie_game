@@ -48,31 +48,31 @@ namespace Code.Villagers.Professions
 
         private void MakeVillagerUnemployed(Villager villager)
         {
-            villager.Profession = villager.gameObject.AddComponent<VillagerUnemployed>();
+            villager.Profession = villager.gameObject.AddComponent<Villager_Profession_Unemployed>();
             unemployed.Add(villager);
         }
         
         private void HireBuilder(Villager villager)
         {
-            villager.Profession = villager.gameObject.AddComponent<VillagerBuilder>();
+            villager.Profession = villager.gameObject.AddComponent<Villager_Profession_Builder>();
             builders.Add(villager);
         }
 
         private void HireLumberjack(Villager villager)
         {
-            villager.Profession = villager.gameObject.AddComponent<VillagerLumberjack>();
+            villager.Profession = villager.gameObject.AddComponent<Villager_Profession_Lumberjack>();
             lumberjacks.Add(villager);
         }
 
         private void HireLocalHauler(Villager villager)
         {
-            villager.Profession = villager.gameObject.AddComponent<VillagerWorkplaceHauler>();
+            villager.Profession = villager.gameObject.AddComponent<Villager_Profession_WorkplaceHauler>();
             localHaulers.Add(villager);
         }
 
         private void HireGlobalHauler(Villager villager)
         {
-            villager.Profession = villager.gameObject.AddComponent<VillagerGlobalHauler>();
+            villager.Profession = villager.gameObject.AddComponent<Villager_Profession_GlobalHauler>();
             globalHaulers.Add(villager);
         }
 
