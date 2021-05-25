@@ -1,13 +1,9 @@
 using System.Collections.Generic;
-using Code.AI;
 using Code.Map.Building.Workplaces;
 using Code.Map.Resources;
 using Code.System;
 using NodeCanvas.BehaviourTrees;
-using NodeCanvas.Framework;
 using UnityEngine;
-using Blackboard = NodeCanvas.Framework.Blackboard;
-using Node = Code.AI.Node;
 using Task = Code.Villagers.Tasks.Task;
 
 namespace Code.Villagers.Professions
@@ -25,11 +21,7 @@ namespace Code.Villagers.Professions
     {
         private readonly Queue<Task> tasks = new Queue<Task>();
 
-        private WorkNode currentWorkNode;
         private Task currentTask;
-
-        protected Node professionAI;
-
         public BehaviourTreeOwner BTO;
         
         public Workplace Workplace { get; set; }
