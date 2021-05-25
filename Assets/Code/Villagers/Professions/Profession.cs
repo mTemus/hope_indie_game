@@ -3,11 +3,12 @@ using Code.AI;
 using Code.Map.Building.Workplaces;
 using Code.Map.Resources;
 using Code.System;
-using Code.Villagers.Tasks;
 using NodeCanvas.BehaviourTrees;
+using NodeCanvas.Framework;
 using UnityEngine;
 using Blackboard = NodeCanvas.Framework.Blackboard;
 using Node = Code.AI.Node;
+using Task = Code.Villagers.Tasks.Task;
 
 namespace Code.Villagers.Professions
 {
@@ -30,7 +31,7 @@ namespace Code.Villagers.Professions
         protected Node professionAI;
 
         public BehaviourTreeOwner BTO;
-        protected Blackboard blackboard;
+        public Blackboard blackboard;
         
         public Workplace Workplace { get; set; }
         public Resource CarriedResource { get; set; }
@@ -51,15 +52,25 @@ namespace Code.Villagers.Professions
 
         protected void InitializeWorkerAI()
         {
+            //TODO: this to public method
+            
             BTO = GetComponent<BehaviourTreeOwner>();
             blackboard = GetComponent<Blackboard>();
-            blackboard.SetVariableValue("myWorkplace", Workplace);
-            blackboard.SetVariableValue("workplacePos", Workplace.PivotedPosition);
+            
         }
 
         protected void InitializeUnemployedAI()
         {
             
+        }
+
+
+        //TODO: this to brain
+        public void ClearAIComponents()
+        {
+            BTO.StopBehaviour();
+            BTO.graph = null;
+            blackboard.GetRoot().variables.Clear();
         }
         
         #endregion

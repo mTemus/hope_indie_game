@@ -250,6 +250,8 @@ GameObject:
   - component: {fileID: 1668639820441404007}
   - component: {fileID: 1668639820441404001}
   - component: {fileID: 1668639820441404006}
+  - component: {fileID: -4983308067433065748}
+  - component: {fileID: -1473598247777809243}
   m_Layer: 0
   m_Name: Unemployed
   m_TagString: Villager
@@ -370,6 +372,51 @@ MonoBehaviour:
   initializeMode: 0
   professionData: {fileID: 11400000, guid: 7e3ee87b2faabad46bacc7f0b5868e17, type: 2}
   workplace: {fileID: 0}
+--- !u!114 &-4983308067433065748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668639820441404011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aad115aca74ce3c4891b3f6de0b4aae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _serializedExposedParameters: []
+  _boundGraphSerialization: 
+  _boundGraphObjectReferences: []
+  _boundGraphSource:
+    _version: 0
+    _category: 
+    _comments: 
+    _translation: {x: 0, y: 0}
+    _zoomFactor: 1
+  _firstActivation: 0
+  _enableAction: 0
+  _disableAction: 0
+  _lockBoundGraphPrefabOverrides: 1
+  _preInitializeSubGraphs: 0
+  _updateMode: 0
+  _graph: {fileID: 0}
+  _blackboard: {fileID: -1473598247777809243}
+--- !u!114 &-1473598247777809243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668639820441404011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b98a6db0b653f764eac834f85857a9dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentBlackboard: {fileID: 0}
+  _serializedBlackboard: '{"_variables":{}}'
+  _objectReferences: []
+  _serializedVariables: []
 --- !u!1 &1668639820504831476
 GameObject:
   m_ObjectHideFlags: 0

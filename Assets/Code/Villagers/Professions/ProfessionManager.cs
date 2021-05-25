@@ -76,7 +76,7 @@ namespace Code.Villagers.Professions
             globalHaulers.Add(villager);
         }
 
-        private void AddBehaviourTreeAIComponents(AIType aiType, GameObject destinationObject)
+        private void AddBehaviourTreeAIComponents(AIType aiType, Villager villager)
         {
             //TODO: unemployed AI not implemented yet
             if (aiType == AIType.villager_unemployed) {
@@ -84,18 +84,21 @@ namespace Code.Villagers.Professions
             }
             
             BehaviourTree bt = AssetsStorage.I.GetBehaviourTreeForAIType(aiType);
-            BehaviourTreeOwner bto = destinationObject.AddComponent<BehaviourTreeOwner>();
+            BehaviourTreeOwner bto = villager.GetComponent<BehaviourTreeOwner>();
+            Blackboard blackboard = villager.GetComponent<Blackboard>();
+            Dictionary<string, Variable> variablesToCopy = AssetsStorage.I.GetBlackboardForAIType(aiType).GetRoot().variables;
+            
             bto.firstActivation = GraphOwner.FirstActivation.OnEnable;
             bto.enableAction = GraphOwner.EnableAction.DoNothing;
             bto.disableAction = GraphOwner.DisableAction.DisableBehaviour;
             bto.updateMode = Graph.UpdateMode.Manual;
-         
-            Blackboard blackboard = destinationObject.AddComponent<Blackboard>();
-            Dictionary<string, Variable> variablesToCopy = AssetsStorage.I.GetBlackboardForAIType(aiType).GetRoot().variables;
-
+            
             foreach (string variableName in variablesToCopy.Keys) 
                 variablesToCopy[variableName].Duplicate(blackboard);
 
+            blackboard.SetVariableValue("myWorkplace", villager.Profession.Workplace);
+            blackboard.SetVariableValue("workplacePos", villager.Profession.Workplace.PivotedPosition);
+            
             bto.blackboard = blackboard;
             bto.graph = bt;
          
@@ -106,12 +109,10 @@ namespace Code.Villagers.Professions
         {
             RemoveVillagerFromProfessionStructure(villager);
             villager.Profession.AbandonAllTasks();
+            villager.Profession.ClearAIComponents();
             villager.Profession.Workplace.FireWorker(villager);
-            villager.Profession.BTO.StopBehaviour();
+            
             DestroyImmediate(villager.Profession);
-            
-            //TODO: clear BTO instead of destroying and adding -> add one clear bto to villager prefab, but clear whole blackboard
-            
             villager.UI.ProfessionName.text = "No Profession Exception";
         }
         
@@ -147,7 +148,7 @@ namespace Code.Villagers.Professions
             AddBehaviourTreeAIComponents(
                 villager.Profession.Data.Type == ProfessionType.Unemployed
                     ? AIType.villager_unemployed
-                    : AIType.villager_worker, villager.gameObject);
+                    : AIType.villager_worker, villager);
             
             villager.Profession.enabled = false;
             villager.Profession.Initialize();
