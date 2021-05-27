@@ -1,3 +1,4 @@
+using Code.AI.VillagerBrain;
 using Code.Villagers.Professions;
 using UnityEngine;
 
@@ -10,7 +11,8 @@ namespace Code.Villagers.Entity
         [SerializeField] private float speed = 5f;
         [SerializeField] private VillagersStatistics statistics;
 
-        [Header("Villager components")]
+        [Header("Villager components")] 
+        [SerializeField] private Villager_Brain brain;
         [SerializeField] private Profession profession;
         [SerializeField] private VillagerUi ui;
         
