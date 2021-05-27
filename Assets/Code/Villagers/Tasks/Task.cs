@@ -3,19 +3,19 @@ using Code.System;
 using Code.Villagers.Entity;
 using UnityEngine;
 
-public enum TaskState
-{
-    NEW,
-    WAITING,
-    RUNNING,
-    INTERRUPTED,
-    PAUSED,
-    ABORTED,
-    COMPLETED
-}
-
 namespace Code.Villagers.Tasks
 {
+    public enum TaskState
+    {
+        NEW,
+        WAITING,
+        RUNNING,
+        INTERRUPTED,
+        PAUSED,
+        ABORTED,
+        COMPLETED
+    }
+
     public abstract class Task
     {
         protected Vector3 taskPosition;
