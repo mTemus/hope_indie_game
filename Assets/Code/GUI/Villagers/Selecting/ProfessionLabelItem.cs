@@ -9,7 +9,7 @@ namespace Code.GUI.Villagers.Selecting
 {
     public class ProfessionLabelItem : UiSelectableElement
     {
-        [SerializeField] private ProfessionData professionData;
+        [SerializeField] private Villager_ProfessionData data;
 
         private Workplace[] workplaces = new Workplace[0];
         
@@ -37,7 +37,7 @@ namespace Code.GUI.Villagers.Selecting
 
         public void LoadWorkplaces()
         {
-            workplaces = Managers.I.Buildings.GetAllFreeWorkplacesForProfession(professionData);
+            workplaces = Managers.I.Buildings.GetAllFreeWorkplacesForProfession(data);
         }
         
         public void ClearWorkplaces()
@@ -48,6 +48,6 @@ namespace Code.GUI.Villagers.Selecting
 
         public Workplace[] Workplaces => workplaces;
 
-        public ProfessionData ProfessionData => professionData;
+        public Villager_ProfessionData Data => data;
     }
 }

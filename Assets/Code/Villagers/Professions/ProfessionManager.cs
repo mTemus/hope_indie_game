@@ -116,9 +116,9 @@ namespace Code.Villagers.Professions
             villager.UI.ProfessionName.text = "No Profession Exception";
         }
         
-        public void SetVillagerProfession(Villager villager, ProfessionData professionData, Workplace workplace)
+        public void SetVillagerProfession(Villager villager, Villager_ProfessionData villagerProfessionData, Workplace workplace)
         {
-            switch (professionData.Type) {
+            switch (villagerProfessionData.Type) {
                 case ProfessionType.Unemployed:
                     MakeVillagerUnemployed(villager);
                     break;
@@ -140,10 +140,10 @@ namespace Code.Villagers.Professions
                     break;
                 
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(professionData.Type), professionData.Type, null);
+                    throw new ArgumentOutOfRangeException(nameof(villagerProfessionData.Type), villagerProfessionData.Type, null);
             }
             
-            villager.Profession.Data = professionData;
+            villager.Profession.Data = villagerProfessionData;
             workplace.HireWorker(villager);
             AddBehaviourTreeAIComponents(
                 villager.Profession.Data.Type == ProfessionType.Unemployed
@@ -152,7 +152,7 @@ namespace Code.Villagers.Professions
             
             villager.Profession.enabled = false;
             villager.Profession.Initialize();
-            villager.UI.ProfessionName.text = professionData.Type + " of " + villager.Profession.Workplace.name;
+            villager.UI.ProfessionName.text = villagerProfessionData.Type + " of " + villager.Profession.Workplace.name;
 
             if (villager.Profession.Data.Type != ProfessionType.Unemployed) 
                 villager.Profession.BTO.StartBehaviour();

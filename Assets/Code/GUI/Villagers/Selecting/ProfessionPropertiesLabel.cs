@@ -62,17 +62,17 @@ namespace Code.GUI.Villagers.Selecting
             GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         }
 
-        public void LoadProfessionData(ProfessionData professionData, Villager villager)
+        public void LoadProfessionData(Villager_ProfessionData villagerProfessionData, Villager villager)
         {
-            SetProfessionText(strengthValueProfession, professionData.RequiredStatistics.Strength);
-            SetProfessionText(dexterityValueProfession, professionData.RequiredStatistics.Dexterity);
-            SetProfessionText(intelligenceValueProfession, professionData.RequiredStatistics.Intelligence);
+            SetProfessionText(strengthValueProfession, villagerProfessionData.RequiredStatistics.Strength);
+            SetProfessionText(dexterityValueProfession, villagerProfessionData.RequiredStatistics.Dexterity);
+            SetProfessionText(intelligenceValueProfession, villagerProfessionData.RequiredStatistics.Intelligence);
             
-            SetVillagerText(strengthValueVillager, villager.Statistics.Strength, professionData.RequiredStatistics.Strength);
-            SetVillagerText(dexterityValueVillager, villager.Statistics.Dexterity, professionData.RequiredStatistics.Dexterity);
-            SetVillagerText(intelligenceValueVillager, villager.Statistics.Intelligence, professionData.RequiredStatistics.Intelligence);
+            SetVillagerText(strengthValueVillager, villager.Statistics.Strength, villagerProfessionData.RequiredStatistics.Strength);
+            SetVillagerText(dexterityValueVillager, villager.Statistics.Dexterity, villagerProfessionData.RequiredStatistics.Dexterity);
+            SetVillagerText(intelligenceValueVillager, villager.Statistics.Intelligence, villagerProfessionData.RequiredStatistics.Intelligence);
 
-            goldValue.text = professionData.GoldPerDay.ToString();
+            goldValue.text = villagerProfessionData.GoldPerDay.ToString();
         }
 
         public void ShowNotAvailableWorkplacesPanel(bool condition)

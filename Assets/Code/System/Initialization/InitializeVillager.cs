@@ -7,7 +7,7 @@ namespace Code.System.Initialization
 {
     public class InitializeVillager : InitializeObject
     {
-        [SerializeField] private ProfessionData professionData;
+        [SerializeField] private Villager_ProfessionData villagerProfessionData;
         [SerializeField] private Workplace workplace;
 
         public Workplace Workplace
@@ -21,7 +21,7 @@ namespace Code.System.Initialization
             Villager villager = GetComponent<Villager>();
             Managers.I.Areas.GetAreaByCoords(Vector3Int.FloorToInt(transform.position))
                 .AddVillager(villager);
-            Managers.I.Professions.SetVillagerProfession(villager, professionData, workplace);
+            Managers.I.Professions.SetVillagerProfession(villager, villagerProfessionData, workplace);
             villager.Profession.enabled = true;
         }
     }

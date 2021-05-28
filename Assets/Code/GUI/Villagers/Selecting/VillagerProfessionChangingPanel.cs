@@ -40,7 +40,7 @@ namespace Code.GUI.Villagers.Selecting
             foreach (UiSelectableElement element in elementsToSelect) {
                 ProfessionLabelItem currItem = (ProfessionLabelItem) element;
                 
-                if (currItem.ProfessionData.Type != villager.Profession.Data.Type) continue;
+                if (currItem.Data.Type != villager.Profession.Data.Type) continue;
                 RectTransform pointerRect = currentProfessionPointer.GetComponent<RectTransform>();
                 currentProfessionPointer.transform.SetParent(element.transform);
                 
@@ -80,7 +80,7 @@ namespace Code.GUI.Villagers.Selecting
             
             //Initialize profession label data
             if (AreThereAnyWorkplaces()) {
-                propertiesLabel.LoadProfessionData(currentProfession.ProfessionData, villager); 
+                propertiesLabel.LoadProfessionData(currentProfession.Data, villager); 
                 Managers.I.Cameras.FocusCameraOn(currentProfession.Workplaces[0].transform);
             }
             else {
@@ -108,7 +108,7 @@ namespace Code.GUI.Villagers.Selecting
 
             if (AreThereAnyWorkplaces()) {
                 propertiesLabel.ShowNotAvailableWorkplacesPanel(false);
-                propertiesLabel.LoadProfessionData(currentProfession.ProfessionData, Managers.I.VillagerSelection.SelectedVillager);
+                propertiesLabel.LoadProfessionData(currentProfession.Data, Managers.I.VillagerSelection.SelectedVillager);
             }
             else {
                 propertiesLabel.ShowNotAvailableWorkplacesPanel(true);
@@ -145,7 +145,7 @@ namespace Code.GUI.Villagers.Selecting
         {
             Villager selectedVillager = Managers.I.VillagerSelection.SelectedVillager;
 
-            if (selectedVillager.Profession.Data.Type == currentProfession.ProfessionData.Type) {
+            if (selectedVillager.Profession.Data.Type == currentProfession.Data.Type) {
                 if (selectedVillager.Profession.Workplace == CurrentWorkplace) return;
                 selectedVillager.Profession.Workplace.FireWorker(selectedVillager);
                 CurrentWorkplace.HireWorker(selectedVillager);
@@ -153,7 +153,7 @@ namespace Code.GUI.Villagers.Selecting
             } else {
                 Managers.I.Professions.FireVillagerFromOldProfession(selectedVillager);
                 Managers.I.Professions.SetVillagerProfession(selectedVillager,
-                    currentProfession.ProfessionData, CurrentWorkplace);
+                    currentProfession.Data, CurrentWorkplace);
             }
         }
 

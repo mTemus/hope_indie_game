@@ -91,11 +91,11 @@ namespace Code.Map.Building
             return workplaces.ToArray();
         }
 
-        public Workplace[] GetAllFreeWorkplacesForProfession(ProfessionData professionData)
+        public Workplace[] GetAllFreeWorkplacesForProfession(Villager_ProfessionData villagerProfessionData)
         {
             Workplace[] workplaces;
             
-            switch (professionData.Type) {
+            switch (villagerProfessionData.Type) {
                 case ProfessionType.Unemployed:
                     workplaces = Managers.I.Buildings.GetAllWorkplacesOfClass(BuildingType.Village,
                         typeof(TownHall));
@@ -105,7 +105,7 @@ namespace Code.Map.Building
                 case ProfessionType.Lumberjack:
                 case ProfessionType.GlobalHauler:
                     workplaces = Managers.I.Buildings.GetAllFreeWorkplacesOfClass(
-                        professionData.WorkplaceBuildingType, professionData.WorkplaceType);
+                        villagerProfessionData.WorkplaceBuildingType, villagerProfessionData.WorkplaceType);
                     break;
                 
                 case ProfessionType.WorkplaceHauler:
@@ -119,9 +119,9 @@ namespace Code.Map.Building
             return workplaces;
         }
 
-        public Workplace GetClosestFreeWorkplaceForProfession(ProfessionData professionData, Vector3 position)
+        public Workplace GetClosestFreeWorkplaceForProfession(Villager_ProfessionData villagerProfessionData, Vector3 position)
         {
-            Workplace[] freeWorkplaces = GetAllFreeWorkplacesForProfession(professionData);
+            Workplace[] freeWorkplaces = GetAllFreeWorkplacesForProfession(villagerProfessionData);
 
             if (freeWorkplaces.Length == 0) 
                 return null;

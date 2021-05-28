@@ -22,7 +22,7 @@ namespace Code.System
    {
       [Header("Villagers")] 
       [SerializeField] private GameObject[] villagerPrefabs;
-      [SerializeField] private ProfessionData[] professionData;
+      [SerializeField] private Villager_ProfessionData[] professionData;
 
       [Header("Buildings")] 
       [SerializeField] private GameObject[] buildingPrefabs;
@@ -78,9 +78,9 @@ namespace Code.System
          return p;
       }
 
-      public ProfessionData GetProfessionDataForProfessionType(ProfessionType professionType)
+      public Villager_ProfessionData GetProfessionDataForProfessionType(ProfessionType professionType)
       {
-         ProfessionData p = professionData.FirstOrDefault(data => data.Type == professionType);
+         Villager_ProfessionData p = professionData.FirstOrDefault(data => data.Type == professionType);
 
          if (p == null)
             throw new Exception("ASSET STORAGE ----- CAN'T FIND DATA FOR PROFESSION: " + professionType);
@@ -124,7 +124,7 @@ namespace Code.System
       
       public void ThrowResourceOnTheGround(Resource resource, float mapX)
       {
-         ProfessionData haulerData = GetProfessionDataForProfessionType(ProfessionType.GlobalHauler);
+         Villager_ProfessionData haulerData = GetProfessionDataForProfessionType(ProfessionType.GlobalHauler);
          int resourceCnt =  Mathf.FloorToInt(resource.amount / haulerData.ResourceCarryingLimit) + (resource.amount % haulerData.ResourceCarryingLimit > 0 ? 1 : 0);
          int currentAmount = resource.amount;
          

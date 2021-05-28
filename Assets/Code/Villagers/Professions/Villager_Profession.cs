@@ -27,7 +27,7 @@ namespace Code.Villagers.Professions
         
         public Workplace Workplace { get; set; }
         public Resource CarriedResource { get; set; }
-        public ProfessionData Data { get; set; }
+        public Villager_ProfessionData Data { get; set; }
         public bool HasWorkToDo => tasks.Count > 0 || currentTask != null || currentTask != null && currentTask.state != TaskState.COMPLETED;
         public bool TaskComplete => currentTask.state == TaskState.COMPLETED;
         public bool IsCarryingResource => CarriedResource != null && CarriedResource.amount > 0;
