@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5876656385529300571}
   - component: {fileID: 8492574595266324196}
   m_Layer: 0
-  m_Name: Lumberjack-1
+  m_Name: Blackboard_villager_worker
   m_TagString: Villager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _parentBlackboard: {fileID: 0}
-  _serializedBlackboard: '{"_variables":{"myProfession":{"_propertyPath":"Code.Villagers.Entity.Villager.Profession","_name":"myProfession","_id":"f8e921f1-fa43-4803-baad-3a09a75cb5d9","$type":"NodeCanvas.Framework.Variable`1[[Code.Villagers.Professions.Profession,
+  _serializedBlackboard: '{"_variables":{"myBrain":{"_propertyPath":"Code.Villagers.Entity.Villager.Brain","_name":"myBrain","_id":"38c6807b-7977-4c8a-966e-0d04c49ccb31","$type":"NodeCanvas.Framework.Variable`1[[Code.AI.VillagerBrain.Villager_Brain,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},"workLayer":{"_propertyPath":"Code.AI.VillagerBrain.Villager_Brain.Work","_name":"workLayer","_id":"9b20be5b-0d19-4d3d-aa4a-3663adf6e9f9","$type":"NodeCanvas.Framework.Variable`1[[Code.AI.VillagerBrain.Layers.Villager_Brain_WorkLayer,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},"myProfession":{"_propertyPath":"Code.Villagers.Entity.Villager.Profession","_name":"myProfession","_id":"841ca5a8-d5ef-4f38-a0ad-08472616f76c","$type":"NodeCanvas.Framework.Variable`1[[Code.Villagers.Professions.Villager_Profession,
     Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},"myWorkplace":{"_name":"myWorkplace","_id":"a7b7954d-f4ec-42d2-8468-e52c0d44a758","$type":"NodeCanvas.Framework.Variable`1[[Code.Map.Building.Workplaces.Workplace,
     Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},"onWanderPos":{"_value":true,"_name":"onWanderPos","_id":"8aee61b5-13b6-43af-b02e-987faf664e5a","$type":"NodeCanvas.Framework.Variable`1[[System.Boolean,
     mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},"waderingSpeed":{"_value":1.3,"_name":"waderingSpeed","_id":"494a6117-6cc4-4037-ba04-f19d37384765","$type":"NodeCanvas.Framework.Variable`1[[System.Single,
@@ -55,13 +57,19 @@ MonoBehaviour:
     mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},"wanderDistMin":{"_name":"wanderDistMin","_id":"3f9f21f5-3495-442e-a139-ab1a41fc1e05","$type":"NodeCanvas.Framework.Variable`1[[System.Single,
     mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},"wanderDistMax":{"_name":"wanderDistMax","_id":"23094c2d-abba-4f6f-9d18-eb7486b142c4","$type":"NodeCanvas.Framework.Variable`1[[System.Single,
     mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},"enoughStamina":{"_value":true,"_name":"enoughStamina","_id":"db46794d-f169-4d30-b76c-fab6cf88c48f","$type":"NodeCanvas.Framework.Variable`1[[System.Boolean,
-    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},"taskCompleted":{"_propertyPath":"Code.Villagers.Professions.Profession.TaskComplete","_name":"taskCompleted","_id":"af056f0b-96ae-4831-9308-b2b55778813d","$type":"NodeCanvas.Framework.Variable`1[[System.Boolean,
-    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},"hasWorkToDo":{"_propertyPath":"Code.Villagers.Professions.Profession.HasWorkToDo","_name":"hasWorkToDo","_id":"da082cfc-eafa-48d1-9382-4d35acf18f9d","$type":"NodeCanvas.Framework.Variable`1[[System.Boolean,
+    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},"taskCompleted":{"_propertyPath":"Code.AI.VillagerBrain.Layers.Villager_Brain_WorkLayer.TaskComplete","_name":"taskCompleted","_id":"af056f0b-96ae-4831-9308-b2b55778813d","$type":"NodeCanvas.Framework.Variable`1[[System.Boolean,
+    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},"hasWorkToDo":{"_propertyPath":"Code.AI.VillagerBrain.Layers.Villager_Brain_WorkLayer.HasWorkToDo","_name":"hasWorkToDo","_id":"da082cfc-eafa-48d1-9382-4d35acf18f9d","$type":"NodeCanvas.Framework.Variable`1[[System.Boolean,
     mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},"_wanderState":{"_name":"_wanderState","_id":"aef470fc-5393-422f-9e00-97aff10be320","$type":"NodeCanvas.Framework.Variable`1[[System.Int32,
     mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"}}}'
   _objectReferences: []
   _serializedVariables:
-  - _json: '{"_propertyPath":"Code.Villagers.Entity.Villager.Profession","_name":"myProfession","_id":"f8e921f1-fa43-4803-baad-3a09a75cb5d9","$type":"NodeCanvas.Framework.Variable`1[[Code.Villagers.Professions.Profession,
+  - _json: '{"_propertyPath":"Code.Villagers.Entity.Villager.Brain","_name":"myBrain","_id":"38c6807b-7977-4c8a-966e-0d04c49ccb31","$type":"NodeCanvas.Framework.Variable`1[[Code.AI.VillagerBrain.Villager_Brain,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}'
+    _references: []
+  - _json: '{"_propertyPath":"Code.AI.VillagerBrain.Villager_Brain.Work","_name":"workLayer","_id":"9b20be5b-0d19-4d3d-aa4a-3663adf6e9f9","$type":"NodeCanvas.Framework.Variable`1[[Code.AI.VillagerBrain.Layers.Villager_Brain_WorkLayer,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}'
+    _references: []
+  - _json: '{"_propertyPath":"Code.Villagers.Entity.Villager.Profession","_name":"myProfession","_id":"841ca5a8-d5ef-4f38-a0ad-08472616f76c","$type":"NodeCanvas.Framework.Variable`1[[Code.Villagers.Professions.Villager_Profession,
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}'
     _references: []
   - _json: '{"_name":"myWorkplace","_id":"a7b7954d-f4ec-42d2-8468-e52c0d44a758","$type":"NodeCanvas.Framework.Variable`1[[Code.Map.Building.Workplaces.Workplace,
@@ -94,10 +102,10 @@ MonoBehaviour:
   - _json: '{"_value":true,"_name":"enoughStamina","_id":"db46794d-f169-4d30-b76c-fab6cf88c48f","$type":"NodeCanvas.Framework.Variable`1[[System.Boolean,
       mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"}'
     _references: []
-  - _json: '{"_propertyPath":"Code.Villagers.Professions.Profession.TaskComplete","_name":"taskCompleted","_id":"af056f0b-96ae-4831-9308-b2b55778813d","$type":"NodeCanvas.Framework.Variable`1[[System.Boolean,
+  - _json: '{"_propertyPath":"Code.AI.VillagerBrain.Layers.Villager_Brain_WorkLayer.TaskComplete","_name":"taskCompleted","_id":"af056f0b-96ae-4831-9308-b2b55778813d","$type":"NodeCanvas.Framework.Variable`1[[System.Boolean,
       mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"}'
     _references: []
-  - _json: '{"_propertyPath":"Code.Villagers.Professions.Profession.HasWorkToDo","_name":"hasWorkToDo","_id":"da082cfc-eafa-48d1-9382-4d35acf18f9d","$type":"NodeCanvas.Framework.Variable`1[[System.Boolean,
+  - _json: '{"_propertyPath":"Code.AI.VillagerBrain.Layers.Villager_Brain_WorkLayer.HasWorkToDo","_name":"hasWorkToDo","_id":"da082cfc-eafa-48d1-9382-4d35acf18f9d","$type":"NodeCanvas.Framework.Variable`1[[System.Boolean,
       mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"}'
     _references: []
   - _json: '{"_name":"_wanderState","_id":"aef470fc-5393-422f-9e00-97aff10be320","$type":"NodeCanvas.Framework.Variable`1[[System.Int32,
