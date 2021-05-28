@@ -9,7 +9,13 @@ namespace Code.AI.VillagerBrain.Layers
     {
         private readonly List<Stimulus> stimuli = new List<Stimulus>();
 
-        private readonly float delayDecrement = Time.deltaTime;
+        private float delayDecrement;
+
+        public override void Initialize(Villager_Brain villagerBrain)
+        {
+            delayDecrement = Time.deltaTime;
+            base.Initialize(villagerBrain);
+        }
 
         private void ProcessStimulus(Stimulus stimulus)
         {
