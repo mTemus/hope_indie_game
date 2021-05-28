@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Code.Villagers.Professions
 {
-    [CreateAssetMenu(fileName = "Profession Data", menuName = "Game Data/Villagers/Profession Data", order = 0)]
+    [CreateAssetMenu(fileName = "Villager Profession Data", menuName = "Game Data/Villagers/Profession Data", order = 0)]
     public class ProfessionData : ScriptableObject
     {
         [Header("Profession data")]

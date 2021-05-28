@@ -1,6 +1,6 @@
 namespace Code.Villagers.Professions.Types
 {
-    public class Villager_Profession_GlobalHauler : Profession
+    public class Villager_Profession_GlobalHauler : Villager_Profession
     {
         private void Update()
         {

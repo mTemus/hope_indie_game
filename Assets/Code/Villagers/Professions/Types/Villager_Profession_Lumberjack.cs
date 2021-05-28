@@ -1,6 +1,6 @@
 namespace Code.Villagers.Professions.Types
 {
-    public class Villager_Profession_Lumberjack : Profession
+    public class Villager_Profession_Lumberjack : Villager_Profession
     {
         private void Update()
         {
@@ -10,9 +10,6 @@ namespace Code.Villagers.Professions.Types
         public override void Initialize()
         {
             InitializeWorkerAI();
-            
-            // blackboard.InitializePropertiesBinding(BTO.blackboard.propertiesBindTarget, false);
-            // BTO.StartBehaviour();
         }
     }
 }

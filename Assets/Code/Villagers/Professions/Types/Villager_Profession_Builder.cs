@@ -1,6 +1,6 @@
 namespace Code.Villagers.Professions.Types
 {
-    public class Villager_Profession_Builder : Profession
+    public class Villager_Profession_Builder : Villager_Profession
     {
         private void Update()
         {

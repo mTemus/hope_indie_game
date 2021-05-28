@@ -20,7 +20,7 @@ namespace Code.Map.Resources.ResourceToGather
             this.onResourceDepleted = onResourceDepleted;
         }
 
-        public void GatherResource(float resourcePerFrame, Profession worker)
+        public void GatherResource(float resourcePerFrame, Villager_Profession worker)
         {
             timeCounter += Time.deltaTime;
             resourceCounter += resourcePerFrame * Time.deltaTime;

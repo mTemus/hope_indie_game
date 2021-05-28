@@ -18,7 +18,7 @@ namespace Code.Villagers.Professions
         GlobalHauler,
     }
     
-    public abstract class Profession : MonoBehaviour
+    public abstract class Villager_Profession : MonoBehaviour
     {
         private readonly Queue<Task> tasks = new Queue<Task>();
 

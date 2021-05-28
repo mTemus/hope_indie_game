@@ -13,12 +13,12 @@ namespace Code.Villagers.Entity
 
         [Header("Villager components")] 
         [SerializeField] private Villager_Brain brain;
-        [SerializeField] private Profession profession;
+        [SerializeField] private Villager_Profession profession;
         [SerializeField] private VillagerUi ui;
         
         public VillagersStatistics Statistics => statistics;
 
-        public Profession Profession
+        public Villager_Profession Profession
         {
             get => profession;
             set => profession = value;

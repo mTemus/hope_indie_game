@@ -16,7 +16,7 @@ namespace Code.AI.VillagerBrain.Layers
         public bool HasWorkToDo => tasks.Count > 0 || currentTask != null || currentTask != null && currentTask.state != TaskState.COMPLETED;
         public bool TaskComplete => currentTask.state == TaskState.COMPLETED;
         public bool IsCarryingResource => CarriedResource != null && CarriedResource.amount > 0;
-        public Profession Profession { get; set; }
+        public Villager_Profession Profession { get; set; }
 
         public override void Initialize(Villager_Brain villagerBrain)
         {
