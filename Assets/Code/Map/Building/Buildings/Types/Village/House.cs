@@ -1,5 +1,3 @@
-using NotImplementedException = System.NotImplementedException;
-
 namespace Code.Map.Building.Buildings.Types.Village
 {
     public class House : Building
