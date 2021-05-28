@@ -159,6 +159,5 @@ namespace Code.Villagers.Tasks
         
         public override void EndTask() {}
         public override void PauseTask() {}
-        public override void AbandonTask() { }
     }
 }

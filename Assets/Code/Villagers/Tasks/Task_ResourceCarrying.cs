@@ -130,6 +130,7 @@ namespace Code.Villagers.Tasks
             }
             
             taskResourceCarryingState = Task_ResourceCarrying_State.FIND_CLOSEST_STORAGE;
+            base.AbandonTask();
         }
     }
 }

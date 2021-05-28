@@ -12,7 +12,7 @@ namespace Code.Villagers.Tasks
         RUNNING,
         INTERRUPTED,
         PAUSED,
-        ABORTED,
+        ABANDONED,
         COMPLETED
     }
 
@@ -31,7 +31,12 @@ namespace Code.Villagers.Tasks
         public abstract void EndTask();
         public abstract void DoTask();
         public abstract void PauseTask();
-        public abstract void AbandonTask();
+
+        public virtual void AbandonTask()
+        {
+            state = TaskState.ABANDONED;
+            worker.Profession.Workplace.TakeTaskBackFromWorker(this);
+        }
 
         public void TakeTask(Villager newWorker, params Action[] taskCompleteActions)
         {

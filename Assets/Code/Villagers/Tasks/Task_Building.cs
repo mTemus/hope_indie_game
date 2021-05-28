@@ -44,9 +44,5 @@ namespace Code.Villagers.Tasks
         public override void PauseTask()
         {
         }
-
-        public override void AbandonTask()
-        {
-        }
     }
 }

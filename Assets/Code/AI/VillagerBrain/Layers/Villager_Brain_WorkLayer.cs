@@ -28,7 +28,6 @@ namespace Code.AI.VillagerBrain.Layers
         private void AbandonTask(Task task)
         {
             task.AbandonTask();
-            Profession.Workplace.TakeTaskBackFromWorker(task);
         }
         
         public bool GetNewTask()
