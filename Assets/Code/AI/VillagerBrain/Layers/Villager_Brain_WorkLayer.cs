@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Code.Map.Resources;
 using Code.System;
-using Code.Villagers.Professions;
 using Code.Villagers.Tasks;
 
 namespace Code.AI.VillagerBrain.Layers
@@ -16,7 +15,6 @@ namespace Code.AI.VillagerBrain.Layers
         public bool HasWorkToDo => tasks.Count > 0 || currentTask != null || currentTask != null && currentTask.state != TaskState.COMPLETED;
         public bool TaskComplete => currentTask.state == TaskState.COMPLETED;
         public bool IsCarryingResource => CarriedResource != null && CarriedResource.amount > 0;
-        public Villager_Profession Profession { get; set; }
 
        public void Work()
        {

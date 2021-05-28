@@ -63,7 +63,7 @@ namespace Code.Villagers.Tasks
                         }
                         else {
                             worker.Profession.CarriedResource = null;
-                            worker.Profession.AbandonCurrentTask();
+                            worker.Brain.Work.AbandonCurrentTask();
                             return;
                         }
                     }

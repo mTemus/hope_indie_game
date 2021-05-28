@@ -66,7 +66,7 @@ namespace Code.Map.Building.Workplaces
         {
             foreach (var worker in workers
                 .Where(worker => worker.Profession.Data.Type != ProfessionType.WorkplaceHauler)) 
-            { worker.Profession.CompleteTask(); }
+            { worker.Brain.Work.CompleteTask(); }
             
             
             Storage.onResourceLimitReset.AddListener(RecoverAllTasks);

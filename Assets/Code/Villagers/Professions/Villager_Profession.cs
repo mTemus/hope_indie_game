@@ -37,10 +37,10 @@ namespace Code.Villagers.Professions
 
         public abstract void Initialize();
 
-        public void Work()
-        {
-            currentTask.DoTask();
-        }
+        // public void Work()
+        // {
+        //     currentTask.DoTask();
+        // }
 
         protected void InitializeWorkerAI()
         {
@@ -54,75 +54,75 @@ namespace Code.Villagers.Professions
             
         }
 
-        //TODO: this to brain
-        public void ClearAIComponents()
-        {
-            BTO.StopBehaviour();
-            BTO.blackboard.variables.Clear();
-            BTO.graph = null;
-        }
-        
+        // //TODO: this to brain
+        // public void ClearAIComponents()
+        // {
+        //     BTO.StopBehaviour();
+        //     BTO.blackboard.variables.Clear();
+        //     BTO.graph = null;
+        // }
+        //
         #endregion
         
         #region Tasks
 
-        private void AbandonTask(Task t)
-        {
-            t.AbandonTask();
-            Workplace.TakeTaskBackFromWorker(t);
-        }
-        
-        public bool GetNewTask()
-        {
-            if (tasks.Count <= 0) {
-                currentTask = null;
-                return false;
-            }
-            
-            currentTask = tasks.Dequeue();
-            currentTask.StartTask();
-            return true;
-        }
-
-        public void AddTask(Task task)
-        {
-            tasks.Enqueue(task);
-        }
-
-        public void PauseCurrentTask()
-        {
-            currentTask.PauseTask();
-            tasks.Enqueue(currentTask);
-            currentTask = null;
-        }
-
-        public void AbandonCurrentTask()
-        {
-            if (currentTask != null) {
-                AbandonTask(currentTask);
-                currentTask = null;
-            }
-
-            if (!IsCarryingResource) return;
-            AssetsStorage.I.ThrowResourceOnTheGround(CarriedResource, transform.position.x);
-            CarriedResource = null;
-        }
-        
-        public void AbandonAllTasks()
-        {
-            if (!HasWorkToDo) 
-                return;
-
-            AbandonTask(currentTask);
-            
-            foreach (Task task in tasks) 
-                AbandonTask(task);
-        }
-        
-        public void CompleteTask()
-        {
-            currentTask.EndTask();
-        }
+        // private void AbandonTask(Task t)
+        // {
+        //     t.AbandonTask();
+        //     Workplace.TakeTaskBackFromWorker(t);
+        // }
+        //
+        // public bool GetNewTask()
+        // {
+        //     if (tasks.Count <= 0) {
+        //         currentTask = null;
+        //         return false;
+        //     }
+        //     
+        //     currentTask = tasks.Dequeue();
+        //     currentTask.StartTask();
+        //     return true;
+        // }
+        //
+        // public void AddTask(Task task)
+        // {
+        //     tasks.Enqueue(task);
+        // }
+        //
+        // public void PauseCurrentTask()
+        // {
+        //     currentTask.PauseTask();
+        //     tasks.Enqueue(currentTask);
+        //     currentTask = null;
+        // }
+        //
+        // public void AbandonCurrentTask()
+        // {
+        //     if (currentTask != null) {
+        //         AbandonTask(currentTask);
+        //         currentTask = null;
+        //     }
+        //
+        //     if (!IsCarryingResource) return;
+        //     AssetsStorage.I.ThrowResourceOnTheGround(CarriedResource, transform.position.x);
+        //     CarriedResource = null;
+        // }
+        //
+        // public void AbandonAllTasks()
+        // {
+        //     if (!HasWorkToDo) 
+        //         return;
+        //
+        //     AbandonTask(currentTask);
+        //     
+        //     foreach (Task task in tasks) 
+        //         AbandonTask(task);
+        // }
+        //
+        // public void CompleteTask()
+        // {
+        //     currentTask.EndTask();
+        // }
 
         #endregion
     }

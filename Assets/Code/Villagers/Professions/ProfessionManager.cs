@@ -108,8 +108,8 @@ namespace Code.Villagers.Professions
         public void FireVillagerFromOldProfession(Villager villager)
         {
             RemoveVillagerFromProfessionStructure(villager);
-            villager.Profession.AbandonAllTasks();
-            villager.Profession.ClearAIComponents();
+            villager.Brain.Work.AbandonAllTasks();
+            villager.Brain.ClearBehaviourAIComponents();
             villager.Profession.Workplace.FireWorker(villager);
             
             DestroyImmediate(villager.Profession);

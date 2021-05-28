@@ -90,8 +90,8 @@ namespace Code.Map.Building.Workplaces
         
         protected void GiveTaskToWorker(Villager worker, Task task)
         {
-            worker.Profession.AddTask(task);
-            task.TakeTask(worker, worker.Profession.CompleteTask);
+            worker.Brain.Work.AddTask(task);
+            task.TakeTask(worker, worker.Brain.Work.CompleteTask);
             UnregisterWorkerWithoutTask(worker);
         }
 
