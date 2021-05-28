@@ -15,7 +15,8 @@ namespace Code.Villagers.Entity
         [SerializeField] private Villager_Brain brain;
         [SerializeField] private Villager_Profession profession;
         [SerializeField] private VillagerUi ui;
-        
+
+        public Villager_Brain Brain => brain;
         public VillagersStatistics Statistics => statistics;
 
         public Villager_Profession Profession
