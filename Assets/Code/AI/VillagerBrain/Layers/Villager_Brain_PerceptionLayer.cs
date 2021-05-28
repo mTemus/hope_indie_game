@@ -17,11 +17,6 @@ namespace Code.AI.VillagerBrain.Layers
                 
             }
         }
-        
-        public override void Initialize(Villager_Brain villagerBrain)
-        {
-            
-        }
 
         public void Update()
         {

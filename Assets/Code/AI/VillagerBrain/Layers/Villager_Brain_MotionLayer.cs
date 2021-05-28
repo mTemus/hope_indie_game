@@ -6,12 +6,6 @@ namespace Code.AI.VillagerBrain.Layers
     {
         [SerializeField] private float speed = 5f;
         
-        public override void Initialize(Villager_Brain villagerBrain)
-        {
-            
-        }
-        
-        
         public bool MoveTo(Vector3 position)
         {
             Vector3 villagerPosition = transform.position;

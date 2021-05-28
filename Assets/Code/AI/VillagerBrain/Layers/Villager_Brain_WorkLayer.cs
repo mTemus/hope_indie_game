@@ -18,18 +18,11 @@ namespace Code.AI.VillagerBrain.Layers
         public bool IsCarryingResource => CarriedResource != null && CarriedResource.amount > 0;
         public Villager_Profession Profession { get; set; }
 
-        public override void Initialize(Villager_Brain villagerBrain)
-        {
-            brain = villagerBrain;
-            
-        }
-        
-        public void Work()
-        {
-            currentTask.DoTask();
-        }
-        
-        
+       public void Work()
+       {
+           currentTask.DoTask();
+       }
+       
         #region Tasks
         
         private void AbandonTask(Task task)

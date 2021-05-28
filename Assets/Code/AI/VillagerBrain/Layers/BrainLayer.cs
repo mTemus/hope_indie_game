@@ -6,6 +6,9 @@ namespace Code.AI.VillagerBrain.Layers
     {
         protected Villager_Brain brain;
 
-        public abstract void Initialize(Villager_Brain villagerBrain);
+        public void Initialize(Villager_Brain villagerBrain)
+        {
+            brain = villagerBrain;
+        }
     }
 }
