@@ -1,59 +1,50 @@
 using System.Collections.Generic;
 using System.Linq;
-using Code.AI.VillagerBrain.StimulusMessageSystem;
+using Code.AI.VillagerBrain.StimulusSystem;
 using UnityEngine;
 
 namespace Code.AI.VillagerBrain.Layers
 {
-    public enum BrainLayerTypes
+    public class Villager_Brain_PerceptionLayer : BrainLayer
     {
-        Behaviour, Perception, Motion, Work
-    }
-    
-    public class Villager_Brain_PerceptionLayer : MonoBehaviour, IBrainLayer
-    {
-        private readonly List<StimulusMessage> messages = new List<StimulusMessage>();
-        private readonly List<StimulusListener> listeners = new List<StimulusListener>();
+        private readonly List<Stimulus> stimuli = new List<Stimulus>();
 
         private readonly float delayDecrement = Time.deltaTime;
+
+        private void ProcessStimulus(Stimulus stimulus)
+        {
+            switch (stimulus.StimulusType) {
+                
+            }
+        }
         
-        public void Initialize(Villager_Brain brain)
+        public override void Initialize(Villager_Brain villagerBrain)
         {
             
         }
 
         public void Update()
         {
-            if (messages.Count <= 0) return;
+            if (stimuli.Count <= 0) return;
 
-            foreach (StimulusMessage stimulus in messages) {
+            foreach (Stimulus stimulus in stimuli) {
                 if (stimulus.Delay > 0) 
                     stimulus.Delay -= delayDecrement;
                 else {
-                    foreach (StimulusListener listener in listeners
-                        .Where(listener => stimulus.Receiver == listener.Receiver)
-                        .Where(listener => stimulus.StimulusType == listener.StimulusType)) {
-                        listener.ReceiveMessage.Invoke(stimulus.Data);
-                        stimulus.Received = true;
-                    }
+                    ProcessStimulus(stimulus);
+                    stimulus.Processed = true;
                 }
             }
 
-            List<StimulusMessage> tmpMessages = new List<StimulusMessage>(messages);
+            List<Stimulus> tmpMessages = new List<Stimulus>(stimuli);
             
-            foreach (StimulusMessage stimulus in tmpMessages
-                .Where(stimulus => stimulus.Received)) { messages.Remove(stimulus); }
+            foreach (Stimulus stimulus in tmpMessages
+                .Where(stimulus => stimulus.Processed)) { stimuli.Remove(stimulus); }
         }
-
-        public void RegisterListener(StimulusListener newListener)
+        
+        public void ReceiveStimulusMessage(Stimulus message)
         {
-            if (listeners.Contains(newListener)) return;
-            listeners.Add(newListener);
-        }
-
-        public void ReceiveStimulusMessage(StimulusMessage message)
-        {
-            messages.Add(message);
+            stimuli.Add(message);
         }
     }
 }

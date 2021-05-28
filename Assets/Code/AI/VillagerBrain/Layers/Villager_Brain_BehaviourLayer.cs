@@ -3,12 +3,11 @@ using UnityEngine;
 
 namespace Code.AI.VillagerBrain.Layers
 {
-    public class Villager_Brain_BehaviourLayer : MonoBehaviour, IBrainLayer
+    public class Villager_Brain_BehaviourLayer : BrainLayer
     {
         public BehaviourTreeOwner BehaviourTree { get; set; }
-
         
-        public void Initialize(Villager_Brain brain)
+        public override void Initialize(Villager_Brain villagerBrain)
         {
             
         }

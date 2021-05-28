@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Code.AI.VillagerBrain.StimulusMessageSystem
+namespace Code.AI.VillagerBrain.StimulusSystem
 {
     public class StimulusData
     {
