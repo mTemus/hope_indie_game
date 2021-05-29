@@ -20,7 +20,7 @@ namespace Code.Map.Building.Buildings.Types.Industry
             Task nt = (from task in tasksToDo
                     where task is Task_Building
                     select task as Task_Building)
-                .FirstOrDefault(bt => bt.state != TaskState.WAITING);
+                .FirstOrDefault(bt => bt.flag != TaskFlag.WAITING);
 
             RemoveTaskFromTodoList(nt);
             return nt;
@@ -51,7 +51,7 @@ namespace Code.Map.Building.Buildings.Types.Industry
         {
             Debug.Log("Adding task as to do: " + task.GetType().Name);
 
-            if (task.state == TaskState.WAITING) {
+            if (task.flag == TaskFlag.WAITING) {
                 tasksToDo.Add(task);
                 Debug.Log("Added task as todo, because it's state is \"WAITING\".");
                 return;
@@ -111,7 +111,7 @@ namespace Code.Map.Building.Buildings.Types.Industry
                 else {
                     Managers.I.Resources.AddWaitingTask(rct, rct.ResourceToCarry);
                     rct.onTaskSetReady += rct.SetReady;
-                    rct.state = TaskState.WAITING;
+                    rct.flag = TaskFlag.WAITING;
                 }
             }
             else {

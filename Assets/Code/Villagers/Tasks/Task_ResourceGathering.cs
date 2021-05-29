@@ -42,7 +42,7 @@ namespace Code.Villagers.Tasks
         
         public override void Execute()
         {
-            state = TaskState.RUNNING;
+            flag = TaskFlag.RUNNING;
             
             switch (currentGatheringState) {
                 case Task_ResourceGathering_State.GO_TO_WORKPLACE:

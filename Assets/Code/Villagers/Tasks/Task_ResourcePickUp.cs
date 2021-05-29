@@ -96,8 +96,8 @@ namespace Code.Villagers.Tasks
 
         public override void Start()
         {
-            switch (state) {
-                case TaskState.NEW:
+            switch (flag) {
+                case TaskFlag.NEW:
                     warehouse = worker.Profession.Workplace as Warehouse;
                     
                     if (warehouse == null) 
@@ -106,17 +106,17 @@ namespace Code.Villagers.Tasks
                     currentPickupResourcePickUpState = Task_ResourcePickUp_State.GET_RESOURCES_DATA;
                     break;
                 
-                case TaskState.WAITING:
+                case TaskFlag.WAITING:
                     break;
-                case TaskState.RUNNING:
+                case TaskFlag.RUNNING:
                     break;
-                case TaskState.INTERRUPTED:
+                case TaskFlag.INTERRUPTED:
                     break;
-                case TaskState.PAUSED:
+                case TaskFlag.PAUSED:
                     break;
-                case TaskState.ABANDONED:
+                case TaskFlag.ABANDONED:
                     break;
-                case TaskState.COMPLETED:
+                case TaskFlag.COMPLETED:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -126,7 +126,7 @@ namespace Code.Villagers.Tasks
 
         public override void Execute()
         {
-            state = TaskState.RUNNING;
+            flag = TaskFlag.RUNNING;
             
             switch (currentPickupResourcePickUpState) {
                 case Task_ResourcePickUp_State.GO_TO_STORAGE:

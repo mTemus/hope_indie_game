@@ -12,8 +12,8 @@ namespace Code.AI.VillagerBrain.Layers
         private Task currentTask;
         
         public Resource CarriedResource { get; set; }
-        public bool HasWorkToDo => tasks.Count > 0 || currentTask != null || currentTask != null && currentTask.state != TaskState.COMPLETED;
-        public bool TaskComplete => currentTask.state == TaskState.COMPLETED;
+        public bool HasWorkToDo => tasks.Count > 0 || currentTask != null || currentTask != null && currentTask.flag != TaskFlag.COMPLETED;
+        public bool TaskComplete => currentTask.flag == TaskFlag.COMPLETED;
         public bool IsCarryingResource => CarriedResource != null && CarriedResource.amount > 0;
 
         /// Called in Worker Behaviour Tree

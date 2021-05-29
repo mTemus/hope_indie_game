@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Code.Villagers.Tasks
 {
-    public enum TaskState
+    public enum TaskFlag
     {
         NEW,
         WAITING,
@@ -22,7 +22,7 @@ namespace Code.Villagers.Tasks
         protected Vector3 taskPosition;
         protected Villager worker;
 
-        public TaskState state = TaskState.NEW;
+        public TaskFlag flag = TaskFlag.NEW;
         
         public Action onTaskCompleted;
         public Action onTaskCancel;
@@ -48,7 +48,7 @@ namespace Code.Villagers.Tasks
         /// </summary>
         public virtual void Pause()
         {
-            state = TaskState.PAUSED;
+            flag = TaskFlag.PAUSED;
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Code.Villagers.Tasks
         /// </summary>
         public virtual void Abandon()
         {
-            state = TaskState.ABANDONED;
+            flag = TaskFlag.ABANDONED;
             worker.Profession.Workplace.TakeTaskBackFromWorker(this);
         }
 
@@ -65,7 +65,7 @@ namespace Code.Villagers.Tasks
         /// </summary>
         public virtual void Interrupt()
         {
-            state = TaskState.INTERRUPTED;
+            flag = TaskFlag.INTERRUPTED;
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Code.Villagers.Tasks
         /// </summary>
         public void SetWaiting()
         {
-            state = TaskState.WAITING;
+            flag = TaskFlag.WAITING;
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Code.Villagers.Tasks
         /// </summary>
         public void SetReady()
         {
-            state = TaskState.READY;
+            flag = TaskFlag.READY;
         }
 
         public void Take(Villager newWorker, params Action[] taskCompleteActions)

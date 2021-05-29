@@ -22,12 +22,12 @@ namespace Code.Villagers.Tasks
 
         public override void End()
         {
-            state = TaskState.COMPLETED;
+            flag = TaskFlag.COMPLETED;
         }
 
         public override void Execute()
         {
-            state = TaskState.RUNNING;
+            flag = TaskFlag.RUNNING;
             
             if (!worker.MoveTo(constructionPosition)) return;
             if (!construction.Construct()) return;

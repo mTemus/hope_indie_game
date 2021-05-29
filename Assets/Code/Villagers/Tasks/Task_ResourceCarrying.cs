@@ -52,7 +52,7 @@ namespace Code.Villagers.Tasks
 
         public override void Execute()
         {
-            state = TaskState.RUNNING;
+            flag = TaskFlag.RUNNING;
             
             switch (taskResourceCarryingState) {
                 case Task_ResourceCarrying_State.FIND_CLOSEST_STORAGE:
@@ -122,7 +122,7 @@ namespace Code.Villagers.Tasks
 
         public override void End()
         {
-            state = TaskState.COMPLETED;
+            flag = TaskFlag.COMPLETED;
         }
         public override void Pause() {}
 

@@ -125,7 +125,7 @@ namespace Code.Map.Building.Workplaces
         public void SetTaskReady(Task readyTask)
         { 
             Debug.Log("Setting " + readyTask.GetType().Name + " as ready.");
-            readyTask.state = TaskState.READY;
+            readyTask.flag = TaskFlag.READY;
         }
 
         #endregion
