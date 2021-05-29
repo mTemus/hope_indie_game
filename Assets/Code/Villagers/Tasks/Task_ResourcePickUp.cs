@@ -8,7 +8,6 @@ namespace Code.Villagers.Tasks
 {
     public enum Task_ResourcePickUp_State 
     {
-        GET_STORAGE,
         GO_TO_STORAGE,
         GET_RESOURCES_DATA,
         GO_TO_RESOURCE,
@@ -156,8 +155,6 @@ namespace Code.Villagers.Tasks
                         worker.Profession.CarriedResource = collectedResource;
                     else 
                         workerResource.amount += collectedResource.amount;
-                    
-                    Debug.Log("Pickuped: " + currentResource.StoredResource.amount + " " + currentResource.StoredResource.Type);
                     
                     warehouse.UnregisterResourceToPickUp(currentResource);
                     GetNextResource();
