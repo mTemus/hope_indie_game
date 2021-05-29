@@ -25,7 +25,8 @@ namespace Code.AI.VillagerBrain
 
         private void Update()
         {
-            perception.Update();
+            perception.ManualUpdate();
+            behaviour.ManualUpdate();
         }
 
         public void ClearBehaviourAIComponents()

@@ -155,7 +155,7 @@ namespace Code.Villagers.Professions
             villager.UI.ProfessionName.text = villagerProfessionData.Type + " of " + villager.Profession.Workplace.name;
 
             if (villager.Profession.Data.Type != ProfessionType.Unemployed) 
-                villager.Profession.BTO.StartBehaviour();
+                villager.Brain.Behaviour.BehaviourTree.StartBehaviour();
         }
     }
 }

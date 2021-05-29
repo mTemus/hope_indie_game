@@ -1,14 +1,17 @@
 using NodeCanvas.BehaviourTrees;
+using UnityEngine;
 
 namespace Code.AI.VillagerBrain.Layers
 {
     public class Villager_Brain_BehaviourLayer : BrainLayer
     {
-        public BehaviourTreeOwner BehaviourTree { get; private set; }
+        [SerializeField] private BehaviourTreeOwner behaviourTree;
 
-        private void Awake()
+        public BehaviourTreeOwner BehaviourTree => behaviourTree;
+        
+        public void ManualUpdate()
         {
-            BehaviourTree = GetComponent<BehaviourTreeOwner>();
+            BehaviourTree.Tick();
         }
     }
 }

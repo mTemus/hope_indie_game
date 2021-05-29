@@ -24,7 +24,7 @@ namespace Code.AI.VillagerBrain.Layers
             }
         }
 
-        public void Update()
+        public void ManualUpdate()
         {
             if (stimuli.Count <= 0) return;
 
