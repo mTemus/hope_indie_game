@@ -250,15 +250,15 @@ GameObject:
   - component: {fileID: 1668639820441404007}
   - component: {fileID: 1668639820441404001}
   - component: {fileID: 1668639820441404006}
-  - component: {fileID: 2395427748994243067}
-  - component: {fileID: 240108517744776949}
-  - component: {fileID: 2699228091900020198}
-  - component: {fileID: 7507214796160935649}
-  - component: {fileID: 3477162602578977087}
-  - component: {fileID: 6690869406248460544}
-  - component: {fileID: 3077500637359862925}
+  - component: {fileID: -6783935266427765137}
+  - component: {fileID: 4247861624112686015}
+  - component: {fileID: -317662784036969273}
+  - component: {fileID: 2827854335279187844}
+  - component: {fileID: 2801349907460507800}
+  - component: {fileID: 9150020556147202100}
+  - component: {fileID: -2314950498180980649}
   m_Layer: 0
-  m_Name: WorkplaceHauler
+  m_Name: Builder
   m_TagString: Villager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -345,7 +345,7 @@ MonoBehaviour:
     strength: 5
     dexterity: 5
     intelligence: 5
-  brain: {fileID: 2699228091900020198}
+  brain: {fileID: -317662784036969273}
   profession: {fileID: 0}
   ui: {fileID: 1668639820441404001}
 --- !u!114 &1668639820441404001
@@ -376,9 +376,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initializeMode: 0
-  villagerProfessionData: {fileID: 11400000, guid: a2885f04ce261c44aa06498491a958cd, type: 2}
+  villagerProfessionData: {fileID: 11400000, guid: 0f02c7c9f06ef5743b159a3867ef2051, type: 2}
   workplace: {fileID: 0}
---- !u!114 &2395427748994243067
+--- !u!114 &-6783935266427765137
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -406,8 +406,8 @@ MonoBehaviour:
   _preInitializeSubGraphs: 0
   _updateMode: 0
   _graph: {fileID: 0}
-  _blackboard: {fileID: 240108517744776949}
---- !u!114 &240108517744776949
+  _blackboard: {fileID: 4247861624112686015}
+--- !u!114 &4247861624112686015
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -423,7 +423,7 @@ MonoBehaviour:
   _serializedBlackboard: '{"_variables":{}}'
   _objectReferences: []
   _serializedVariables: []
---- !u!114 &2699228091900020198
+--- !u!114 &-317662784036969273
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -435,11 +435,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69a3009b1c0f8614988ee657c9e217a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  perception: {fileID: 7507214796160935649}
-  behaviour: {fileID: 3477162602578977087}
-  motion: {fileID: 6690869406248460544}
-  work: {fileID: 3077500637359862925}
---- !u!114 &7507214796160935649
+  perception: {fileID: 2827854335279187844}
+  behaviour: {fileID: 2801349907460507800}
+  motion: {fileID: 9150020556147202100}
+  work: {fileID: -2314950498180980649}
+--- !u!114 &2827854335279187844
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -451,7 +451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad523731e34dcae4aa31e49fba666c11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3477162602578977087
+--- !u!114 &2801349907460507800
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -463,7 +463,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 511b2eaa2e1a14143b393178fae2804f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6690869406248460544
+  behaviourTree: {fileID: -6783935266427765137}
+--- !u!114 &9150020556147202100
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -476,7 +477,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
---- !u!114 &3077500637359862925
+--- !u!114 &-2314950498180980649
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
