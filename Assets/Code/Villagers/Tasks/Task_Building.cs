@@ -7,8 +7,6 @@ namespace Code.Villagers.Tasks
     {
         private readonly Construction construction;
         private readonly Vector3 constructionPosition;
-
-        public bool ResourcesDelivered { get; private set; }
         
         public Task_Building(Vector3 taskPosition, Construction construction)
         {
@@ -17,18 +15,20 @@ namespace Code.Villagers.Tasks
             constructionPosition = construction.transform.position + construction.GetComponent<Building>().Data.EntrancePivot;
         }
         
-        public override void StartTask()
+        public override void Start()
         {
             
         }
 
-        public override void EndTask()
+        public override void End()
         {
             state = TaskState.COMPLETED;
         }
 
-        public override void DoTask()
+        public override void Execute()
         {
+            state = TaskState.RUNNING;
+            
             if (!worker.MoveTo(constructionPosition)) return;
             if (!construction.Construct()) return;
             onTaskCompleted.Invoke();
@@ -37,11 +37,10 @@ namespace Code.Villagers.Tasks
 
         public void SetResourcesAsDelivered()
         {
-            ResourcesDelivered = true;
-            onTaskSetReady.Invoke(this);
+            SetReady();
         }
         
-        public override void PauseTask()
+        public override void Pause()
         {
         }
     }

@@ -18,9 +18,9 @@ namespace Code.Map.Building.Buildings.Types.Industry
         protected override Task GetNormalTask()
         {
             Task nt = (from task in tasksToDo
-                    where task is Task_Building 
+                    where task is Task_Building
                     select task as Task_Building)
-                .FirstOrDefault(btt => btt.ResourcesDelivered);
+                .FirstOrDefault(bt => bt.state != TaskState.WAITING);
 
             RemoveTaskFromTodoList(nt);
             return nt;
@@ -51,9 +51,9 @@ namespace Code.Map.Building.Buildings.Types.Industry
         {
             Debug.Log("Adding task as to do: " + task.GetType().Name);
 
-            if (task is Task_Building {ResourcesDelivered: false}) {
-                Debug.Log("Added as waiting.");
-                SetTaskWaiting(task);
+            if (task.state == TaskState.WAITING) {
+                tasksToDo.Add(task);
+                Debug.Log("Added task as todo, because it's state is \"WAITING\".");
                 return;
             }
 
@@ -110,8 +110,8 @@ namespace Code.Map.Building.Buildings.Types.Industry
                 }
                 else {
                     Managers.I.Resources.AddWaitingTask(rct, rct.ResourceToCarry);
-                    rct.onTaskSetReady += SetTaskReady;
-                    SetTaskWaiting(rct);
+                    rct.onTaskSetReady += rct.SetReady;
+                    rct.state = TaskState.WAITING;
                 }
             }
             else {
@@ -122,7 +122,7 @@ namespace Code.Map.Building.Buildings.Types.Industry
         public void CreateBuildingTask(Construction construction, BuildingData buildingData)
         {
             Task_Building bt = new Task_Building(construction.transform.position + construction.PositionOffset, construction);
-            bt.onTaskSetReady += SetTaskReady;
+            bt.SetWaiting();
             construction.SetBuildingTask(bt);
             AddTaskToDo(bt);
 

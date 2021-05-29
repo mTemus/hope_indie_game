@@ -19,7 +19,6 @@ namespace Code.Map.Building.Workplaces
         protected readonly List<Villager> workers = new List<Villager>();
         protected readonly List<Villager> workersWithoutTasks = new List<Villager>();
         protected readonly List<Task> tasksToDo = new List<Task>();
-        protected readonly List<Task> waitingTasks = new List<Task>();
         
         protected int haulersCnt;
 
@@ -122,15 +121,11 @@ namespace Code.Map.Building.Workplaces
 
         public bool RemoveTaskToDo(Task task) =>
             tasksToDo.Remove(task);
-        
-        public void SetTaskWaiting(Task waitingTask) =>
-            waitingTasks.Add(waitingTask);
-        
+
         public void SetTaskReady(Task readyTask)
         { 
             Debug.Log("Setting " + readyTask.GetType().Name + " as ready.");
-            waitingTasks.Remove(readyTask);
-            AddTaskToDo(readyTask);
+            readyTask.state = TaskState.READY;
         }
 
         #endregion

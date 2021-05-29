@@ -9,6 +9,7 @@ namespace Code.Villagers.Tasks
     {
         NEW,
         WAITING,
+        READY,
         RUNNING,
         INTERRUPTED,
         PAUSED,
@@ -25,7 +26,7 @@ namespace Code.Villagers.Tasks
         
         public Action onTaskCompleted;
         public Action onTaskCancel;
-        public Action<Task> onTaskSetReady;
+        public Action onTaskSetReady;
         
         /// <summary>
         /// Method should check current state of task and execute block of code dependently of it
@@ -73,6 +74,14 @@ namespace Code.Villagers.Tasks
         public void SetWaiting()
         {
             state = TaskState.WAITING;
+        }
+
+        /// <summary>
+        /// Method should be invoked when task is no longer dependent on other tasks and can be executed
+        /// </summary>
+        public void SetReady()
+        {
+            state = TaskState.READY;
         }
 
         public void Take(Villager newWorker, params Action[] taskCompleteActions)

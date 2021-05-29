@@ -40,7 +40,7 @@ namespace Code.Map.Resources
             if (!CanReserveResource(awaitedResource)) continue;
             ReserveResources(waitingTask, awaitedResource);
             tasksWaitingForResources.Remove(waitingTask);
-            waitingTask.onTaskSetReady.Invoke(waitingTask);
+            waitingTask.onTaskSetReady.Invoke();
          }
       }
 
