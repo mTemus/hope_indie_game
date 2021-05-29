@@ -1,11 +1,6 @@
-using System.Collections.Generic;
 using Code.Map.Building.Workplaces;
 using Code.Map.Resources;
-using Code.System;
-using Code.Villagers.Tasks;
-using NodeCanvas.BehaviourTrees;
 using UnityEngine;
-using Task = Code.Villagers.Tasks.Task;
 
 namespace Code.Villagers.Professions
 {
