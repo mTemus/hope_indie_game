@@ -95,15 +95,10 @@ namespace Code.Villagers.Tasks
             resources = new Queue<ResourceToPickUp>(resourcesList);
         }
 
-        public override void StartTask()
+        public override void Start()
         {
-            currentPickupResourcePickUpState = Task_ResourcePickUp_State.GET_STORAGE;
-        }
-
-        public override void DoTask()
-        {
-            switch (currentPickupResourcePickUpState) {
-                case Task_ResourcePickUp_State.GET_STORAGE:
+            switch (state) {
+                case TaskState.NEW:
                     warehouse = worker.Profession.Workplace as Warehouse;
                     
                     if (warehouse == null) 
@@ -112,6 +107,29 @@ namespace Code.Villagers.Tasks
                     currentPickupResourcePickUpState = Task_ResourcePickUp_State.GET_RESOURCES_DATA;
                     break;
                 
+                case TaskState.WAITING:
+                    break;
+                case TaskState.RUNNING:
+                    break;
+                case TaskState.INTERRUPTED:
+                    break;
+                case TaskState.PAUSED:
+                    break;
+                case TaskState.ABANDONED:
+                    break;
+                case TaskState.COMPLETED:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            
+        }
+
+        public override void Execute()
+        {
+            state = TaskState.RUNNING;
+            
+            switch (currentPickupResourcePickUpState) {
                 case Task_ResourcePickUp_State.GO_TO_STORAGE:
                     if (worker.MoveTo(warehouse.PivotedPosition)) 
                         currentPickupResourcePickUpState = worker.Profession.CarriedResource != null ? 
@@ -157,7 +175,7 @@ namespace Code.Villagers.Tasks
             }
         }
         
-        public override void EndTask() {}
-        public override void PauseTask() {}
+        public override void End() {}
+        public override void Pause() {}
     }
 }

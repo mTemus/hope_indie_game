@@ -50,8 +50,10 @@ namespace Code.Villagers.Tasks
             }
         }
 
-        public override void DoTask()
+        public override void Execute()
         {
+            state = TaskState.RUNNING;
+            
             switch (taskResourceCarryingState) {
                 case Task_ResourceCarrying_State.FIND_CLOSEST_STORAGE:
                     Building fromStorage = Managers.I.Buildings
@@ -114,15 +116,17 @@ namespace Code.Villagers.Tasks
             worker.UI.StateText.text = "Resource carrying: " + taskResourceCarryingState;
         }
 
-        public override void StartTask() {}
+        public override void Start()
+        {
+        }
 
-        public override void EndTask()
+        public override void End()
         {
             state = TaskState.COMPLETED;
         }
-        public override void PauseTask() {}
+        public override void Pause() {}
 
-        public override void AbandonTask()
+        public override void Abandon()
         {
             if (IsResourceInDelivery) {
                 resourceToCarry.amount += worker.Profession.CarriedResource.amount;
@@ -130,7 +134,7 @@ namespace Code.Villagers.Tasks
             }
             
             taskResourceCarryingState = Task_ResourceCarrying_State.FIND_CLOSEST_STORAGE;
-            base.AbandonTask();
+            base.Abandon();
         }
     }
 }

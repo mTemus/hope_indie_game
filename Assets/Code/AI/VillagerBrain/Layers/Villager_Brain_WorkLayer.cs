@@ -16,18 +16,20 @@ namespace Code.AI.VillagerBrain.Layers
         public bool TaskComplete => currentTask.state == TaskState.COMPLETED;
         public bool IsCarryingResource => CarriedResource != null && CarriedResource.amount > 0;
 
-       public void Work()
-       {
-           currentTask.DoTask();
-       }
+        /// Called in Worker Behaviour Tree
+        public void Work()
+        { 
+            currentTask.Execute();
+        }
        
         #region Tasks
         
         private void AbandonTask(Task task)
         {
-            task.AbandonTask();
+            task.Abandon();
         }
         
+        /// Called in Worker Behaviour Tree
         public bool GetNewTask()
         {
             if (tasks.Count <= 0) {
@@ -36,19 +38,20 @@ namespace Code.AI.VillagerBrain.Layers
             }
             
             currentTask = tasks.Dequeue();
-            currentTask.StartTask();
+            currentTask.Start();
             return true;
         }
         
         public void AddTask(Task task)
         {
             tasks.Enqueue(task);
-            task.state = TaskState.NEW;
         }
 
         public void PauseCurrentTask()
         {
-            currentTask.PauseTask();
+            currentTask.Pause();
+            AddTask(currentTask);
+            currentTask = null;
         }
 
         public void AbandonCurrentTask()
@@ -73,10 +76,17 @@ namespace Code.AI.VillagerBrain.Layers
             foreach (Task task in tasks) 
                 AbandonTask(task);
         }
+
+        public void InterruptTask()
+        {
+            currentTask.Interrupt();
+            AddTask(currentTask);
+            currentTask = null;
+        }
         
         public void CompleteTask()
         {
-            currentTask.EndTask();
+            currentTask.End();
         }
         
         #endregion

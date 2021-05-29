@@ -35,13 +35,15 @@ namespace Code.Villagers.Tasks
             this.gatherAreas = gatherAreas;
         }
         
-        public override void StartTask()
+        public override void Start()
         {
             currentGatheringState = Task_ResourceGathering_State.FIND_CLOSEST_RESOURCE;
         }
         
-        public override void DoTask()
+        public override void Execute()
         {
+            state = TaskState.RUNNING;
+            
             switch (currentGatheringState) {
                 case Task_ResourceGathering_State.GO_TO_WORKPLACE:
                     if (!worker.MoveTo(worker.Profession.Workplace.PivotedPosition)) break;
@@ -99,8 +101,8 @@ namespace Code.Villagers.Tasks
             }
         }
         
-        public override void EndTask() {}
-        public override void PauseTask() {}
+        public override void End() {}
+        public override void Pause() {}
 
         public void DepleteCurrentResource()
         {

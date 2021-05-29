@@ -91,7 +91,7 @@ namespace Code.Map.Building.Workplaces
         protected void GiveTaskToWorker(Villager worker, Task task)
         {
             worker.Brain.Work.AddTask(task);
-            task.TakeTask(worker, worker.Brain.Work.CompleteTask);
+            task.Take(worker, worker.Brain.Work.CompleteTask);
             UnregisterWorkerWithoutTask(worker);
         }
 
