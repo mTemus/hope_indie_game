@@ -24,6 +24,7 @@ Game is in deep prototyping stage and everything can be changed. It is made only
 [5. Used Assets](#assets-used-in-project)  
 [6. Video updates](#updates-on-youtube)  
 [7. License](#license)
+
 ---
 
 ## World
