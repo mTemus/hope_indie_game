@@ -10,21 +10,19 @@ Game is in deep prototyping stage and everything can be changed. It is made only
 
 ### Table of contents
 
-[1. World](#world)
-
+[1. World](#world)  
 [2. Player](#player)
-* [Tools System](#player-tools-system)
+ * [Tools System](#player-tools-system)
+   
+[3. Systems](#systems)  
+* [Building](#building-system)  
 
-[3. Systems](#systems)
-* [Building](#building-system)
+[4. Villagers](#villagers)  
+* [Professions](#professions)  
+* [Villagers AI](#villagers-ai)  
 
-[4. Villagers](#villagers)
-* [Professions](#professions)
-* [Villagers AI](#villagers-ai)
-
-[5. Used Assets](#assets-used-in-project)
-
-[6. Video updates](#updates-on-youtube)
+[5. Used Assets](#assets-used-in-project)  
+[6. Video updates](#updates-on-youtube)  
 
 ---
 
@@ -115,8 +113,7 @@ Every villager-worker with profession has a collection which contain tasks that 
 
 ## Assets used in project
 
-[1. Lean Tween](https://assetstore.unity.com/packages/tools/animation/leantween-3595)
-
+[1. Lean Tween](https://assetstore.unity.com/packages/tools/animation/leantween-3595)  
 [2. Node Canvas](https://assetstore.unity.com/packages/tools/visual-scripting/nodecanvas-14914)
 
 _All visual assets are currently also from asset store._
