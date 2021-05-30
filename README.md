@@ -23,7 +23,7 @@ Game is in deep prototyping stage and everything can be changed. It is made only
 
 [5. Used Assets](#assets-used-in-project)  
 [6. Video updates](#updates-on-youtube)  
-
+[7. License](#license)
 ---
 
 ## World
@@ -128,6 +128,14 @@ _All visual assets are currently also from asset store._
 * [Developer console implementation](https://www.youtube.com/watch?v=r-kNdXYLJPA)
 * [Resource Gathering - wood](https://www.youtube.com/watch?v=hXsnhwjksXg)
 * [Resources on ground](https://www.youtube.com/watch?v=osgqHBOloio)
+
+---
+
+## License
+Below project was published only for demonstration purposes. I do not allow copying, modifying and making money from it.
+
+
+
 
 
 [tools]: https://imgur.com/Q88VK3p.png
