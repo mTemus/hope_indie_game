@@ -11,13 +11,6 @@ using UnityEngine;
 //TODO: whole class should be deleted and all assets should be available through addressables
 namespace Code.System
 {
-   //TODO: move this somewhere else
-   public enum AIType
-   {
-      villager_worker,
-      villager_unemployed
-   }
-   
    public class AssetsStorage : MonoBehaviour
    {
       [Header("Villagers")] 
@@ -99,7 +92,7 @@ namespace Code.System
          return r;
       }
 
-      public BehaviourTree GetBehaviourTreeForAIType(AIType aiType)
+      public BehaviourTree GetBehaviourTreeForAIType(ProfessionAIType aiType)
       {
          BehaviourTree bt = behaviourTrees.FirstOrDefault(tree => tree.name.Contains(aiType.ToString()));
 
@@ -109,7 +102,7 @@ namespace Code.System
          return bt;
       }
 
-      public Blackboard GetBlackboardForAIType(AIType aiType)
+      public Blackboard GetBlackboardForAIType(ProfessionAIType aiType)
       {
          Blackboard blackboard = blackboards.FirstOrDefault(board => board.name.Contains(aiType.ToString()));
 

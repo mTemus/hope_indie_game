@@ -13,6 +13,12 @@ namespace Code.Villagers.Professions
         GlobalHauler,
     }
     
+    public enum ProfessionAIType
+    {
+        villager_worker,
+        villager_unemployed
+    }
+    
     public abstract class Villager_Profession : MonoBehaviour
     {
         public Workplace Workplace { get; set; }

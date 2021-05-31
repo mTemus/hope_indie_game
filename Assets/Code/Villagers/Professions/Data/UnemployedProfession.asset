@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: UnemployedProfession
   m_EditorClassIdentifier: 
   type: 0
+  aiType: 1
   requiredStatistics:
     strength: 0
     dexterity: 0

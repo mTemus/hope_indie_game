@@ -76,13 +76,8 @@ namespace Code.Villagers.Professions
             globalHaulers.Add(villager);
         }
 
-        private void AddBehaviourTreeAIComponents(AIType aiType, Villager villager)
+        private void AddBehaviourTreeAIComponents(ProfessionAIType aiType, Villager villager)
         {
-            //TODO: unemployed AI not implemented yet
-            if (aiType == AIType.villager_unemployed) {
-                return;
-            }
-            
             BehaviourTree bt = AssetsStorage.I.GetBehaviourTreeForAIType(aiType);
             BehaviourTreeOwner bto = villager.GetComponent<BehaviourTreeOwner>();
             Blackboard blackboard = villager.GetComponent<Blackboard>();
@@ -104,21 +99,10 @@ namespace Code.Villagers.Professions
          
             blackboard.InitializePropertiesBinding(bto.blackboard.propertiesBindTarget, false);
         }
-        
-        public void FireVillagerFromOldProfession(Villager villager)
+
+        private void  AddProfessionComponent(Villager villager, ProfessionType type)
         {
-            RemoveVillagerFromProfessionStructure(villager);
-            villager.Brain.Work.AbandonAllTasks();
-            villager.Brain.ClearBehaviourAIComponents();
-            villager.Profession.Workplace.FireWorker(villager);
-            
-            DestroyImmediate(villager.Profession);
-            villager.UI.ProfessionName.text = "No Profession Exception";
-        }
-        
-        public void SetVillagerProfession(Villager villager, Villager_ProfessionData villagerProfessionData, Workplace workplace)
-        {
-            switch (villagerProfessionData.Type) {
+            switch (type) {
                 case ProfessionType.Unemployed:
                     MakeVillagerUnemployed(villager);
                     break;
@@ -140,22 +124,33 @@ namespace Code.Villagers.Professions
                     break;
                 
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(villagerProfessionData.Type), villagerProfessionData.Type, null);
+                    throw new Exception("PROFESSION MANAGER --- CAN'T HIRE VILLAGER FOR PROFESSION: " + type);
             }
+        }
+        
+        public void FireVillagerFromOldProfession(Villager villager)
+        {
+            RemoveVillagerFromProfessionStructure(villager);
+            villager.Brain.Work.AbandonAllTasks();
+            villager.Brain.ClearBehaviourAIComponents();
+            villager.Profession.Workplace.FireWorker(villager);
             
+            DestroyImmediate(villager.Profession);
+            villager.UI.ProfessionName.text = "No Profession Exception";
+        }
+        
+        public void SetVillagerProfession(Villager villager, Villager_ProfessionData villagerProfessionData, Workplace workplace)
+        {
+            AddProfessionComponent(villager, villagerProfessionData.Type);
             villager.Profession.Data = villagerProfessionData;
             workplace.HireWorker(villager);
-            AddBehaviourTreeAIComponents(
-                villager.Profession.Data.Type == ProfessionType.Unemployed
-                    ? AIType.villager_unemployed
-                    : AIType.villager_worker, villager);
             
-            villager.Profession.enabled = false;
+            AddBehaviourTreeAIComponents(villagerProfessionData.AIType, villager);
+            
             villager.Profession.Initialize();
             villager.UI.ProfessionName.text = villagerProfessionData.Type + " of " + villager.Profession.Workplace.name;
 
-            if (villager.Profession.Data.Type != ProfessionType.Unemployed) 
-                villager.Brain.Behaviour.BehaviourTree.StartBehaviour();
+            villager.Brain.Behaviour.BehaviourTree.StartBehaviour();
         }
     }
 }

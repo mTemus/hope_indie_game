@@ -11,6 +11,7 @@ namespace Code.Villagers.Professions
     {
         [Header("Profession data")]
         [SerializeField] private ProfessionType type;
+        [SerializeField] private ProfessionAIType aiType;
         [SerializeField] private VillagersStatistics requiredStatistics;
         [SerializeField] private int resourceCarryingLimit;
         
@@ -26,6 +27,7 @@ namespace Code.Villagers.Professions
         public Type WorkplaceType => workplaceBuildingData.Prefab.GetComponent<Workplace>().GetType();
         public BuildingType WorkplaceBuildingType => workplaceBuildingData.BuildingType;
         public ProfessionType Type => type;
+        public ProfessionAIType AIType => aiType;
         public VillagersStatistics RequiredStatistics => requiredStatistics;
         public int GoldPerDay => goldPerDay;
         public int ResourceCarryingLimit => resourceCarryingLimit;
