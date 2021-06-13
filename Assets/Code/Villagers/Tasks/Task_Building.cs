@@ -29,7 +29,7 @@ namespace Code.Villagers.Tasks
         {
             flag = TaskFlag.RUNNING;
             
-            if (!worker.MoveTo(constructionPosition)) return;
+            if (!worker.Brain.Motion.MoveTo(constructionPosition)) return;
             if (!construction.Construct()) return;
             onTaskCompleted.Invoke();
             construction.CleanAfterConstruction();

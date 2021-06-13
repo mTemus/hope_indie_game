@@ -130,7 +130,7 @@ namespace Code.Villagers.Tasks
             
             switch (currentPickupResourcePickUpState) {
                 case Task_ResourcePickUp_State.GO_TO_STORAGE:
-                    if (worker.MoveTo(warehouse.PivotedPosition)) 
+                    if (worker.Brain.Motion.MoveTo(warehouse.PivotedPosition)) 
                         currentPickupResourcePickUpState = worker.Profession.CarriedResource != null ? 
                             Task_ResourcePickUp_State.DELIVER_RESOURCE : Task_ResourcePickUp_State.GET_RESOURCES_DATA;
                     break;
@@ -142,7 +142,7 @@ namespace Code.Villagers.Tasks
                     break;
                 
                 case Task_ResourcePickUp_State.GO_TO_RESOURCE:
-                    if (worker.MoveTo(currentResource.transform.position))
+                    if (worker.Brain.Motion.MoveTo(currentResource.transform.position))
                         currentPickupResourcePickUpState = Task_ResourcePickUp_State.COLLECT_RESOURCE;
                     break;
                 

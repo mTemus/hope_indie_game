@@ -46,7 +46,7 @@ namespace Code.Villagers.Tasks
             
             switch (currentGatheringState) {
                 case Task_ResourceGathering_State.GO_TO_WORKPLACE:
-                    if (!worker.MoveTo(worker.Profession.Workplace.PivotedPosition)) break;
+                    if (!worker.Brain.Motion.MoveTo(worker.Profession.Workplace.PivotedPosition)) break;
                     currentGatheringState = Task_ResourceGathering_State.DELIVER_RESOURCE_TO_WORKPLACE;
                     break;
                 
@@ -75,7 +75,7 @@ namespace Code.Villagers.Tasks
                     break;
                 
                 case Task_ResourceGathering_State.GO_TO_RESOURCE:
-                    if (!worker.MoveTo(resourcePosition)) break;
+                    if (!worker.Brain.Motion.MoveTo(resourcePosition)) break;
                     resourceToGather.StartGathering(worker);
                     currentGatheringState = Task_ResourceGathering_State.GATHER_RESOURCE;
                     break;

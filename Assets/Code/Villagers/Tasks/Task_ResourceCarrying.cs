@@ -69,7 +69,7 @@ namespace Code.Villagers.Tasks
                     break;
                 
                 case Task_ResourceCarrying_State.GO_TO_STORAGE:
-                    if (worker.MoveTo(fromStoragePosition))
+                    if (worker.Brain.Motion.MoveTo(fromStoragePosition))
                         taskResourceCarryingState = Task_ResourceCarrying_State.TAKE_RESOURCES;
                     break;
                 
@@ -93,7 +93,7 @@ namespace Code.Villagers.Tasks
                     break;
                 
                 case Task_ResourceCarrying_State.GO_ON_TASK_POSITION:
-                    if (worker.MoveTo(taskPosition))
+                    if (worker.Brain.Motion.MoveTo(taskPosition))
                         taskResourceCarryingState = Task_ResourceCarrying_State.DELIVER_RESOURCES;
                     break;
                 
