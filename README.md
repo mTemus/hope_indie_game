@@ -129,6 +129,7 @@ _All visual assets are currently also from asset store._
 * [Developer console implementation](https://www.youtube.com/watch?v=r-kNdXYLJPA)
 * [Resource Gathering - wood](https://www.youtube.com/watch?v=hXsnhwjksXg)
 * [Resources on ground](https://www.youtube.com/watch?v=osgqHBOloio)
+* [Parallax + water reflections](https://www.youtube.com/watch?v=wITCXLnpNPk)
 
 ---
 
