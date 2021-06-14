@@ -10,6 +10,7 @@ namespace Code.AI.VillagerBrain.Layers
     public class Villager_Brain_AnimationsLayer : BrainLayer
     {
         [SerializeField] private Animator animator;
+        [SerializeField] private GameObject spriteGo;
 
         private VillagerAnimationState currentState;
 
@@ -47,10 +48,10 @@ namespace Code.AI.VillagerBrain.Layers
         {
             facingRight = !facingRight;
 
-            var myTransform = transform;
-            Vector3 theScale = myTransform.localScale;
+            Transform spriteGoTransform = spriteGo.transform;
+            Vector3 theScale = spriteGoTransform.localScale;
             theScale.x *= -1;
-            myTransform.localScale = theScale;
+            spriteGoTransform.localScale = theScale;
         }
     }
 }
