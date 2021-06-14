@@ -257,6 +257,7 @@ GameObject:
   - component: {fileID: 2801349907460507800}
   - component: {fileID: 9150020556147202100}
   - component: {fileID: -2314950498180980649}
+  - component: {fileID: -6367711819627782571}
   m_Layer: 0
   m_Name: Builder
   m_TagString: Villager
@@ -439,6 +440,7 @@ MonoBehaviour:
   behaviour: {fileID: 2801349907460507800}
   motion: {fileID: 9150020556147202100}
   work: {fileID: -2314950498180980649}
+  animations: {fileID: -6367711819627782571}
 --- !u!114 &2827854335279187844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -489,6 +491,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54d9478cf25a93341b1f4cc970995d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-6367711819627782571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668639820441404011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dae6fec576c56444cb24f8143d9ebc13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 9035219178610320303}
 --- !u!1 &1668639820504831476
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,6 +514,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1668639820504831479}
   - component: {fileID: 1668639820504831478}
+  - component: {fileID: 9035219178610320303}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -571,6 +587,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!95 &9035219178610320303
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668639820504831476}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d5d1fe1901a3543aa87a1aec6ca53a04, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1668639820585069869
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,7 +8,6 @@ namespace Code.Player
         Idle, Run
     }
     
-    
     public class PlayerAnimations : MonoBehaviour
     {
         [SerializeField] private Animator animator;
