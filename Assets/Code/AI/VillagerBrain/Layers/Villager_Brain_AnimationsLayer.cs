@@ -26,8 +26,6 @@ namespace Code.AI.VillagerBrain.Layers
             if (currentState == state) return;
             currentState = state;
             
-            
-            Debug.Log(currentState.ToString());
             animator.Play(currentState.ToString());
         }
         

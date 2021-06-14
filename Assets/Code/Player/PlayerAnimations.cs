@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Code.Player
@@ -24,8 +23,6 @@ namespace Code.Player
             if (currentState == state) return;
             currentState = state;
             
-            
-            Debug.Log(currentState.ToString());
             animator.Play(currentState.ToString());
         }
     }
