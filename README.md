@@ -130,13 +130,12 @@ _All visual assets are currently also from asset store._
 * [Resource Gathering - wood](https://www.youtube.com/watch?v=hXsnhwjksXg)
 * [Resources on ground](https://www.youtube.com/watch?v=osgqHBOloio)
 * [Parallax + water reflections](https://www.youtube.com/watch?v=wITCXLnpNPk)
+* [Player/Villagers animations](https://www.youtube.com/watch?v=Zw63tGiNtSM)
 
 ---
 
 ## License
 Below project was published only for demonstration purposes. I do not allow copying, modifying and making money from it.
-
-
 
 
 
