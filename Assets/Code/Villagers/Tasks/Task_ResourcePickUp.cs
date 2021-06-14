@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Code.AI.VillagerBrain.Layers;
 using Code.Map.Building.Buildings.Types.Resources;
 using Code.Map.Resources;
 using UnityEngine;
@@ -122,6 +123,7 @@ namespace Code.Villagers.Tasks
                     throw new ArgumentOutOfRangeException();
             }
             
+            worker.Brain.Animations.SetState(VillagerAnimationState.Walk);
         }
 
         public override void Execute()

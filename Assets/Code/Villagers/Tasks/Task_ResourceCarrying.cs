@@ -1,4 +1,5 @@
 using System;
+using Code.AI.VillagerBrain.Layers;
 using Code.Map.Building;
 using Code.Map.Building.Buildings.Types.Resources;
 using Code.Map.Resources;
@@ -50,6 +51,11 @@ namespace Code.Villagers.Tasks
             }
         }
 
+        public override void Start()
+        {
+            worker.Brain.Animations.SetState(VillagerAnimationState.Walk);
+        }
+        
         public override void Execute()
         {
             flag = TaskFlag.RUNNING;
@@ -65,6 +71,7 @@ namespace Code.Villagers.Tasks
                     else 
                         onResourceWithdraw += fromStorage.Storage.WithdrawResource;
                     
+                    worker.Brain.Animations.SetState(VillagerAnimationState.Walk);
                     taskResourceCarryingState = Task_ResourceCarrying_State.GO_TO_STORAGE;
                     break;
                 
@@ -114,10 +121,6 @@ namespace Code.Villagers.Tasks
             }
 
             worker.UI.StateText.text = "Resource carrying: " + taskResourceCarryingState;
-        }
-
-        public override void Start()
-        {
         }
 
         public override void End()

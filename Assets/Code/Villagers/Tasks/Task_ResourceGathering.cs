@@ -1,4 +1,5 @@
 using System;
+using Code.AI.VillagerBrain.Layers;
 using Code.Map.Resources;
 using Code.Map.Resources.ResourceToGather;
 using Code.System;
@@ -37,6 +38,7 @@ namespace Code.Villagers.Tasks
         
         public override void Start()
         {
+            worker.Brain.Animations.SetState(VillagerAnimationState.Walk);
             currentGatheringState = Task_ResourceGathering_State.FIND_CLOSEST_RESOURCE;
         }
         
@@ -77,13 +79,15 @@ namespace Code.Villagers.Tasks
                 case Task_ResourceGathering_State.GO_TO_RESOURCE:
                     if (!worker.Brain.Motion.MoveTo(resourcePosition)) break;
                     resourceToGather.StartGathering(worker);
+                    worker.Brain.Animations.SetState(VillagerAnimationState.Idle);
                     currentGatheringState = Task_ResourceGathering_State.GATHER_RESOURCE;
                     break;
                 
                 case Task_ResourceGathering_State.GATHER_RESOURCE:
                     if (resourceToGather.Gather(worker, gatheringSocketId)) break;
-                        worker.UI.SetResourceIcon(worker.Profession.CarriedResource.Type);
-                        currentGatheringState = Task_ResourceGathering_State.GO_TO_WORKPLACE;
+                    worker.UI.SetResourceIcon(worker.Profession.CarriedResource.Type);
+                    worker.Brain.Animations.SetState(VillagerAnimationState.Walk);
+                    currentGatheringState = Task_ResourceGathering_State.GO_TO_WORKPLACE;
                     break;
                 
                 case Task_ResourceGathering_State.DELIVER_RESOURCE_TO_WORKPLACE:
@@ -99,8 +103,12 @@ namespace Code.Villagers.Tasks
                     throw new ArgumentOutOfRangeException();
             }
         }
+
+        public override void End()
+        {
+            flag = TaskFlag.COMPLETED;
+        }
         
-        public override void End() {}
         public override void Pause() {}
 
         public void DepleteCurrentResource()
