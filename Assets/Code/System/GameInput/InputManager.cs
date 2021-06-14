@@ -7,7 +7,7 @@ namespace Code.System.GameInput
 {
     public class InputManager : MonoBehaviour
     {
-        [SerializeField] private PlayerMovement movement;
+        [SerializeField] private PlayerController player;
 
         [Header("Keycodes")] 
         [SerializeField] private KeyCode left;
@@ -64,7 +64,7 @@ namespace Code.System.GameInput
             Debug.LogWarning("INPUT STATE ----" + currentInputState.GetType().Name);
         }
         
-        public PlayerMovement Movement => movement;
+        public PlayerController Player => player;
 
         public KeyCode Left => left;
         public KeyCode LeftAlt => leftAlt;
