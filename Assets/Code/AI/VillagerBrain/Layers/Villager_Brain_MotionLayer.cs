@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Code.AI.VillagerBrain.Layers
@@ -5,14 +6,23 @@ namespace Code.AI.VillagerBrain.Layers
     public class Villager_Brain_MotionLayer : BrainLayer
     {
         [SerializeField] private float speed = 5f;
+
+        private Action<Vector3> onVillagerTurnDirection;
         
-        private bool facingRight = true;
         private bool turnedFacing = false;
-        
+
+        public override void Initialize(Villager_Brain villagerBrain)
+        {
+            base.Initialize(villagerBrain);
+            onVillagerTurnDirection += villagerBrain.Animations.Turn;
+        }
+
         public bool MoveTo(Vector3 position)
         {
-            if (!turnedFacing) 
-                Turn(position);
+            if (!turnedFacing) {
+                onVillagerTurnDirection.Invoke(position);
+                turnedFacing = true;
+            }
 
             Vector3 villagerPosition = transform.position;
             villagerPosition = Vector3.MoveTowards(villagerPosition , position, speed * Time.deltaTime);
@@ -28,8 +38,10 @@ namespace Code.AI.VillagerBrain.Layers
         
         public bool MoveTo(Vector3 position, float villagerSpeed)
         {
-            if (!turnedFacing) 
-                Turn(position);
+            if (!turnedFacing) {
+                onVillagerTurnDirection.Invoke(position);
+                turnedFacing = true;
+            }
             
             Vector3 villagerPosition = transform.position;
             villagerPosition = Vector3.MoveTowards(villagerPosition , position, villagerSpeed * Time.deltaTime);
@@ -41,30 +53,6 @@ namespace Code.AI.VillagerBrain.Layers
                 turnedFacing = false;
             
             return isOnPosition;
-        }
-
-        private void Turn(Vector3 position)
-        {
-            turnedFacing = true;
-            
-            if (position.x >= transform.position.x) {
-                if (facingRight) return;
-                Flip();
-            }
-            else {
-                if (!facingRight) return;
-                Flip();
-            }
-        }
-        
-        private void Flip()
-        {
-            facingRight = !facingRight;
-
-            var myTransform = transform;
-            Vector3 theScale = myTransform.localScale;
-            theScale.x *= -1;
-            myTransform.localScale = theScale;
         }
     }
 }
