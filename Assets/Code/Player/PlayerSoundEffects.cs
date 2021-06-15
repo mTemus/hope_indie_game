@@ -34,7 +34,7 @@ namespace Code.Player
         private void PlayWalkingSoundEffect()
         {
             if (walkingChannel.isPlaying) return;
-            walkingChannel.pitch = Random.Range(1f, 2.5f);
+            walkingChannel.pitch = Random.Range(1f, 1.5f);
             walkingChannel.volume = Random.Range(0.3f, 0.4f);
             walkingChannel.Play((ulong) 0.2);
         }
