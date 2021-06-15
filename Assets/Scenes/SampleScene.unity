@@ -12571,6 +12571,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wood_tree_1 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 9012876387296291302, guid: 5290f3692b8766b4a9efb28e5aaed7bb, type: 3}
+      propertyPath: gatheringSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 12c71d377b6707b4f9dab89140aab0fb, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5290f3692b8766b4a9efb28e5aaed7bb, type: 3}
 --- !u!114 &1075628975 stripped
@@ -23758,6 +23762,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wood_tree_1 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 9012876387296291302, guid: 5290f3692b8766b4a9efb28e5aaed7bb, type: 3}
+      propertyPath: gatheringSound
+      value: 
+      objectReference: {fileID: 8300000, guid: de5a3f360eea3534abb04091e61a28f0, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5290f3692b8766b4a9efb28e5aaed7bb, type: 3}
 --- !u!114 &2076161130 stripped
@@ -24462,6 +24470,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wood_tree_1
       objectReference: {fileID: 0}
+    - target: {fileID: 9012876387296291302, guid: 5290f3692b8766b4a9efb28e5aaed7bb, type: 3}
+      propertyPath: gatheringSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 3e19134275f94f444b3745eb8196c4bc, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5290f3692b8766b4a9efb28e5aaed7bb, type: 3}
 --- !u!114 &637620838460850440 stripped
