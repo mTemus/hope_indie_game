@@ -53,6 +53,7 @@ namespace Code.Villagers.Tasks
 
         public override void Start()
         {
+            worker.Brain.Animations.Turn(taskPosition);
             worker.Brain.Animations.SetState(VillagerAnimationState.Walk);
         }
         
