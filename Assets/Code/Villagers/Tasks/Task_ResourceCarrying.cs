@@ -72,6 +72,7 @@ namespace Code.Villagers.Tasks
                     else 
                         onResourceWithdraw += fromStorage.Storage.WithdrawResource;
                     
+                    worker.Brain.Animations.Turn(fromStoragePosition);
                     worker.Brain.Animations.SetState(VillagerAnimationState.Walk);
                     taskResourceCarryingState = Task_ResourceCarrying_State.GO_TO_STORAGE;
                     break;
