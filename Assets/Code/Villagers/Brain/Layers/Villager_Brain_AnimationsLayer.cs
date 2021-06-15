@@ -13,12 +13,19 @@ namespace Code.Villagers.Brain.Layers
         [SerializeField] private GameObject spriteGo;
 
         private VillagerAnimationState currentState;
-
+        private Villager_Brain_SoundsLayer sounds;
+        
         private bool facingRight = true;
 
         private void Awake()
         {
             currentState = VillagerAnimationState.Idle;
+        }
+
+        public override void Initialize(Villager_Brain villagerBrain)
+        {
+            base.Initialize(villagerBrain);
+            sounds = villagerBrain.Sounds;
         }
 
         public void SetState(VillagerAnimationState state)
@@ -51,5 +58,8 @@ namespace Code.Villagers.Brain.Layers
             theScale.x *= -1;
             spriteGoTransform.localScale = theScale;
         }
+
+        private void PlaySoundEffectOnAnimation(VillagerSoundEffectType effectType) =>
+            sounds.PlaySoundEffect(effectType);
     }
 }

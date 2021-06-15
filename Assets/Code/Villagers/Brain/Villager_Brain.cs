@@ -11,12 +11,14 @@ namespace Code.Villagers.Brain
         [SerializeField] private Villager_Brain_MotionLayer motion;
         [SerializeField] private Villager_Brain_WorkLayer work;
         [SerializeField] private Villager_Brain_AnimationsLayer animations;
+        [SerializeField] private Villager_Brain_SoundsLayer sounds;
     
         public Villager_Brain_PerceptionLayer Perception => perception;
         public Villager_Brain_BehaviourLayer Behaviour => behaviour;
         public Villager_Brain_MotionLayer Motion => motion;
         public Villager_Brain_WorkLayer Work => work;
         public Villager_Brain_AnimationsLayer Animations => animations;
+        public Villager_Brain_SoundsLayer Sounds => sounds;
 
         private void Awake()
         {
