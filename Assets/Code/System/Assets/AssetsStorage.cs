@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Code.Map.Resources;
 using Code.Map.Resources.ResourceToGather;
@@ -29,7 +30,12 @@ namespace Code.System.Assets
       [Header("Behaviour Trees")] 
       [SerializeField] private Blackboard[] blackboards;
       [SerializeField] private BehaviourTree[] behaviourTrees;
-      
+
+      [Header("Sounds")] 
+      [SerializeField] private Asset_Sound[] walkingSoundEffects;
+      [SerializeField] private Asset_Sound[] constructionSoundEffects;
+
+
       [Header("Other")] 
       [SerializeField] private GameObject resourceOnGround;
       
@@ -40,6 +46,12 @@ namespace Code.System.Assets
          I = this;
          LeanTween.init(100);
       }
+
+      private AudioClip[] GetConstructionAudioClipsByName(string clipName) =>
+         constructionSoundEffects
+            .Where(sound => sound.AssetName.Contains(clipName))
+            .Select(asset => asset.Clip)
+            .ToArray();
    
       public Sprite GetResourceIcon(ResourceType resourceType)
       {
@@ -135,6 +147,28 @@ namespace Code.System.Assets
                .GetComponent<ResourceToPickUp>()
                .Initialize(r, mapX);
          }
+      }
+
+      public AudioClip[] GetAudioClipsByName(AssetSoundType soundType, string assetName)
+      {
+         AudioClip[] clips = null;
+
+         switch (soundType) {
+            case AssetSoundType.Walking:
+               break;
+            
+            case AssetSoundType.Background:
+               break;
+            
+            case AssetSoundType.Construction:
+               clips = GetConstructionAudioClipsByName(assetName);
+               break;
+            
+            default:
+               throw new Exception("ASSET STORAGE ----- CAN'T FIND SOUND ASSETS FOR TYPE: " + soundType);
+         }
+         
+         return clips;
       }
    }
 }
