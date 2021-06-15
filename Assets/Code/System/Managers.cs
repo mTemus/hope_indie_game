@@ -7,6 +7,7 @@ using Code.System.Areas;
 using Code.System.Camera;
 using Code.System.GameInput;
 using Code.System.Initialization;
+using Code.System.Sound;
 using Code.Villagers;
 using Code.Villagers.Professions;
 using UnityEngine;
@@ -23,6 +24,7 @@ namespace Code.System
       [SerializeField] private InputManager input;
       [SerializeField] private CameraManager cameras;
       [SerializeField] private InitializationManager initialization;
+      [SerializeField] private SoundManager sound;
 
       [Header("Map")]
       [SerializeField] private AreaManager areas;
@@ -49,7 +51,8 @@ namespace Code.System
       public InitializationManager Initialization => initialization;
       public VillagerSelectionManager VillagerSelection => villagerSelection;
       public GUIManager GUI => gui;
-      
+      public SoundManager Sound => sound;
+
       private void Awake()
       {
          I = this;
