@@ -1,6 +1,7 @@
 using System;
 using Code.Villagers.Professions;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Code.Map.Resources.ResourceToGather
 {
@@ -11,21 +12,33 @@ namespace Code.Map.Resources.ResourceToGather
         
         private float timeCounter;
         private float resourceCounter;
+        private AudioSource gatherChannel;
 
         private Action onResourceDepleted;
-
-        public GatheringSocket(Resource resource, Action onResourceDepleted)
+        
+        public GatheringSocket(Resource resource, Action onResourceDepleted, AudioSource gatherChannel)
         {
             this.resource = resource;
             this.onResourceDepleted = onResourceDepleted;
+            this.gatherChannel = gatherChannel;
+        }
+
+        private void PlayGatheringSound()
+        {
+            if (gatherChannel.isPlaying) return;
+            gatherChannel.pitch = Random.Range(0.8f, 1f);
+            gatherChannel.Play((ulong) 0.5f);
         }
 
         public void GatherResource(float resourcePerFrame, Villager_Profession worker)
         {
+            PlayGatheringSound();
             timeCounter += Time.deltaTime;
             resourceCounter += resourcePerFrame * Time.deltaTime;
-
+            
             if (timeCounter < 1) return;
+
+            if (gatherChannel.isPlaying) gatherChannel.Stop();
             int gatheredResource = Mathf.FloorToInt(resourceCounter);
 
             if (worker.CarriedResource.amount + gatheredResource > worker.Data.ResourceCarryingLimit) 

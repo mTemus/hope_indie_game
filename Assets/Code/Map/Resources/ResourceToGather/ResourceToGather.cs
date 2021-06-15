@@ -20,6 +20,9 @@ namespace Code.Map.Resources.ResourceToGather
         [SerializeField] private Vector2Int size;
         [SerializeField] private Vector3 pivot;
         
+        [Header("Assets")]
+        [SerializeField] private AudioClip gatheringSound;
+        
         protected Resource resource;
         protected GatheringSocket[] gatheringSockets;
         protected Dictionary<Villager, Task_ResourceGathering> gatherers = new Dictionary<Villager, Task_ResourceGathering>();
@@ -47,8 +50,17 @@ namespace Code.Map.Resources.ResourceToGather
             maximumGatherers = resourceToGatherData.MaximumGatherers;
             gatheringSockets = new GatheringSocket[maximumGatherers];
             
-            for (int i = 0; i < gatheringSockets.Length; i++) 
-                gatheringSockets[i] = new GatheringSocket(resource, DepleteResource);
+            for (int i = 0; i < gatheringSockets.Length; i++) {
+                AudioSource channel = gameObject.AddComponent<AudioSource>();
+                channel.volume = 0.3f;
+                channel.playOnAwake = false;
+                channel.spatialBlend = 1f;
+                channel.minDistance = 3f;
+                channel.maxDistance = 10f;
+                channel.clip = gatheringSound;
+                
+                gatheringSockets[i] = new GatheringSocket(resource, DepleteResource, channel);
+            }
         }
         
         #endregion
