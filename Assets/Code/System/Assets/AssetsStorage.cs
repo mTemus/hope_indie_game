@@ -52,7 +52,12 @@ namespace Code.System.Assets
             .Where(sound => sound.AssetName.Contains(clipName))
             .Select(asset => asset.Clip)
             .ToArray();
-   
+
+      private AudioClip GetWalkingAudioClipByAreaName(string areaName) =>
+         walkingSoundEffects
+            .SingleOrDefault(sound => sound.AssetName.Contains(areaName))
+            ?.Clip;
+      
       public Sprite GetResourceIcon(ResourceType resourceType)
       {
          Sprite s = resourceIcons.FirstOrDefault(sprite => sprite.name == resourceType.ToString().ToLower());
@@ -169,6 +174,28 @@ namespace Code.System.Assets
          }
          
          return clips;
+      }
+
+      public AudioClip GetAudioClipByName(AssetSoundType soundType, string assetName)
+      {
+         AudioClip clip = null;
+         
+         switch (soundType) {
+            case AssetSoundType.Walking:
+               clip = GetWalkingAudioClipByAreaName(assetName);
+               break;
+            
+            case AssetSoundType.Background:
+               break;
+            
+            case AssetSoundType.Construction:
+               break;
+            
+            default:
+               throw new ArgumentOutOfRangeException(nameof(soundType), soundType, null);
+         }
+
+         return clip;
       }
    }
 }

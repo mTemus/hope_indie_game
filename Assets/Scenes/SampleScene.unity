@@ -9166,6 +9166,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sawmill
       objectReference: {fileID: 0}
+    - target: {fileID: 6724467691292049219, guid: 29849b52182697849a1804d9b539db17, type: 3}
+      propertyPath: MaxDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724467691292049219, guid: 29849b52182697849a1804d9b539db17, type: 3}
+      propertyPath: MinDistance
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 590919746894719648, guid: 29849b52182697849a1804d9b539db17, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 29849b52182697849a1804d9b539db17, type: 3}
@@ -11172,7 +11180,11 @@ MonoBehaviour:
   behaviourTrees:
   - {fileID: 11400000, guid: c8f9fc7795f1c4d489ca1a22092c8dc9, type: 2}
   - {fileID: 11400000, guid: 1671aa42552853c45935a8b089c2c527, type: 2}
-  walkingSoundEffects: []
+  walkingSoundEffects:
+  - assetName: gravel-village
+    clip: {fileID: 8300000, guid: 1c53d801059e7824ea79953cbab81571, type: 3}
+  - assetName: grass-forest
+    clip: {fileID: 8300000, guid: 234b445a47676b3459b44f7f4c6ba774, type: 3}
   constructionSoundEffects:
   - assetName: construction-1
     clip: {fileID: 8300000, guid: bfca258bc9ddec54abf301425ec8a277, type: 3}

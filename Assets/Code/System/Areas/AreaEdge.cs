@@ -1,4 +1,7 @@
 using System.Collections.Generic;
+using Code.Player;
+using Code.System.Assets;
+using Code.Villagers.Brain;
 using UnityEngine;
 
 namespace Code.System.Areas
@@ -17,12 +20,26 @@ namespace Code.System.Areas
         private void OnTriggerExit2D(Collider2D visitor)
         {
             if (!visitors.Contains(visitor.gameObject)) return;
-            
+            GameObject visitorGO = visitor.gameObject;
+
             switch (visitor.tag) {
                 case "Player":
                     if (area.IsPlayerInArea) return;
                     Managers.I.Areas.SetPlayerToArea(area, visitor.gameObject);
+                    visitorGO
+                        .GetComponent<PlayerController>().Sounds
+                        .SetWalkingAudioClip(AssetsStorage.I.
+                            GetAudioClipByName(AssetSoundType.Walking, area.name.ToLower()));
+                    
                     visitors.Remove(visitor.gameObject);
+                    break;
+                
+                case "Villager":
+                    visitorGO
+                        .GetComponent<Villager_Brain>().Sounds
+                        .SetWalkingAudioClip(AssetsStorage.I
+                            .GetAudioClipByName(AssetSoundType.Walking, area.name.ToLower()));
+                    visitors.Remove(visitorGO);
                     break;
             }
         }
