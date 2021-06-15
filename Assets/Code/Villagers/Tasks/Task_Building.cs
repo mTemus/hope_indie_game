@@ -27,7 +27,6 @@ namespace Code.Villagers.Tasks
         
         public override void Start()
         {
-            worker.Brain.Animations.Turn(constructionPosition);
             worker.Brain.Animations.SetState(VillagerAnimationState.Walk);
             currentBuildingState = Task_Building_State.GO_TO_CONSTRUCTION;
         }
@@ -56,6 +55,7 @@ namespace Code.Villagers.Tasks
         
         public override void End()
         {
+            worker.Brain.Animations.SetState(VillagerAnimationState.Walk);
             flag = TaskFlag.COMPLETED;
         }
         
