@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!82 &13297879 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6724467691292049219, guid: 29849b52182697849a1804d9b539db17, type: 3}
+  m_PrefabInstance: {fileID: 627212229}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &26802303
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9051,7 +9056,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1807201772521007745, guid: 29849b52182697849a1804d9b539db17, type: 3}
       propertyPath: onResourceStored.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1807201772521007745, guid: 29849b52182697849a1804d9b539db17, type: 3}
       propertyPath: onResourceWithdraw.m_PersistentCalls.m_Calls.Array.size
@@ -9063,12 +9068,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1807201772521007745, guid: 29849b52182697849a1804d9b539db17, type: 3}
       propertyPath: onResourceStored.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1807201772521007745, guid: 29849b52182697849a1804d9b539db17, type: 3}
       propertyPath: onResourceStored.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 6318708528280280240}
+      objectReference: {fileID: 13297879}
     - target: {fileID: 1807201772521007745, guid: 29849b52182697849a1804d9b539db17, type: 3}
       propertyPath: onResourceWithdraw.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
@@ -9078,12 +9083,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1807201772521007745, guid: 29849b52182697849a1804d9b539db17, type: 3}
+      propertyPath: onResourceStored.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1807201772521007745, guid: 29849b52182697849a1804d9b539db17, type: 3}
       propertyPath: onResourceLimitReach.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 6318708528280280240}
     - target: {fileID: 1807201772521007745, guid: 29849b52182697849a1804d9b539db17, type: 3}
       propertyPath: onResourceStored.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: DeliverStoredResources
+      value: Play
       objectReference: {fileID: 0}
     - target: {fileID: 1807201772521007745, guid: 29849b52182697849a1804d9b539db17, type: 3}
       propertyPath: onResourceWithdraw.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
@@ -9099,7 +9108,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1807201772521007745, guid: 29849b52182697849a1804d9b539db17, type: 3}
       propertyPath: onResourceStored.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Code.Map.Building.Workplaces.GatheringWorkplace, Assembly-CSharp
+      value: UnityEngine.AudioSource, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1807201772521007745, guid: 29849b52182697849a1804d9b539db17, type: 3}
       propertyPath: onResourceLimitReach.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
