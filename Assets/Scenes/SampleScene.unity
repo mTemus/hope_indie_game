@@ -9083,10 +9083,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1807201772521007745, guid: 29849b52182697849a1804d9b539db17, type: 3}
-      propertyPath: onResourceStored.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1807201772521007745, guid: 29849b52182697849a1804d9b539db17, type: 3}
       propertyPath: onResourceLimitReach.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 6318708528280280240}
@@ -11176,6 +11172,12 @@ MonoBehaviour:
   behaviourTrees:
   - {fileID: 11400000, guid: c8f9fc7795f1c4d489ca1a22092c8dc9, type: 2}
   - {fileID: 11400000, guid: 1671aa42552853c45935a8b089c2c527, type: 2}
+  walkingSoundEffects: []
+  constructionSoundEffects:
+  - assetName: construction-1
+    clip: {fileID: 8300000, guid: bfca258bc9ddec54abf301425ec8a277, type: 3}
+  - assetName: construction-2
+    clip: {fileID: 8300000, guid: a25ff99847724164aa684d545c75f68e, type: 3}
   resourceOnGround: {fileID: 8039996828542303674, guid: 0eec1714cc7eb7e459bfd69e0d596ffd, type: 3}
 --- !u!1 &824363550
 GameObject:
