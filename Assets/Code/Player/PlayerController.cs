@@ -9,10 +9,12 @@ namespace Code.Player
         [Header("Player components")] 
         [SerializeField] private PlayerMovement movement;
         [SerializeField] private PlayerAnimations animations;
-
+        [SerializeField] private PlayerSoundEffects sounds;
+        
         public PlayerMovement Movement => movement;
         public PlayerAnimations Animations => animations;
-
+        public PlayerSoundEffects Sounds => sounds;
+        
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.CompareTag("Villager")) {
