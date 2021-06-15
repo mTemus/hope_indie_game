@@ -54,7 +54,8 @@ MonoBehaviour:
     mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},"wanderDistMin":{"_name":"wanderDistMin","_id":"3f9f21f5-3495-442e-a139-ab1a41fc1e05","$type":"NodeCanvas.Framework.Variable`1[[System.Single,
     mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},"wanderDistMax":{"_name":"wanderDistMax","_id":"23094c2d-abba-4f6f-9d18-eb7486b142c4","$type":"NodeCanvas.Framework.Variable`1[[System.Single,
     mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},"_wanderState":{"_name":"_wanderState","_id":"aef470fc-5393-422f-9e00-97aff10be320","$type":"NodeCanvas.Framework.Variable`1[[System.Int32,
-    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"}}}'
+    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},"animationsLayer":{"_propertyPath":"Code.Villagers.Brain.Villager_Brain.Animations","_name":"animationsLayer","_id":"52067b71-f5c5-4bad-a6c2-af2602885a43","$type":"NodeCanvas.Framework.Variable`1[[Code.Villagers.Brain.Layers.Villager_Brain_AnimationsLayer,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}}}'
   _objectReferences: []
   _serializedVariables:
   - _json: '{"_name":"myWorkplace","_id":"a7b7954d-f4ec-42d2-8468-e52c0d44a758","$type":"NodeCanvas.Framework.Variable`1[[Code.Map.Building.Workplaces.Workplace,
@@ -86,4 +87,7 @@ MonoBehaviour:
     _references: []
   - _json: '{"_name":"_wanderState","_id":"aef470fc-5393-422f-9e00-97aff10be320","$type":"NodeCanvas.Framework.Variable`1[[System.Int32,
       mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"}'
+    _references: []
+  - _json: '{"_propertyPath":"Code.Villagers.Brain.Villager_Brain.Animations","_name":"animationsLayer","_id":"52067b71-f5c5-4bad-a6c2-af2602885a43","$type":"NodeCanvas.Framework.Variable`1[[Code.Villagers.Brain.Layers.Villager_Brain_AnimationsLayer,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}'
     _references: []

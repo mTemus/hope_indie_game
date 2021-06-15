@@ -1339,6 +1339,14 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 998301226748236715, guid: 627974fc63f4c2f4cbe909a65950e4e1, type: 3}
+      propertyPath: MaxDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 998301226748236715, guid: 627974fc63f4c2f4cbe909a65950e4e1, type: 3}
+      propertyPath: MinDistance
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 627974fc63f4c2f4cbe909a65950e4e1, type: 3}
 --- !u!1 &184165674
@@ -7897,6 +7905,14 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 998301226748236715, guid: 627974fc63f4c2f4cbe909a65950e4e1, type: 3}
+      propertyPath: MaxDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 998301226748236715, guid: 627974fc63f4c2f4cbe909a65950e4e1, type: 3}
+      propertyPath: MinDistance
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 627974fc63f4c2f4cbe909a65950e4e1, type: 3}
 --- !u!1 &503025567
@@ -9939,6 +9955,14 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 998301226748236715, guid: 627974fc63f4c2f4cbe909a65950e4e1, type: 3}
+      propertyPath: MaxDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 998301226748236715, guid: 627974fc63f4c2f4cbe909a65950e4e1, type: 3}
+      propertyPath: MinDistance
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 627974fc63f4c2f4cbe909a65950e4e1, type: 3}
 --- !u!114 &706633893 stripped
@@ -10442,8 +10466,6 @@ GameObject:
   - component: {fileID: 738032749}
   - component: {fileID: 738032754}
   - component: {fileID: 738032753}
-  - component: {fileID: 738032756}
-  - component: {fileID: 738032755}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -10540,34 +10562,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: {fileID: 738032753}
-  animations: {fileID: 738032756}
-  sounds: {fileID: 738032755}
---- !u!114 &738032755
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 738032748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 411c93fc76f962f43ac815b67a5f77b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkingChannel: {fileID: 794289396}
---- !u!114 &738032756
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 738032748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9ead6514cdc7814a97d345c51051ef5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 824363551}
+  animations: {fileID: 824363554}
+  sounds: {fileID: 794289398}
 --- !u!1 &747109469
 GameObject:
   m_ObjectHideFlags: 0
@@ -10865,6 +10861,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 794289397}
+  - component: {fileID: 794289398}
   - component: {fileID: 794289396}
   m_Layer: 0
   m_Name: AudioChannels
@@ -10983,6 +10980,19 @@ Transform:
   m_Father: {fileID: 738032751}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &794289398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794289395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 411c93fc76f962f43ac815b67a5f77b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkingChannel: {fileID: 794289396}
 --- !u!1 &800460993
 GameObject:
   m_ObjectHideFlags: 0
@@ -11270,9 +11280,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 824363550}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c03f0dbfb702cb4c8ce7ae3a24ec67d, type: 3}
+  m_Script: {fileID: 11500000, guid: f9ead6514cdc7814a97d345c51051ef5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 824363551}
 --- !u!1 &845625884
 GameObject:
   m_ObjectHideFlags: 0

@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _parentBlackboard: {fileID: 0}
-  _serializedBlackboard: '{"_variables":{"myBrain":{"_propertyPath":"Code.Villagers.Entity.Villager.Brain","_name":"myBrain","_id":"38c6807b-7977-4c8a-966e-0d04c49ccb31","$type":"NodeCanvas.Framework.Variable`1[[Code.AI.VillagerBrain.Villager_Brain,
-    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},"workLayer":{"_propertyPath":"Code.AI.VillagerBrain.Villager_Brain.Work","_name":"workLayer","_id":"9b20be5b-0d19-4d3d-aa4a-3663adf6e9f9","$type":"NodeCanvas.Framework.Variable`1[[Code.AI.VillagerBrain.Layers.Villager_Brain_WorkLayer,
+  _serializedBlackboard: '{"_variables":{"myBrain":{"_propertyPath":"Code.Villagers.Entity.Villager.Brain","_name":"myBrain","_id":"38c6807b-7977-4c8a-966e-0d04c49ccb31","$type":"NodeCanvas.Framework.Variable`1[[Code.Villagers.Brain.Villager_Brain,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},"workLayer":{"_propertyPath":"Code.AI.VillagerBrain.Villager_Brain.Work","_name":"workLayer","_id":"9b20be5b-0d19-4d3d-aa4a-3663adf6e9f9","$type":"NodeCanvas.Framework.Variable`1[[Code.Villagers.Brain.Layers.Villager_Brain_WorkLayer,
     Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},"myProfession":{"_propertyPath":"Code.Villagers.Entity.Villager.Profession","_name":"myProfession","_id":"841ca5a8-d5ef-4f38-a0ad-08472616f76c","$type":"NodeCanvas.Framework.Variable`1[[Code.Villagers.Professions.Villager_Profession,
     Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},"myWorkplace":{"_name":"myWorkplace","_id":"a7b7954d-f4ec-42d2-8468-e52c0d44a758","$type":"NodeCanvas.Framework.Variable`1[[Code.Map.Building.Workplaces.Workplace,
     Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},"onWanderPos":{"_value":true,"_name":"onWanderPos","_id":"8aee61b5-13b6-43af-b02e-987faf664e5a","$type":"NodeCanvas.Framework.Variable`1[[System.Boolean,
@@ -60,13 +60,14 @@ MonoBehaviour:
     mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},"taskCompleted":{"_propertyPath":"Code.AI.VillagerBrain.Layers.Villager_Brain_WorkLayer.TaskComplete","_name":"taskCompleted","_id":"af056f0b-96ae-4831-9308-b2b55778813d","$type":"NodeCanvas.Framework.Variable`1[[System.Boolean,
     mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},"hasWorkToDo":{"_propertyPath":"Code.AI.VillagerBrain.Layers.Villager_Brain_WorkLayer.HasWorkToDo","_name":"hasWorkToDo","_id":"da082cfc-eafa-48d1-9382-4d35acf18f9d","$type":"NodeCanvas.Framework.Variable`1[[System.Boolean,
     mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},"_wanderState":{"_name":"_wanderState","_id":"aef470fc-5393-422f-9e00-97aff10be320","$type":"NodeCanvas.Framework.Variable`1[[System.Int32,
-    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"}}}'
+    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},"animationsLayer":{"_propertyPath":"Code.Villagers.Brain.Villager_Brain.Animations","_name":"animationsLayer","_id":"202e4d9b-90de-42d9-9086-b57749eaf0e2","$type":"NodeCanvas.Framework.Variable`1[[Code.Villagers.Brain.Layers.Villager_Brain_AnimationsLayer,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}}}'
   _objectReferences: []
   _serializedVariables:
-  - _json: '{"_propertyPath":"Code.Villagers.Entity.Villager.Brain","_name":"myBrain","_id":"38c6807b-7977-4c8a-966e-0d04c49ccb31","$type":"NodeCanvas.Framework.Variable`1[[Code.AI.VillagerBrain.Villager_Brain,
+  - _json: '{"_propertyPath":"Code.Villagers.Entity.Villager.Brain","_name":"myBrain","_id":"38c6807b-7977-4c8a-966e-0d04c49ccb31","$type":"NodeCanvas.Framework.Variable`1[[Code.Villagers.Brain.Villager_Brain,
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}'
     _references: []
-  - _json: '{"_propertyPath":"Code.AI.VillagerBrain.Villager_Brain.Work","_name":"workLayer","_id":"9b20be5b-0d19-4d3d-aa4a-3663adf6e9f9","$type":"NodeCanvas.Framework.Variable`1[[Code.AI.VillagerBrain.Layers.Villager_Brain_WorkLayer,
+  - _json: '{"_propertyPath":"Code.AI.VillagerBrain.Villager_Brain.Work","_name":"workLayer","_id":"9b20be5b-0d19-4d3d-aa4a-3663adf6e9f9","$type":"NodeCanvas.Framework.Variable`1[[Code.Villagers.Brain.Layers.Villager_Brain_WorkLayer,
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}'
     _references: []
   - _json: '{"_propertyPath":"Code.Villagers.Entity.Villager.Profession","_name":"myProfession","_id":"841ca5a8-d5ef-4f38-a0ad-08472616f76c","$type":"NodeCanvas.Framework.Variable`1[[Code.Villagers.Professions.Villager_Profession,
@@ -110,4 +111,7 @@ MonoBehaviour:
     _references: []
   - _json: '{"_name":"_wanderState","_id":"aef470fc-5393-422f-9e00-97aff10be320","$type":"NodeCanvas.Framework.Variable`1[[System.Int32,
       mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"}'
+    _references: []
+  - _json: '{"_propertyPath":"Code.Villagers.Brain.Villager_Brain.Animations","_name":"animationsLayer","_id":"202e4d9b-90de-42d9-9086-b57749eaf0e2","$type":"NodeCanvas.Framework.Variable`1[[Code.Villagers.Brain.Layers.Villager_Brain_AnimationsLayer,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}'
     _references: []
