@@ -35,7 +35,7 @@ namespace Code.Villagers.Brain.Layers
         {
             if (walkingChannel.isPlaying) return;
             walkingChannel.pitch = Random.Range(1f, 1.5f);
-            walkingChannel.volume = Random.Range(0.1f, 0.2f);
+            walkingChannel.volume = Random.Range(0.2f, 0.3f);
             walkingChannel.Play((ulong) 0.2);
         }
     }
