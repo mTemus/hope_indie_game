@@ -131,6 +131,7 @@ _All visual assets are currently also from asset store._
 * [Resources on ground](https://www.youtube.com/watch?v=osgqHBOloio)
 * [Parallax + water reflections](https://www.youtube.com/watch?v=wITCXLnpNPk)
 * [Player/Villagers animations](https://www.youtube.com/watch?v=Zw63tGiNtSM)
+* [Sound effects and background](https://www.youtube.com/watch?v=ilJtkdyIBxE)
 
 ---
 
