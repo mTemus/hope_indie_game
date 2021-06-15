@@ -5,6 +5,7 @@ using Code.Map.Building.Buildings.Types.Resources;
 using Code.Map.Resources;
 using Code.Map.Resources.ResourceToGather;
 using Code.System;
+using Code.System.Assets;
 using Code.Villagers.Entity;
 using Code.Villagers.Professions;
 using Code.Villagers.Tasks;

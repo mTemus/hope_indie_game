@@ -9,7 +9,7 @@ using ThirdParty.LeanTween.Framework;
 using UnityEngine;
 
 //TODO: whole class should be deleted and all assets should be available through addressables
-namespace Code.System
+namespace Code.System.Assets
 {
    public class AssetsStorage : MonoBehaviour
    {

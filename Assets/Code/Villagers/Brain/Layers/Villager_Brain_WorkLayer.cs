@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Code.Map.Resources;
-using Code.System;
+using Code.System.Assets;
 using Code.Villagers.Tasks;
 
 namespace Code.Villagers.Brain.Layers

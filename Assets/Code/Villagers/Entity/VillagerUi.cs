@@ -1,5 +1,5 @@
 using Code.Map.Resources;
-using Code.System;
+using Code.System.Assets;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

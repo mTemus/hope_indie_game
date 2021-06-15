@@ -2,6 +2,7 @@ using System.Collections;
 using Code.Map.Building;
 using Code.Map.Building.Buildings.Types.Resources;
 using Code.System;
+using Code.System.Assets;
 using Code.Villagers.Tasks;
 using ThirdParty.LeanTween.Framework;
 using UnityEngine;
