@@ -3,7 +3,7 @@ using Code.Map.Resources;
 using Code.System;
 using Code.Villagers.Tasks;
 
-namespace Code.AI.VillagerBrain.Layers
+namespace Code.Villagers.Brain.Layers
 {
     public class Villager_Brain_WorkLayer : BrainLayer
     {

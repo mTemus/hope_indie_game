@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Code.AI.VillagerBrain.Layers
+namespace Code.Villagers.Brain.Layers
 {
     public abstract class BrainLayer : MonoBehaviour
     {

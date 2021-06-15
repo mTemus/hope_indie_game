@@ -1,7 +1,7 @@
 using NodeCanvas.BehaviourTrees;
 using UnityEngine;
 
-namespace Code.AI.VillagerBrain.Layers
+namespace Code.Villagers.Brain.Layers
 {
     public class Villager_Brain_BehaviourLayer : BrainLayer
     {

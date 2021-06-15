@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using Code.AI.VillagerBrain.StimulusSystem;
+using Code.Villagers.Brain.StimulusSystem;
 using UnityEngine;
 
-namespace Code.AI.VillagerBrain.Layers
+namespace Code.Villagers.Brain.Layers
 {
     public class Villager_Brain_PerceptionLayer : BrainLayer
     {

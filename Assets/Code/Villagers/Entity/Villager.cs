@@ -1,4 +1,4 @@
-using Code.AI.VillagerBrain;
+using Code.Villagers.Brain;
 using Code.Villagers.Professions;
 using UnityEngine;
 

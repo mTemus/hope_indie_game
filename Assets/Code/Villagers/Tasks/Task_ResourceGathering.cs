@@ -1,9 +1,9 @@
 using System;
-using Code.AI.VillagerBrain.Layers;
 using Code.Map.Resources;
 using Code.Map.Resources.ResourceToGather;
 using Code.System;
 using Code.System.Areas;
+using Code.Villagers.Brain.Layers;
 using UnityEngine;
 
 namespace Code.Villagers.Tasks

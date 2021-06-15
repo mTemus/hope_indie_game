@@ -1,7 +1,7 @@
-using Code.AI.VillagerBrain.Layers;
+using Code.Villagers.Brain.Layers;
 using UnityEngine;
 
-namespace Code.AI.VillagerBrain
+namespace Code.Villagers.Brain
 {
     public class Villager_Brain : MonoBehaviour
     {
