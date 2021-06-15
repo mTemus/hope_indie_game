@@ -11,10 +11,13 @@ namespace Code.Player
     {
         [SerializeField] private Animator animator;
         
+        private PlayerSoundEffects sounds;
+
         private PlayerAnimationState currentState;
 
         private void Awake()
         {
+            sounds = transform.parent.gameObject.GetComponent<PlayerController>().Sounds;
             currentState = PlayerAnimationState.Idle;
         }
 
@@ -25,5 +28,8 @@ namespace Code.Player
             
             animator.Play(currentState.ToString());
         }
+        
+        private void PlaySoundEffectOnAnimation(PlayerSoundEffectType effectType) =>
+            sounds.PlaySoundEffect(effectType);
     }
 }
