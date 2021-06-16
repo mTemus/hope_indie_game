@@ -3,7 +3,6 @@ using Code.Map.Building;
 using Code.Map.Building.Workplaces;
 using UnityEngine;
 
-
 namespace Code.Villagers.Professions
 {
     [CreateAssetMenu(fileName = "Villager Profession Data", menuName = "Game Data/Villagers/Profession Data", order = 0)]
