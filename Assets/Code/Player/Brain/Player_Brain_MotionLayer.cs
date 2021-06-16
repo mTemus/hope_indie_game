@@ -1,12 +1,14 @@
 using UnityEngine;
 
-namespace Code.Player
+namespace Code.Player.Brain
 {
-    public class PlayerMovement : MonoBehaviour
+    public class Player_Brain_MotionLayer : Player_Brain_Layer
     {
         public float speed = 10f;
         private bool facingRight = true;
         
+        public override void Initialize(Player_Brain brain) { }
+
         public void Move(Vector3 direction)
         {
             transform.position += direction * (Time.deltaTime * speed);

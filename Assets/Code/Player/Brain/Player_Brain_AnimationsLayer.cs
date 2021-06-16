@@ -1,23 +1,29 @@
+using System;
 using UnityEngine;
+using NotImplementedException = System.NotImplementedException;
 
-namespace Code.Player
+namespace Code.Player.Brain
 {
     public enum PlayerAnimationState
     {
         Idle, Run
     }
     
-    public class PlayerAnimations : MonoBehaviour
+    public class Player_Brain_AnimationsLayer : Player_Brain_Layer
     {
         [SerializeField] private Animator animator;
         
-        private PlayerSoundEffects sounds;
-
         private PlayerAnimationState currentState;
 
+        private Action<PlayerSoundEffectType> playSoundEffectOnAnimation;
+        
+        public override void Initialize(Player_Brain brain)
+        {
+            playSoundEffectOnAnimation = brain.Sounds.PlaySoundEffect;
+        }
+        
         private void Awake()
         {
-            sounds = transform.parent.gameObject.GetComponent<PlayerController>().Sounds;
             currentState = PlayerAnimationState.Idle;
         }
 
@@ -30,6 +36,8 @@ namespace Code.Player
         }
         
         private void PlaySoundEffectOnAnimation(PlayerSoundEffectType effectType) =>
-            sounds.PlaySoundEffect(effectType);
+            playSoundEffectOnAnimation.Invoke(effectType);
+
+        
     }
 }

@@ -1,4 +1,4 @@
-using Code.Player;
+using Code.Player.Brain;
 using Code.System.DeveloperTools.Console;
 using Code.System.GameInput.States;
 using UnityEngine;
@@ -7,7 +7,7 @@ namespace Code.System.GameInput
 {
     public class InputManager : MonoBehaviour
     {
-        [SerializeField] private PlayerController player;
+        [SerializeField] private Player_Brain player;
 
         [Header("Keycodes")] 
         [SerializeField] private KeyCode left;
@@ -64,7 +64,7 @@ namespace Code.System.GameInput
             Debug.LogWarning("INPUT STATE ----" + currentInputState.GetType().Name);
         }
         
-        public PlayerController Player => player;
+        public Player_Brain Player => player;
 
         public KeyCode Left => left;
         public KeyCode LeftAlt => leftAlt;

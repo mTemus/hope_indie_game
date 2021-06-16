@@ -10798,7 +10798,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9738fc6fb743f874d9fb9fa7bc459622, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movement: {fileID: 738032753}
+  motion: {fileID: 738032753}
   animations: {fileID: 824363554}
   sounds: {fileID: 794289398}
 --- !u!1 &747109469
@@ -11226,7 +11226,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 794289395}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 411c93fc76f962f43ac815b67a5f77b6, type: 3}
+  m_Script: {fileID: 11500000, guid: 219c9ef913d5ef946ae20424127f1a5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   walkingChannel: {fileID: 794289396}
@@ -11527,7 +11527,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 824363550}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9ead6514cdc7814a97d345c51051ef5, type: 3}
+  m_Script: {fileID: 11500000, guid: 5fea8afc7dc20e14dbe18e1a650227c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 824363551}

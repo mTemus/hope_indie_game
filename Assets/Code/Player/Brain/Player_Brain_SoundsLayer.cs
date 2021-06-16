@@ -2,17 +2,19 @@ using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Code.Player
+namespace Code.Player.Brain
 {
     public enum PlayerSoundEffectType
     {
         Walking, 
     }
     
-    public class PlayerSoundEffects : MonoBehaviour
+    public class Player_Brain_SoundsLayer : Player_Brain_Layer
     {
         [SerializeField] private AudioSource walkingChannel;
 
+        public override void Initialize(Player_Brain brain) { }
+        
         public void PlaySoundEffect(PlayerSoundEffectType effectType)
         {
             switch (effectType) {

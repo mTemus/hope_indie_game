@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Code.Player;
+using Code.Player.Brain;
 using Code.System.Assets;
 using Code.Villagers.Brain;
 using UnityEngine;
@@ -27,7 +27,7 @@ namespace Code.System.Areas
                     if (area.IsPlayerInArea) return;
                     Managers.I.Areas.SetPlayerToArea(area, visitor.gameObject);
                     visitorGO
-                        .GetComponent<PlayerController>().Sounds
+                        .GetComponent<Player_Brain>().Sounds
                         .SetWalkingAudioClip(AssetsStorage.I.
                             GetAudioClipByName(AssetSoundType.Walking, area.name.ToLower()));
                     

@@ -1,3 +1,4 @@
+using Code.Player.Brain;
 using Code.System;
 using Code.System.Areas;
 using UnityEngine;
@@ -6,7 +7,7 @@ namespace Code.Player
 {
     public class PlayerManager : MonoBehaviour
     {
-        [SerializeField] private PlayerController player;
+        [SerializeField] private Player_Brain player;
         
         private void Start()
         {
@@ -21,7 +22,7 @@ namespace Code.Player
         public Vector2 GetPlayerLocalPosition()
             => player.transform.localPosition;
 
-        public PlayerController Player => player;
+        public Player_Brain Player => player;
 
         public GameObject PlayerGO => player.gameObject;
     }
