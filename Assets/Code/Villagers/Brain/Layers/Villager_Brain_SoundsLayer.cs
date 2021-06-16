@@ -9,9 +9,11 @@ namespace Code.Villagers.Brain.Layers
         Walking,
     }
 
-    public class Villager_Brain_SoundsLayer : MonoBehaviour
+    public class Villager_Brain_SoundsLayer : Villager_BrainLayer
     {
         [SerializeField] private AudioSource walkingChannel;
+
+        public override void Initialize(Villager_Brain villagerBrain) {}
 
         public void PlaySoundEffect(VillagerSoundEffectType effectType)
         {

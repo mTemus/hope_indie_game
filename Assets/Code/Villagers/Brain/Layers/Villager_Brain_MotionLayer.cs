@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Code.Villagers.Brain.Layers
 {
-    public class Villager_Brain_MotionLayer : BrainLayer
+    public class Villager_Brain_MotionLayer : Villager_BrainLayer
     {
         [SerializeField] private float speed = 5f;
 
@@ -13,7 +13,6 @@ namespace Code.Villagers.Brain.Layers
 
         public override void Initialize(Villager_Brain villagerBrain)
         {
-            base.Initialize(villagerBrain);
             onVillagerTurnDirection += villagerBrain.Animations.Turn;
         }
 

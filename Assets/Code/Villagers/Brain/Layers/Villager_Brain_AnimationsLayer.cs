@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Code.Villagers.Brain.Layers
@@ -7,13 +8,12 @@ namespace Code.Villagers.Brain.Layers
         Idle, Walk
     }
     
-    public class Villager_Brain_AnimationsLayer : BrainLayer
+    public class Villager_Brain_AnimationsLayer : Villager_BrainLayer
     {
         [SerializeField] private Animator animator;
         [SerializeField] private GameObject spriteGo;
 
         private VillagerAnimationState currentState;
-        private Villager_Brain_SoundsLayer sounds;
         
         private bool facingRight = true;
 

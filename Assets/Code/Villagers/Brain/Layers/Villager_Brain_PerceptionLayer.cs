@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Code.Villagers.Brain.Layers
 {
-    public class Villager_Brain_PerceptionLayer : BrainLayer
+    public class Villager_Brain_PerceptionLayer : Villager_BrainLayer
     {
         private readonly List<Stimulus> stimuli = new List<Stimulus>();
 
@@ -14,7 +14,6 @@ namespace Code.Villagers.Brain.Layers
         public override void Initialize(Villager_Brain villagerBrain)
         {
             delayDecrement = Time.deltaTime;
-            base.Initialize(villagerBrain);
         }
 
         private void ProcessStimulus(Stimulus stimulus)

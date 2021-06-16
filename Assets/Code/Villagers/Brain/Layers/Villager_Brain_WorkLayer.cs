@@ -5,7 +5,7 @@ using Code.Villagers.Tasks;
 
 namespace Code.Villagers.Brain.Layers
 {
-    public class Villager_Brain_WorkLayer : BrainLayer
+    public class Villager_Brain_WorkLayer : Villager_BrainLayer
     {
         private readonly Queue<Task> tasks = new Queue<Task>();
         
@@ -16,6 +16,8 @@ namespace Code.Villagers.Brain.Layers
         public bool TaskComplete => currentTask.flag == TaskFlag.COMPLETED;
         public bool IsCarryingResource => CarriedResource != null && CarriedResource.amount > 0;
 
+        public override void Initialize(Villager_Brain villagerBrain) {}
+        
         /// Called in Worker Behaviour Tree
         public void Work()
         { 
