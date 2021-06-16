@@ -13,6 +13,8 @@ namespace Code.Villagers.Brain.Layers
         [SerializeField] private Animator animator;
         [SerializeField] private GameObject spriteGo;
 
+        private Action<VillagerSoundEffectType> playSoundEffectOnAnimation;
+
         private VillagerAnimationState currentState;
         
         private bool facingRight = true;
@@ -24,8 +26,7 @@ namespace Code.Villagers.Brain.Layers
 
         public override void Initialize(Villager_Brain villagerBrain)
         {
-            base.Initialize(villagerBrain);
-            sounds = villagerBrain.Sounds;
+            playSoundEffectOnAnimation = villagerBrain.Sounds.PlaySoundEffect;
         }
 
         public void SetState(VillagerAnimationState state)
@@ -60,6 +61,6 @@ namespace Code.Villagers.Brain.Layers
         }
 
         private void PlaySoundEffectOnAnimation(VillagerSoundEffectType effectType) =>
-            sounds.PlaySoundEffect(effectType);
+            playSoundEffectOnAnimation.Invoke(effectType);
     }
 }
