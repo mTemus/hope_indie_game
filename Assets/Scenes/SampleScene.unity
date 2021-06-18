@@ -10703,6 +10703,7 @@ GameObject:
   - component: {fileID: 738032749}
   - component: {fileID: 738032754}
   - component: {fileID: 738032753}
+  - component: {fileID: 738032750}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -10736,6 +10737,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 3.3}
   m_EdgeRadius: 0
+--- !u!114 &738032750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 738032748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a56cb6295bc79c04b9b384ceea5267a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initializeMode: 0
 --- !u!4 &738032751
 Transform:
   m_ObjectHideFlags: 0
@@ -13046,6 +13060,8 @@ MonoBehaviour:
   type: 0
   width: 100
   height: 30
+  leftNeighbour: {fileID: 0}
+  rightNeighbour: {fileID: 0}
 --- !u!114 &1190323420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15879,6 +15895,8 @@ MonoBehaviour:
   - {fileID: 1075628975}
   - {fileID: 2076161130}
   - {fileID: 637620838460850440}
+  player:
+  - {fileID: 738032750}
 --- !u!114 &1577391083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23812,6 +23830,8 @@ MonoBehaviour:
   type: 1
   width: 100
   height: 30
+  leftNeighbour: {fileID: 0}
+  rightNeighbour: {fileID: 0}
 --- !u!4 &2080944413
 Transform:
   m_ObjectHideFlags: 0
