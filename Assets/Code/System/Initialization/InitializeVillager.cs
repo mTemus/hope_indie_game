@@ -1,4 +1,5 @@
 using Code.Map.Building.Workplaces;
+using Code.System.Areas;
 using Code.Villagers.Entity;
 using Code.Villagers.Professions;
 using UnityEngine;
@@ -19,8 +20,10 @@ namespace Code.System.Initialization
         public override void InitializeMe()
         {
             Villager villager = GetComponent<Villager>();
-            Managers.I.Areas.GetAreaByCoords(Vector3Int.FloorToInt(transform.position))
-                .AddVillager(villager);
+            Area area = Managers.I.Areas.GetAreaByCoords(Vector3Int.FloorToInt(transform.position));
+            area.AddVillager(villager);
+            area.SetVisitorWalkingAudio(villager.gameObject);
+
             Managers.I.Professions.SetVillagerProfession(villager, villagerProfessionData, workplace);
             villager.Profession.enabled = true;
         }
