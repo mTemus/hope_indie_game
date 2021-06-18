@@ -104,13 +104,5 @@ namespace Code.System.Areas
 
             return closestArea;
         }
-        
-        public void SetPlayerToArea(Area newArea, GameObject player)
-        {
-            GetPlayerArea().ClearPlayerInArea();;
-            newArea.SetPlayerToArea(player);
-            
-            Debug.LogWarning("Player is in " + newArea.name);
-        }
     }
 }

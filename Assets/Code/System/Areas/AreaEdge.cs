@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using Code.Player.Brain;
-using Code.System.Assets;
-using Code.Villagers.Brain;
+using Code.AI;
 using UnityEngine;
 
 namespace Code.System.Areas
@@ -13,35 +11,20 @@ namespace Code.System.Areas
         
         private void OnTriggerEnter2D(Collider2D visitor)
         {
-            if (!visitors.Contains(visitor.gameObject)) 
-                visitors.Add(visitor.gameObject);
+            if (visitors.Contains(visitor.gameObject)) return;
+            GameObject visitorGO = visitor.gameObject;
+            visitors.Add(visitorGO);
+
+            if (area.ContainsEntity(visitorGO)) return;
+            visitorGO.GetComponent<EntityBrain>().CurrentArea.HandleLeavingEntity(visitorGO);
+            visitors.Remove(visitor.gameObject);
+
+            area.HandleEnteringEntity(visitorGO);
         }
 
         private void OnTriggerExit2D(Collider2D visitor)
         {
-            if (!visitors.Contains(visitor.gameObject)) return;
-            GameObject visitorGO = visitor.gameObject;
-
-            switch (visitor.tag) {
-                case "Player":
-                    if (area.IsPlayerInArea) return;
-                    Managers.I.Areas.SetPlayerToArea(area, visitor.gameObject);
-                    visitorGO
-                        .GetComponent<Player_Brain>().Sounds
-                        .SetWalkingAudioClip(AssetsStorage.I.
-                            GetAudioClipByName(AssetSoundType.Walking, area.name.ToLower()));
-                    
-                    visitors.Remove(visitor.gameObject);
-                    break;
-                
-                case "Villager":
-                    visitorGO
-                        .GetComponent<Villager_Brain>().Sounds
-                        .SetWalkingAudioClip(AssetsStorage.I
-                            .GetAudioClipByName(AssetSoundType.Walking, area.name.ToLower()));
-                    visitors.Remove(visitorGO);
-                    break;
-            }
+            visitors.Remove(visitor.gameObject);
         }
         
         private void OnDrawGizmos()

@@ -1,10 +1,14 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Code.AI;
 using Code.Map.Building;
 using Code.Map.Resources;
 using Code.Map.Resources.ResourceToGather;
+using Code.System.Assets;
 using Code.System.Grid;
 using Code.System.Properties;
+using Code.Villagers.Brain;
 using Code.Villagers.Entity;
 using UnityEngine;
 
@@ -46,20 +50,85 @@ namespace Code.System.Areas
             gridMap = new GridMap(widthTileCnt, heightTileCnt, GlobalProperties.WorldTileSize);
         }
 
+        #region Area
+
+        public void SetVisitorWalkingAudio(GameObject visitor)
+        {
+            visitor
+                .GetComponent<EntityBrain>().onWalkingSoundSet
+                .Invoke(AssetsStorage.I
+                    .GetAudioClipByName(AssetSoundType.Walking, name.ToLower()));
+        }
+
+        public bool ContainsEntity(GameObject visitor)
+        {
+            return visitor.tag switch {
+                "Player" => playerObject != null,
+                "Villager" => villagers.Contains(visitor.GetComponent<Villager>()),
+                _ => throw new Exception("AREA --- CAN'T FIND ENTITY WITH TAG: " + gameObject.tag)
+            };
+        }
+
+        public void HandleEnteringEntity(GameObject visitor)
+        {
+            switch (visitor.tag) {
+                case "Player":
+                    PlayerEnterArea(visitor);
+                    break;
+                
+                case "Villager":
+                    VillagerEnterArea(visitor);
+                    break;
+                
+                default:
+                    throw new Exception("AREA --- CAN'T HANDLE VISITOR WITH TAG: " + gameObject.tag);
+            }
+            
+            SetVisitorWalkingAudio(visitor);
+
+        }
+
+        public void HandleLeavingEntity(GameObject leaver)
+        {
+            switch (leaver.tag) {
+                case "Player":
+                    PlayerExitArea(leaver);
+                    break;
+                
+                case "Villager":
+                    VillagerExitArea(leaver);
+                    break;
+                
+                default:
+                    throw new Exception("AREA --- CAN'T HANDLE VISITOR WITH TAG: " + gameObject.tag);
+            }
+        }
+        
+        #endregion
+
         #region Player
+        
+        private void PlayerEnterArea(GameObject player)
+        {
+            playerObject = player;
+            playerObject.GetComponent<EntityBrain>().CurrentArea = this;
+            playerObject.transform.SetParent(transform);
+            Debug.LogWarning("Player is in " + name);
+        }
+
+        private void PlayerExitArea(GameObject player)
+        {
+            playerObject.transform.SetParent(transform.root);
+            playerObject.GetComponent<EntityBrain>().CurrentArea = null;
+            playerObject = null;
+        }
         
         public void SetPlayerToArea(GameObject player)
         {
             playerObject = player;
-            playerObject.transform.SetParent(transform);
+            player.transform.SetParent(transform);
         }
-
-        public void ClearPlayerInArea()
-        {
-            playerObject.transform.SetParent(transform.root);
-            playerObject = null;
-        }
-
+        
         #endregion
 
         #region Buildings
@@ -142,10 +211,21 @@ namespace Code.System.Areas
 
         #region Villagers
 
-        //TODO: update adding villagers between areas
+        private void VillagerEnterArea(GameObject villager)
+        {
+            villager.GetComponent<Villager_Brain>().CurrentArea = this;
+            villager.transform.SetParent(transform);
+        }
+
+        private void VillagerExitArea(GameObject villager)
+        {
+            villagers.Remove(villager.GetComponent<Villager>());
+            villager.transform.SetParent(transform.parent);
+        }
         
         public void AddVillager(Villager villager)
         {
+            villager.Brain.CurrentArea = this;
             villager.transform.SetParent(transform);
             villagers.Add(villager);
             
