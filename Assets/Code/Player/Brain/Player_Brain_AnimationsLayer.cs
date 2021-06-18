@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using NotImplementedException = System.NotImplementedException;
 
 namespace Code.Player.Brain
 {

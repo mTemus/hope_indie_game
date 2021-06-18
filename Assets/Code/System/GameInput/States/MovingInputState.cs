@@ -1,5 +1,4 @@
-﻿using Code.Player;
-using Code.Player.Brain;
+﻿using Code.Player.Brain;
 using UnityEngine;
 
 namespace Code.System.GameInput.States
