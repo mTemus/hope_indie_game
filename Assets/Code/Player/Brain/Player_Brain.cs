@@ -1,11 +1,11 @@
-using System;
+using Code.AI;
 using Code.System;
 using Code.Villagers.Entity;
 using UnityEngine;
 
 namespace Code.Player.Brain
 {
-    public class Player_Brain : MonoBehaviour
+    public class Player_Brain : EntityBrain
     {
         [Header("Player components")] 
         [SerializeField] private Player_Brain_MotionLayer motion;
@@ -18,6 +18,8 @@ namespace Code.Player.Brain
 
         private void Awake()
         {
+            onWalkingSoundSet = sounds.SetWalkingAudioClip;
+        
             motion.Initialize(this);
             animations.Initialize(this);
             sounds.Initialize(this);

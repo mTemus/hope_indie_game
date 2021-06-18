@@ -1,9 +1,10 @@
+using Code.AI;
 using Code.Villagers.Brain.Layers;
 using UnityEngine;
 
 namespace Code.Villagers.Brain
 {
-    public class Villager_Brain : MonoBehaviour
+    public class Villager_Brain : EntityBrain
     {
         [Header("Layers")]
         [SerializeField] private Villager_Brain_PerceptionLayer perception;
@@ -22,6 +23,8 @@ namespace Code.Villagers.Brain
 
         private void Awake()
         {
+            onWalkingSoundSet = sounds.SetWalkingAudioClip;
+
             perception.Initialize(this);
             behaviour.Initialize(this);
             motion.Initialize(this);
