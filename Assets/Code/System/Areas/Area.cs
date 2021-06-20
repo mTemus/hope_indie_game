@@ -18,6 +18,7 @@ namespace Code.System.Areas
     {
         VILLAGE,
         FOREST,
+        HIGHLANDS,
         EMPTY,
     }
 
