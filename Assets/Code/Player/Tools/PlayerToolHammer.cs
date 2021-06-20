@@ -9,11 +9,6 @@ namespace Code.Player.Tools
     {
         public override void UseTool()
         {
-            if (Managers.I.Areas.GetPlayerArea().Type != AreaType.VILLAGE) {
-                Debug.LogError("Can't build outside village!");
-                return;
-            }
-            
             Managers.I.Input.SetState(InputManager.BuildingSelectingInputState);
         }
     }
