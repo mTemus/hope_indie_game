@@ -16,3 +16,4 @@ MonoBehaviour:
   resourceToGatherType: 1
   amount: 90000
   maximumGatherers: 4
+  occurAreas: 02000000
