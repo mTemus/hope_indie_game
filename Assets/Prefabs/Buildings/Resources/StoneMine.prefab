@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3550465842639192586}
   - component: {fileID: 6756605291133905947}
   - component: {fileID: 5051787282019691935}
+  - component: {fileID: 6994904709745485538}
   m_Layer: 0
   m_Name: StoneMine
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6618267498007128141}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -119.39, y: 9.03, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -110,7 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 6cbd1c0a5558209479229c7b4912d69b, type: 2}
-  storage: {fileID: 0}
+  storage: {fileID: 6994904709745485538}
   properties: {fileID: 11400000, guid: 469051b756be9d04282b6946418dd02b, type: 2}
   onWorkerHired:
     m_PersistentCalls:
@@ -134,3 +135,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initializeMode: 0
+--- !u!114 &6994904709745485538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6618267498007128141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aad97b5c21bc83a4bb791c21fa620cfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourceLimit: 1000
+  onResourceStored:
+    m_PersistentCalls:
+      m_Calls: []
+  onResourceWithdraw:
+    m_PersistentCalls:
+      m_Calls: []
+  onResourceLimitReach:
+    m_PersistentCalls:
+      m_Calls: []
+  onResourceLimitReset:
+    m_PersistentCalls:
+      m_Calls: []
+  resources: []
