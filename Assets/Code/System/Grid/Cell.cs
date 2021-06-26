@@ -3,7 +3,7 @@ using Code.Map.Resources.ResourceToGather;
 
 namespace Code.System.Grid
 {
-    public class Cell
+    public abstract class Cell
     {
         public Building buildingData;
         public ResourceToGather resourceToGatherData;

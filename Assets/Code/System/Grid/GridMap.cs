@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Code.Map.Building;
+using Code.Map.Resources;
 using Code.Map.Resources.ResourceToGather;
 using Code.System.Properties;
 using UnityEngine;
@@ -24,8 +26,14 @@ namespace Code.System.Grid
             cells = new Cell[width, height];
 
             for (int i = 0; i < width; i++)
-            for (int j = 0; j < height; j++) 
-                cells[i, j] = new Cell();
+            for (int j = 0; j < height; j++)
+                if (j == 0) cells[i, j] = new SurfaceCell();
+                else cells[i, j] = new SpaceCell();
+        }
+        
+        private void SetSurfaceCellType(Cell cell, SurfaceCellType type) {
+            if (cell is SurfaceCell sc) 
+                sc.SetNewSurface(type);
         }
 
         public void GetXY(Vector3 worldPosition, out int x, out int y)
@@ -72,18 +80,34 @@ namespace Code.System.Grid
             return y  <= height && y >= 0 && x + objectWidth <= width && x >= 0;
         }
 
-        public void SetBuildingValueAtArea(List<Vector2Int> area, Building building)
+        public void SetBuildingInGrid(List<Vector2Int> area, Building building)
         {
             foreach (var cell in area
-                .Select(cellPos => GetCellAt(cellPos.x, cellPos.y))) 
-            { cell.buildingData = building; }
+                .Select(cellPos => GetCellAt(cellPos.x, cellPos.y))) {
+                cell.buildingData = building;
+                SetSurfaceCellType(cell, SurfaceCellType.Building);
+            }
         }
 
-        public void SetResourceToGatherValueAtArea(List<Vector2Int> area, ResourceToGather resourceToGather)
+        public void SetResourceToGatherInGrid(List<Vector2Int> area, ResourceToGather resourceToGather)
         {
             foreach (var cell in area
-                .Select(cellPos => GetCellAt(cellPos.x, cellPos.y))) 
-            { cell.resourceToGatherData = resourceToGather; }
+                .Select(cellPos => GetCellAt(cellPos.x, cellPos.y))) {
+                cell.resourceToGatherData = resourceToGather;
+
+                switch (resourceToGather.Resource.Type) {
+                    case ResourceType.WOOD:
+                        SetSurfaceCellType(cell, SurfaceCellType.WoodResource);
+                        break;
+                    
+                    case ResourceType.STONE:
+                        SetSurfaceCellType(cell, SurfaceCellType.StoneResource);
+                        break;
+                    
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
         }
         
         public int CellSize => cellSize;
@@ -94,7 +118,4 @@ namespace Code.System.Grid
 
         public int Height => height;
     }
-    
-    
-    
 }
