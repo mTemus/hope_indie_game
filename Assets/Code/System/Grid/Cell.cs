@@ -8,7 +8,10 @@ namespace Code.System.Grid
         public Building buildingData;
         public ResourceToGather resourceToGatherData;
 
-        public bool CanBuild() =>
-            buildingData == null;
+        public bool ContainsBuilding() =>
+            buildingData != null;
+
+        public bool ContainsResource() =>
+            resourceToGatherData != null;
     }
 }
