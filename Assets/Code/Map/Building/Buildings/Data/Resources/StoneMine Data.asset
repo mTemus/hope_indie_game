@@ -17,7 +17,7 @@ MonoBehaviour:
   buildingName: StoneMine
   placedOn: 1
   requiredSurface: 1
-  size: {x: 10, y: 8}
+  size: {x: 5, y: 4}
   entrancePivot: {x: 5, y: 0, z: 0}
   requiredResources:
   - type: 0
