@@ -32,10 +32,14 @@ namespace Code.Map.Building.Systems
             _currentBuildingData = buildingData;
 
             Vector3Int buildingPosition = new Vector3Int(x, y, 0) * GlobalProperties.WorldTileSize;
-            if (!playerArea.GridMap.IsTileInRange(buildingPosition.x, buildingPosition.y, _currentBuildingData.Size.x)) 
-                while (!playerArea.GridMap.IsTileInRange(buildingPosition.x, buildingPosition.y, _currentBuildingData.Size.x)) 
-                    buildingPosition.x -= 1 * GlobalProperties.WorldTileSize;
             
+            if (!IsBuildingInAreaRange(currentBuildingArea, buildingPosition)) 
+                while (!IsBuildingInAreaRange(currentBuildingArea, buildingPosition))
+                    if (buildingPosition.x < 0) 
+                        buildingPosition.x += 1 * GlobalProperties.WorldTileSize;
+                    else if (buildingPosition.x > 0)
+                        buildingPosition.x -= 1 * GlobalProperties.WorldTileSize;
+
             buildingPosition /= GlobalProperties.WorldTileSize;
             
             _currentBuilding = Instantiate(
