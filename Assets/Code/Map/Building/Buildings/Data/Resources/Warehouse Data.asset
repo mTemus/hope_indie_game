@@ -15,6 +15,7 @@ MonoBehaviour:
   buildingType: 0
   prefab: {fileID: 5600572580210474735, guid: 2fa98d1e929f51c43a0ac176884a0bb3, type: 3}
   buildingName: Warehouse
+  requiredCellContent: 1
   size: {x: 7, y: 8}
   entrancePivot: {x: 5.5, y: 0, z: 0}
   requiredResources:

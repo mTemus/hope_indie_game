@@ -15,6 +15,7 @@ MonoBehaviour:
   buildingType: 0
   prefab: {fileID: 2961238222191277132, guid: 29849b52182697849a1804d9b539db17, type: 3}
   buildingName: Sawmill
+  requiredCellContent: 1
   size: {x: 7, y: 6}
   entrancePivot: {x: 11, y: 0, z: 0}
   requiredResources:

@@ -15,6 +15,7 @@ MonoBehaviour:
   buildingType: 1
   prefab: {fileID: 2699120673269493026, guid: ea3a3f3e8e5d66a47a1eebef9e16a9be, type: 3}
   buildingName: House
+  requiredCellContent: 1
   size: {x: 6, y: 6}
   entrancePivot: {x: 7, y: 0, z: 0}
   requiredResources:

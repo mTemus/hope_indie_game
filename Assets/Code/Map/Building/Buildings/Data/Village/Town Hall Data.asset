@@ -15,6 +15,7 @@ MonoBehaviour:
   buildingType: 1
   prefab: {fileID: 2699120673269493026, guid: 71d6fb766878d6f479c257e7fc4867fb, type: 3}
   buildingName: Town Hall
+  requiredCellContent: 1
   size: {x: 3, y: 3}
   entrancePivot: {x: 2.5, y: 0, z: 0}
   requiredResources:

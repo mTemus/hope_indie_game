@@ -30,11 +30,6 @@ namespace Code.System.Grid
                 if (j == 0) cells[i, j] = new SurfaceCell();
                 else cells[i, j] = new SpaceCell();
         }
-        
-        private void SetSurfaceCellType(Cell cell, SurfaceCellType type) {
-            if (cell is SurfaceCell sc) 
-                sc.SetNewSurface(type);
-        }
 
         public void GetXY(Vector3 worldPosition, out int x, out int y)
         {
@@ -85,7 +80,7 @@ namespace Code.System.Grid
             foreach (var cell in area
                 .Select(cellPos => GetCellAt(cellPos.x, cellPos.y))) {
                 cell.buildingData = building;
-                SetSurfaceCellType(cell, SurfaceCellType.Building);
+                cell.content = CellContentType.Building;
             }
         }
 
@@ -97,11 +92,11 @@ namespace Code.System.Grid
 
                 switch (resourceToGather.Resource.Type) {
                     case ResourceType.WOOD:
-                        SetSurfaceCellType(cell, SurfaceCellType.WoodResource);
+                        cell.content = CellContentType.WoodResource;
                         break;
                     
                     case ResourceType.STONE:
-                        SetSurfaceCellType(cell, SurfaceCellType.StoneResource);
+                        cell.content = CellContentType.StoneResource;
                         break;
                     
                     default:

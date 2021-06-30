@@ -15,6 +15,7 @@ MonoBehaviour:
   buildingType: 0
   prefab: {fileID: 8793695768821999390, guid: 9d54e0cff6b04084d9810a56aa2ad2f4, type: 3}
   buildingName: Well
+  requiredCellContent: 1
   size: {x: 2, y: 2}
   entrancePivot: {x: 1, y: 0, z: 0}
   requiredResources:

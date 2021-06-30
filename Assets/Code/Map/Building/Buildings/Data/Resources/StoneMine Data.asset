@@ -15,8 +15,7 @@ MonoBehaviour:
   buildingType: 0
   prefab: {fileID: 6618267498007128142, guid: 1e8bada0a932f234fbc204c31fd1856c, type: 3}
   buildingName: StoneMine
-  placedOn: 1
-  requiredSurface: 1
+  requiredCellContent: 3
   size: {x: 5, y: 4}
   entrancePivot: {x: 5, y: 0, z: 0}
   requiredResources:

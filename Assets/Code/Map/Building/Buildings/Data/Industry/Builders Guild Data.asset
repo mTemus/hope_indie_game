@@ -15,6 +15,7 @@ MonoBehaviour:
   buildingType: 2
   prefab: {fileID: 1484742641791407110, guid: 27019d35ebc484b43b1d7dcad63b0dc9, type: 3}
   buildingName: Builder Guild
+  requiredCellContent: 1
   size: {x: 7, y: 8}
   entrancePivot: {x: 2, y: 0, z: 0}
   requiredResources: []
