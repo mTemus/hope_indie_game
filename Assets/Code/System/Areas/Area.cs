@@ -5,6 +5,7 @@ using Code.AI;
 using Code.Map.Building;
 using Code.Map.Resources;
 using Code.Map.Resources.ResourceToGather;
+using Code.Map.Resources.ResourceToGather.ResourcesToGather;
 using Code.System.Assets;
 using Code.System.Grid;
 using Code.System.Properties;
@@ -145,15 +146,48 @@ namespace Code.System.Areas
                 new Vector2Int(currBuildPos.x / GlobalProperties.WorldTileSize, currBuildPos.y), 
                 new Vector2Int(buildingData.Size.x, buildingData.Size.y));
             
-            gridMap.SetBuildingValueAtArea(buildingArea, building);
+            gridMap.SetBuildingInGrid(buildingArea, building);
             buildings.Add(building);
             Debug.Log("Add building " + building.name + "  to area "+ gameObject.name + ".");
         }
         
-        public bool CanPlaceBuilding(List<Vector2Int> buildingArea) =>
-            buildingArea
+        public bool CanPlaceBuilding(List<Vector2Int> buildingArea, CellContentType requiredCellContent)
+        {
+            bool buildingAreaIsSuitable = buildingArea
                 .Select(tilePos => gridMap.GetCellAt(tilePos.x, tilePos.y))
-                .All(cell => cell.CanBuild());
+                .All(cell => cell.CanBePlacedOn(requiredCellContent));
+
+            if (!buildingAreaIsSuitable) 
+                return false;
+
+            switch (requiredCellContent) {
+                case CellContentType.Null:
+                    break;
+                
+                case CellContentType.Nothing:
+                    break;
+                
+                case CellContentType.WoodResource:
+                    break;
+                
+                case CellContentType.StoneResource:
+                    if (gridMap.GetCellAt(buildingArea[0].x, buildingArea[0].y).resourceToGatherData is StoneToGather
+                        {
+                            hasWorkplace: true
+                        })
+                        return false;
+                    break;
+                
+                case CellContentType.Building:
+                    break;
+                
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(requiredCellContent), requiredCellContent, null);
+            }
+
+
+            return true;
+        }
 
         #endregion
 
@@ -170,9 +204,8 @@ namespace Code.System.Areas
                 new Vector2Int(currResourcePos.x / GlobalProperties.WorldTileSize, currResourcePos.y),
                 new Vector2Int(resourceToGather.Size.x, resourceToGather.Size.y));
 
-            gridMap.SetResourceToGatherValueAtArea(resourceArea, resourceToGather);
+            gridMap.SetResourceToGatherInGrid(resourceArea, resourceToGather);
             resourcesToGather.Add(resourceToGather);
-            Debug.Log("Add resource " + resourceToGather.name + "  to area "+ gameObject.name + ".");
         }
 
         public void RemoveResourceToGather(ResourceToGather resourceToGather)
@@ -182,7 +215,7 @@ namespace Code.System.Areas
                 new Vector2Int(currResourcePos.x / GlobalProperties.WorldTileSize, currResourcePos.y),
                 new Vector2Int(resourceToGather.Size.x, resourceToGather.Size.y));
 
-            gridMap.SetResourceToGatherValueAtArea(resourceArea, null);
+            gridMap.SetResourceToGatherInGrid(resourceArea, null);
             resourcesToGather.Remove(resourceToGather);
             Debug.LogError("Remove resource " + resourceToGather.name + "  to area "+ gameObject.name + ".");
         }

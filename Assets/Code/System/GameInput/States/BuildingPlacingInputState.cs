@@ -7,6 +7,7 @@ namespace Code.System.GameInput.States
     {
         public void OnStateSet()
         {
+            Systems.I.Building.MoveCurrentBuilding(Vector3Int.zero);
             Managers.I.Cameras.FocusCameraOn(BuildingSystem.CurrentBuilding.transform);
             Managers.I.GUI.RequiredResourcesPanel.gameObject.SetActive(true);
             Managers.I.GUI.RequiredResourcesPanel.OnPanelOpen();
@@ -15,17 +16,17 @@ namespace Code.System.GameInput.States
         public void HandleState(InputManager inputManager)
         {
             if (Input.GetKeyDown(inputManager.Left) || Input.GetKeyDown(inputManager.LeftAlt)) 
-                Systems.Instance.Building.MoveCurrentBuilding(Vector3Int.left);
+                Systems.I.Building.MoveCurrentBuilding(Vector3Int.left);
         
             if (Input.GetKeyDown(inputManager.Right) || Input.GetKeyDown(inputManager.RightAlt)) 
-                Systems.Instance.Building.MoveCurrentBuilding(Vector3Int.right);
+                Systems.I.Building.MoveCurrentBuilding(Vector3Int.right);
 
             if (Input.GetKeyDown(inputManager.Action)) {
-                Systems.Instance.Building.BuildBuilding();
+                Systems.I.Building.BuildBuilding();
             }
 
             if (Input.GetKeyDown(inputManager.Cancel)) {
-                Systems.Instance.Building.CancelBuilding();
+                Systems.I.Building.CancelBuilding();
                 Managers.I.Cameras.FocusCameraOn(Managers.I.Player.PlayerGO.transform);
                 Managers.I.Input.SetState(InputManager.MovingInputState);
             }

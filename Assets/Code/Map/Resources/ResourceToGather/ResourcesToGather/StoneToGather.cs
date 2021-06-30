@@ -8,6 +8,14 @@ namespace Code.Map.Resources.ResourceToGather.ResourcesToGather
     {
         private Workplace workplace;
 
+        public Workplace Workplace
+        {
+            get => workplace;
+            set => workplace = value;
+        }
+
+        public bool hasWorkplace => workplace != null;
+
         public override void StartGathering(Villager worker)
         {
             throw new NotImplementedException();

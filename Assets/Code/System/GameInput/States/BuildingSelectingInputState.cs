@@ -28,13 +28,14 @@ namespace Code.System.GameInput.States
                 inputManager.SetState(InputManager.BuildingPlacingInputState);
             
             if (Input.GetKeyDown(inputManager.Cancel)) {
-                Systems.Instance.Building.CancelBuilding();
+                Systems.I.Building.CancelBuilding();
                 Managers.I.Input.SetState(InputManager.MovingInputState);
             }
         }
 
         public void OnStateChange()
         {
+            Systems.I.Building.MoveCurrentBuilding(Vector3Int.zero);
             Managers.I.GUI.BuildingSelectingMenu.OnMenuClose();
             Managers.I.GUI.BuildingSelectingMenu.gameObject.SetActive(false);
         }
