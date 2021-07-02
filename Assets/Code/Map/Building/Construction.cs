@@ -4,6 +4,7 @@ using Code.Map.Building.Buildings.Types.Industry;
 using Code.Map.Resources;
 using Code.System;
 using Code.System.Assets;
+using Code.System.Initialization;
 using Code.Villagers.Tasks;
 using UnityEngine;
 
@@ -47,7 +48,7 @@ namespace Code.Map.Building
 
             if (!(currentProgress <= 0.1f)) return false;
             GetComponent<SpriteRenderer>().material = normalMaterial;
-            GetComponent<Building>().Initialize();
+            GetComponent<InitializeBuilding>().InitializeMe();
             return true;
         }
 

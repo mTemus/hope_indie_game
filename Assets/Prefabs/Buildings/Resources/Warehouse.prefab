@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 535798750942615330}
   - component: {fileID: -4573971488769372000}
   - component: {fileID: -5289495316672013107}
+  - component: {fileID: 7040758130962973667}
   m_Layer: 0
   m_Name: Warehouse
   m_TagString: Untagged
@@ -114,3 +115,22 @@ MonoBehaviour:
   onWorkerHired:
     m_PersistentCalls:
       m_Calls: []
+  onHaulerHired:
+    m_PersistentCalls:
+      m_Calls: []
+  onWorkerEnter:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &7040758130962973667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3085277392001244458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2c1bc33a349ce9488eda880eb04d872, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initializeMode: 0

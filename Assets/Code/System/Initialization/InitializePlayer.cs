@@ -12,6 +12,7 @@ namespace Code.System.Initialization
             area.SetPlayerToArea(gameObject);
             area.SetVisitorWalkingAudio(gameObject);
             GetComponent<EntityBrain>().CurrentArea = area;
+            DestroyImmediate(this);
         }
     }
 }

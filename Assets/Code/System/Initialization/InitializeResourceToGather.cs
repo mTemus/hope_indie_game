@@ -14,6 +14,8 @@ namespace Code.System.Initialization
             
             Managers.I.Areas.GetAreaByCoords(Vector3Int.FloorToInt(transform.position))
                 .AddResourceToGather(rtg);
+            
+            DestroyImmediate(this);
         }
     }
 }

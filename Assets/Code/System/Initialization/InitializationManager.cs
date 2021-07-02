@@ -19,10 +19,8 @@ namespace Code.System.Initialization
 
         private void InitializeObjects(InitializeObject[] objects)
         {
-            foreach (InitializeObject o in objects) {
+            foreach (InitializeObject o in objects) 
                 o.InitializeMe();
-                DestroyImmediate(o.GetComponent<InitializeObject>());
-            } 
         }
     }
 }

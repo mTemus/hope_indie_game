@@ -26,6 +26,8 @@ namespace Code.System.Initialization
 
             Managers.I.Professions.SetVillagerProfession(villager, villagerProfessionData, workplace);
             villager.Profession.enabled = true;
+            
+            DestroyImmediate(this);
         }
     }
 }

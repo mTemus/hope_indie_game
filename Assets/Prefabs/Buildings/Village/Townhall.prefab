@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2699120673269493025}
   - component: {fileID: 8668220053115138210}
   - component: {fileID: 4584748742301246570}
+  - component: {fileID: 6641843641779269789}
   m_Layer: 0
   m_Name: Townhall
   m_TagString: Untagged
@@ -114,3 +115,22 @@ MonoBehaviour:
   onWorkerHired:
     m_PersistentCalls:
       m_Calls: []
+  onHaulerHired:
+    m_PersistentCalls:
+      m_Calls: []
+  onWorkerEnter:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &6641843641779269789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2699120673269493024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2c1bc33a349ce9488eda880eb04d872, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initializeMode: 0

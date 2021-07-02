@@ -224,6 +224,7 @@ GameObject:
   - component: {fileID: 9167801433571190483}
   - component: {fileID: 6969352291290258241}
   - component: {fileID: 7631306087601245034}
+  - component: {fileID: 925203713727462041}
   m_Layer: 0
   m_Name: Builders Guild
   m_TagString: Untagged
@@ -327,6 +328,25 @@ MonoBehaviour:
   onWorkerHired:
     m_PersistentCalls:
       m_Calls: []
+  onHaulerHired:
+    m_PersistentCalls:
+      m_Calls: []
+  onWorkerEnter:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &925203713727462041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4451268907026413094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2c1bc33a349ce9488eda880eb04d872, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initializeMode: 0
 --- !u!1 &4711893602148995234
 GameObject:
   m_ObjectHideFlags: 0
