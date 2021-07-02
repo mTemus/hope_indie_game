@@ -44,7 +44,7 @@ namespace Code.Map.Building.Systems
         private bool CheckBuildingCorner(Vector3Int cornerPosition, out Vector3 newBuildingPosition)
         {
             Cell cell = currentBuildingArea.GridMap.GetCellAt(cornerPosition.x / GlobalProperties.WorldTileSize, 0);
-            if (cell.CanBePlacedOn(_currentBuildingData.RequiredCellContent)) {
+            if (cell.content == _currentBuildingData.RequiredCellContent) {
                 switch (cell.content) {
                     case CellContentType.Null:
                         break;

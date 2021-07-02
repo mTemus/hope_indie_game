@@ -153,11 +153,16 @@ namespace Code.System.Areas
         
         public bool CanPlaceBuilding(List<Vector2Int> buildingArea, CellContentType requiredCellContent)
         {
-            bool buildingAreaIsSuitable = buildingArea
-                .Select(tilePos => gridMap.GetCellAt(tilePos.x, tilePos.y))
-                .All(cell => cell.CanBePlacedOn(requiredCellContent));
-
-            if (!buildingAreaIsSuitable) 
+            if (!buildingArea
+                .FindAll(tilePos => tilePos.y == buildingArea[0].y)
+                .Select(baseTilePos => gridMap.GetCellAt(baseTilePos.x, baseTilePos.y))
+                .All(cell => cell.content == requiredCellContent)) 
+                return false;
+            
+            if (!buildingArea
+                .FindAll(tilePos => tilePos.y != buildingArea[0].y)
+                .Select(baseTilePos => gridMap.GetCellAt(baseTilePos.x, baseTilePos.y))
+                .All(cell => cell.content == requiredCellContent || cell.content == CellContentType.Nothing)) 
                 return false;
 
             switch (requiredCellContent) {
@@ -184,7 +189,6 @@ namespace Code.System.Areas
                 default:
                     throw new ArgumentOutOfRangeException(nameof(requiredCellContent), requiredCellContent, null);
             }
-
 
             return true;
         }

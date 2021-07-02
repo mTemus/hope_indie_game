@@ -18,10 +18,7 @@ namespace Code.System.Grid
         {
             content = CellContentType.Nothing;
         }
-
-        public bool CanBePlacedOn(CellContentType requiredType) =>
-            content == requiredType;
-
+        
         public bool ContainsBuilding() =>
             buildingData != null;
 
