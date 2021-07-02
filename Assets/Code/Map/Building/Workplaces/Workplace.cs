@@ -12,9 +12,10 @@ namespace Code.Map.Building.Workplaces
         [Header("Workplace Properties")]
         [SerializeField] private WorkplaceProperties properties;
 
-        [Header("Workplace hire events")]
+        [Header("Workplace events")]
         public UnityEvent onWorkerHired;
         public UnityEvent onHaulerHired;
+        public UnityEvent onWorkerEnter;
         
         protected readonly List<Villager> workers = new List<Villager>();
         protected readonly List<Villager> workersWithoutTasks = new List<Villager>();
