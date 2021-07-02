@@ -103,7 +103,9 @@ namespace Code.System.DeveloperTools.Console
                     break;
                 }
 
-                ReturnWrongCommand("No such command!");
+                if (commandPlaceholderField.text.Length == 0) 
+                    ReturnWrongCommand("No such command!");
+                
                 break;
             }
 
