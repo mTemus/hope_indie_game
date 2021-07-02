@@ -17,7 +17,8 @@ namespace Code.Villagers.Professions
         private readonly List<Villager> lumberjacks = new List<Villager>();
         private readonly List<Villager> localHaulers = new List<Villager>();
         private readonly List<Villager> globalHaulers = new List<Villager>();
-
+        private readonly List<Villager> stoneMiners = new List<Villager>();
+        
         private void RemoveVillagerFromProfessionStructure(Villager villager)
         {
             switch (villager.Profession.Data.Type) {
@@ -39,6 +40,10 @@ namespace Code.Villagers.Professions
                 
                 case ProfessionType.GlobalHauler:
                     globalHaulers.Remove(villager);
+                    break;
+
+                case ProfessionType.StoneMiner:
+                    stoneMiners.Remove(villager);
                     break;
                 
                 default:
@@ -74,6 +79,12 @@ namespace Code.Villagers.Professions
         {
             villager.Profession = villager.gameObject.AddComponent<Villager_Profession_GlobalHauler>();
             globalHaulers.Add(villager);
+        }
+
+        private void HireStoneMiner(Villager villager)
+        {
+            villager.Profession = villager.gameObject.AddComponent<Villager_Profession_StoneMiner>();
+            stoneMiners.Add(villager);
         }
 
         private void AddBehaviourTreeAIComponents(ProfessionAIType aiType, Villager villager)
@@ -121,6 +132,10 @@ namespace Code.Villagers.Professions
                 
                 case ProfessionType.GlobalHauler:
                     HireGlobalHauler(villager);
+                    break;
+
+                case ProfessionType.StoneMiner:
+                    HireStoneMiner(villager);
                     break;
                 
                 default:

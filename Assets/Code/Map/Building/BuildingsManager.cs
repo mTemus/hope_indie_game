@@ -104,6 +104,7 @@ namespace Code.Map.Building
                 case ProfessionType.Builder:
                 case ProfessionType.Lumberjack:
                 case ProfessionType.GlobalHauler:
+                case ProfessionType.StoneMiner:
                     workplaces = Managers.I.Buildings.GetAllFreeWorkplacesOfClass(
                         villagerProfessionData.WorkplaceBuildingType, villagerProfessionData.WorkplaceType);
                     break;

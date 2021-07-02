@@ -11,6 +11,7 @@ namespace Code.Villagers.Professions
         Lumberjack,
         WorkplaceHauler,
         GlobalHauler,
+        StoneMiner,
     }
     
     public enum ProfessionAIType
