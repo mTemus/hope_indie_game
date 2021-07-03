@@ -8,21 +8,12 @@ using UnityEngine;
 
 namespace Code.Map.Resources.ResourceToGather
 {
-    public enum ResourceToGatherType
-    {
-        Single, 
-        Spot
-    }
-    
     public abstract class ResourceToGather : MonoBehaviour
     {
         [Header("World Properties")]
         [SerializeField] private Vector2Int size;
         [SerializeField] private Vector3 pivot;
-        
-        [Header("Resource Properties")]
-        [SerializeField] private ResourceToGatherType type;
-        
+
         [Header("Assets")]
         [SerializeField] private AudioClip gatheringSound;
         
@@ -34,7 +25,6 @@ namespace Code.Map.Resources.ResourceToGather
         
         public Vector2Int Size => size;
         public Vector3 PivotedPosition => transform.position + pivot;
-        public ResourceToGatherType Type => type;
         public Resource Resource => resource;
         public bool CanGather =>
             gatherers.Keys.Count < maximumGatherers;
@@ -48,7 +38,6 @@ namespace Code.Map.Resources.ResourceToGather
         public void Initialize(ResourceToGatherData resourceToGatherData)
         {
             resource = new Resource(resourceToGatherData.ResourceType, resourceToGatherData.Amount);
-            type = resourceToGatherData.ResourceToGatherType;
             maximumGatherers = resourceToGatherData.MaximumGatherers;
             gatheringSockets = new GatheringSocket[maximumGatherers];
             

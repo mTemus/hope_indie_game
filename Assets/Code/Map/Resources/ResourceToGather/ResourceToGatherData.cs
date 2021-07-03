@@ -8,7 +8,6 @@ namespace Code.Map.Resources.ResourceToGather
     {
         [Header("Resource properties")]
         [SerializeField] private ResourceType resourceType;
-        [SerializeField] private ResourceToGatherType resourceToGatherType;
         [SerializeField] private int amount;
         [SerializeField] private int maximumGatherers;
 
@@ -19,6 +18,5 @@ namespace Code.Map.Resources.ResourceToGather
         public ResourceType ResourceType => resourceType;
         public int Amount => amount;
         public int MaximumGatherers => maximumGatherers;
-        public ResourceToGatherType ResourceToGatherType => resourceToGatherType;
     }
 }
