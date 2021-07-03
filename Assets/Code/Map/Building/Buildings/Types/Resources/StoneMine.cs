@@ -1,8 +1,10 @@
 using System.Linq;
 using Code.Map.Building.Workplaces;
 using Code.Map.Resources;
+using Code.System;
 using Code.Villagers.Entity;
 using Code.Villagers.Tasks;
+using UnityEngine;
 
 namespace Code.Map.Building.Buildings.Types.Resources
 {
@@ -12,10 +14,16 @@ namespace Code.Map.Building.Buildings.Types.Resources
         {
             gatheringResourceType = ResourceType.STONE;
             
-            onWorkerHired.AddListener(CreateResourceGatheringTask);
+            onWorkerHired.AddListener(CreateSpotResourceGatheringTask);
             onHaulerHired.AddListener(TakeTasksBackFromWarehouse);
             Storage.onResourceStored.AddListener(DeliverStoredResources);
             Storage.onResourceLimitReach.AddListener(StopAllTasks);
+
+            Vector3 myPosition = transform.position;
+
+            gatheringResource = Managers.I.Areas
+                .GetAreaByCoords(myPosition)
+                .GetClosestResourceToGatherByType(myPosition, ResourceType.STONE);
         }
 
         #region Resources
@@ -46,24 +54,12 @@ namespace Code.Map.Building.Buildings.Types.Resources
         {
             AddTaskToDo(task);
         }
-
-
+        
         #endregion
 
         #region Workers
 
-        protected override void FireNormalWorker(Villager worker)
-        {
-            throw new global::System.NotImplementedException();
-        }
-
-        public void EnterWorkplace(Villager worker)
-        {
-            
-            
-            
-            
-        }
+        protected override void FireNormalWorker(Villager worker) { }
 
         #endregion
     }

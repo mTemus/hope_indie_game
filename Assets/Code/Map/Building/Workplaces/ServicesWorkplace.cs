@@ -18,8 +18,6 @@ namespace Code.Map.Building.Workplaces
             Debug.LogWarning(name + " had hired: " + worker.name);
         }
         
-        public override bool CanHireHauler() => false;
-
         #endregion
         
         #region Tasks

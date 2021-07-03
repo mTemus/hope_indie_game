@@ -173,6 +173,17 @@ namespace Code.Map.Building.Workplaces
             workersWithoutTasks.Remove(worker);
         }
 
+        //TODO: this should be rather in a building.cs class or somewhere
+        public void WorkerEntersWorkplace(Villager worker)
+        {
+            MoveWorkerAway_tmp(worker.gameObject);
+        }
+
+        private void MoveWorkerAway_tmp(GameObject workerGO)
+        {
+            workerGO.transform.position = new Vector3(PivotedPosition.x, 100f, workerGO.transform.position.z);
+        }
+
         public virtual void HireWorker(Villager worker)
         {
             if (worker.Profession.Data.Type == ProfessionType.WorkplaceHauler) 

@@ -20,14 +20,16 @@ namespace Code.Map.Resources.ResourceToGather
         [SerializeField] private Vector2Int size;
         [SerializeField] private Vector3 pivot;
         
+        [Header("Resource Properties")]
+        [SerializeField] private ResourceToGatherType type;
+        
         [Header("Assets")]
         [SerializeField] private AudioClip gatheringSound;
         
         protected Resource resource;
         protected GatheringSocket[] gatheringSockets;
-        protected Dictionary<Villager, Task_ResourceGathering> gatherers = new Dictionary<Villager, Task_ResourceGathering>();
-
-        private ResourceToGatherType type;
+        protected readonly Dictionary<Villager, Task_ResourceGathering> gatherers = new Dictionary<Villager, Task_ResourceGathering>();
+        
         private int maximumGatherers;
         
         public Vector2Int Size => size;

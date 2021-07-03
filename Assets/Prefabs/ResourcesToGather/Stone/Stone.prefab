@@ -49,7 +49,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   size: {x: 10, y: 3}
   pivot: {x: 10, y: 0, z: 0}
-  gatheringSound: {fileID: 0}
+  type: 0
+  gatheringSound: {fileID: 8300000, guid: 18fccd14767d4a048ac3bd1298a0627f, type: 3}
 --- !u!114 &5499117628425511642
 MonoBehaviour:
   m_ObjectHideFlags: 0

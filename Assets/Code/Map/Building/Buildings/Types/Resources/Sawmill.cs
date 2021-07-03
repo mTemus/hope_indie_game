@@ -13,7 +13,7 @@ namespace Code.Map.Building.Buildings.Types.Resources
         {
             gatheringResourceType = ResourceType.WOOD;
             
-            onWorkerHired.AddListener(CreateResourceGatheringTask);
+            onWorkerHired.AddListener(CreateSingleResourceGatheringTask);
             onHaulerHired.AddListener(TakeTasksBackFromWarehouse);
             Storage.onResourceStored.AddListener(DeliverStoredResources);
             Storage.onResourceLimitReach.AddListener(StopAllTasks);

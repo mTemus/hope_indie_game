@@ -16,7 +16,8 @@ namespace Code.Map.Building.Workplaces
     public abstract class GatheringWorkplace : Workplace
     {
         protected ResourceType gatheringResourceType;
-
+        protected ResourceToGather gatheringResource;
+        
         #region Tasks
 
         private void RegisterTaskAsExternal(Task task)
@@ -77,19 +78,29 @@ namespace Code.Map.Building.Workplaces
         private void RecoverAllTasks()
         {
             int tasksNeeded = workersWithoutTasks.Count(worker => worker.Profession.Data.Type != ProfessionType.WorkplaceHauler);
-
-            for (int i = 0; i < tasksNeeded; i++) 
-                CreateResourceGatheringTask();
+            
+            //TODO: event or sth
+            // for (int i = 0; i < tasksNeeded; i++) 
+            //     CreateResourceGatheringTask();
         }
         
         #endregion
         
         #region Resources
 
-        protected virtual void CreateResourceGatheringTask()
+        protected virtual void CreateSingleResourceGatheringTask()
         {
             ResourceToGatherData rtgd = AssetsStorage.I.GetResourceToGatherDataByResourceType(gatheringResourceType);
-            Task_ResourceGathering rgt = new Task_ResourceGathering(rtgd.ResourceType, rtgd.OccurAreas);
+            Task_ResourceGathering rgt = new Task_ResourceGathering_Single(rtgd.ResourceType, rtgd.OccurAreas);
+            rgt.onResourceDelivery += Storage.StoreResource;
+            AddTaskToDo(rgt);
+            
+            Debug.LogError("Created automated task in: " + name);
+        }
+        
+        protected virtual void CreateSpotResourceGatheringTask()
+        {
+            Task_ResourceGathering rgt = new Task_ResourceGathering_Spot(gatheringResource);
             rgt.onResourceDelivery += Storage.StoreResource;
             AddTaskToDo(rgt);
             
