@@ -34,7 +34,7 @@ namespace Code.Map.Building
         private void AddWorkplacesWithoutHaulers(List<Building> listIn, List<Workplace> listOut)
         {
             listOut.AddRange(listIn.Cast<Workplace>()
-                .Where(workplace => workplace.CanHireHauler()));
+                .Where(workplace => workplace.CanHireHauler));
         }
         
         public void AddBuilding(BuildingType buildingType, Building building)

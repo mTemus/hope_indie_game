@@ -133,22 +133,11 @@ namespace Code.Map.Building.Workplaces
         
         #region Workers
         
-        public virtual bool CanHireHauler() => haulersCnt < properties.Haulers;
+        public bool CanHireHauler => haulersCnt < properties.Haulers;
         public bool HasHiredHaulers => haulersCnt > 0;
         public bool CanHireWorker => workers.Count - haulersCnt < properties.Workers;
-
-        protected void HireNormalWorker()
-        {
-            onWorkerHired?.Invoke();
-        }
         
-        private void HireHauler()
-        {
-            onHaulerHired?.Invoke();
-            haulersCnt++;
-        }
-
-        public void ReportWorkerWithoutTask(Villager worker)
+        protected void ReportWorkerWithoutTask(Villager worker)
         {
             Debug.Log("Registering " + worker.name + " as free.");
             
@@ -168,7 +157,18 @@ namespace Code.Map.Building.Workplaces
             }
         }
         
-        protected void UnregisterWorkerWithoutTask(Villager worker)
+        protected void HireNormalWorker()
+        {
+            onWorkerHired?.Invoke();
+        }
+        
+        private void HireHauler()
+        {
+            onHaulerHired?.Invoke();
+            haulersCnt++;
+        }
+        
+        private void UnregisterWorkerWithoutTask(Villager worker)
         {
             workersWithoutTasks.Remove(worker);
         }

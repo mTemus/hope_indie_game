@@ -56,6 +56,9 @@ namespace Code.System.Areas
                 where coordinates.x > xAreaStart && coordinates.x < xAreaEnd 
                 select area).FirstOrDefault();
 
+        public Area GetAreaByCoords(Vector3 coordinates) =>
+            GetAreaByCoords(Vector3Int.FloorToInt(coordinates));
+        
         public Area GetVillageArea() =>
             areas.FirstOrDefault(area => area.Type == AreaType.VILLAGE);
 
