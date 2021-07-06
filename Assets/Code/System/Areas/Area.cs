@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Code.AI;
+using Code.Environment.Parallax;
 using Code.Map.Building;
 using Code.Map.Resources;
 using Code.Map.Resources.ResourceToGather;
@@ -29,6 +30,9 @@ namespace Code.System.Areas
         [SerializeField] private AreaType type;
         [SerializeField] private float width = 100f;
         [SerializeField] private float height = 30f;
+
+        [Header("Environment")] 
+        [SerializeField] private ParallaxControllerLocal parallax;
 
         private readonly List<Villager> villagers = new List<Villager>();
         private readonly List<Building> buildings = new List<Building>();
@@ -105,6 +109,12 @@ namespace Code.System.Areas
                     throw new Exception("AREA --- CAN'T HANDLE VISITOR WITH TAG: " + gameObject.tag);
             }
         }
+
+        public float ClampInArea(float entityX, float entityWidth)
+        {
+            float leftCorner = transform.localPosition.x;
+            return Mathf.Clamp(entityX, leftCorner, leftCorner + width - entityWidth);
+        }
         
         #endregion
 
@@ -115,11 +125,14 @@ namespace Code.System.Areas
             playerObject = player;
             playerObject.GetComponent<EntityBrain>().CurrentArea = this;
             playerObject.transform.SetParent(transform);
+            parallax.Move(Vector3.zero);
+            SetCurrentLocalParallax();
             Debug.LogWarning("Player is in " + name);
         }
 
         private void PlayerExitArea(GameObject player)
         {
+            parallax.Move(Vector3.zero);
             playerObject.transform.SetParent(transform.root);
             playerObject.GetComponent<EntityBrain>().CurrentArea = null;
             playerObject = null;
@@ -268,6 +281,20 @@ namespace Code.System.Areas
             villagers.Add(villager);
             
             Debug.Log("Add villager " + villager.name + "  to area "+ gameObject.name + ".");
+        }
+
+        #endregion
+
+        #region Environment
+
+        private void SetCurrentLocalParallax()
+        {
+            //TODO: remove this null, it is only for now
+            if (parallax == null) {
+                Managers.I.Environment.SetLocalParallax(null);
+                return;
+            }
+            Managers.I.Environment.SetLocalParallax(parallax);
         }
 
         #endregion

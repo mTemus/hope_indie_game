@@ -1,3 +1,4 @@
+using Code.Environment;
 using Code.GUI;
 using Code.Map.Building;
 using Code.Map.Resources;
@@ -34,6 +35,9 @@ namespace Code.System
       [Header("Villagers")]
       [SerializeField] private ProfessionManager professions;
       [SerializeField] private VillagerSelectionManager villagerSelection;
+
+      [Header("Environment")] 
+      [SerializeField] private EnvironmentManager environment;
       
       [Header("GUI")]
       [SerializeField] private GUIManager gui;
@@ -52,6 +56,7 @@ namespace Code.System
       public VillagerSelectionManager VillagerSelection => villagerSelection;
       public GUIManager GUI => gui;
       public SoundManager Sound => sound;
+      public EnvironmentManager Environment => environment;
 
       private void Awake()
       {
