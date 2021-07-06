@@ -53,7 +53,7 @@ namespace Code.System.Areas
             (from area in areas let areaPosInt = Vector3Int.FloorToInt(area.transform.position) 
                 let xAreaStart = areaPosInt.x 
                 let xAreaEnd = areaPosInt.x + (int) area.Width 
-                where coordinates.x > xAreaStart && coordinates.x < xAreaEnd 
+                where coordinates.x >= xAreaStart && coordinates.x <= xAreaEnd 
                 select area).FirstOrDefault();
 
         public Area GetAreaByCoords(Vector3 coordinates) =>
