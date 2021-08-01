@@ -1,4 +1,3 @@
-using System;
 using Code.Environment.Parallax;
 using UnityEngine;
 
@@ -12,10 +11,12 @@ namespace Code.Environment
         [Header("Parallax")] 
         [SerializeField] private ParallaxControllerGlobal globalParallax;
         [SerializeField] private ParallaxControllerLocal localParallax;
+        [SerializeField] private ParallaxControllerWater waterParallax;
         
         public ParallaxControllerGlobal GlobalParallax => globalParallax;
         public ParallaxControllerLocal LocalParallax => localParallax;
-
+        public ParallaxControllerWater WaterParallax => waterParallax;
+        
         private void Awake()
         {
             globalParallax.InitializeLayers(mainCamera.transform.position);
@@ -32,6 +33,7 @@ namespace Code.Environment
             Vector3 currCamPos = mainCamera.transform.position;
             
             globalParallax.Move(currCamPos);
+            waterParallax.Move(currCamPos);
             
             if (localParallax == null) return;
             localParallax.Move(currCamPos);
