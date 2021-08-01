@@ -24,7 +24,7 @@ namespace Code.Environment
         public void SetLocalParallax(ParallaxControllerLocal parallax)
         {
             localParallax = parallax;
-            localParallax.InitializeLayers(localParallax.transform.InverseTransformVector(mainCamera.transform.position));
+            localParallax.InitializeLayers(mainCamera.transform.position);
         }
         
         private void LateUpdate()
@@ -34,7 +34,7 @@ namespace Code.Environment
             globalParallax.Move(currCamPos);
             
             if (localParallax == null) return;
-            localParallax.Move(localParallax.transform.InverseTransformVector(currCamPos));
+            localParallax.Move(currCamPos);
         }
     }
 }
