@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BuildingFade
+  m_Name: M_BuildingFade
   m_Shader: {fileID: -6465566751694194690, guid: 6d6cd8dd5e6fd1647bacc80d9eb85bb7, type: 3}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
   m_LightmapFlags: 4
@@ -54,6 +54,7 @@ Material:
     m_Floats:
     - Vector1_0f92a5ee17be4c5ba2d7c33737f441df: 1
     - Vector1_19d33945b8a044348f18e5ed91bf1a09: 30
+    - Vector1_Visibility: 30
     - _EnableExternalAlpha: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
