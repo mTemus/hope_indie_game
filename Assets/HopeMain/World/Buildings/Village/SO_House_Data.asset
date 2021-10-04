@@ -10,16 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3f3b576d1c44b88ae6a8184d2bfbc26, type: 3}
-  m_Name: Well Data
+  m_Name: SO_House_Data
   m_EditorClassIdentifier: 
-  buildingType: 0
-  prefab: {fileID: 8793695768821999390, guid: 9d54e0cff6b04084d9810a56aa2ad2f4, type: 3}
-  buildingName: Well
+  buildingType: 1
+  prefab: {fileID: 2699120673269493026, guid: ea3a3f3e8e5d66a47a1eebef9e16a9be, type: 3}
+  buildingName: House
   requiredCellContent: 1
-  size: {x: 2, y: 2}
-  entrancePivot: {x: 1, y: 0, z: 0}
+  size: {x: 6, y: 6}
+  entrancePivot: {x: 7, y: 0, z: 0}
   requiredResources:
   - type: 0
-    amount: 10
-  - type: 1
     amount: 100

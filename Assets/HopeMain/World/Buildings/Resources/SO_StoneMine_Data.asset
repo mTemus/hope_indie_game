@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3f3b576d1c44b88ae6a8184d2bfbc26, type: 3}
-  m_Name: House Data
+  m_Name: SO_StoneMine_Data
   m_EditorClassIdentifier: 
-  buildingType: 1
-  prefab: {fileID: 2699120673269493026, guid: ea3a3f3e8e5d66a47a1eebef9e16a9be, type: 3}
-  buildingName: House
-  requiredCellContent: 1
-  size: {x: 6, y: 6}
-  entrancePivot: {x: 7, y: 0, z: 0}
+  buildingType: 0
+  prefab: {fileID: 6618267498007128142, guid: 1e8bada0a932f234fbc204c31fd1856c, type: 3}
+  buildingName: StoneMine
+  requiredCellContent: 3
+  size: {x: 5, y: 4}
+  entrancePivot: {x: 5, y: 0, z: 0}
   requiredResources:
   - type: 0
-    amount: 100
+    amount: 60

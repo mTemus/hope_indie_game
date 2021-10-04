@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad2fdbc79a96414b9a1dbd1a003cdf7, type: 3}
-  m_Name: Sawmill Properties
+  m_Script: {fileID: 11500000, guid: c85a9692c60b8de4885708f48980ab9f, type: 3}
+  m_Name: SO_AddResources_Cheat
   m_EditorClassIdentifier: 
-  workers: 3
-  haulers: 1
+  prefix: /
+  command: addResource
+  valueDescription: <resource type> <resource amount>

@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85a9692c60b8de4885708f48980ab9f, type: 3}
-  m_Name: Add Resources Command
+  m_Script: {fileID: 11500000, guid: 535bd1f786561084794dbd973144b65f, type: 3}
+  m_Name: SO_SpawnVillager_Cheat
   m_EditorClassIdentifier: 
   prefix: /
-  command: addResource
-  valueDescription: <resource type> <resource amount>
+  command: spawnVillager
+  valueDescription: <profession type>
