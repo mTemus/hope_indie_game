@@ -1,10 +1,11 @@
+using System;
 using HopeMain.Code.AI.Villagers.Tasks;
 using HopeMain.Code.Characters.Villagers.Entity;
-using NotImplementedException = System.NotImplementedException;
+using HopeMain.Code.World.Buildings.Workplace;
 
 namespace HopeMain.Code.World.Buildings.Type.Village
 {
-    public class TownHall : Workplace.Workplace
+    public class TownHall : WorkplaceBase
     {
         public override void Initialize()
         {

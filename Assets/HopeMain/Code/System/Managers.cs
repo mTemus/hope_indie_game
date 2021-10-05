@@ -34,7 +34,7 @@ namespace HopeMain.Code.System
 
       [Header("Villagers")]
       [SerializeField] private ProfessionManager professions;
-      [SerializeField] private VillagerSelectionManager villagerSelection;
+      [SerializeField] private SelectionManager selection;
 
       [Header("Environment")] 
       [SerializeField] private EnvironmentManager environment;
@@ -53,7 +53,7 @@ namespace HopeMain.Code.System
       public ResourcesManager Resources => resources;
       public ProfessionManager Professions => professions;
       public InitializationManager Initialization => initialization;
-      public VillagerSelectionManager VillagerSelection => villagerSelection;
+      public SelectionManager Selection => selection;
       public GUIManager GUI => gui;
       public SoundManager Sound => sound;
       public EnvironmentManager Environment => environment;

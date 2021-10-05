@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Linq;
-using HopeMain.Code.System.Assets;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace HopeMain.Code.System.Sound
 {
@@ -14,7 +12,7 @@ namespace HopeMain.Code.System.Sound
     
         [Header("Sounds")]
         [SerializeField] private AudioClip[] backgroundSounds;
-        [SerializeField] private Asset_Sound[] environmentEffects;
+        [SerializeField] private Assets.Sound[] environmentEffects;
 
         private float backgroundTimer = 5f;
         

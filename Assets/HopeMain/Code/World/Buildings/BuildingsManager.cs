@@ -4,6 +4,7 @@ using System.Linq;
 using HopeMain.Code.Characters.Villagers.Profession;
 using HopeMain.Code.System;
 using HopeMain.Code.World.Buildings.Type.Village;
+using HopeMain.Code.World.Buildings.Workplace;
 using UnityEngine;
 
 namespace HopeMain.Code.World.Buildings
@@ -30,9 +31,9 @@ namespace HopeMain.Code.World.Buildings
             };
         }
 
-        private void AddWorkplacesWithoutHaulers(List<Building> listIn, List<Workplace.Workplace> listOut)
+        private void AddWorkplacesWithoutHaulers(List<Building> listIn, List<WorkplaceBase> listOut)
         {
-            listOut.AddRange(listIn.Cast<Workplace.Workplace>()
+            listOut.AddRange(listIn.Cast<WorkplaceBase>()
                 .Where(workplace => workplace.CanHireHauler));
         }
         
@@ -63,26 +64,26 @@ namespace HopeMain.Code.World.Buildings
                 .ToArray();
         }
 
-        public Workplace.Workplace[] GetAllWorkplacesOfClass(BuildingType type, global::System.Type classType)
+        public WorkplaceBase[] GetAllWorkplacesOfClass(BuildingType type, global::System.Type classType)
         {
             return GetBuildingsByType(type)
                 .Where(building => building.GetType() == classType)
-                .Cast<Workplace.Workplace>()
+                .Cast<WorkplaceBase>()
                 .ToArray();
         }
 
-        public Workplace.Workplace[] GetAllFreeWorkplacesOfClass(BuildingType buildingType, global::System.Type classType)
+        public WorkplaceBase[] GetAllFreeWorkplacesOfClass(BuildingType buildingType, global::System.Type classType)
         {
             return GetBuildingsByType(buildingType)
-                .Cast<Workplace.Workplace>()
+                .Cast<WorkplaceBase>()
                 .Where(workplace => workplace.GetType() == classType)
                 .Where(workplace => workplace.CanHireWorker)
                 .ToArray();
         }
 
-        public Workplace.Workplace[] GetAllWorkplacesWithHaulersToHire()
+        public WorkplaceBase[] GetAllWorkplacesWithHaulersToHire()
         {
-            List<Workplace.Workplace> workplaces = new List<Workplace.Workplace>();
+            List<WorkplaceBase> workplaces = new List<WorkplaceBase>();
 
             AddWorkplacesWithoutHaulers(resourcesBuildings, workplaces);
             AddWorkplacesWithoutHaulers(industryBuildings, workplaces);
@@ -90,11 +91,11 @@ namespace HopeMain.Code.World.Buildings
             return workplaces.ToArray();
         }
 
-        public Workplace.Workplace[] GetAllFreeWorkplacesForProfession(Villager_ProfessionData villagerProfessionData)
+        public WorkplaceBase[] GetAllFreeWorkplacesForProfession(Characters.Villagers.Profession.Data professionData)
         {
-            Workplace.Workplace[] workplaces;
+            WorkplaceBase[] workplaces;
             
-            switch (villagerProfessionData.Type) {
+            switch (professionData.Type) {
                 case ProfessionType.Unemployed:
                     workplaces = Managers.I.Buildings.GetAllWorkplacesOfClass(BuildingType.Village,
                         typeof(TownHall));
@@ -105,7 +106,7 @@ namespace HopeMain.Code.World.Buildings
                 case ProfessionType.GlobalHauler:
                 case ProfessionType.StoneMiner:
                     workplaces = Managers.I.Buildings.GetAllFreeWorkplacesOfClass(
-                        villagerProfessionData.WorkplaceBuildingType, villagerProfessionData.WorkplaceType);
+                        professionData.WorkplaceBuildingType, professionData.WorkplaceType);
                     break;
                 
                 case ProfessionType.WorkplaceHauler:
@@ -119,14 +120,14 @@ namespace HopeMain.Code.World.Buildings
             return workplaces;
         }
 
-        public Workplace.Workplace GetClosestFreeWorkplaceForProfession(Villager_ProfessionData villagerProfessionData, Vector3 position)
+        public WorkplaceBase GetClosestFreeWorkplaceForProfession(Characters.Villagers.Profession.Data professionData, Vector3 position)
         {
-            Workplace.Workplace[] freeWorkplaces = GetAllFreeWorkplacesForProfession(villagerProfessionData);
+            WorkplaceBase[] freeWorkplaces = GetAllFreeWorkplacesForProfession(professionData);
 
             if (freeWorkplaces.Length == 0) 
                 return null;
             
-            Workplace.Workplace closestWorkplace = freeWorkplaces[0];
+            WorkplaceBase closestWorkplace = freeWorkplaces[0];
             float bestDistance = Vector3.Distance(closestWorkplace.transform.position, position);
             
             for (int i = 1; i < freeWorkplaces.Length; i++) {

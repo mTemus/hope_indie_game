@@ -7,7 +7,7 @@ using HopeMain.Code.World.Resources;
 
 namespace HopeMain.Code.World.Buildings.Type.Resources
 {
-    public class Sawmill : GatheringWorkplace
+    public class Sawmill : Gathering
     {
         public override void Initialize()
         {
@@ -24,8 +24,8 @@ namespace HopeMain.Code.World.Buildings.Type.Resources
         protected override Task GetNormalTask() 
         {
             Task rct = (from task in tasksToDo
-                    where task is Task_ResourceGathering
-                    select task as Task_ResourceGathering)
+                    where task is ResourceGathering
+                    select task as ResourceGathering)
                 .FirstOrDefault();
 
             RemoveTaskFromTodoList(rct);
@@ -35,8 +35,8 @@ namespace HopeMain.Code.World.Buildings.Type.Resources
         protected override Task GetResourceCarryingTask()
         {
             Task rct = (from task in tasksToDo
-                    where task is Task_ResourceCarrying
-                    select task as Task_ResourceCarrying)
+                    where task is ResourceCarrying
+                    select task as ResourceCarrying)
                 .FirstOrDefault();
 
             RemoveTaskFromTodoList(rct);

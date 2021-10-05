@@ -5,7 +5,7 @@ namespace HopeMain.Code.GUI.UIElements.SelectableElement
 {
     public abstract class UiSelectablePanel : MonoBehaviour
     {
-        [SerializeField] protected UiSelectingPointer pointer;
+        [SerializeField] protected UISelectingPointer pointer;
         [SerializeField] protected UiSelectableElement[] elementsToSelect;
    
         protected int selectionIdx;

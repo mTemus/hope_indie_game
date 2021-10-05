@@ -145,6 +145,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using Object = System.Object;
 
 namespace ThirdParty.LeanTween.Framework
 {
@@ -267,7 +269,7 @@ namespace ThirdParty.LeanTween.Framework
     private static float previousRealTime;
 #endif
         public static float dtActual;
-        private static uint global_counter = 0;
+        private static uint global_counter;
         private static int i;
         private static int j;
         private static int finishedCnt;
@@ -345,7 +347,7 @@ namespace ThirdParty.LeanTween.Framework
                 }
 
 #if UNITY_5_4_OR_NEWER
-                UnityEngine.SceneManagement.SceneManager.sceneLoaded += onLevelWasLoaded54;
+                SceneManager.sceneLoaded += onLevelWasLoaded54;
 #endif
 
                 sequences = new LTSeq[ maxSimultaneousSequences ]; 
@@ -368,11 +370,11 @@ namespace ThirdParty.LeanTween.Framework
         }
 
         public void Update(){
-            LeanTween.update();
+            update();
         }
 
 #if UNITY_5_4_OR_NEWER
-        private static void onLevelWasLoaded54( UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode ){ internalOnLevelWasLoaded( scene.buildIndex ); }
+        private static void onLevelWasLoaded54( Scene scene, LoadSceneMode mode ){ internalOnLevelWasLoaded( scene.buildIndex ); }
 #else
     public void OnLevelWasLoaded( int lvl ){ internalOnLevelWasLoaded( lvl ); }
 #endif
@@ -492,13 +494,11 @@ namespace ThirdParty.LeanTween.Framework
             float plusDiff = Mathf.Abs(plusWhole-from);
             if( toDiffAbs < minusDiff && toDiffAbs < plusDiff ){
                 return to;
-            }else {
-                if(minusDiff < plusDiff){
-                    return minusWhole;
-                }else{
-                    return plusWhole;
-                }
             }
+            if(minusDiff < plusDiff){
+                return minusWhole;
+            }
+            return plusWhole;
         }
 
         /**
@@ -572,7 +572,7 @@ namespace ThirdParty.LeanTween.Framework
                 if(tweens[backId].trans==null || (tweens[backId].trans.gameObject == gameObject && tweens[backId].counter==backCounter)) {
                     if (callOnComplete && tweens[backId].optional.onComplete != null)
                         tweens[backId].optional.onComplete();
-                    removeTween((int)backId);
+                    removeTween(backId);
                 }
             }
         }
@@ -584,7 +584,7 @@ namespace ThirdParty.LeanTween.Framework
                 int backCounter = uniqueId >> 16;
                 // Debug.Log("uniqueId:"+uniqueId+ " id:"+backId +" action:"+(TweenAction)backType + " tweens[id].type:"+tweens[backId].type);
                 if(tweens[backId]._optional.ltRect == ltRect && tweens[backId].counter==backCounter)
-                    removeTween((int)backId);
+                    removeTween(backId);
             }
         }
 
@@ -625,7 +625,7 @@ namespace ThirdParty.LeanTween.Framework
                     if (tweens[backId].counter == backCounter) {
                         if (callOnComplete && tweens[backId].optional.onComplete != null)
                             tweens[backId].optional.onComplete();
-                        removeTween((int)backId);
+                        removeTween(backId);
                     }
                 }
             }
@@ -688,7 +688,7 @@ namespace ThirdParty.LeanTween.Framework
             return descrs.ToArray();
         }
 
-        [System.Obsolete("Use 'pause( id )' instead")]
+        [Obsolete("Use 'pause( id )' instead")]
         public static void pause( GameObject gameObject, int uniqueId ){
             pause( uniqueId );
         }
@@ -751,7 +751,7 @@ namespace ThirdParty.LeanTween.Framework
             }
         }
 
-        [System.Obsolete("Use 'resume( id )' instead")]
+        [Obsolete("Use 'resume( id )' instead")]
         public static void resume( GameObject gameObject, int uniqueId ){
             resume( uniqueId );
         }
@@ -801,7 +801,7 @@ namespace ThirdParty.LeanTween.Framework
             {
                 for (int i = 0; i <= tweenMaxSearch; i++)
                 {
-                    if (Mathf.Equals(tweens[i].direction, 0f))
+                    if (Equals(tweens[i].direction, 0f))
                         return true;
                 }
                 return false;
@@ -809,7 +809,7 @@ namespace ThirdParty.LeanTween.Framework
             Transform trans = gameObject.transform;
             for (int i = 0; i <= tweenMaxSearch; i++)
             {
-                if (Mathf.Equals(tweens[i].direction, 0f) && tweens[i].trans == trans)
+                if (Equals(tweens[i].direction, 0f) && tweens[i].trans == trans)
                     return true;
             }
             return false;
@@ -837,7 +837,7 @@ namespace ThirdParty.LeanTween.Framework
             int backCounter = uniqueId >> 16;
             if (backId < 0 || backId >= maxTweens) return false;
             // Debug.Log("tweens[backId].counter:"+tweens[backId].counter+" backCounter:"+backCounter +" toggle:"+tweens[backId].toggle);
-            if (tweens[backId].counter == backCounter && Mathf.Equals(tweens[i].direction, 0f))
+            if (tweens[backId].counter == backCounter && Equals(tweens[i].direction, 0f))
             {
                 return true;
             }
@@ -1003,7 +1003,7 @@ namespace ThirdParty.LeanTween.Framework
             }
         }
 
-        public static int startSearch = 0;
+        public static int startSearch;
         public static LTDescr d;
 
         private static LTDescr pushNewTween( GameObject gameObject, Vector3 to, float time, LTDescr tween ){
@@ -1033,10 +1033,10 @@ namespace ThirdParty.LeanTween.Framework
     * @example
     * LeanTween.play(gameObject.GetComponent&lt;RectTransform&gt;(), sprites).setLoopPingPong();
     */  
-        public static LTDescr play(RectTransform rectTransform, UnityEngine.Sprite[] sprites){
+        public static LTDescr play(RectTransform rectTransform, Sprite[] sprites){
             float defaultFrameRate = 0.25f;
             float time = defaultFrameRate * sprites.Length;
-            return pushNewTween(rectTransform.gameObject, new Vector3((float)sprites.Length - 1.0f,0,0), time, options().setCanvasPlaySprite().setSprites( sprites ).setRepeat(-1));
+            return pushNewTween(rectTransform.gameObject, new Vector3(sprites.Length - 1.0f,0,0), time, options().setCanvasPlaySprite().setSprites( sprites ).setRepeat(-1));
         }
 #endif
 
@@ -2326,23 +2326,24 @@ namespace ThirdParty.LeanTween.Framework
             end -= start;
             if (val < (1 / 2.75f)){
                 return end * (7.5625f * val * val) + start;
-            }else if (val < (2 / 2.75f)){
+            }
+            if (val < (2 / 2.75f)){
                 val -= (1.5f / 2.75f);
                 return end * (7.5625f * (val) * val + .75f) + start;
-            }else if (val < (2.5 / 2.75)){
+            }
+            if (val < (2.5 / 2.75)){
                 val -= (2.25f / 2.75f);
                 return end * (7.5625f * (val) * val + .9375f) + start;
-            }else{
-                val -= (2.625f / 2.75f);
-                return end * (7.5625f * (val) * val + .984375f) + start;
             }
+            val -= (2.625f / 2.75f);
+            return end * (7.5625f * (val) * val + .984375f) + start;
         }
 
         public static float easeInOutBounce(float start, float end, float val){
             end -= start;
             float d= 1f;
             if (val < d/2) return easeInBounce(0, end, val*2) * 0.5f + start;
-            else return easeOutBounce(0, end, val*2-d) * 0.5f + end*0.5f + start;
+            return easeOutBounce(0, end, val*2-d) * 0.5f + end*0.5f + start;
         }
 
         public static float easeInBack(float start, float end, float val, float overshoot = 1.0f){
@@ -2732,14 +2733,14 @@ namespace ThirdParty.LeanTween.Framework
 
         // LeanTween Listening/Dispatch
 
-        private static System.Action<LTEvent>[] eventListeners;
+        private static Action<LTEvent>[] eventListeners;
         private static GameObject[] goListeners;
-        private static int eventsMaxSearch = 0;
+        private static int eventsMaxSearch;
         public static int EVENTS_MAX = 10;
         public static int LISTENERS_MAX = 10;
         private static int INIT_LISTENERS_MAX = LISTENERS_MAX;
 
-        public static void addListener( int eventId, System.Action<LTEvent> callback ){
+        public static void addListener( int eventId, Action<LTEvent> callback ){
             addListener(tweenEmpty, eventId, callback);
         }
 
@@ -2755,10 +2756,10 @@ namespace ThirdParty.LeanTween.Framework
     * <br />
     * void jumpUp( LTEvent e ){ Debug.Log("jump!"); }<br />
     */
-        public static void addListener( GameObject caller, int eventId, System.Action<LTEvent> callback ){
+        public static void addListener( GameObject caller, int eventId, Action<LTEvent> callback ){
             if(eventListeners==null){
                 INIT_LISTENERS_MAX = LISTENERS_MAX;
-                eventListeners = new System.Action<LTEvent>[ EVENTS_MAX * LISTENERS_MAX ];
+                eventListeners = new Action<LTEvent>[ EVENTS_MAX * LISTENERS_MAX ];
                 goListeners = new GameObject[ EVENTS_MAX * LISTENERS_MAX ];
             }
             // Debug.Log("searching for an empty space for:"+caller + " eventid:"+event);
@@ -2779,7 +2780,7 @@ namespace ThirdParty.LeanTween.Framework
             return;
             }
 #else
-                if(goListeners[ point ] == caller && System.Object.Equals( eventListeners[ point ], callback)){  
+                if(goListeners[ point ] == caller && Equals( eventListeners[ point ], callback)){  
                     // Debug.Log("This event is already being listened for.");
                     return;
                 }
@@ -2788,7 +2789,7 @@ namespace ThirdParty.LeanTween.Framework
             Debug.LogError("You ran out of areas to add listeners, consider increasing LISTENERS_MAX, ex: LeanTween.LISTENERS_MAX = "+(LISTENERS_MAX*2));
         }
 
-        public static bool removeListener( int eventId, System.Action<LTEvent> callback ){
+        public static bool removeListener( int eventId, Action<LTEvent> callback ){
             return removeListener( tweenEmpty, eventId, callback);
         }
 
@@ -2811,13 +2812,13 @@ namespace ThirdParty.LeanTween.Framework
     * <br />
     * void jumpUp( LTEvent e ){ }<br />
     */
-        public static bool removeListener( GameObject caller, int eventId, System.Action<LTEvent> callback ){
+        public static bool removeListener( GameObject caller, int eventId, Action<LTEvent> callback ){
             for(i = 0; i < eventsMaxSearch; i++){
                 int point = eventId*INIT_LISTENERS_MAX + i;
 #if UNITY_FLASH
             if(goListeners[ point ] == caller && System.Object.ReferenceEquals( eventListeners[ point ], callback) ){
 #else
-                if(goListeners[ point ] == caller && System.Object.Equals( eventListeners[ point ], callback) ){
+                if(goListeners[ point ] == caller && Equals( eventListeners[ point ], callback) ){
 #endif
                     eventListeners[ point ] = null;
                     goListeners[ point ] = null;
@@ -2898,41 +2899,41 @@ namespace ThirdParty.LeanTween.Framework
             bb = 3*(a+c) - 6*b;
             cc = 3*(b-a);
 
-            this.len = 1.0f / precision;
-            arcLengths = new float[(int)this.len + (int)1];
+            len = 1.0f / precision;
+            arcLengths = new float[(int)len + 1];
             arcLengths[0] = 0;
 
             Vector3 ov = a;
             Vector3 v;
             float clen = 0.0f;
-            for(int i = 1; i <= this.len; i++) {
+            for(int i = 1; i <= len; i++) {
                 v = bezierPoint(i * precision);
                 clen += (ov - v).magnitude;
-                this.arcLengths[i] = clen;
+                arcLengths[i] = clen;
                 ov = v;
             }
-            this.length = clen;
+            length = clen;
         }
 
         private float map(float u) {
-            float targetLength = u * this.arcLengths[(int)this.len];
+            float targetLength = u * arcLengths[(int)len];
             int low = 0;
-            int high = (int)this.len;
+            int high = (int)len;
             int index = 0;
             while (low < high) {
                 index = low + ((int)((high - low) / 2.0f) | 0);
-                if (this.arcLengths[index] < targetLength) {
+                if (arcLengths[index] < targetLength) {
                     low = index + 1;
                 } else {
                     high = index;
                 }
             }
-            if(this.arcLengths[index] > targetLength)
+            if(arcLengths[index] > targetLength)
                 index--;
             if(index<0)
                 index = 0;
 
-            return (index + (targetLength - arcLengths[index]) / (arcLengths[index + 1] - arcLengths[index])) / this.len;
+            return (index + (targetLength - arcLengths[index]) / (arcLengths[index + 1] - arcLengths[index])) / len;
         }
 
         private Vector3 bezierPoint(float t){
@@ -2964,7 +2965,7 @@ namespace ThirdParty.LeanTween.Framework
 
         private LTBezier[] beziers;
         private float[] lengthRatio;
-        private int currentBezier=0,previousBezier=0;
+        private int currentBezier=0,previousBezier;
 
         public LTBezierPath(){ }
         public LTBezierPath( Vector3[] pts_ ){
@@ -3115,7 +3116,7 @@ namespace ThirdParty.LeanTween.Framework
 
             for (int i = 1; i <= 120; i++)
             {
-                float pm = (float)i / 120f;
+                float pm = i / 120f;
                 Vector3 currPt2 = point(pm);
                 //Gizmos.color = new Color(UnityEngine.Random.Range(0f,1f),UnityEngine.Random.Range(0f,1f),UnityEngine.Random.Range(0f,1f),1);
                 Gizmos.color = (previousBezier == currentBezier) ? Color.magenta : Color.grey;
@@ -3141,7 +3142,7 @@ namespace ThirdParty.LeanTween.Framework
             int maxIndex = Mathf.RoundToInt(1f / precision);
             for (int i = 0; i < maxIndex; i++)
             {
-                float ratio = (float)i / (float)maxIndex;
+                float ratio = i / (float)maxIndex;
                 float dist = Vector3.Distance(pt, point( ratio ) );
                 // Debug.Log("i:"+i+" dist:"+dist);
                 if (dist < closestDist)
@@ -3151,7 +3152,7 @@ namespace ThirdParty.LeanTween.Framework
                 }
             }
             //Debug.Log("closestI:"+closestI+" maxIndex:"+maxIndex);
-            return (float)closestI / (float)(maxIndex);
+            return closestI / (float)(maxIndex);
         }
     }
 
@@ -3166,7 +3167,7 @@ namespace ThirdParty.LeanTween.Framework
 * LeanTween.moveSpline(lt, ltSpline.vec3, 4.0f).setOrientToPath(true).setDelay(1f).setEase(LeanTweenType.easeInOutQuad); // animate <br />
 * Vector3 pt = ltSpline.point( 0.6f ); // retrieve a point along the path
 */
-    [System.Serializable]
+    [Serializable]
     public class LTSpline {
         public static int DISTANCE_COUNT = 3; // increase for a more accurate constant speed
         public static int SUBLINE_COUNT = 20; // increase for a more accurate smoothing of the curves into lines
@@ -3174,12 +3175,12 @@ namespace ThirdParty.LeanTween.Framework
         /**
     * @property {float} distance distance of the spline (in unity units)
     */
-        public float distance = 0f;
+        public float distance;
 
         public bool constantSpeed = true;
 
         public Vector3[] pts;
-        [System.NonSerialized]
+        [NonSerialized]
         public Vector3[] ptsAdj;
         public int ptsAdjLength;
         public bool orientToPath;
@@ -3203,7 +3204,7 @@ namespace ThirdParty.LeanTween.Framework
             }
 
             this.pts = new Vector3[pts.Length];
-            System.Array.Copy(pts, this.pts, pts.Length);
+            Array.Copy(pts, this.pts, pts.Length);
 
             numSections = pts.Length - 3;
 
@@ -3289,8 +3290,8 @@ namespace ThirdParty.LeanTween.Framework
         }
 
         public Vector3 interp(float t) {
-            currPt = Mathf.Min(Mathf.FloorToInt(t * (float) numSections), numSections - 1);
-            float u = t * (float) numSections - (float) currPt;
+            currPt = Mathf.Min(Mathf.FloorToInt(t * numSections), numSections - 1);
+            float u = t * numSections - currPt;
 
             //Debug.Log("currPt:"+currPt+" numSections:"+numSections+" pts.Length :"+pts.Length );
             Vector3 a = pts[currPt];
@@ -3329,7 +3330,7 @@ namespace ThirdParty.LeanTween.Framework
                 }
             }
             // Debug.Log("closestI:"+closestI+" ptsAdjLength:"+ptsAdjLength);
-            return (float) closestI / (float)(ptsAdjLength-1);
+            return closestI / (float)(ptsAdjLength-1);
         }
 
         /**
@@ -3451,14 +3452,14 @@ namespace ThirdParty.LeanTween.Framework
         }
 
         public void drawGizmo( Color color ) {
-            if( this.ptsAdjLength>=4){
+            if( ptsAdjLength>=4){
 
-                Vector3 prevPt = this.ptsAdj[0];
+                Vector3 prevPt = ptsAdj[0];
 
                 Color colorBefore = Gizmos.color;
                 Gizmos.color = color;
-                for (int i = 0; i < this.ptsAdjLength; i++) {
-                    Vector3 currPt2 = this.ptsAdj[i];
+                for (int i = 0; i < ptsAdjLength; i++) {
+                    Vector3 currPt2 = ptsAdj[i];
                     // Debug.Log("currPt2:"+currPt2);
 
                     Gizmos.DrawLine(prevPt, currPt2);
@@ -3522,12 +3523,12 @@ namespace ThirdParty.LeanTween.Framework
             GL.Color(color);
 
             if (constantSpeed) {
-                if (this.ptsAdjLength >= 4) {
+                if (ptsAdjLength >= 4) {
 
-                    Vector3 prevPt = this.ptsAdj[0];
+                    Vector3 prevPt = ptsAdj[0];
 
-                    for (int i = 0; i < this.ptsAdjLength; i++) {
-                        Vector3 currPt2 = this.ptsAdj[i];
+                    for (int i = 0; i < ptsAdjLength; i++) {
+                        Vector3 currPt2 = ptsAdj[i];
                         GL.Vertex(prevPt);
                         GL.Vertex(currPt2);
 
@@ -3536,11 +3537,11 @@ namespace ThirdParty.LeanTween.Framework
                 }
 
             } else {
-                if (this.pts.Length >= 4) {
+                if (pts.Length >= 4) {
 
-                    Vector3 prevPt = this.pts[0];
+                    Vector3 prevPt = pts[0];
 
-                    float split = 1f / ((float)this.pts.Length * 10f);
+                    float split = 1f / (pts.Length * 10f);
 
                     float iter = 0f;
                     while (iter < 1f) {
@@ -3565,12 +3566,12 @@ namespace ThirdParty.LeanTween.Framework
         }
 
         public Vector3[] generateVectors(){
-            if (this.pts.Length >= 4) {
+            if (pts.Length >= 4) {
                 List<Vector3> meshPoints = new List<Vector3>();
-                Vector3 prevPt = this.pts[0];
+                Vector3 prevPt = pts[0];
                 meshPoints.Add(prevPt);
 
-                float split = 1f / ((float)this.pts.Length * 10f);
+                float split = 1f / (pts.Length * 10f);
 
                 float iter = 0f;
                 while (iter < 1f) {
@@ -3618,8 +3619,8 @@ namespace ThirdParty.LeanTween.Framework
 * @param {float} rotation:float (Optional) initial rotation in degrees (0-360) 
 */
 
-    [System.Serializable]
-    public class LTRect : System.Object{
+    [Serializable]
+    public class LTRect : Object{
         /**
     * Pass this value to the GUI Methods
     * 
@@ -3640,7 +3641,7 @@ namespace ThirdParty.LeanTween.Framework
         public string labelStr;
         public LTGUI.Element_Type type;
         public GUIStyle style;
-        public bool useColor = false;
+        public bool useColor;
         public Color color = Color.white;
         public bool fontScaleToFit;
         public bool useSimpleScale;
@@ -3656,7 +3657,7 @@ namespace ThirdParty.LeanTween.Framework
 
         public LTRect(){
             reset();
-            this.rotateEnabled = this.alphaEnabled = true;
+            rotateEnabled = alphaEnabled = true;
             _rect = new Rect(0f,0f,1f,1f);
         }
 
@@ -3667,25 +3668,25 @@ namespace ThirdParty.LeanTween.Framework
 
         public LTRect(float x, float y, float width, float height){
             _rect = new Rect(x,y,width,height);
-            this.alpha = 1.0f;
-            this.rotation = 0.0f;
-            this.rotateEnabled = this.alphaEnabled = false;
+            alpha = 1.0f;
+            rotation = 0.0f;
+            rotateEnabled = alphaEnabled = false;
         }
 
         public LTRect(float x, float y, float width, float height, float alpha){
             _rect = new Rect(x,y,width,height);
             this.alpha = alpha;
-            this.rotation = 0.0f;
-            this.rotateEnabled = this.alphaEnabled = false;
+            rotation = 0.0f;
+            rotateEnabled = alphaEnabled = false;
         }
 
         public LTRect(float x, float y, float width, float height, float alpha, float rotation){
             _rect = new Rect(x,y,width,height);
             this.alpha = alpha;
             this.rotation = rotation;
-            this.rotateEnabled = this.alphaEnabled = false;
+            rotateEnabled = alphaEnabled = false;
             if(rotation!=0.0f){
-                this.rotateEnabled = true;
+                rotateEnabled = true;
                 resetForRotation();
             }
         }
@@ -3711,17 +3712,17 @@ namespace ThirdParty.LeanTween.Framework
         } 
 
         public void setId( int id, int counter){
-            this._id = id;
+            _id = id;
             this.counter = counter;
         }
 
         public void reset(){
-            this.alpha = 1.0f;
-            this.rotation = 0.0f;
-            this.rotateEnabled = this.alphaEnabled = false;
-            this.margin = Vector2.zero;
-            this.sizeByHeight = false;
-            this.useColor = false;
+            alpha = 1.0f;
+            rotation = 0.0f;
+            rotateEnabled = alphaEnabled = false;
+            margin = Vector2.zero;
+            sizeByHeight = false;
+            useColor = false;
         }
 
         public void resetForRotation(){
@@ -3773,8 +3774,8 @@ namespace ThirdParty.LeanTween.Framework
                     colorTouched = true;
                 }
                 if(fontScaleToFit){
-                    if(this.useSimpleScale){
-                        style.fontSize = (int)(_rect.height*this.relativeRect.height);
+                    if(useSimpleScale){
+                        style.fontSize = (int)(_rect.height*relativeRect.height);
                     }else{
                         style.fontSize = (int)_rect.height;
                     }
@@ -3799,7 +3800,7 @@ namespace ThirdParty.LeanTween.Framework
 
         public LTRect setColor( Color color ){
             this.color = color;
-            this.useColor = true;
+            useColor = true;
             return this;
         }
 
@@ -3809,7 +3810,7 @@ namespace ThirdParty.LeanTween.Framework
         }
 
         public LTRect setLabel( String str ){
-            this.labelStr = str;
+            labelStr = str;
             return this;
         }
 
@@ -3821,7 +3822,7 @@ namespace ThirdParty.LeanTween.Framework
 
         public LTRect setUseSimpleScale( bool useSimpleScale){
             this.useSimpleScale = useSimpleScale;
-            this.relativeRect = new Rect(0f,0f,Screen.width,Screen.height);
+            relativeRect = new Rect(0f,0f,Screen.width,Screen.height);
             return this;
         }
 
@@ -3863,8 +3864,8 @@ namespace ThirdParty.LeanTween.Framework
         private static int[] buttonLastFrame;
         private static LTRect r;
         private static Color color = Color.white;
-        private static bool isGUIEnabled = false;
-        private static int global_counter = 0;
+        private static bool isGUIEnabled;
+        private static int global_counter;
 
         public enum Element_Type{
             Texture,
@@ -3928,7 +3929,7 @@ namespace ThirdParty.LeanTween.Framework
                             }else if(r.type == Element_Type.Texture && r.texture!=null){
                                 Vector2 size = r.useSimpleScale ? new Vector2(0f, r.rect.height*r.relativeRect.height) : new Vector2(r.rect.width, r.rect.height);
                                 if(r.sizeByHeight){
-                                    size.x = (float)r.texture.width/(float)r.texture.height * size.y;
+                                    size.x = r.texture.width/(float)r.texture.height * size.y;
                                 }
                                 if(r.useSimpleScale){
                                     GUI.DrawTexture( new Rect((r.rect.x + r.margin.x + r.relativeRect.x)*r.relativeRect.width, (r.rect.y + r.margin.y + r.relativeRect.y)*r.relativeRect.height, size.x, size.y), r.texture );
@@ -3994,7 +3995,7 @@ namespace ThirdParty.LeanTween.Framework
             if(rect!=null){
                 destroy(rect.id);
             }
-            if(rect.type==LTGUI.Element_Type.Label && rect.style!=null){
+            if(rect.type==Element_Type.Label && rect.style!=null){
                 if(rect.style.normal.textColor.a<=0f){
                     Debug.LogWarning("Your GUI normal color has an alpha of zero, and will not be rendered.");
                 }
@@ -4080,7 +4081,8 @@ namespace ThirdParty.LeanTween.Framework
         public static Vector2 firstTouch(){
             if(Input.touchCount>0){
                 return Input.touches[0].position;
-            }else if(Input.GetMouseButton(0)){
+            }
+            if(Input.GetMouseButton(0)){
                 return Input.mousePosition;
             }
 

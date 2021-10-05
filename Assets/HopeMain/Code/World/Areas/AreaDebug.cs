@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using HopeMain.Code.Utilities;
+using HopeMain.Code.World.Grid;
 using UnityEngine;
 
 namespace HopeMain.Code.World.Areas
@@ -15,7 +16,7 @@ namespace HopeMain.Code.World.Areas
             GameObject textPool = new GameObject("DebugPool");
             textPool.transform.SetParent(transform);
 
-            Grid.GridMap gridMap = myArea.GridMap;
+            GridMap gridMap = myArea.GridMap;
             gridText = new List<TextMesh>();
             
             for (int x = 0; x < gridMap.Cells.GetLength(0); x++) {
@@ -29,7 +30,7 @@ namespace HopeMain.Code.World.Areas
         public void ShowGrid()
         {
             Vector3Int areaPos = Vector3Int.FloorToInt(transform.position);
-            Grid.GridMap gridMap = myArea.GridMap;
+            GridMap gridMap = myArea.GridMap;
             
             for (int x = 0; x < gridMap.Cells.GetLength(0); x++) 
             for (int y = 0; y < gridMap.Cells.GetLength(1); y++) {

@@ -6,7 +6,6 @@ using HopeMain.Code.World.Buildings;
 using HopeMain.Code.World.Buildings.Type.Resources;
 using ThirdParty.LeanTween.Framework;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace HopeMain.Code.World.Resources
 {
@@ -23,10 +22,10 @@ namespace HopeMain.Code.World.Resources
 
         private float newMapX;
         
-        public Task_ResourcePickUp TaskResourcePickUp { get; set; }
+        public ResourcePickUp ResourcePickUpTask { get; set; }
         public Resource StoredResource => storedResource;
         
-        public bool IsRegisteredToPickUp => TaskResourcePickUp != null;
+        public bool IsRegisteredToPickUp => ResourcePickUpTask != null;
 
         private void RegisterResourceOnGround()
         {
@@ -52,7 +51,7 @@ namespace HopeMain.Code.World.Resources
         {
             yield return new WaitForSeconds(decayTimeSeconds);
             warehouse.UnregisterResourceToPickUp(this);
-            TaskResourcePickUp.RemoveResourceBeforePickUp(this);
+            ResourcePickUpTask.RemoveResourceBeforePickUp(this);
             
             DestroyImmediate(gameObject);
         }

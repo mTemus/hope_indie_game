@@ -1,5 +1,4 @@
 using HopeMain.Code.AI.Player.Brain;
-using HopeMain.Code.DeveloperTools.Console;
 using HopeMain.Code.System.GameInput.States;
 using UnityEngine;
 
@@ -7,7 +6,7 @@ namespace HopeMain.Code.System.GameInput
 {
     public class InputManager : MonoBehaviour
     {
-        [SerializeField] private Player_Brain player;
+        [SerializeField] private Brain player;
 
         [Header("Keycodes")] 
         [SerializeField] private KeyCode left;
@@ -24,34 +23,34 @@ namespace HopeMain.Code.System.GameInput
         [SerializeField] private KeyCode console;
         [SerializeField] private KeyCode accept;
 
-        private static MovingInputState _movingInputState;
-        private static ToolSelectingInputState _toolSelectingInputState;
-        private static BuildingSelectingInputState _buildingSelectingInputState;
-        private static BuildingPlacingInputState _buildingPlacingInputState;
-        private static VillagerPropertiesInputState _villagerPropertiesInputState;
+        private static Moving moving;
+        private static ToolSelecting toolSelecting;
+        private static BuildingSelecting buildingSelecting;
+        private static BuildingPlacing buildingPlacing;
+        private static VillagerProperties villagerProperties;
         
         private IInputState currentInputState;
-        private DeveloperConsoleInputState consoleInputState;
+        private DeveloperConsole _console;
 
         private void Awake()
         {
-            _movingInputState = new MovingInputState();
-            _toolSelectingInputState = new ToolSelectingInputState();
-            _buildingSelectingInputState = new BuildingSelectingInputState();
-            _buildingPlacingInputState = new BuildingPlacingInputState();
-            _villagerPropertiesInputState = new VillagerPropertiesInputState();
+            moving = new Moving();
+            toolSelecting = new ToolSelecting();
+            buildingSelecting = new BuildingSelecting();
+            buildingPlacing = new BuildingPlacing();
+            villagerProperties = new VillagerProperties();
             
-            currentInputState = _movingInputState;
-            consoleInputState = new DeveloperConsoleInputState();
+            currentInputState = moving;
+            _console = new DeveloperConsole();
 
             Debug.LogWarning(currentInputState.GetType().Name);
         }
 
         void Update()
         {
-            consoleInputState.HandleState(this);
+            _console.HandleState(this);
 
-            if (DeveloperConsole.I.IsConsoleActive()) return;
+            if (DeveloperTools.Console.DeveloperConsole.I.IsConsoleActive()) return;
             currentInputState.HandleState(this);
         }
         
@@ -64,7 +63,7 @@ namespace HopeMain.Code.System.GameInput
             Debug.LogWarning("INPUT STATE ----" + currentInputState.GetType().Name);
         }
         
-        public Player_Brain Player => player;
+        public Brain Player => player;
 
         public KeyCode Left => left;
         public KeyCode LeftAlt => leftAlt;
@@ -80,14 +79,14 @@ namespace HopeMain.Code.System.GameInput
         public KeyCode Console => console;
         public KeyCode Accept => accept;
 
-        public static MovingInputState MovingInputState => _movingInputState;
+        public static Moving Moving => moving;
 
-        public static ToolSelectingInputState ToolSelectingInputState => _toolSelectingInputState;
+        public static ToolSelecting ToolSelecting => toolSelecting;
         
-        public static BuildingSelectingInputState BuildingSelectingInputState => _buildingSelectingInputState;
+        public static BuildingSelecting BuildingSelecting => buildingSelecting;
 
-        public static BuildingPlacingInputState BuildingPlacingInputState => _buildingPlacingInputState;
+        public static BuildingPlacing BuildingPlacing => buildingPlacing;
 
-        public static VillagerPropertiesInputState VillagerPropertiesInputState => _villagerPropertiesInputState;
+        public static VillagerProperties VillagerProperties => villagerProperties;
     }
 }

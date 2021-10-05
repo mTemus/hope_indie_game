@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using HopeMain.Code.GameProperties;
 using HopeMain.Code.World.Buildings;
+using HopeMain.Code.World.Grid.Cell;
 using HopeMain.Code.World.Resources;
 using HopeMain.Code.World.Resources.ResourceToGather;
 using UnityEngine;
@@ -15,7 +16,7 @@ namespace HopeMain.Code.World.Grid
         private readonly int height;
         private readonly int cellSize;
 
-        private readonly Cell[,] cells;
+        private readonly CellBase[,] cells;
 
         public GridMap(int width, int height, int cellSize)
         {
@@ -23,7 +24,7 @@ namespace HopeMain.Code.World.Grid
             this.height = height;
             this.cellSize = cellSize;
 
-            cells = new Cell[width, height];
+            cells = new CellBase[width, height];
 
             for (int i = 0; i < width; i++)
             for (int j = 0; j < height; j++)
@@ -58,7 +59,7 @@ namespace HopeMain.Code.World.Grid
         public Vector2 GetWorldPosition(Vector2 pos) => 
             pos * cellSize;
 
-        public Cell GetCellAt(int x, int y) =>
+        public CellBase GetCellAt(int x, int y) =>
             cells[x, y];
 
         public bool IsTileInRange(int x, int y)
@@ -84,7 +85,7 @@ namespace HopeMain.Code.World.Grid
             }
         }
 
-        public void SetResourceToGatherInGrid(List<Vector2Int> area, ResourceToGather resourceToGather)
+        public void SetResourceToGatherInGrid(List<Vector2Int> area, ResourceToGatherBase resourceToGather)
         {
             foreach (var cell in area
                 .Select(cellPos => GetCellAt(cellPos.x, cellPos.y))) {
@@ -107,7 +108,7 @@ namespace HopeMain.Code.World.Grid
         
         public int CellSize => cellSize;
 
-        public Cell[,] Cells => cells;
+        public CellBase[,] Cells => cells;
 
         public int Width => width;
 

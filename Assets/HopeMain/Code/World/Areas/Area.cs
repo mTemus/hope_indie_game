@@ -10,9 +10,11 @@ using HopeMain.Code.System;
 using HopeMain.Code.System.Assets;
 using HopeMain.Code.World.Buildings;
 using HopeMain.Code.World.Grid;
+using HopeMain.Code.World.Grid.Cell;
 using HopeMain.Code.World.Resources;
 using HopeMain.Code.World.Resources.ResourceToGather;
 using UnityEngine;
+using Data = HopeMain.Code.World.Buildings.Data;
 
 namespace HopeMain.Code.World.Areas
 {
@@ -32,11 +34,11 @@ namespace HopeMain.Code.World.Areas
         [SerializeField] private float height = 30f;
 
         [Header("Environment")] 
-        [SerializeField] private ParallaxControllerLocal parallax;
+        [SerializeField] private LocalParallaxController localParallax;
 
         private readonly List<Villager> villagers = new List<Villager>();
         private readonly List<Building> buildings = new List<Building>();
-        private readonly List<ResourceToGather> resourcesToGather = new List<ResourceToGather>();
+        private readonly List<ResourceToGatherBase> resourcesToGather = new List<ResourceToGatherBase>();
         
         private GameObject playerObject;
         private GridMap gridMap;
@@ -63,7 +65,7 @@ namespace HopeMain.Code.World.Areas
             visitor
                 .GetComponent<EntityBrain>().onWalkingSoundSet
                 .Invoke(AssetsStorage.I
-                    .GetAudioClipByName(AssetSoundType.Walking, name.ToLower()));
+                    .GetAudioClipByName(SoundType.Walking, name.ToLower()));
         }
 
         public bool ContainsEntity(GameObject visitor)
@@ -125,14 +127,14 @@ namespace HopeMain.Code.World.Areas
             playerObject = player;
             playerObject.GetComponent<EntityBrain>().CurrentArea = this;
             playerObject.transform.SetParent(transform);
-            parallax.Move(Vector3.zero);
+            localParallax.Move(Vector3.zero);
             SetCurrentLocalParallax();
             Debug.LogWarning("Player is in " + name);
         }
 
         private void PlayerExitArea(GameObject player)
         {
-            parallax.Move(Vector3.zero);
+            localParallax.Move(Vector3.zero);
             playerObject.transform.SetParent(transform.root);
             playerObject.GetComponent<EntityBrain>().CurrentArea = null;
             playerObject = null;
@@ -148,7 +150,7 @@ namespace HopeMain.Code.World.Areas
 
         #region Buildings
 
-        public void AddBuilding(Building building, BuildingData buildingData)
+        public void AddBuilding(Building building, Data buildingData)
         {
             Transform buildingTransform = building.transform;
             buildingTransform.SetParent(transform);
@@ -189,7 +191,7 @@ namespace HopeMain.Code.World.Areas
                     break;
                 
                 case CellContentType.StoneResource:
-                    if (gridMap.GetCellAt(buildingArea[0].x, buildingArea[0].y).resourceToGatherData is StoneToGather
+                    if (gridMap.GetCellAt(buildingArea[0].x, buildingArea[0].y).resourceToGatherData is Stone
                         {
                             hasWorkplace: true
                         })
@@ -210,7 +212,7 @@ namespace HopeMain.Code.World.Areas
 
         #region Resources to Gather
 
-        public void AddResourceToGather(ResourceToGather resourceToGather)
+        public void AddResourceToGather(ResourceToGatherBase resourceToGather)
         {
             Transform resourceTransform = resourceToGather.transform;
             resourceTransform.SetParent(transform);
@@ -225,7 +227,7 @@ namespace HopeMain.Code.World.Areas
             resourcesToGather.Add(resourceToGather);
         }
 
-        public void RemoveResourceToGather(ResourceToGather resourceToGather)
+        public void RemoveResourceToGather(ResourceToGatherBase resourceToGather)
         {
             Vector3Int currResourcePos = Vector3Int.FloorToInt(resourceToGather.transform.localPosition);
             List<Vector2Int> resourceArea = gridMap.GetTileWithNeighbours(
@@ -237,16 +239,16 @@ namespace HopeMain.Code.World.Areas
             Debug.LogError("Remove resource " + resourceToGather.name + "  to area "+ gameObject.name + ".");
         }
         
-        public ResourceToGather GetClosestResourceToGatherByType(Vector3 position, ResourceType resourceType)
+        public ResourceToGatherBase GetClosestResourceToGatherByType(Vector3 position, ResourceType resourceType)
         {
-            List<ResourceToGather> resources = resourcesToGather
+            List<ResourceToGatherBase> resources = resourcesToGather
                 .Where(resourceToGather => resourceToGather.Resource.Type == resourceType)
                 .ToList();
 
-            ResourceToGather closestResource = resources[0];
+            ResourceToGatherBase closestResource = resources[0];
             float bestDistance = Vector3.Distance(position, closestResource.transform.position);
 
-            foreach (ResourceToGather resource in resources) {
+            foreach (ResourceToGatherBase resource in resources) {
                 float distance = Vector3.Distance(position, resource.transform.position);
 
                 if (bestDistance < distance) continue;
@@ -264,7 +266,7 @@ namespace HopeMain.Code.World.Areas
 
         private void VillagerEnterArea(GameObject villager)
         {
-            villager.GetComponent<Villager_Brain>().CurrentArea = this;
+            villager.GetComponent<Brain>().CurrentArea = this;
             villager.transform.SetParent(transform);
         }
 
@@ -290,11 +292,11 @@ namespace HopeMain.Code.World.Areas
         private void SetCurrentLocalParallax()
         {
             //TODO: remove this null, it is only for now
-            if (parallax == null) {
+            if (localParallax == null) {
                 Managers.I.Environment.SetLocalParallax(null);
                 return;
             }
-            Managers.I.Environment.SetLocalParallax(parallax);
+            Managers.I.Environment.SetLocalParallax(localParallax);
         }
 
         #endregion

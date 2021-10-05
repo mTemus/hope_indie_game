@@ -30,7 +30,7 @@ namespace HopeMain.Code.World.Resources.ResourceToGather
             gatherChannel.Play((ulong) 0.5f);
         }
 
-        public void GatherResource(float resourcePerFrame, Villager_Profession worker)
+        public void GatherResource(float resourcePerFrame, Profession worker)
         {
             PlayGatheringSound();
             timeCounter += Time.deltaTime;

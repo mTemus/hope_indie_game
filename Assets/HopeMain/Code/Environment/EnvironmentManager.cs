@@ -9,22 +9,22 @@ namespace HopeMain.Code.Environment
         [SerializeField] private Camera mainCamera;
         
         [Header("Parallax")] 
-        [SerializeField] private ParallaxControllerGlobal globalParallax;
-        [SerializeField] private ParallaxControllerLocal localParallax;
-        [SerializeField] private ParallaxControllerWater waterParallax;
+        [SerializeField] private GlobalParallaxController globalParallax;
+        [SerializeField] private LocalParallaxController localParallax;
+        [SerializeField] private WaterParallaxController waterParallax;
         
-        public ParallaxControllerGlobal GlobalParallax => globalParallax;
-        public ParallaxControllerLocal LocalParallax => localParallax;
-        public ParallaxControllerWater WaterParallax => waterParallax;
+        public GlobalParallaxController GlobalParallax => globalParallax;
+        public LocalParallaxController LocalParallax => localParallax;
+        public WaterParallaxController WaterParallax => waterParallax;
         
         private void Awake()
         {
             globalParallax.InitializeLayers(mainCamera.transform.position);
         }
 
-        public void SetLocalParallax(ParallaxControllerLocal parallax)
+        public void SetLocalParallax(LocalParallaxController parallaxController)
         {
-            localParallax = parallax;
+            localParallax = parallaxController;
             localParallax.InitializeLayers(mainCamera.transform.position);
         }
         

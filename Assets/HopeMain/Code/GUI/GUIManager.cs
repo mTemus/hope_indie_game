@@ -13,14 +13,14 @@ namespace HopeMain.Code.GUI
         [SerializeField] private RequiredResourcesPanel requiredResourcesPanel;
 
         [Header("Villager GUI")] 
-        [SerializeField] private VillagerPropertiesPanel villagerPropertiesPanel;
-        [SerializeField] private VillagerProfessionChangingPanel villagerProfessionChangingPanel;
+        [SerializeField] private PropertiesPanel villagerPropertiesPanel;
+        [SerializeField] private ProfessionChangingPanel professionChangingPanel;
 
         public RequiredResourcesPanel RequiredResourcesPanel => requiredResourcesPanel;
 
-        public VillagerProfessionChangingPanel VillagerProfessionChangingPanel => villagerProfessionChangingPanel;
+        public ProfessionChangingPanel ProfessionChangingPanel => professionChangingPanel;
 
-        public VillagerPropertiesPanel VillagerPropertiesPanel => villagerPropertiesPanel;
+        public PropertiesPanel VillagerPropertiesPanel => villagerPropertiesPanel;
 
         public BuildingSelectingMenu BuildingSelectingMenu => buildingSelectingMenu;
 

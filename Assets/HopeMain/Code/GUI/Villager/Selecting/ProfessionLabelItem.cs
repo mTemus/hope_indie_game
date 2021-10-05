@@ -9,9 +9,9 @@ namespace HopeMain.Code.GUI.Villager.Selecting
 {
     public class ProfessionLabelItem : UiSelectableElement
     {
-        [SerializeField] private Villager_ProfessionData data;
+        [SerializeField] private Data data;
 
-        private Workplace[] workplaces = new Workplace[0];
+        private WorkplaceBase[] workplaces = Array.Empty<WorkplaceBase>();
         
         public override void OnElementSelected()
         {
@@ -46,8 +46,8 @@ namespace HopeMain.Code.GUI.Villager.Selecting
             workplaces = null;
         }
 
-        public Workplace[] Workplaces => workplaces;
+        public WorkplaceBase[] Workplaces => workplaces;
 
-        public Villager_ProfessionData Data => data;
+        public Data Data => data;
     }
 }

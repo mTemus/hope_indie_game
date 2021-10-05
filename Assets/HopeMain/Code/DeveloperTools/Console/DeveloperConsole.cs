@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using HopeMain.Code.DeveloperTools.Console.Command;
 using TMPro;
 using UnityEngine;
 
@@ -18,7 +19,7 @@ namespace HopeMain.Code.DeveloperTools.Console
         [SerializeField] private Color noCommandColor;
         
         [Header("Commands")] 
-        [SerializeField] private ConsoleCommandData[] commands;
+        [SerializeField] private Data[] commands;
 
         [Header("Similar commands display")] 
         [SerializeField] private RectTransform similarCommandsBackground;
@@ -94,7 +95,7 @@ namespace HopeMain.Code.DeveloperTools.Console
             if (!rawCommand.StartsWith("/")) return;
             string[] command = rawCommand.Remove(0, 1).Split(' ');
 
-            foreach (ConsoleCommandData commandData in commands) {
+            foreach (Data commandData in commands) {
                 if (commandData.Command != command[0]) continue;
                 if (commandData.Process(command.Skip(1).ToArray())) {
                         

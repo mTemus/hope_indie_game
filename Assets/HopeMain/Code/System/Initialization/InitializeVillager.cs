@@ -8,10 +8,10 @@ namespace HopeMain.Code.System.Initialization
 {
     public class InitializeVillager : InitializeObject
     {
-        [SerializeField] private Villager_ProfessionData villagerProfessionData;
-        [SerializeField] private Workplace workplace;
+        [SerializeField] private Data professionData;
+        [SerializeField] private WorkplaceBase workplace;
 
-        public Workplace Workplace
+        public WorkplaceBase Workplace
         {
             get => workplace;
             set => workplace = value;
@@ -24,7 +24,7 @@ namespace HopeMain.Code.System.Initialization
             area.AddVillager(villager);
             area.SetVisitorWalkingAudio(villager.gameObject);
 
-            Managers.I.Professions.SetVillagerProfession(villager, villagerProfessionData, workplace);
+            Managers.I.Professions.SetVillagerProfession(villager, professionData, workplace);
             villager.Profession.enabled = true;
             
             DestroyImmediate(this);

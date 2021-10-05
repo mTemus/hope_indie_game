@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace HopeMain.Code.World.Buildings.Type.Industry
 {
-    public class BuildersGuild : ServicesWorkplace
+    public class BuildersGuild : Services
     {
         public override void Initialize() {}
         
@@ -18,8 +18,8 @@ namespace HopeMain.Code.World.Buildings.Type.Industry
         protected override Task GetNormalTask()
         {
             Task nt = (from task in tasksToDo
-                    where task is Task_Building
-                    select task as Task_Building)
+                    where task is AI.Villagers.Tasks.Building
+                    select task as AI.Villagers.Tasks.Building)
                 .FirstOrDefault(bt => bt.flag != TaskFlag.WAITING);
 
             RemoveTaskFromTodoList(nt);
@@ -29,8 +29,8 @@ namespace HopeMain.Code.World.Buildings.Type.Industry
         protected override Task GetResourceCarryingTask()
         {
             Task rct = (from task in tasksToDo
-                    where task is Task_ResourceCarrying
-                    select task as Task_ResourceCarrying)
+                    where task is ResourceCarrying
+                    select task as ResourceCarrying)
                 .FirstOrDefault();
 
             RemoveTaskFromTodoList(rct);
@@ -39,8 +39,8 @@ namespace HopeMain.Code.World.Buildings.Type.Industry
         
         private void DeliverResourcesToConstruction(Resource requiredResource, Construction construction)
         {
-            Task_ResourceCarrying rct =
-                new Task_ResourceCarrying(requiredResource, true, construction.GetComponent<Building>());
+            ResourceCarrying rct =
+                new ResourceCarrying(requiredResource, true, construction.GetComponent<Building>());
             rct.onResourceDelivery += construction.AddResources;
             
             Managers.I.Resources.ReserveResources(rct, requiredResource);
@@ -64,7 +64,7 @@ namespace HopeMain.Code.World.Buildings.Type.Industry
             }
             
             foreach (Villager worker in workersWithoutTasks) {
-                if (task is Task_ResourceCarrying) {
+                if (task is ResourceCarrying) {
                     if (haulersCnt > 0) {
                         if (worker.Profession.Data.Type != ProfessionType.WorkplaceHauler) continue;
                         GiveTaskToWorker(worker, task);
@@ -91,7 +91,7 @@ namespace HopeMain.Code.World.Buildings.Type.Industry
 
         public override void TakeTaskBackFromWorker(Task task)
         {
-            if (task is Task_ResourceCarrying rct) {
+            if (task is ResourceCarrying rct) {
                 if (Managers.I.Resources.IsResourceReserved(rct)) {
                     if (!Managers.I.Resources.CanWithdrawReserved(rct, rct.ResourceToCarry)) 
                         Managers.I.Resources.ClearReservedResource(rct);
@@ -119,9 +119,9 @@ namespace HopeMain.Code.World.Buildings.Type.Industry
             }
         }
 
-        public void CreateBuildingTask(Construction construction, BuildingData buildingData)
+        public void CreateBuildingTask(Construction construction, Data buildingData)
         {
-            Task_Building bt = new Task_Building(construction.transform.position + construction.PositionOffset, construction);
+            AI.Villagers.Tasks.Building bt = new AI.Villagers.Tasks.Building(construction.transform.position + construction.PositionOffset, construction);
             bt.SetWaiting();
             construction.SetBuildingTask(bt);
             AddTaskToDo(bt);

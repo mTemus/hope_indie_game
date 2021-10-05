@@ -1,0 +1,34 @@
+using System;
+using HopeMain.Code.World.Buildings;
+using HopeMain.Code.World.Buildings.Workplace;
+using UnityEngine;
+
+namespace HopeMain.Code.Characters.Villagers.Profession
+{
+    [CreateAssetMenu(fileName = "Villager Profession Data", menuName = "Game Data/Villagers/Profession Data", order = 0)]
+    public class Data : ScriptableObject
+    {
+        [Header("Profession data")]
+        [SerializeField] private ProfessionType type;
+        [SerializeField] private ProfessionAIType aiType;
+        [SerializeField] private Statistics requiredStatistics;
+        [SerializeField] private int resourceCarryingLimit;
+        
+        //TODO: this wont work, it need to be moved to "profession.cs"
+        [SerializeField] private int goldPerDay;
+
+        [Header("WorkplaceBase data")] 
+        [SerializeField] private World.Buildings.Data workplaceBuildingData;
+
+        public void SetGoldPerDay(int amount) =>
+            goldPerDay = amount;
+
+        public Type WorkplaceType => workplaceBuildingData.Prefab.GetComponent<WorkplaceBase>().GetType();
+        public BuildingType WorkplaceBuildingType => workplaceBuildingData.BuildingType;
+        public ProfessionType Type => type;
+        public ProfessionAIType AIType => aiType;
+        public Statistics RequiredStatistics => requiredStatistics;
+        public int GoldPerDay => goldPerDay;
+        public int ResourceCarryingLimit => resourceCarryingLimit;
+    }
+}

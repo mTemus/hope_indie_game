@@ -7,6 +7,7 @@ using NodeCanvas.BehaviourTrees;
 using NodeCanvas.Framework;
 using ThirdParty.LeanTween.Framework;
 using UnityEngine;
+using Data = HopeMain.Code.World.Resources.ResourceToGather.Data;
 
 //TODO: whole class should be deleted and all assets should be available through addressables
 namespace HopeMain.Code.System.Assets
@@ -15,13 +16,13 @@ namespace HopeMain.Code.System.Assets
    {
       [Header("Villagers")] 
       [SerializeField] private GameObject[] villagerPrefabs;
-      [SerializeField] private Villager_ProfessionData[] professionData;
+      [SerializeField] private Characters.Villagers.Profession.Data[] professionData;
 
       [Header("Buildings")] 
       [SerializeField] private GameObject[] buildingPrefabs;
 
       [Header("Resources")] 
-      [SerializeField] private ResourceToGatherData[] resourcesToGatherData;
+      [SerializeField] private Data[] resourcesToGatherData;
       
       [Header("Sprites")]
       [SerializeField] private Sprite[] resourceIcons;
@@ -31,8 +32,8 @@ namespace HopeMain.Code.System.Assets
       [SerializeField] private BehaviourTree[] behaviourTrees;
 
       [Header("Sounds")] 
-      [SerializeField] private Asset_Sound[] walkingSoundEffects;
-      [SerializeField] private Asset_Sound[] constructionSoundEffects;
+      [SerializeField] private Sound[] walkingSoundEffects;
+      [SerializeField] private Sound[] constructionSoundEffects;
 
 
       [Header("Other")] 
@@ -87,9 +88,9 @@ namespace HopeMain.Code.System.Assets
          return p;
       }
 
-      public Villager_ProfessionData GetProfessionDataForProfessionType(ProfessionType professionType)
+      public Characters.Villagers.Profession.Data GetProfessionDataForProfessionType(ProfessionType professionType)
       {
-         Villager_ProfessionData p = professionData.FirstOrDefault(data => data.Type == professionType);
+         Characters.Villagers.Profession.Data p = professionData.FirstOrDefault(data => data.Type == professionType);
 
          if (p == null)
             throw new Exception("ASSET STORAGE ----- CAN'T FIND DATA FOR PROFESSION: " + professionType);
@@ -97,9 +98,9 @@ namespace HopeMain.Code.System.Assets
          return p;
       }
 
-      public ResourceToGatherData GetResourceToGatherDataByResourceType(ResourceType resourceType)
+      public Data GetResourceToGatherDataByResourceType(ResourceType resourceType)
       {
-         ResourceToGatherData r =
+         Data r =
             resourcesToGatherData.FirstOrDefault(resource => resource.ResourceType == resourceType);
          
          if (r == null)
@@ -133,7 +134,7 @@ namespace HopeMain.Code.System.Assets
       
       public void ThrowResourceOnTheGround(Resource resource, float mapX)
       {
-         Villager_ProfessionData haulerData = GetProfessionDataForProfessionType(ProfessionType.GlobalHauler);
+         Characters.Villagers.Profession.Data haulerData = GetProfessionDataForProfessionType(ProfessionType.GlobalHauler);
          int resourceCnt =  Mathf.FloorToInt(resource.amount / haulerData.ResourceCarryingLimit) + (resource.amount % haulerData.ResourceCarryingLimit > 0 ? 1 : 0);
          int currentAmount = resource.amount;
          
@@ -153,18 +154,18 @@ namespace HopeMain.Code.System.Assets
          }
       }
 
-      public AudioClip[] GetAudioClipsByName(AssetSoundType soundType, string assetName)
+      public AudioClip[] GetAudioClipsByName(SoundType soundType, string assetName)
       {
          AudioClip[] clips = null;
 
          switch (soundType) {
-            case AssetSoundType.Walking:
+            case SoundType.Walking:
                break;
             
-            case AssetSoundType.Background:
+            case SoundType.Background:
                break;
             
-            case AssetSoundType.Construction:
+            case SoundType.Construction:
                clips = GetConstructionAudioClipsByName(assetName);
                break;
             
@@ -175,19 +176,19 @@ namespace HopeMain.Code.System.Assets
          return clips;
       }
 
-      public AudioClip GetAudioClipByName(AssetSoundType soundType, string assetName)
+      public AudioClip GetAudioClipByName(SoundType soundType, string assetName)
       {
          AudioClip clip = null;
          
          switch (soundType) {
-            case AssetSoundType.Walking:
+            case SoundType.Walking:
                clip = GetWalkingAudioClipByAreaName(assetName);
                break;
             
-            case AssetSoundType.Background:
+            case SoundType.Background:
                break;
             
-            case AssetSoundType.Construction:
+            case SoundType.Construction:
                break;
             
             default:

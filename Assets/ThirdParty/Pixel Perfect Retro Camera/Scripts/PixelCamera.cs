@@ -30,14 +30,14 @@ namespace ThirdParty.Pixel_Perfect_Retro_Camera.Scripts
 			int scale = Screen.height / renderHeight;
 		
 			// Height is snapped to the closest whole multiple of reference height.
-			actualHeight = (int)(renderHeight * scale);
+			actualHeight = renderHeight * scale;
 		
 			/*
 			Width isn't snapped like height is and will fill the entire width of 
 			the monitor using the scale determined by the height.
 		*/
-			renderWidth = (int)(Screen.width / scale);			
-			actualWidth = (int)(renderWidth * scale);
+			renderWidth = Screen.width / scale;			
+			actualWidth = renderWidth * scale;
 
 			Rect rect = cam.rect;
 		

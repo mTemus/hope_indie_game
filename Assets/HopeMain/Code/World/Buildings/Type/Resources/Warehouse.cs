@@ -3,17 +3,17 @@ using System.Linq;
 using HopeMain.Code.AI.Villagers.Tasks;
 using HopeMain.Code.Characters.Villagers.Entity;
 using HopeMain.Code.System;
+using HopeMain.Code.World.Buildings.Workplace;
 using HopeMain.Code.World.Resources;
 using UnityEngine;
-using Task = HopeMain.Code.AI.Villagers.Tasks.Task;
 
 namespace HopeMain.Code.World.Buildings.Type.Resources
 {
-    public class Warehouse : Workplace.Workplace
+    public class Warehouse : WorkplaceBase
     {
         private readonly List<Resource> storedResources = new List<Resource>();
         private readonly List<ResourceToPickUp> resourcesToPickUp = new List<ResourceToPickUp>();
-        private readonly Dictionary<Workplace.Workplace, List<Task>> externalTasks = new Dictionary<Workplace.Workplace, List<Task>>();
+        private readonly Dictionary<WorkplaceBase, List<Task>> externalTasks = new Dictionary<WorkplaceBase, List<Task>>();
 
         public override void Initialize()
         {
@@ -25,23 +25,23 @@ namespace HopeMain.Code.World.Buildings.Type.Resources
 
         public void RegisterResourceToPickUp(ResourceToPickUp resource)
         {
-            Task_ResourcePickUp rtpt = null;
+            ResourcePickUp rtpt = null;
             
             foreach (Task task in tasksToDo) {
-                if (!(task is Task_ResourcePickUp {HasWorker: true} rpt)) continue;
+                if (!(task is ResourcePickUp {HasWorker: true} rpt)) continue;
                 if (rpt.IsResourceInDelivery) continue;
                 if (rpt.CanStoreResources) {
                     if (rpt.AddResourceToPickUp(resource))
-                        resource.TaskResourcePickUp = rpt;
+                        resource.ResourcePickUpTask = rpt;
                 }
                 else {
-                    rtpt = new Task_ResourcePickUp(resource.StoredResource.Type);
+                    rtpt = new ResourcePickUp(resource.StoredResource.Type);
                     AddTaskToDo(rtpt); 
                 }
             }
 
             if (rtpt == null) {
-                rtpt = new Task_ResourcePickUp(resource.StoredResource.Type);
+                rtpt = new ResourcePickUp(resource.StoredResource.Type);
                 AddTaskToDo(rtpt); 
             }
             
@@ -53,13 +53,13 @@ namespace HopeMain.Code.World.Buildings.Type.Resources
             resourcesToPickUp.Remove(resource);
         }
 
-        public void GetResourcesToPickUpByType(Task_ResourcePickUp rput)
+        public void GetResourcesToPickUpByType(ResourcePickUp rput)
         {
             foreach (var resource in resourcesToPickUp
                 .Where(resource => resource.StoredResource.Type == rput.StoredResourceType)
                 .Where(resource => !resource.IsRegisteredToPickUp)) {
                 if (rput.AddResourceToPickUp(resource))
-                    resource.TaskResourcePickUp = rput;
+                    resource.ResourcePickUpTask = rput;
                 if (!rput.CanStoreResources) break;
             }
         }
@@ -107,7 +107,7 @@ namespace HopeMain.Code.World.Buildings.Type.Resources
 
         private Task GetExternalTask()
         {
-            List<Workplace.Workplace> keys = externalTasks.Keys.ToList();
+            List<WorkplaceBase> keys = externalTasks.Keys.ToList();
             Task et = externalTasks[keys[0]][0];
             externalTasks[keys[0]].Remove(et);
 
@@ -117,10 +117,10 @@ namespace HopeMain.Code.World.Buildings.Type.Resources
             return et;
         }
         
-        public bool HasExternalTasksFromWorkplace(Workplace.Workplace workplace) =>
+        public bool HasExternalTasksFromWorkplace(WorkplaceBase workplace) =>
             externalTasks.ContainsKey(workplace);
         
-        public void RegisterExternalTask(Workplace.Workplace workplace, Task task)
+        public void RegisterExternalTask(WorkplaceBase workplace, Task task)
         {
             if (workersWithoutTasks.Count > 0) {
                 GiveTaskToWorker(workersWithoutTasks[0], task);
@@ -133,7 +133,7 @@ namespace HopeMain.Code.World.Buildings.Type.Resources
                 externalTasks[workplace] = new List<Task> { task };
         }
 
-        public List<Task> GetExternalTasksBackToWorkplace(Workplace.Workplace workplace)
+        public List<Task> GetExternalTasksBackToWorkplace(WorkplaceBase workplace)
         {
             List<Task> tasks = new List<Task>(externalTasks[workplace]);
             externalTasks.Remove(workplace);

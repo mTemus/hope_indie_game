@@ -21,7 +21,7 @@ namespace HopeMain.Code.GUI.Villager.Selecting
         [SerializeField] private TextMeshProUGUI intelligenceValueVillager;
         [SerializeField] private TextMeshProUGUI goldValue;
 
-        [Header("Workplace values")] 
+        [Header("WorkplaceBase values")] 
         [SerializeField] private GameObject noAvailableWorkplacePanel;
 
         private Vector2 labelSize;
@@ -61,17 +61,17 @@ namespace HopeMain.Code.GUI.Villager.Selecting
             GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         }
 
-        public void LoadProfessionData(Villager_ProfessionData villagerProfessionData, Characters.Villagers.Entity.Villager villager)
+        public void LoadProfessionData(Data professionData, Characters.Villagers.Entity.Villager villager)
         {
-            SetProfessionText(strengthValueProfession, villagerProfessionData.RequiredStatistics.Strength);
-            SetProfessionText(dexterityValueProfession, villagerProfessionData.RequiredStatistics.Dexterity);
-            SetProfessionText(intelligenceValueProfession, villagerProfessionData.RequiredStatistics.Intelligence);
+            SetProfessionText(strengthValueProfession, professionData.RequiredStatistics.Strength);
+            SetProfessionText(dexterityValueProfession, professionData.RequiredStatistics.Dexterity);
+            SetProfessionText(intelligenceValueProfession, professionData.RequiredStatistics.Intelligence);
             
-            SetVillagerText(strengthValueVillager, villager.Statistics.Strength, villagerProfessionData.RequiredStatistics.Strength);
-            SetVillagerText(dexterityValueVillager, villager.Statistics.Dexterity, villagerProfessionData.RequiredStatistics.Dexterity);
-            SetVillagerText(intelligenceValueVillager, villager.Statistics.Intelligence, villagerProfessionData.RequiredStatistics.Intelligence);
+            SetVillagerText(strengthValueVillager, villager.Statistics.Strength, professionData.RequiredStatistics.Strength);
+            SetVillagerText(dexterityValueVillager, villager.Statistics.Dexterity, professionData.RequiredStatistics.Dexterity);
+            SetVillagerText(intelligenceValueVillager, villager.Statistics.Intelligence, professionData.RequiredStatistics.Intelligence);
 
-            goldValue.text = villagerProfessionData.GoldPerDay.ToString();
+            goldValue.text = professionData.GoldPerDay.ToString();
         }
 
         public void ShowNotAvailableWorkplacesPanel(bool condition)

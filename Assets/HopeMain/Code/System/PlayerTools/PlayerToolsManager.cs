@@ -4,13 +4,13 @@ namespace HopeMain.Code.System.PlayerTools
 {
     public class PlayerToolsManager : MonoBehaviour
     {
-        private readonly PlayerTool hammer = new PlayerToolHammer();
-        private readonly PlayerTool hand = new PlayerToolFreeHand();
-        private readonly PlayerTool goldPocket = new PlayerToolGoldPocket();
-        private readonly PlayerTool villagersBook = new PlayerToolVillagersBook();
-        private readonly PlayerTool buildingsBook = new PlayerToolBuildingsBook();
+        private readonly Tool hammer = new Hammer();
+        private readonly Tool hand = new FreeHand();
+        private readonly Tool goldPocket = new GoldPocket();
+        private readonly Tool villagersBook = new VillagersBook();
+        private readonly Tool buildingsBook = new BuildingsBook();
 
-        private PlayerTool currentTool;
+        private Tool currentTool;
 
         private void Awake()
         {
@@ -33,7 +33,7 @@ namespace HopeMain.Code.System.PlayerTools
                 _ => currentTool
             };
             
-            Debug.LogWarning(currentTool.ToString() + " selected.");
+            Debug.LogWarning(currentTool + " selected.");
         }
     }
 }

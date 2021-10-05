@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using HopeMain.Code.AI.Villagers.Tasks;
 using HopeMain.Code.System;
 using HopeMain.Code.System.Assets;
 using HopeMain.Code.System.Initialization;
@@ -16,7 +15,7 @@ namespace HopeMain.Code.World.Buildings
         
         private float currentProgress;
         
-        private Task_Building taskBuilding;
+        private AI.Villagers.Tasks.Building _buildingTask;
         private Vector3 positionOffset;
         private Material normalMaterial;
         private Material buildingMaterial;
@@ -57,9 +56,9 @@ namespace HopeMain.Code.World.Buildings
             requiredResources.Add(resource);
         }
 
-        public void SetBuildingTask(Task_Building @this)
+        public void SetBuildingTask(AI.Villagers.Tasks.Building @this)
         {
-            taskBuilding = @this;
+            _buildingTask = @this;
         }
         
         public void AddResources(Resource deliveredResource)
@@ -71,11 +70,11 @@ namespace HopeMain.Code.World.Buildings
             
             if (AreResourceDelivered) {
                 Debug.LogError("Resources delivered for: " + name);
-                taskBuilding.SetResourcesAsDelivered();
+                _buildingTask.SetResourcesAsDelivered();
             }
         }
 
-        public void InitializeConstruction(BuildingData buildingData, Material fadeMaterial)
+        public void InitializeConstruction(Data buildingData, Material fadeMaterial)
         {
             SpriteRenderer buildingRenderer = GetComponent<SpriteRenderer>();
             
@@ -101,7 +100,7 @@ namespace HopeMain.Code.World.Buildings
             constructionChannel.spatialBlend = 1f;
             constructionChannel.minDistance = 3f;
             constructionChannel.maxDistance = 10f;
-            clips = AssetsStorage.I.GetAudioClipsByName(AssetSoundType.Construction, "construction");
+            clips = AssetsStorage.I.GetAudioClipsByName(SoundType.Construction, "construction");
         }
 
         public void CleanAfterConstruction()

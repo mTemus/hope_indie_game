@@ -5,11 +5,11 @@ namespace HopeMain.Code.System.Initialization
 {
     public class InitializeResourceToGather : InitializeObject
     {
-        [SerializeField] private ResourceToGatherData resourceToGatherData;
+        [SerializeField] private Data resourceToGatherData;
         
         public override void InitializeMe()
         {
-            ResourceToGather rtg = GetComponent<ResourceToGather>();
+            ResourceToGatherBase rtg = GetComponent<ResourceToGatherBase>();
             rtg.Initialize(resourceToGatherData);
             
             Managers.I.Areas.GetAreaByCoords(Vector3Int.FloorToInt(transform.position))

@@ -5,7 +5,8 @@ using HopeMain.Code.GameProperties;
 using HopeMain.Code.System;
 using HopeMain.Code.System.GameInput;
 using HopeMain.Code.World.Areas;
-using HopeMain.Code.World.Grid;
+using HopeMain.Code.World.Buildings.Workplace;
+using HopeMain.Code.World.Grid.Cell;
 using HopeMain.Code.World.Resources.ResourceToGather;
 using UnityEngine;
 
@@ -23,7 +24,7 @@ namespace HopeMain.Code.World.Buildings.Systems
         private Vector3Int currOffset;
 
         private static GameObject _currentBuilding;
-        private static BuildingData _currentBuildingData;
+        private static Data _currentBuildingData;
         private Area currentBuildingArea;
         private Vector3Int currentPlacingPosition;
         
@@ -34,14 +35,14 @@ namespace HopeMain.Code.World.Buildings.Systems
         // 4. Build -> set building on current position if it is valid for this type of building or it is free
         
         public static GameObject CurrentBuilding => _currentBuilding;
-        public static BuildingData CurrentBuildingData => _currentBuildingData;
+        public static Data CurrentBuildingData => _currentBuildingData;
         
         private bool IsBuildingInAreaRange(Area area, Vector3Int buildingPosition) =>
             area.GridMap.IsTileInRange(buildingPosition.x, buildingPosition.y, _currentBuildingData.Size.x);
         
         private bool CheckBuildingCorner(Vector3Int cornerPosition, out Vector3 newBuildingPosition)
         {
-            Cell cell = currentBuildingArea.GridMap.GetCellAt(cornerPosition.x / GlobalProperties.WorldTileSize, 0);
+            CellBase cell = currentBuildingArea.GridMap.GetCellAt(cornerPosition.x / GlobalProperties.WorldTileSize, 0);
             if (cell.content == _currentBuildingData.RequiredCellContent) {
                 switch (cell.content) {
                     case CellContentType.Null:
@@ -55,7 +56,7 @@ namespace HopeMain.Code.World.Buildings.Systems
                         break;
                     
                     case CellContentType.StoneResource:
-                        ResourceToGather resource = cell.resourceToGatherData;
+                        ResourceToGatherBase resource = cell.resourceToGatherData;
                         newBuildingPosition = new Vector3(
                             (int) resource.transform.localPosition.x + Mathf.FloorToInt(_currentBuildingData.Size.x / 2f) * GlobalProperties.WorldTileSize, 
                             cornerPosition.y, 
@@ -110,7 +111,7 @@ namespace HopeMain.Code.World.Buildings.Systems
             return newBuildingPosition == Vector3.zero ? currentPlacingPosition : newBuildingPosition;
         }
         
-        public void SetBuilding(BuildingData buildingData)
+        public void SetBuilding(Data buildingData)
         {
             if (_currentBuilding != null) 
                 DestroyImmediate(_currentBuilding.gameObject);
@@ -189,8 +190,8 @@ namespace HopeMain.Code.World.Buildings.Systems
                 
                 case CellContentType.StoneResource:
                     if (currentBuildingArea.GridMap.GetCellAt(buildingArea[0].x, buildingArea[0].y).resourceToGatherData
-                        is StoneToGather stone)
-                        stone.Workplace = _currentBuilding.GetComponent<Workplace.Workplace>();
+                        is Stone stone)
+                        stone.Workplace = _currentBuilding.GetComponent<WorkplaceBase>();
                     break;
                 
                 case CellContentType.Building:
@@ -207,7 +208,7 @@ namespace HopeMain.Code.World.Buildings.Systems
             currOffset = Vector3Int.zero;
             
             
-            Managers.I.Input.SetState(InputManager.MovingInputState);
+            Managers.I.Input.SetState(InputManager.Moving);
         }
 
         public void CancelBuilding()

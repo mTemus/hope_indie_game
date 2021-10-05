@@ -12,8 +12,8 @@ namespace HopeMain.Code.GUI.Player.BuildingSelecting
     public class BuildingSelectingMenu : MonoBehaviour
     {
         [Header("Scroll Areas")]
-        [SerializeField] private UiScrollArea buildingTypesArea;
-        [SerializeField] private UiScrollArea buildingObjectsArea;
+        [SerializeField] private UIScrollArea buildingTypesArea;
+        [SerializeField] private UIScrollArea buildingObjectsArea;
 
         [Header("Building Types")] 
         [SerializeField] private Transform buildingTypesContent;

@@ -52,37 +52,37 @@ namespace HopeMain.Code.Characters.Villagers.Profession
 
         private void MakeVillagerUnemployed(Villager villager)
         {
-            villager.Profession = villager.gameObject.AddComponent<Villager_Profession_Unemployed>();
+            villager.Profession = villager.gameObject.AddComponent<Unemployed>();
             unemployed.Add(villager);
         }
         
         private void HireBuilder(Villager villager)
         {
-            villager.Profession = villager.gameObject.AddComponent<Villager_Profession_Builder>();
+            villager.Profession = villager.gameObject.AddComponent<Builder>();
             builders.Add(villager);
         }
 
         private void HireLumberjack(Villager villager)
         {
-            villager.Profession = villager.gameObject.AddComponent<Villager_Profession_Lumberjack>();
+            villager.Profession = villager.gameObject.AddComponent<Lumberjack>();
             lumberjacks.Add(villager);
         }
 
         private void HireLocalHauler(Villager villager)
         {
-            villager.Profession = villager.gameObject.AddComponent<Villager_Profession_WorkplaceHauler>();
+            villager.Profession = villager.gameObject.AddComponent<WorkplaceHauler>();
             localHaulers.Add(villager);
         }
 
         private void HireGlobalHauler(Villager villager)
         {
-            villager.Profession = villager.gameObject.AddComponent<Villager_Profession_GlobalHauler>();
+            villager.Profession = villager.gameObject.AddComponent<GlobalHauler>();
             globalHaulers.Add(villager);
         }
 
         private void HireStoneMiner(Villager villager)
         {
-            villager.Profession = villager.gameObject.AddComponent<Villager_Profession_StoneMiner>();
+            villager.Profession = villager.gameObject.AddComponent<StoneMiner>();
             stoneMiners.Add(villager);
         }
 
@@ -153,16 +153,16 @@ namespace HopeMain.Code.Characters.Villagers.Profession
             villager.UI.ProfessionName.text = "No Profession Exception";
         }
         
-        public void SetVillagerProfession(Villager villager, Villager_ProfessionData villagerProfessionData, Workplace workplace)
+        public void SetVillagerProfession(Villager villager, Data professionData, WorkplaceBase workplace)
         {
-            AddProfessionComponent(villager, villagerProfessionData.Type);
-            villager.Profession.Data = villagerProfessionData;
+            AddProfessionComponent(villager, professionData.Type);
+            villager.Profession.Data = professionData;
             workplace.HireWorker(villager);
             
-            AddBehaviourTreeAIComponents(villagerProfessionData.AIType, villager);
+            AddBehaviourTreeAIComponents(professionData.AIType, villager);
             
             villager.Profession.Initialize();
-            villager.UI.ProfessionName.text = villagerProfessionData.Type + " of " + villager.Profession.Workplace.name;
+            villager.UI.ProfessionName.text = professionData.Type + " of " + villager.Profession.Workplace.name;
 
             villager.Brain.Behaviour.BehaviourTree.StartBehaviour();
         }

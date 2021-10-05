@@ -1,6 +1,6 @@
 namespace HopeMain.Code.GUI.UIElements.SelectableElement
 {
-    public class ProfessionsVisualsGroup : UiVerticalGroup
+    public class ProfessionsVisualsGroup : UIVerticalGroup
     {
         
     }

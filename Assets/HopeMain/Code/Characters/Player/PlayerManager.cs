@@ -7,7 +7,7 @@ namespace HopeMain.Code.Characters.Player
 {
     public class PlayerManager : MonoBehaviour
     {
-        [SerializeField] private Player_Brain player;
+        [SerializeField] private Brain player;
         
         private void Start()
         {
@@ -22,7 +22,7 @@ namespace HopeMain.Code.Characters.Player
         public Vector2 GetPlayerLocalPosition()
             => player.transform.localPosition;
 
-        public Player_Brain Player => player;
+        public Brain Player => player;
 
         public GameObject PlayerGO => player.gameObject;
     }

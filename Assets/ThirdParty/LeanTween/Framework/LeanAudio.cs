@@ -4,7 +4,7 @@ namespace ThirdParty.LeanTween.Framework
 {
 	public class LeanAudioStream {
 
-		public int position = 0;
+		public int position;
 
 		public AudioClip audioClip;
 		public float[] audioArr;
@@ -16,14 +16,14 @@ namespace ThirdParty.LeanTween.Framework
 		public void OnAudioRead(float[] data) {
 			int count = 0;
 			while (count < data.Length) {
-				data[count] = audioArr[this.position];
+				data[count] = audioArr[position];
 				position++;
 				count++;
 			}
 		}
 
 		public void OnAudioSetPosition(int newPosition) {
-			this.position = newPosition;   
+			position = newPosition;   
 		}
 	}
 
@@ -38,7 +38,7 @@ namespace ThirdParty.LeanTween.Framework
 		public static float MIN_FREQEUNCY_PERIOD = 0.000115f;
 		public static int PROCESSING_ITERATIONS_MAX = 50000;
 		public static float[] generatedWaveDistances;
-		public static int generatedWaveDistancesCount = 0;
+		public static int generatedWaveDistancesCount;
 
 		private static float[] longList;
 
@@ -113,23 +113,22 @@ namespace ThirdParty.LeanTween.Framework
 				if(listLength >= PROCESSING_ITERATIONS_MAX-1){
 					Debug.LogError("LeanAudio has reached it's processing cap. To avoid this error increase the number of iterations ex: LeanAudio.PROCESSING_ITERATIONS_MAX = "+(PROCESSING_ITERATIONS_MAX*2));
 					break;
-				}else{
-					int distPoint = listLength / 2;
-				
-					//generatedWaveDistances.Add( f );
-					passed += f;
-
-					generatedWaveDistances[ distPoint ] = passed;
-					//Debug.Log("distPoint:"+distPoint+" passed:"+passed);
-
-					//list.Add( passed );
-					//list.Add( i%2==0 ? -height : height );
-
-					longList[ listLength ] = passed;
-					longList[ listLength + 1 ] = i%2==0 ? -height : height;
 				}
+				int distPoint = listLength / 2;
+				
+				//generatedWaveDistances.Add( f );
+				passed += f;
 
-			
+				generatedWaveDistances[ distPoint ] = passed;
+				//Debug.Log("distPoint:"+distPoint+" passed:"+passed);
+
+				//list.Add( passed );
+				//list.Add( i%2==0 ? -height : height );
+
+				longList[ listLength ] = passed;
+				longList[ listLength + 1 ] = i%2==0 ? -height : height;
+
+
 
 				listLength += 2;
 			
@@ -155,7 +154,7 @@ namespace ThirdParty.LeanTween.Framework
 			float subWaveTime = longList[waveIter];
 			float waveHeight = longList[waveIter+1];
 			for(int i = 0; i < audioArr.Length; i++){
-				float passedTime = (float)i / (float)options.frequencyRate;
+				float passedTime = i / (float)options.frequencyRate;
 				if(passedTime > longList[waveIter] ){
 					subWaveTimeLast = longList[waveIter];
 					waveIter += 2;
@@ -246,7 +245,7 @@ namespace ThirdParty.LeanTween.Framework
 
 			// Debug.Log("curveTime:"+curveTime+" AudioSettings.outputSampleRate:"+AudioSettings.outputSampleRate);
 			for(int i = 0; i < audioArr.Length; i++){
-				float pt = (float)i / (float)frequencyRate;
+				float pt = i / (float)frequencyRate;
 				audioArr[i] = curve.Evaluate( pt );
 				// Debug.Log("pt:"+pt+" i:"+i+" val:"+audioArr[i]+" len:"+audioArr.Length);
 			}
@@ -305,7 +304,7 @@ namespace ThirdParty.LeanTween.Framework
 
 			Keyframe[] frames = new Keyframe[samples.Length];
 			while (i < samples.Length) {
-				frames[i] = new Keyframe( (float)i * scaleX, samples[i] );
+				frames[i] = new Keyframe( i * scaleX, samples[i] );
 				++i;
 			}
 			curve = new AnimationCurve( frames );
@@ -337,8 +336,6 @@ namespace ThirdParty.LeanTween.Framework
 
 		public bool useSetData = true;
 		public LeanAudioStream stream;
-
-		public LeanAudioOptions(){}
 
 		/**
 	* Set the frequency for the audio is encoded. 44100 is CD quality, but you can usually get away with much lower (or use a lower amount to get a more 8-bit sound).
@@ -379,38 +376,38 @@ namespace ThirdParty.LeanTween.Framework
 	}*/
 
 		public LeanAudioOptions setWaveSine(){
-			this.waveStyle = LeanAudioWaveStyle.Sine;
+			waveStyle = LeanAudioWaveStyle.Sine;
 			return this;
 		}
 
 		public LeanAudioOptions setWaveSquare(){
-			this.waveStyle = LeanAudioWaveStyle.Square;
+			waveStyle = LeanAudioWaveStyle.Square;
 			return this;
 		}
 
 		public LeanAudioOptions setWaveSawtooth(){
-			this.waveStyle = LeanAudioWaveStyle.Sawtooth;
+			waveStyle = LeanAudioWaveStyle.Sawtooth;
 			return this;
 		}
 
 		public LeanAudioOptions setWaveNoise(){
-			this.waveStyle = LeanAudioWaveStyle.Noise;
+			waveStyle = LeanAudioWaveStyle.Noise;
 			return this;
 		}
 
 		public LeanAudioOptions setWaveStyle( LeanAudioWaveStyle style ){
-			this.waveStyle = style;
+			waveStyle = style;
 			return this;
 		}
 
 
 		public LeanAudioOptions setWaveNoiseScale( float waveScale ){
-			this.waveNoiseScale = waveScale;
+			waveNoiseScale = waveScale;
 			return this;
 		}
 
 		public LeanAudioOptions setWaveNoiseInfluence( float influence ){
-			this.waveNoiseInfluence = influence;
+			waveNoiseInfluence = influence;
 			return this;
 		}
 	}

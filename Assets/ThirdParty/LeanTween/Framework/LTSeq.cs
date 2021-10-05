@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace ThirdParty.LeanTween.Framework
 {
@@ -35,7 +36,7 @@ namespace ThirdParty.LeanTween.Framework
 
 		public uint counter;
 
-		public bool toggle = false;
+		public bool toggle;
 
 		private uint _id;
 
@@ -65,30 +66,30 @@ namespace ThirdParty.LeanTween.Framework
 
 			counter = global_counter;
 
-			this.current = this;
+			current = this;
 		}
 
 		private LTSeq addOn(){
-			this.current.toggle = true;
-			LTSeq lastCurrent = this.current;
-			this.current = LeanTween.sequence(true);
+			current.toggle = true;
+			LTSeq lastCurrent = current;
+			current = LeanTween.sequence();
 			// Debug.Log("this.current:" + this.current.id + " lastCurrent:" + lastCurrent.id);
-			this.current.previous = lastCurrent;
+			current.previous = lastCurrent;
 			lastCurrent.toggle = false;
-			this.current.totalDelay = lastCurrent.totalDelay;
-			this.current.debugIter = lastCurrent.debugIter + 1;
+			current.totalDelay = lastCurrent.totalDelay;
+			current.debugIter = lastCurrent.debugIter + 1;
 			return current;
 		}
 
 		private float addPreviousDelays(){
 //		Debug.Log("delay:"+delay+" count:"+this.current.count+" this.current.totalDelay:"+this.current.totalDelay);
 
-			LTSeq prev = this.current.previous;
+			LTSeq prev = current.previous;
 
 			if (prev != null && prev.tween!=null) {
-				return this.current.totalDelay + prev.tween.time;
+				return current.totalDelay + prev.tween.time;
 			}
-			return this.current.totalDelay;
+			return current.totalDelay;
 		}
 
 		/**
@@ -101,9 +102,9 @@ namespace ThirdParty.LeanTween.Framework
 	* seq.append( LeanTween.move(cube1, Vector3.one * 10f, 1f) ); // do a tween<br>
 	*/
 		public LTSeq append( float delay ){
-			this.current.totalDelay += delay;
+			current.totalDelay += delay;
 
-			return this.current;
+			return current;
 		}
 
 		/**
@@ -121,7 +122,7 @@ namespace ThirdParty.LeanTween.Framework
 	* &nbsp;Debug.Log("We are done now");<br>
 	* });;<br>
 	*/
-		public LTSeq append( System.Action callback ){
+		public LTSeq append( Action callback ){
 			LTDescr newTween = LeanTween.delayedCall(0f, callback);
 //		Debug.Log("newTween:" + newTween);
 			return append(newTween);
@@ -143,19 +144,19 @@ namespace ThirdParty.LeanTween.Framework
 	* &nbsp;Debug.Log("We are done now obj value:"+dict["hi"]);
 	* &nbsp;}, new Dictionary<string,string>(){ {"hi","sup"} } );
 	*/
-		public LTSeq append( System.Action<object> callback, object obj ){
+		public LTSeq append( Action<object> callback, object obj ){
 			append(LeanTween.delayedCall(0f, callback).setOnCompleteParam(obj));
 
 			return addOn();
 		}
 
-		public LTSeq append( GameObject gameObject, System.Action callback ){
+		public LTSeq append( GameObject gameObject, Action callback ){
 			append(LeanTween.delayedCall(gameObject, 0f, callback));
 
 			return addOn();
 		}
 
-		public LTSeq append( GameObject gameObject, System.Action<object> callback, object obj ){
+		public LTSeq append( GameObject gameObject, Action<object> callback, object obj ){
 			append(LeanTween.delayedCall(gameObject, 0f, callback).setOnCompleteParam(obj));
 
 			return addOn();
@@ -172,19 +173,19 @@ namespace ThirdParty.LeanTween.Framework
 	* seq.append( LeanTween.rotateAround( avatar1, Vector3.forward, 360f, 1f ) ); // then do a rotate tween<br>
 	*/
 		public LTSeq append( LTDescr tween ){
-			this.current.tween = tween;
+			current.tween = tween;
 
 //		Debug.Log("tween:" + tween + " delay:" + this.current.totalDelay);
 
-			this.current.totalDelay = addPreviousDelays();
+			current.totalDelay = addPreviousDelays();
 
-			tween.setDelay( this.current.totalDelay );
+			tween.setDelay( current.totalDelay );
 
 			return addOn();
 		}
 
 		public LTSeq insert( LTDescr tween ){
-			this.current.tween = tween;
+			current.tween = tween;
 
 			tween.setDelay( addPreviousDelays() );
 
@@ -194,7 +195,7 @@ namespace ThirdParty.LeanTween.Framework
 
 		public LTSeq setScale( float timeScale ){
 //		Debug.Log("this.current:" + this.current.previous.debugIter+" tween:"+this.current.previous.tween);
-			setScaleRecursive(this.current, timeScale, 500);
+			setScaleRecursive(current, timeScale, 500);
 
 			return addOn();
 		}
