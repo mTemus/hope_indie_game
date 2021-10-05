@@ -680,7 +680,7 @@ MonoBehaviour:
   type: 2
   width: 100
   height: 30
-  parallax: {fileID: 0}
+  localParallax: {fileID: 0}
 --- !u!4 &58873779
 Transform:
   m_ObjectHideFlags: 0
@@ -8830,7 +8830,7 @@ MonoBehaviour:
   buildingSelectingMenu: {fileID: 1388466219}
   requiredResourcesPanel: {fileID: 936070672}
   villagerPropertiesPanel: {fileID: 1535540518}
-  villagerProfessionChangingPanel: {fileID: 104695375}
+  professionChangingPanel: {fileID: 0}
 --- !u!1 &507497736
 GameObject:
   m_ObjectHideFlags: 0
@@ -14144,7 +14144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28d50b787c6bbfc4e876f76c23b9d7db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  area: {fileID: 2080944412}
+  area: {fileID: 0}
   visitors: []
 --- !u!1 &1157421554
 GameObject:
@@ -14315,7 +14315,7 @@ MonoBehaviour:
   type: 0
   width: 100
   height: 30
-  parallax: {fileID: 887546486}
+  localParallax: {fileID: 0}
 --- !u!114 &1190323420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22606,7 +22606,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugAreas: 0
   areas:
-  - {fileID: 2080944412}
+  - {fileID: 0}
   - {fileID: 1190323419}
   - {fileID: 58873778}
 --- !u!1 &1487678052
@@ -23052,7 +23052,7 @@ MonoBehaviour:
   buildings: {fileID: 1483205192}
   resources: {fileID: 1483205190}
   professions: {fileID: 1307042241}
-  villagerSelection: {fileID: 1307042242}
+  selection: {fileID: 0}
   environment: {fileID: 390188015}
   gui: {fileID: 503572590}
 --- !u!4 &1579721258
@@ -25014,7 +25014,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28d50b787c6bbfc4e876f76c23b9d7db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  area: {fileID: 2080944412}
+  area: {fileID: 0}
   visitors: []
 --- !u!1 &1822530154
 GameObject:
@@ -30896,7 +30896,7 @@ MonoBehaviour:
   type: 1
   width: 300
   height: 30
-  parallax: {fileID: 2008466196}
+  localParallax: {fileID: 0}
 --- !u!4 &2080944413
 Transform:
   m_ObjectHideFlags: 0
@@ -30926,7 +30926,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6ef0733c5b0d324188f5a215166bb18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myArea: {fileID: 2080944412}
+  myArea: {fileID: 0}
 --- !u!1 &2089969471
 GameObject:
   m_ObjectHideFlags: 0
