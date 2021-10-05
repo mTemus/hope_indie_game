@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Code.System;
-using Code.Villagers.Entity;
-using Code.Villagers.Tasks;
+using HopeMain.Code.AI.Villagers.Tasks;
+using HopeMain.Code.Characters.Villagers.Entity;
+using HopeMain.Code.System;
 using UnityEngine;
 
-namespace Code.Map.Resources.ResourceToGather
+namespace HopeMain.Code.World.Resources.ResourceToGather
 {
     public abstract class ResourceToGather : MonoBehaviour
     {

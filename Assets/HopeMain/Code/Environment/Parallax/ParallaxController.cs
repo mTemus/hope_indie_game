@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Code.Environment.Parallax
+namespace HopeMain.Code.Environment.Parallax
 {
     public abstract class ParallaxController : MonoBehaviour
     {

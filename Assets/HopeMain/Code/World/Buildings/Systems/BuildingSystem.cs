@@ -1,17 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Code.Map.Building.Workplaces;
-using Code.Map.Resources.ResourceToGather;
-using Code.Map.Resources.ResourceToGather.ResourcesToGather;
-using Code.System;
-using Code.System.Areas;
-using Code.System.GameInput;
-using Code.System.Grid;
-using Code.System.Properties;
+using HopeMain.Code.GameProperties;
+using HopeMain.Code.System;
+using HopeMain.Code.System.GameInput;
+using HopeMain.Code.World.Areas;
+using HopeMain.Code.World.Grid;
+using HopeMain.Code.World.Resources.ResourceToGather;
 using UnityEngine;
 
-namespace Code.Map.Building.Systems
+namespace HopeMain.Code.World.Buildings.Systems
 {
     //TODO: Apply systems dependent on building type/building resources, when no resources, then set resources delivered in building task
     
@@ -192,7 +190,7 @@ namespace Code.Map.Building.Systems
                 case CellContentType.StoneResource:
                     if (currentBuildingArea.GridMap.GetCellAt(buildingArea[0].x, buildingArea[0].y).resourceToGatherData
                         is StoneToGather stone)
-                        stone.Workplace = _currentBuilding.GetComponent<Workplace>();
+                        stone.Workplace = _currentBuilding.GetComponent<Workplace.Workplace>();
                     break;
                 
                 case CellContentType.Building:

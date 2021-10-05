@@ -1,10 +1,10 @@
 using System.Linq;
-using Code.Map.Building.Systems;
-using Code.Map.Resources;
+using HopeMain.Code.World.Buildings.Systems;
+using HopeMain.Code.World.Resources;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Code.GUI.BuildingSelecting
+namespace HopeMain.Code.GUI.Player.BuildingSelecting
 {
     public class RequiredResourcesPanel : MonoBehaviour
     {

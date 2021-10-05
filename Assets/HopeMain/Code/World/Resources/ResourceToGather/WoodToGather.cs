@@ -1,6 +1,6 @@
-using Code.Villagers.Entity;
+using HopeMain.Code.Characters.Villagers.Entity;
 
-namespace Code.Map.Resources.ResourceToGather.ResourcesToGather
+namespace HopeMain.Code.World.Resources.ResourceToGather
 {
     public class WoodToGather : ResourceToGather
     {

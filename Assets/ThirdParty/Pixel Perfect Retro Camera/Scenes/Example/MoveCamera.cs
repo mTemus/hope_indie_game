@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace AssetStore.Wolv_Interactive.Pixel_Perfect_Retro_Camera.Scenes.Example
+namespace ThirdParty.Pixel_Perfect_Retro_Camera.Scenes.Example
 {
 	public class MoveCamera : MonoBehaviour {
 		private float spd = 3f;

@@ -1,7 +1,7 @@
-using Code.Environment.Parallax;
+using HopeMain.Code.Environment.Parallax;
 using UnityEngine;
 
-namespace Code.Environment
+namespace HopeMain.Code.Environment
 {
     public class EnvironmentManager : MonoBehaviour
     {

@@ -1,8 +1,6 @@
-using Code.AI;
-using Code.Villagers.Brain.Layers;
 using UnityEngine;
 
-namespace Code.Villagers.Brain
+namespace HopeMain.Code.AI.Villagers.Brain
 {
     public class Villager_Brain : EntityBrain
     {

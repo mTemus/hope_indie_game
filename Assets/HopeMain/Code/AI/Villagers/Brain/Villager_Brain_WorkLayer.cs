@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using Code.Map.Resources;
-using Code.System.Assets;
-using Code.Villagers.Tasks;
+using HopeMain.Code.AI.Villagers.Tasks;
+using HopeMain.Code.System.Assets;
+using HopeMain.Code.World.Resources;
 
-namespace Code.Villagers.Brain.Layers
+namespace HopeMain.Code.AI.Villagers.Brain
 {
     public class Villager_Brain_WorkLayer : Villager_BrainLayer
     {

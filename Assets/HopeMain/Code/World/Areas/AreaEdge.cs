@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using Code.AI;
+using HopeMain.Code.AI;
 using UnityEngine;
 
-namespace Code.System.Areas
+namespace HopeMain.Code.World.Areas
 {
     public class AreaEdge : MonoBehaviour
     {

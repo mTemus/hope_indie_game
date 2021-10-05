@@ -1,7 +1,7 @@
-using Code.System.Areas;
+using HopeMain.Code.World.Areas;
 using UnityEngine;
 
-namespace Code.Environment.Parallax
+namespace HopeMain.Code.Environment.Parallax
 {
     //TODO: clean this class
     

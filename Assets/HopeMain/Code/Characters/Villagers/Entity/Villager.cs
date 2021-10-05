@@ -1,8 +1,9 @@
-using Code.Villagers.Brain;
-using Code.Villagers.Professions;
+using HopeMain.Code.AI.Villagers.Brain;
+using HopeMain.Code.Characters.Villagers.Profession;
+using HopeMain.Code.GUI.Villager;
 using UnityEngine;
 
-namespace Code.Villagers.Entity
+namespace HopeMain.Code.Characters.Villagers.Entity
 {
     public class Villager : MonoBehaviour
     {

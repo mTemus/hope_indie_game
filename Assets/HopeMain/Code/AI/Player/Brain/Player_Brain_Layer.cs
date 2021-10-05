@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Code.Player.Brain
+namespace HopeMain.Code.AI.Player.Brain
 {
     public abstract class Player_Brain_Layer : MonoBehaviour
     {

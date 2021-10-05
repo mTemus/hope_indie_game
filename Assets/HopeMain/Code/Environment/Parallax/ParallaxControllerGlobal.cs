@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace Code.Environment.Parallax
+namespace HopeMain.Code.Environment.Parallax
 {
     public class ParallaxControllerGlobal : ParallaxController
     {

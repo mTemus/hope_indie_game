@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Code.GUI.UIElements
+namespace HopeMain.Code.GUI.UIElements
 {
    public class UiSelectingPointer : MonoBehaviour
    {

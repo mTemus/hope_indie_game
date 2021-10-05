@@ -1,13 +1,13 @@
 using System;
 using System.Linq;
-using Code.GUI.UIElements;
-using Code.Map.Resources;
-using Code.System;
+using HopeMain.Code.GUI.UIElements;
+using HopeMain.Code.System;
+using HopeMain.Code.World.Resources;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Code.GUI.BuildingSelecting
+namespace HopeMain.Code.GUI.Player.BuildingSelecting
 {
     public class BuildingSelectingMenu : MonoBehaviour
     {

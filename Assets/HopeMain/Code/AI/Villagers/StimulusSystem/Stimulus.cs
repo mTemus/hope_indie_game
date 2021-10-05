@@ -1,4 +1,4 @@
-namespace Code.Villagers.Brain.StimulusSystem
+namespace HopeMain.Code.AI.Villagers.StimulusSystem
 {
     public enum StimulusType
     {

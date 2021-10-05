@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Code.Environment
+namespace HopeMain.Code.Environment
 {
     public class WaterReflectionController : MonoBehaviour
     {

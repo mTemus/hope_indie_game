@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Code.Villagers
+namespace HopeMain.Code.Characters.Villagers
 {
     [Serializable]
     public class VillagersStatistics

@@ -1,20 +1,19 @@
 using System.Collections.Generic;
 using System.Linq;
-using Code.Map.Building.Workplaces;
-using Code.Map.Resources;
-using Code.System;
-using Code.Villagers.Entity;
-using Code.Villagers.Tasks;
+using HopeMain.Code.AI.Villagers.Tasks;
+using HopeMain.Code.Characters.Villagers.Entity;
+using HopeMain.Code.System;
+using HopeMain.Code.World.Resources;
 using UnityEngine;
-using Task = Code.Villagers.Tasks.Task;
+using Task = HopeMain.Code.AI.Villagers.Tasks.Task;
 
-namespace Code.Map.Building.Buildings.Types.Resources
+namespace HopeMain.Code.World.Buildings.Type.Resources
 {
-    public class Warehouse : Workplace
+    public class Warehouse : Workplace.Workplace
     {
         private readonly List<Resource> storedResources = new List<Resource>();
         private readonly List<ResourceToPickUp> resourcesToPickUp = new List<ResourceToPickUp>();
-        private readonly Dictionary<Workplace, List<Task>> externalTasks = new Dictionary<Workplace, List<Task>>();
+        private readonly Dictionary<Workplace.Workplace, List<Task>> externalTasks = new Dictionary<Workplace.Workplace, List<Task>>();
 
         public override void Initialize()
         {
@@ -108,7 +107,7 @@ namespace Code.Map.Building.Buildings.Types.Resources
 
         private Task GetExternalTask()
         {
-            List<Workplace> keys = externalTasks.Keys.ToList();
+            List<Workplace.Workplace> keys = externalTasks.Keys.ToList();
             Task et = externalTasks[keys[0]][0];
             externalTasks[keys[0]].Remove(et);
 
@@ -118,10 +117,10 @@ namespace Code.Map.Building.Buildings.Types.Resources
             return et;
         }
         
-        public bool HasExternalTasksFromWorkplace(Workplace workplace) =>
+        public bool HasExternalTasksFromWorkplace(Workplace.Workplace workplace) =>
             externalTasks.ContainsKey(workplace);
         
-        public void RegisterExternalTask(Workplace workplace, Task task)
+        public void RegisterExternalTask(Workplace.Workplace workplace, Task task)
         {
             if (workersWithoutTasks.Count > 0) {
                 GiveTaskToWorker(workersWithoutTasks[0], task);
@@ -134,7 +133,7 @@ namespace Code.Map.Building.Buildings.Types.Resources
                 externalTasks[workplace] = new List<Task> { task };
         }
 
-        public List<Task> GetExternalTasksBackToWorkplace(Workplace workplace)
+        public List<Task> GetExternalTasksBackToWorkplace(Workplace.Workplace workplace)
         {
             List<Task> tasks = new List<Task>(externalTasks[workplace]);
             externalTasks.Remove(workplace);

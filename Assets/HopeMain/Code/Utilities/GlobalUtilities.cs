@@ -1,4 +1,4 @@
-﻿namespace Code.Utilities
+﻿namespace HopeMain.Code.Utilities
 {
     public static class GlobalUtilities
     {

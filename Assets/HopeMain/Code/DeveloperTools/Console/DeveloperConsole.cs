@@ -4,7 +4,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 
-namespace Code.System.DeveloperTools.Console
+namespace HopeMain.Code.DeveloperTools.Console
 {
     public class DeveloperConsole : MonoBehaviour
     {

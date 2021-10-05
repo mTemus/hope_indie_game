@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Code.Map.Building.Workplaces
+namespace HopeMain.Code.World.Buildings.Workplace
 {
     public enum WorkplaceType
     {

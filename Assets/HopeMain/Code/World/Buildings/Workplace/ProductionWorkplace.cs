@@ -1,4 +1,4 @@
-namespace Code.Map.Building.Workplaces
+namespace HopeMain.Code.World.Buildings.Workplace
 {
     public abstract  class ProductionWorkplace : Workplace
     {

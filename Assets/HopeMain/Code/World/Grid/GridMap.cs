@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Code.Map.Building;
-using Code.Map.Resources;
-using Code.Map.Resources.ResourceToGather;
-using Code.System.Properties;
+using HopeMain.Code.GameProperties;
+using HopeMain.Code.World.Buildings;
+using HopeMain.Code.World.Resources;
+using HopeMain.Code.World.Resources.ResourceToGather;
 using UnityEngine;
 
-namespace Code.System.Grid
+namespace HopeMain.Code.World.Grid
 {
     public class GridMap
     {

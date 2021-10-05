@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Code.GUI.UIElements
+namespace HopeMain.Code.GUI.UIElements
 {
     public class UiXScrollArea : UiScrollArea
     {

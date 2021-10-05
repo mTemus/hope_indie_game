@@ -1,8 +1,8 @@
-using Code.Map.Building.Workplaces;
-using Code.Villagers.Entity;
+using HopeMain.Code.Characters.Villagers.Entity;
+using HopeMain.Code.World.Buildings.Workplace;
 using NotImplementedException = System.NotImplementedException;
 
-namespace Code.Map.Resources.ResourceToGather.ResourcesToGather
+namespace HopeMain.Code.World.Resources.ResourceToGather
 {
     public class StoneToGather : ResourceToGather
     {

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Code.Villagers.Brain.Layers
+namespace HopeMain.Code.AI.Villagers.Brain
 {
     public enum VillagerAnimationState
     {

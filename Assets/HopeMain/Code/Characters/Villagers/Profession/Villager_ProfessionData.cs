@@ -1,9 +1,9 @@
 using System;
-using Code.Map.Building;
-using Code.Map.Building.Workplaces;
+using HopeMain.Code.World.Buildings;
+using HopeMain.Code.World.Buildings.Workplace;
 using UnityEngine;
 
-namespace Code.Villagers.Professions
+namespace HopeMain.Code.Characters.Villagers.Profession
 {
     [CreateAssetMenu(fileName = "Villager Profession Data", menuName = "Game Data/Villagers/Profession Data", order = 0)]
     public class Villager_ProfessionData : ScriptableObject

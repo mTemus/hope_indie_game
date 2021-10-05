@@ -1,8 +1,8 @@
-using Code.Villagers.Entity;
-using Code.Villagers.Tasks;
+using HopeMain.Code.AI.Villagers.Tasks;
+using HopeMain.Code.Characters.Villagers.Entity;
 using UnityEngine;
 
-namespace Code.Map.Building.Workplaces
+namespace HopeMain.Code.World.Buildings.Workplace
 {
     public abstract class ServicesWorkplace : Workplace
     {

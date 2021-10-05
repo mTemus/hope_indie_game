@@ -1,7 +1,7 @@
-using Code.Map.Resources.ResourceToGather;
+using HopeMain.Code.World.Resources.ResourceToGather;
 using UnityEngine;
 
-namespace Code.System.Initialization
+namespace HopeMain.Code.System.Initialization
 {
     public class InitializeResourceToGather : InitializeObject
     {

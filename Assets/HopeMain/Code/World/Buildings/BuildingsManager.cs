@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Code.Map.Building.Buildings.Types.Village;
-using Code.Map.Building.Workplaces;
-using Code.System;
-using Code.Villagers.Professions;
+using HopeMain.Code.Characters.Villagers.Profession;
+using HopeMain.Code.System;
+using HopeMain.Code.World.Buildings.Type.Village;
 using UnityEngine;
 
-namespace Code.Map.Building
+namespace HopeMain.Code.World.Buildings
 {
     public enum BuildingType {
         Resources,
@@ -31,9 +30,9 @@ namespace Code.Map.Building
             };
         }
 
-        private void AddWorkplacesWithoutHaulers(List<Building> listIn, List<Workplace> listOut)
+        private void AddWorkplacesWithoutHaulers(List<Building> listIn, List<Workplace.Workplace> listOut)
         {
-            listOut.AddRange(listIn.Cast<Workplace>()
+            listOut.AddRange(listIn.Cast<Workplace.Workplace>()
                 .Where(workplace => workplace.CanHireHauler));
         }
         
@@ -57,33 +56,33 @@ namespace Code.Map.Building
             }
         }
 
-        public Building[] GetAllBuildingOfClass(BuildingType type, Type classType)
+        public Building[] GetAllBuildingOfClass(BuildingType type, global::System.Type classType)
         {
             return GetBuildingsByType(type)
                 .Where(building => building.GetType() == classType)
                 .ToArray();
         }
 
-        public Workplace[] GetAllWorkplacesOfClass(BuildingType type, Type classType)
+        public Workplace.Workplace[] GetAllWorkplacesOfClass(BuildingType type, global::System.Type classType)
         {
             return GetBuildingsByType(type)
                 .Where(building => building.GetType() == classType)
-                .Cast<Workplace>()
+                .Cast<Workplace.Workplace>()
                 .ToArray();
         }
 
-        public Workplace[] GetAllFreeWorkplacesOfClass(BuildingType buildingType, Type classType)
+        public Workplace.Workplace[] GetAllFreeWorkplacesOfClass(BuildingType buildingType, global::System.Type classType)
         {
             return GetBuildingsByType(buildingType)
-                .Cast<Workplace>()
+                .Cast<Workplace.Workplace>()
                 .Where(workplace => workplace.GetType() == classType)
                 .Where(workplace => workplace.CanHireWorker)
                 .ToArray();
         }
 
-        public Workplace[] GetAllWorkplacesWithHaulersToHire()
+        public Workplace.Workplace[] GetAllWorkplacesWithHaulersToHire()
         {
-            List<Workplace> workplaces = new List<Workplace>();
+            List<Workplace.Workplace> workplaces = new List<Workplace.Workplace>();
 
             AddWorkplacesWithoutHaulers(resourcesBuildings, workplaces);
             AddWorkplacesWithoutHaulers(industryBuildings, workplaces);
@@ -91,9 +90,9 @@ namespace Code.Map.Building
             return workplaces.ToArray();
         }
 
-        public Workplace[] GetAllFreeWorkplacesForProfession(Villager_ProfessionData villagerProfessionData)
+        public Workplace.Workplace[] GetAllFreeWorkplacesForProfession(Villager_ProfessionData villagerProfessionData)
         {
-            Workplace[] workplaces;
+            Workplace.Workplace[] workplaces;
             
             switch (villagerProfessionData.Type) {
                 case ProfessionType.Unemployed:
@@ -120,14 +119,14 @@ namespace Code.Map.Building
             return workplaces;
         }
 
-        public Workplace GetClosestFreeWorkplaceForProfession(Villager_ProfessionData villagerProfessionData, Vector3 position)
+        public Workplace.Workplace GetClosestFreeWorkplaceForProfession(Villager_ProfessionData villagerProfessionData, Vector3 position)
         {
-            Workplace[] freeWorkplaces = GetAllFreeWorkplacesForProfession(villagerProfessionData);
+            Workplace.Workplace[] freeWorkplaces = GetAllFreeWorkplacesForProfession(villagerProfessionData);
 
             if (freeWorkplaces.Length == 0) 
                 return null;
             
-            Workplace closestWorkplace = freeWorkplaces[0];
+            Workplace.Workplace closestWorkplace = freeWorkplaces[0];
             float bestDistance = Vector3.Distance(closestWorkplace.transform.position, position);
             
             for (int i = 1; i < freeWorkplaces.Length; i++) {
@@ -140,7 +139,7 @@ namespace Code.Map.Building
             return closestWorkplace;
         }
 
-        public Building GetClosestBuildingOfClass(BuildingType buildingType, Type classType, Vector3 position)
+        public Building GetClosestBuildingOfClass(BuildingType buildingType, global::System.Type classType, Vector3 position)
         {
             List<Building> buildings = new List<Building>(GetAllBuildingOfClass(buildingType, classType));
             

@@ -1,7 +1,7 @@
-using Code.Map.Building.Systems;
+using HopeMain.Code.World.Buildings.Systems;
 using UnityEngine;
 
-namespace Code.System
+namespace HopeMain.Code.System
 {
     public class Systems : MonoBehaviour
     {

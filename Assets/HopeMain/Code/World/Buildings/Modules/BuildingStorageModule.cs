@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
-using Code.Map.Resources;
-using Code.System.Assets;
+using HopeMain.Code.System.Assets;
+using HopeMain.Code.World.Resources;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Code.Map.Building.Buildings.Modules
+namespace HopeMain.Code.World.Buildings.Modules
 {
     public class BuildingStorageModule : MonoBehaviour
     {

@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Code.Villagers.Tasks;
+using HopeMain.Code.AI.Villagers.Tasks;
 using UnityEngine;
 
-namespace Code.Map.Resources
+namespace HopeMain.Code.World.Resources
 {
    public class ResourcesManager : MonoBehaviour
    {

@@ -1,8 +1,8 @@
-using Code.Map.Building.Workplaces;
-using Code.Map.Resources;
+using HopeMain.Code.World.Buildings.Workplace;
+using HopeMain.Code.World.Resources;
 using UnityEngine;
 
-namespace Code.Villagers.Professions
+namespace HopeMain.Code.Characters.Villagers.Profession
 {
     public enum ProfessionType
     {

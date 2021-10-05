@@ -1,4 +1,4 @@
-namespace Code.Map.Building.Buildings.Types.Village
+namespace HopeMain.Code.World.Buildings.Type.Village
 {
     public class House : Building
     {

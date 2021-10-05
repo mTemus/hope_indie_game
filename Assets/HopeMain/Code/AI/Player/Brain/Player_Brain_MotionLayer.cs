@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Code.Player.Brain
+namespace HopeMain.Code.AI.Player.Brain
 {
     public class Player_Brain_MotionLayer : Player_Brain_Layer
     {

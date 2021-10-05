@@ -1,8 +1,8 @@
-﻿using Code.Map.Resources;
-using Code.System.Grid;
+﻿using HopeMain.Code.World.Grid;
+using HopeMain.Code.World.Resources;
 using UnityEngine;
 
-namespace Code.Map.Building
+namespace HopeMain.Code.World.Buildings
 {
     
     

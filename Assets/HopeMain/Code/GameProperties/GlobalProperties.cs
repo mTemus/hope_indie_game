@@ -1,4 +1,4 @@
-namespace Code.System.Properties
+namespace HopeMain.Code.GameProperties
 {
     public static class GlobalProperties
     {

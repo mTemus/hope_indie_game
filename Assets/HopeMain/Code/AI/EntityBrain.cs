@@ -1,8 +1,8 @@
 using System;
-using Code.System.Areas;
+using HopeMain.Code.World.Areas;
 using UnityEngine;
 
-namespace Code.AI
+namespace HopeMain.Code.AI
 {
     public abstract class EntityBrain : MonoBehaviour
     {

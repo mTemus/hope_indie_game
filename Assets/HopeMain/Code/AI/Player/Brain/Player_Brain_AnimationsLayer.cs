@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Code.Player.Brain
+namespace HopeMain.Code.AI.Player.Brain
 {
     public enum PlayerAnimationState
     {

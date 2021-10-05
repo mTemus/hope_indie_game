@@ -1,13 +1,12 @@
-using Code.GUI.UIElements;
-using Code.GUI.UIElements.SelectableElement;
-using Code.Map.Building.Workplaces;
-using Code.System;
-using Code.System.GameInput;
-using Code.Villagers.Entity;
+using HopeMain.Code.GUI.UIElements;
+using HopeMain.Code.GUI.UIElements.SelectableElement;
+using HopeMain.Code.System;
+using HopeMain.Code.System.GameInput;
+using HopeMain.Code.World.Buildings.Workplace;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Code.GUI.Villagers.Selecting
+namespace HopeMain.Code.GUI.Villager.Selecting
 {
     public class VillagerProfessionChangingPanel : UiSelectablePanel
     {
@@ -35,7 +34,7 @@ namespace Code.GUI.Villagers.Selecting
 
         public void UpdateCurrentWorkPointerPosition()
         {
-            Villager villager = Managers.I.VillagerSelection.SelectedVillager;
+            Characters.Villagers.Entity.Villager villager = Managers.I.VillagerSelection.SelectedVillager;
 
             foreach (UiSelectableElement element in elementsToSelect) {
                 ProfessionLabelItem currItem = (ProfessionLabelItem) element;
@@ -59,7 +58,7 @@ namespace Code.GUI.Villagers.Selecting
         public void OnPanelOpen()
         {
             InputManager.VillagerPropertiesInputState.SetToVillagerProfessionDisplayChildState(Managers.I.GUI.VillagerProfessionChangingPanel);
-            Villager villager = Managers.I.VillagerSelection.SelectedVillager;
+            Characters.Villagers.Entity.Villager villager = Managers.I.VillagerSelection.SelectedVillager;
             
             //Initialize profession pointer pos
             UpdateCurrentWorkPointerPosition();
@@ -143,7 +142,7 @@ namespace Code.GUI.Villagers.Selecting
         
         public void TakeProfession()
         {
-            Villager selectedVillager = Managers.I.VillagerSelection.SelectedVillager;
+            Characters.Villagers.Entity.Villager selectedVillager = Managers.I.VillagerSelection.SelectedVillager;
 
             if (selectedVillager.Profession.Data.Type == currentProfession.Data.Type) {
                 if (selectedVillager.Profession.Workplace == CurrentWorkplace) return;

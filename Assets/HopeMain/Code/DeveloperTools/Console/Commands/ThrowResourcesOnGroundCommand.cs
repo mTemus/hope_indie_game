@@ -1,9 +1,10 @@
 using System;
-using Code.Map.Resources;
-using Code.System.Assets;
+using HopeMain.Code.System;
+using HopeMain.Code.System.Assets;
+using HopeMain.Code.World.Resources;
 using UnityEngine;
 
-namespace Code.System.DeveloperTools.Console.Commands
+namespace HopeMain.Code.DeveloperTools.Console.Commands
 {
     [CreateAssetMenu(fileName = "Spawn Resources On Ground Command", menuName = "Game Data/System/Console Commands/SpawnResourcesOnGround Command", order = 0)]
     public class ThrowResourcesOnGroundCommand : ConsoleCommandData

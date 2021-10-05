@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using Code.Villagers.Entity;
-using Code.Villagers.Professions;
-using Code.Villagers.Tasks;
+using HopeMain.Code.AI.Villagers.Tasks;
+using HopeMain.Code.Characters.Villagers.Entity;
+using HopeMain.Code.Characters.Villagers.Profession;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Code.Map.Building.Workplaces
+namespace HopeMain.Code.World.Buildings.Workplace
 {
     public abstract class Workplace : Building
     {

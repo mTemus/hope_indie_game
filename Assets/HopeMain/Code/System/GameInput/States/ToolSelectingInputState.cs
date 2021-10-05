@@ -1,7 +1,7 @@
 ﻿
 using UnityEngine;
 
-namespace Code.System.GameInput.States
+namespace HopeMain.Code.System.GameInput.States
 {
     public class ToolSelectingInputState : IInputState
     {

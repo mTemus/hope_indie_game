@@ -1,10 +1,10 @@
 using System;
-using Code.Map.Resources;
-using Code.Map.Resources.ResourceToGather;
-using Code.System.Areas;
+using HopeMain.Code.World.Areas;
+using HopeMain.Code.World.Resources;
+using HopeMain.Code.World.Resources.ResourceToGather;
 using UnityEngine;
 
-namespace Code.Villagers.Tasks
+namespace HopeMain.Code.AI.Villagers.Tasks
 {
     public enum Task_ResourceGathering_State
     {

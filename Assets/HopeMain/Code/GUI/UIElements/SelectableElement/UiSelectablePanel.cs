@@ -1,7 +1,7 @@
-using Code.Utilities;
+using HopeMain.Code.Utilities;
 using UnityEngine;
 
-namespace Code.GUI.UIElements.SelectableElement
+namespace HopeMain.Code.GUI.UIElements.SelectableElement
 {
     public abstract class UiSelectablePanel : MonoBehaviour
     {

@@ -1,8 +1,8 @@
-using Code.Map.Building;
-using Code.Map.Building.Workplaces;
+using HopeMain.Code.World.Buildings;
+using HopeMain.Code.World.Buildings.Workplace;
 using UnityEngine;
 
-namespace Code.GUI.BuildingSelecting
+namespace HopeMain.Code.GUI.Player.BuildingSelecting
 {
    public class UiBuildingElement : MonoBehaviour
    {

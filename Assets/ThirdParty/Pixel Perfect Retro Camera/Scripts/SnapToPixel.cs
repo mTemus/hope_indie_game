@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace AssetStore.Wolv_Interactive.Pixel_Perfect_Retro_Camera.Scripts
+namespace ThirdParty.Pixel_Perfect_Retro_Camera.Scripts
 {
 	[ExecuteInEditMode]
 	public class SnapToPixel : MonoBehaviour {

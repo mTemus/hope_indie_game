@@ -1,9 +1,8 @@
-using Code.Villagers.Entity;
-using Code.Villagers.Professions;
+using HopeMain.Code.Characters.Villagers.Profession;
 using TMPro;
 using UnityEngine;
 
-namespace Code.GUI.Villagers.Selecting
+namespace HopeMain.Code.GUI.Villager.Selecting
 {
     public class ProfessionPropertiesLabel : MonoBehaviour
     {
@@ -62,7 +61,7 @@ namespace Code.GUI.Villagers.Selecting
             GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         }
 
-        public void LoadProfessionData(Villager_ProfessionData villagerProfessionData, Villager villager)
+        public void LoadProfessionData(Villager_ProfessionData villagerProfessionData, Characters.Villagers.Entity.Villager villager)
         {
             SetProfessionText(strengthValueProfession, villagerProfessionData.RequiredStatistics.Strength);
             SetProfessionText(dexterityValueProfession, villagerProfessionData.RequiredStatistics.Dexterity);

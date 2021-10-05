@@ -1,4 +1,4 @@
-namespace Code.System.Grid
+namespace HopeMain.Code.World.Grid
 {
     public class SpaceCell : Cell
     {

@@ -1,12 +1,12 @@
 using System;
-using Code.Map.Building;
-using Code.Map.Building.Buildings.Types.Resources;
-using Code.Map.Resources;
-using Code.System;
-using Code.Villagers.Brain.Layers;
+using HopeMain.Code.AI.Villagers.Brain;
+using HopeMain.Code.System;
+using HopeMain.Code.World.Buildings;
+using HopeMain.Code.World.Buildings.Type.Resources;
+using HopeMain.Code.World.Resources;
 using UnityEngine;
 
-namespace Code.Villagers.Tasks
+namespace HopeMain.Code.AI.Villagers.Tasks
 {
     public enum Task_ResourceCarrying_State
     {

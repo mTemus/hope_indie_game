@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Code.System;
+using HopeMain.Code.System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Code.GUI.PlayerToolsMenu
+namespace HopeMain.Code.GUI.Player.ToolsMenu
 {
     public class RadialToolsMenu : MonoBehaviour
     {

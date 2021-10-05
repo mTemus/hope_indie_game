@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Code.GUI.PlayerToolsMenu
+namespace HopeMain.Code.GUI.Player.ToolsMenu
 {
     public class CircleMenuButton : MonoBehaviour
     {

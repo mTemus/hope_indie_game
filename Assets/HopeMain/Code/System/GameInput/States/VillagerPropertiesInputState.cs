@@ -1,7 +1,8 @@
-using Code.GUI.UIElements.SelectableElement;
-using Code.GUI.Villagers.Selecting;
+using HopeMain.Code.GUI.UIElements.SelectableElement;
+using HopeMain.Code.GUI.Villager.Selecting;
+using HopeMain.Code.System.GameInput.ChildStates;
 
-namespace Code.System.GameInput.States
+namespace HopeMain.Code.System.GameInput.States
 {
     public class VillagerPropertiesInputState : IInputState
     {

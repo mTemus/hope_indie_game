@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Code.Map.Resources
+namespace HopeMain.Code.World.Resources
 {
     [Serializable]
     public enum ResourceType

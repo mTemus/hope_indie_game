@@ -1,19 +1,19 @@
-using Code.Environment;
-using Code.GUI;
-using Code.Map.Building;
-using Code.Map.Resources;
-using Code.Player;
-using Code.Player.Tools;
-using Code.System.Areas;
-using Code.System.Camera;
-using Code.System.GameInput;
-using Code.System.Initialization;
-using Code.System.Sound;
-using Code.Villagers;
-using Code.Villagers.Professions;
+using HopeMain.Code.Characters.Player;
+using HopeMain.Code.Characters.Villagers;
+using HopeMain.Code.Characters.Villagers.Profession;
+using HopeMain.Code.Environment;
+using HopeMain.Code.GUI;
+using HopeMain.Code.System.Camera;
+using HopeMain.Code.System.GameInput;
+using HopeMain.Code.System.Initialization;
+using HopeMain.Code.System.PlayerTools;
+using HopeMain.Code.System.Sound;
+using HopeMain.Code.World.Areas;
+using HopeMain.Code.World.Buildings;
+using HopeMain.Code.World.Resources;
 using UnityEngine;
 
-namespace Code.System
+namespace HopeMain.Code.System
 {
    public class Managers : MonoBehaviour
    {

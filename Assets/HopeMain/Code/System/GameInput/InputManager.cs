@@ -1,9 +1,9 @@
-using Code.Player.Brain;
-using Code.System.DeveloperTools.Console;
-using Code.System.GameInput.States;
+using HopeMain.Code.AI.Player.Brain;
+using HopeMain.Code.DeveloperTools.Console;
+using HopeMain.Code.System.GameInput.States;
 using UnityEngine;
 
-namespace Code.System.GameInput
+namespace HopeMain.Code.System.GameInput
 {
     public class InputManager : MonoBehaviour
     {

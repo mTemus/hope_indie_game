@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using Code.Utilities;
+using HopeMain.Code.Utilities;
 using UnityEngine;
 
-namespace Code.System.Areas
+namespace HopeMain.Code.World.Areas
 {
     public class AreaDebug : MonoBehaviour
     {

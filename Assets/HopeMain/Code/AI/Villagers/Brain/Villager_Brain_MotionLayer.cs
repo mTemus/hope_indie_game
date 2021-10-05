@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Code.Villagers.Brain.Layers
+namespace HopeMain.Code.AI.Villagers.Brain
 {
     public class Villager_Brain_MotionLayer : Villager_BrainLayer
     {

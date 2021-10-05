@@ -1,4 +1,4 @@
-namespace Code.Map.Building.Buildings.Types.Resources
+namespace HopeMain.Code.World.Buildings.Type.Resources
 {
     public class Well : Building
     {

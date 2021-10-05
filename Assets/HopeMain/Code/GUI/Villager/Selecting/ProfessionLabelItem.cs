@@ -1,11 +1,11 @@
 using System;
-using Code.GUI.UIElements.SelectableElement;
-using Code.Map.Building.Workplaces;
-using Code.System;
-using Code.Villagers.Professions;
+using HopeMain.Code.Characters.Villagers.Profession;
+using HopeMain.Code.GUI.UIElements.SelectableElement;
+using HopeMain.Code.System;
+using HopeMain.Code.World.Buildings.Workplace;
 using UnityEngine;
 
-namespace Code.GUI.Villagers.Selecting
+namespace HopeMain.Code.GUI.Villager.Selecting
 {
     public class ProfessionLabelItem : UiSelectableElement
     {

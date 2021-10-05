@@ -1,8 +1,8 @@
-using Code.AI;
-using Code.System.Areas;
+using HopeMain.Code.AI;
+using HopeMain.Code.World.Areas;
 using UnityEngine;
 
-namespace Code.System.Initialization
+namespace HopeMain.Code.System.Initialization
 {
     public class InitializePlayer : InitializeObject
     {

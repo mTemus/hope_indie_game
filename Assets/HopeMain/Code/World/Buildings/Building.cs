@@ -1,7 +1,7 @@
-using Code.Map.Building.Buildings.Modules;
+using HopeMain.Code.World.Buildings.Modules;
 using UnityEngine;
 
-namespace Code.Map.Building
+namespace HopeMain.Code.World.Buildings
 {
     public abstract class Building : MonoBehaviour
     {

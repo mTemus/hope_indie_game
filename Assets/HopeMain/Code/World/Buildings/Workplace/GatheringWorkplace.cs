@@ -1,17 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Code.Map.Building.Buildings.Types.Resources;
-using Code.Map.Resources;
-using Code.Map.Resources.ResourceToGather;
-using Code.System;
-using Code.System.Assets;
-using Code.Villagers.Entity;
-using Code.Villagers.Professions;
-using Code.Villagers.Tasks;
+using HopeMain.Code.AI.Villagers.Tasks;
+using HopeMain.Code.Characters.Villagers.Entity;
+using HopeMain.Code.Characters.Villagers.Profession;
+using HopeMain.Code.System;
+using HopeMain.Code.System.Assets;
+using HopeMain.Code.World.Buildings.Type.Resources;
+using HopeMain.Code.World.Resources;
+using HopeMain.Code.World.Resources.ResourceToGather;
 using UnityEngine;
 
-namespace Code.Map.Building.Workplaces
+namespace HopeMain.Code.World.Buildings.Workplace
 {
     public abstract class GatheringWorkplace : Workplace
     {

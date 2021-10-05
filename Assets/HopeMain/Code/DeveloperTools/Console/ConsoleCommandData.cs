@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Code.System.DeveloperTools.Console
+namespace HopeMain.Code.DeveloperTools.Console
 {
     public abstract class ConsoleCommandData : ScriptableObject
     {

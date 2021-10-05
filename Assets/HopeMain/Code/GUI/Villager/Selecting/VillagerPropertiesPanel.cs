@@ -1,11 +1,10 @@
-using Code.GUI.UIElements.SelectableElement;
-using Code.System;
-using Code.Villagers.Entity;
+using HopeMain.Code.GUI.UIElements.SelectableElement;
+using HopeMain.Code.System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Code.GUI.Villagers.Selecting
+namespace HopeMain.Code.GUI.Villager.Selecting
 {
     public class VillagerPropertiesPanel : UiSelectablePanel
     {
@@ -34,7 +33,7 @@ namespace Code.GUI.Villagers.Selecting
             gameObject.SetActive(false);
         }
 
-        public void OpenPropertiesPanel(Villager villager)
+        public void OpenPropertiesPanel(Characters.Villagers.Entity.Villager villager)
         {
             villagerNameText.text = villager.name;
             villagerProfessionText.text = villager.Profession.Data.Type.ToString();

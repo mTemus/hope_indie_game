@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Code.Villagers.Brain.Layers
+namespace HopeMain.Code.AI.Villagers.Brain
 {
     public enum VillagerSoundEffectType
     {

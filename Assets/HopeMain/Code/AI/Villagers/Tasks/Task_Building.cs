@@ -1,9 +1,9 @@
 using System;
-using Code.Map.Building;
-using Code.Villagers.Brain.Layers;
+using HopeMain.Code.AI.Villagers.Brain;
+using HopeMain.Code.World.Buildings;
 using UnityEngine;
 
-namespace Code.Villagers.Tasks
+namespace HopeMain.Code.AI.Villagers.Tasks
 {
     public enum Task_Building_State
     {

@@ -1,7 +1,7 @@
-using Code.GUI.Villagers.Selecting;
+using HopeMain.Code.GUI.Villager.Selecting;
 using UnityEngine;
 
-namespace Code.System.GameInput.States
+namespace HopeMain.Code.System.GameInput.ChildStates
 {
     public class VillagerProfessionDisplayChildInputState : IInputState
     {

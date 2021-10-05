@@ -1,10 +1,10 @@
-using Code.Map.Resources;
-using Code.System.Assets;
+using HopeMain.Code.System.Assets;
+using HopeMain.Code.World.Resources;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Code.Villagers.Entity
+namespace HopeMain.Code.GUI.Villager
 {
     public class VillagerUi : MonoBehaviour
     {

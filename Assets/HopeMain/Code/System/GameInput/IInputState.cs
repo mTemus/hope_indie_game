@@ -1,4 +1,4 @@
-﻿namespace Code.System.GameInput
+﻿namespace HopeMain.Code.System.GameInput
 {
     public interface IInputState
     {

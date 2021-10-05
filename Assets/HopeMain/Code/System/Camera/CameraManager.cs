@@ -1,7 +1,7 @@
 using Cinemachine;
 using UnityEngine;
 
-namespace Code.System.Camera
+namespace HopeMain.Code.System.Camera
 {
     public class CameraManager : MonoBehaviour
     {

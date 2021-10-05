@@ -1,14 +1,14 @@
 using System.Collections;
-using Code.Map.Building;
-using Code.Map.Building.Buildings.Types.Resources;
-using Code.System;
-using Code.System.Assets;
-using Code.Villagers.Tasks;
+using HopeMain.Code.AI.Villagers.Tasks;
+using HopeMain.Code.System;
+using HopeMain.Code.System.Assets;
+using HopeMain.Code.World.Buildings;
+using HopeMain.Code.World.Buildings.Type.Resources;
 using ThirdParty.LeanTween.Framework;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Code.Map.Resources
+namespace HopeMain.Code.World.Resources
 {
     public class ResourceToPickUp : MonoBehaviour
     {

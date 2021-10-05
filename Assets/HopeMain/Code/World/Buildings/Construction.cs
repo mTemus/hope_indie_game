@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
-using Code.Map.Building.Buildings.Types.Industry;
-using Code.Map.Resources;
-using Code.System;
-using Code.System.Assets;
-using Code.System.Initialization;
-using Code.Villagers.Tasks;
+using HopeMain.Code.AI.Villagers.Tasks;
+using HopeMain.Code.System;
+using HopeMain.Code.System.Assets;
+using HopeMain.Code.System.Initialization;
+using HopeMain.Code.World.Buildings.Type.Industry;
+using HopeMain.Code.World.Resources;
 using UnityEngine;
 
-namespace Code.Map.Building
+namespace HopeMain.Code.World.Buildings
 {
     public class Construction : MonoBehaviour
     {

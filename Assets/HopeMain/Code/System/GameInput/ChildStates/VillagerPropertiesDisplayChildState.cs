@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Code.System.GameInput.States
+namespace HopeMain.Code.System.GameInput.ChildStates
 {
     public class VillagerPropertiesDisplayChildState : IInputState
     {

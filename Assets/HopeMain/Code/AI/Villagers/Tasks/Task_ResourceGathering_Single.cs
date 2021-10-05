@@ -1,11 +1,11 @@
 using System;
-using Code.Map.Resources;
-using Code.System;
-using Code.System.Areas;
-using Code.Villagers.Brain.Layers;
+using HopeMain.Code.AI.Villagers.Brain;
+using HopeMain.Code.System;
+using HopeMain.Code.World.Areas;
+using HopeMain.Code.World.Resources;
 using UnityEngine;
 
-namespace Code.Villagers.Tasks
+namespace HopeMain.Code.AI.Villagers.Tasks
 {
     public class Task_ResourceGathering_Single : Task_ResourceGathering
     {

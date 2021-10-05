@@ -1,7 +1,6 @@
-using Code.System;
-using Code.System.GameInput;
+using HopeMain.Code.System.GameInput;
 
-namespace Code.Player.Tools
+namespace HopeMain.Code.System.PlayerTools
 {
     public class PlayerToolVillagersBook : PlayerTool
     {

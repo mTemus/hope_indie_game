@@ -1,9 +1,9 @@
 using System;
-using Code.Villagers.Professions;
+using HopeMain.Code.Characters.Villagers.Profession;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Code.Map.Resources.ResourceToGather
+namespace HopeMain.Code.World.Resources.ResourceToGather
 {
     [Serializable]
     public class GatheringSocket

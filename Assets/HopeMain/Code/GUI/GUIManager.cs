@@ -1,9 +1,9 @@
-using Code.GUI.BuildingSelecting;
-using Code.GUI.PlayerToolsMenu;
-using Code.GUI.Villagers.Selecting;
+using HopeMain.Code.GUI.Player.BuildingSelecting;
+using HopeMain.Code.GUI.Player.ToolsMenu;
+using HopeMain.Code.GUI.Villager.Selecting;
 using UnityEngine;
 
-namespace Code.GUI
+namespace HopeMain.Code.GUI
 {
     public class GUIManager : MonoBehaviour
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Code.System.Areas
+namespace HopeMain.Code.World.Areas
 {
     public class AreaManager : MonoBehaviour
     {

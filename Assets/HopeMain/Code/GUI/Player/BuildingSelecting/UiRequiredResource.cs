@@ -1,9 +1,9 @@
-using Code.Map.Resources;
-using Code.System;
+using HopeMain.Code.System;
+using HopeMain.Code.World.Resources;
 using TMPro;
 using UnityEngine;
 
-namespace Code.GUI.BuildingSelecting
+namespace HopeMain.Code.GUI.Player.BuildingSelecting
 {
     public class UiRequiredResource : MonoBehaviour
     {

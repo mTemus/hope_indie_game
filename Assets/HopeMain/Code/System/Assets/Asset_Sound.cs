@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Code.System.Assets
+namespace HopeMain.Code.System.Assets
 {
     public enum AssetSoundType
     {

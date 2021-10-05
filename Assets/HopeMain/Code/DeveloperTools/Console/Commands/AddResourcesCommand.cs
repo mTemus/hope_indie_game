@@ -1,8 +1,9 @@
 using System;
-using Code.Map.Resources;
+using HopeMain.Code.System;
+using HopeMain.Code.World.Resources;
 using UnityEngine;
 
-namespace Code.System.DeveloperTools.Console.Commands
+namespace HopeMain.Code.DeveloperTools.Console.Commands
 {
     [CreateAssetMenu(fileName = "Add Resources Command", menuName = "Game Data/System/Console Commands/AddResources Command", order = 0)]
 

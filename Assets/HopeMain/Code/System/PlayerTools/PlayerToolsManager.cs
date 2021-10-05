@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Code.Player.Tools
+namespace HopeMain.Code.System.PlayerTools
 {
     public class PlayerToolsManager : MonoBehaviour
     {

@@ -1,12 +1,13 @@
 using System;
 using System.Linq;
-using Code.Map.Building.Workplaces;
-using Code.System.Assets;
-using Code.System.Initialization;
-using Code.Villagers.Professions;
+using HopeMain.Code.Characters.Villagers.Profession;
+using HopeMain.Code.System;
+using HopeMain.Code.System.Assets;
+using HopeMain.Code.System.Initialization;
+using HopeMain.Code.World.Buildings.Workplace;
 using UnityEngine;
 
-namespace Code.System.DeveloperTools.Console.Commands
+namespace HopeMain.Code.DeveloperTools.Console.Commands
 {
     [CreateAssetMenu(fileName = "Spawn Villager Command", menuName = "Game Data/System/Console Commands/SpawnVillager Command", order = 1)]
 

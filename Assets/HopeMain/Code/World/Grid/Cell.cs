@@ -1,7 +1,7 @@
-using Code.Map.Building;
-using Code.Map.Resources.ResourceToGather;
+using HopeMain.Code.World.Buildings;
+using HopeMain.Code.World.Resources.ResourceToGather;
 
-namespace Code.System.Grid
+namespace HopeMain.Code.World.Grid
 {
     public enum CellContentType
     {

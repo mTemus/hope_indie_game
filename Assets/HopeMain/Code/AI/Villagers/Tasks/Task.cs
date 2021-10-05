@@ -1,9 +1,9 @@
 using System;
-using Code.System.Assets;
-using Code.Villagers.Entity;
+using HopeMain.Code.Characters.Villagers.Entity;
+using HopeMain.Code.System.Assets;
 using UnityEngine;
 
-namespace Code.Villagers.Tasks
+namespace HopeMain.Code.AI.Villagers.Tasks
 {
     public enum TaskFlag
     {

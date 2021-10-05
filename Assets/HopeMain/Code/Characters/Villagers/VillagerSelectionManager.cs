@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using Code.System;
-using Code.Villagers.Entity;
+using HopeMain.Code.Characters.Villagers.Entity;
+using HopeMain.Code.System;
 using UnityEngine;
 
-namespace Code.Villagers
+namespace HopeMain.Code.Characters.Villagers
 {
     public class VillagerSelectionManager : MonoBehaviour
     {

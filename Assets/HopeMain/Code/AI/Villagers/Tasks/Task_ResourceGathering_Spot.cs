@@ -1,9 +1,8 @@
 using System;
-using Code.Map.Resources.ResourceToGather;
-using Code.Villagers.Brain.Layers;
-using NotImplementedException = System.NotImplementedException;
+using HopeMain.Code.AI.Villagers.Brain;
+using HopeMain.Code.World.Resources.ResourceToGather;
 
-namespace Code.Villagers.Tasks
+namespace HopeMain.Code.AI.Villagers.Tasks
 {
     public class Task_ResourceGathering_Spot : Task_ResourceGathering
     {

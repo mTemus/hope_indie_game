@@ -1,7 +1,7 @@
-﻿using Code.Map.Building.Systems;
+﻿using HopeMain.Code.World.Buildings.Systems;
 using UnityEngine;
 
-namespace Code.System.GameInput.States
+namespace HopeMain.Code.System.GameInput.States
 {
     public class BuildingPlacingInputState :IInputState
     {

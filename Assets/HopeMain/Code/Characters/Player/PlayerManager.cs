@@ -1,9 +1,9 @@
-using Code.Player.Brain;
-using Code.System;
-using Code.System.Areas;
+using HopeMain.Code.AI.Player.Brain;
+using HopeMain.Code.System;
+using HopeMain.Code.World.Areas;
 using UnityEngine;
 
-namespace Code.Player
+namespace HopeMain.Code.Characters.Player
 {
     public class PlayerManager : MonoBehaviour
     {

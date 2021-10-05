@@ -1,13 +1,13 @@
 using System.Linq;
-using Code.Map.Building.Workplaces;
-using Code.Map.Resources;
-using Code.System;
-using Code.Villagers.Entity;
-using Code.Villagers.Professions;
-using Code.Villagers.Tasks;
+using HopeMain.Code.AI.Villagers.Tasks;
+using HopeMain.Code.Characters.Villagers.Entity;
+using HopeMain.Code.Characters.Villagers.Profession;
+using HopeMain.Code.System;
+using HopeMain.Code.World.Buildings.Workplace;
+using HopeMain.Code.World.Resources;
 using UnityEngine;
 
-namespace Code.Map.Building.Buildings.Types.Industry
+namespace HopeMain.Code.World.Buildings.Type.Industry
 {
     public class BuildersGuild : ServicesWorkplace
     {

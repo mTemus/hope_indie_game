@@ -1,9 +1,8 @@
-using Code.AI;
-using Code.System;
-using Code.Villagers.Entity;
+using HopeMain.Code.Characters.Villagers.Entity;
+using HopeMain.Code.System;
 using UnityEngine;
 
-namespace Code.Player.Brain
+namespace HopeMain.Code.AI.Player.Brain
 {
     public class Player_Brain : EntityBrain
     {

@@ -1,7 +1,7 @@
-using Code.GUI.UIElements.SelectableElement;
+using HopeMain.Code.GUI.UIElements.SelectableElement;
 using UnityEngine;
 
-namespace Code.System.GameInput.States
+namespace HopeMain.Code.System.GameInput.ChildStates
 {
     public class VillagerProfessionSetAcceptanceChildInputState : IInputState
     {

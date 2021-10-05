@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Linq;
-using Code.System.Assets;
+using HopeMain.Code.System.Assets;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Code.System.Sound
+namespace HopeMain.Code.System.Sound
 {
     public class SoundManager : MonoBehaviour
     {

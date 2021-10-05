@@ -1,8 +1,8 @@
-using Code.System;
-using Code.System.Areas;
+using HopeMain.Code.System;
+using HopeMain.Code.World.Areas;
 using UnityEngine;
 
-namespace Code.Environment.Parallax
+namespace HopeMain.Code.Environment.Parallax
 {
     public class ParallaxControllerLocal : ParallaxController
     {

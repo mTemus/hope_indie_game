@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using Code.Map.Building.Buildings.Types.Resources;
-using Code.Map.Resources;
-using Code.Villagers.Brain.Layers;
+using HopeMain.Code.AI.Villagers.Brain;
+using HopeMain.Code.World.Buildings.Type.Resources;
+using HopeMain.Code.World.Resources;
 using UnityEngine;
 
-namespace Code.Villagers.Tasks
+namespace HopeMain.Code.AI.Villagers.Tasks
 {
     public enum Task_ResourcePickUp_State 
     {

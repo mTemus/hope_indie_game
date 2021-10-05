@@ -1,7 +1,7 @@
-using Code.System.DeveloperTools.Console;
+using HopeMain.Code.DeveloperTools.Console;
 using UnityEngine;
 
-namespace Code.System.GameInput.States
+namespace HopeMain.Code.System.GameInput.States
 {
     public class DeveloperConsoleInputState : IInputState
     {

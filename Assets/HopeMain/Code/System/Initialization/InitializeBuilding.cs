@@ -1,7 +1,7 @@
-using Code.Map.Building;
+using HopeMain.Code.World.Buildings;
 using UnityEngine;
 
-namespace Code.System.Initialization
+namespace HopeMain.Code.System.Initialization
 {
     public class InitializeBuilding : InitializeObject
     {

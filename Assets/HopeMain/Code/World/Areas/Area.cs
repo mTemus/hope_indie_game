@@ -1,20 +1,20 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Code.AI;
-using Code.Environment.Parallax;
-using Code.Map.Building;
-using Code.Map.Resources;
-using Code.Map.Resources.ResourceToGather;
-using Code.Map.Resources.ResourceToGather.ResourcesToGather;
-using Code.System.Assets;
-using Code.System.Grid;
-using Code.System.Properties;
-using Code.Villagers.Brain;
-using Code.Villagers.Entity;
+using HopeMain.Code.AI;
+using HopeMain.Code.AI.Villagers.Brain;
+using HopeMain.Code.Characters.Villagers.Entity;
+using HopeMain.Code.Environment.Parallax;
+using HopeMain.Code.GameProperties;
+using HopeMain.Code.System;
+using HopeMain.Code.System.Assets;
+using HopeMain.Code.World.Buildings;
+using HopeMain.Code.World.Grid;
+using HopeMain.Code.World.Resources;
+using HopeMain.Code.World.Resources.ResourceToGather;
 using UnityEngine;
 
-namespace Code.System.Areas
+namespace HopeMain.Code.World.Areas
 {
     public enum AreaType
     {

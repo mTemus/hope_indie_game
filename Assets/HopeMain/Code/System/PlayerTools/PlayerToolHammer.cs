@@ -1,9 +1,6 @@
-using Code.System;
-using Code.System.Areas;
-using Code.System.GameInput;
-using UnityEngine;
+using HopeMain.Code.System.GameInput;
 
-namespace Code.Player.Tools
+namespace HopeMain.Code.System.PlayerTools
 {
     public class PlayerToolHammer : PlayerTool
     {

@@ -1,15 +1,15 @@
 using System;
 using System.Linq;
-using Code.Map.Resources;
-using Code.Map.Resources.ResourceToGather;
-using Code.Villagers.Professions;
+using HopeMain.Code.Characters.Villagers.Profession;
+using HopeMain.Code.World.Resources;
+using HopeMain.Code.World.Resources.ResourceToGather;
 using NodeCanvas.BehaviourTrees;
 using NodeCanvas.Framework;
 using ThirdParty.LeanTween.Framework;
 using UnityEngine;
 
 //TODO: whole class should be deleted and all assets should be available through addressables
-namespace Code.System.Assets
+namespace HopeMain.Code.System.Assets
 {
    public class AssetsStorage : MonoBehaviour
    {

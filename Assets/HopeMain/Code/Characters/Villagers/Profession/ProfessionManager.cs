@@ -1,14 +1,13 @@
 using System;
 using System.Collections.Generic;
-using Code.Map.Building.Workplaces;
-using Code.System.Assets;
-using Code.Villagers.Entity;
-using Code.Villagers.Professions.Types;
+using HopeMain.Code.Characters.Villagers.Entity;
+using HopeMain.Code.System.Assets;
+using HopeMain.Code.World.Buildings.Workplace;
 using NodeCanvas.BehaviourTrees;
 using NodeCanvas.Framework;
 using UnityEngine;
 
-namespace Code.Villagers.Professions
+namespace HopeMain.Code.Characters.Villagers.Profession
 {
     public class ProfessionManager : MonoBehaviour
     {

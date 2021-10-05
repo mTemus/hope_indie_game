@@ -1,10 +1,10 @@
-using Code.Map.Building.Workplaces;
-using Code.System.Areas;
-using Code.Villagers.Entity;
-using Code.Villagers.Professions;
+using HopeMain.Code.Characters.Villagers.Entity;
+using HopeMain.Code.Characters.Villagers.Profession;
+using HopeMain.Code.World.Areas;
+using HopeMain.Code.World.Buildings.Workplace;
 using UnityEngine;
 
-namespace Code.System.Initialization
+namespace HopeMain.Code.System.Initialization
 {
     public class InitializeVillager : InitializeObject
     {
