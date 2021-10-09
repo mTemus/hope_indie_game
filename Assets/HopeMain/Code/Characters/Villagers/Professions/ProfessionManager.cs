@@ -7,42 +7,45 @@ using NodeCanvas.BehaviourTrees;
 using NodeCanvas.Framework;
 using UnityEngine;
 
-namespace HopeMain.Code.Characters.Villagers.Profession
+namespace HopeMain.Code.Characters.Villagers.Professions
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ProfessionManager : MonoBehaviour
     {
-        private readonly List<Villager> unemployed = new List<Villager>();
-        private readonly List<Villager> builders = new List<Villager>();
-        private readonly List<Villager> lumberjacks = new List<Villager>();
-        private readonly List<Villager> localHaulers = new List<Villager>();
-        private readonly List<Villager> globalHaulers = new List<Villager>();
-        private readonly List<Villager> stoneMiners = new List<Villager>();
+        private readonly List<Villager> _unemployed = new List<Villager>();
+        private readonly List<Villager> _builders = new List<Villager>();
+        private readonly List<Villager> _lumberjacks = new List<Villager>();
+        private readonly List<Villager> _localHaulers = new List<Villager>();
+        private readonly List<Villager> _globalHaulers = new List<Villager>();
+        private readonly List<Villager> _stoneMiners = new List<Villager>();
         
         private void RemoveVillagerFromProfessionStructure(Villager villager)
         {
             switch (villager.Profession.Data.Type) {
                 case ProfessionType.Unemployed:
-                    unemployed.Remove(villager);
+                    _unemployed.Remove(villager);
                     break;
                 
                 case ProfessionType.Builder:
-                    builders.Remove(villager);
+                    _builders.Remove(villager);
                     break;
                 
                 case ProfessionType.Lumberjack:
-                    lumberjacks.Remove(villager);
+                    _lumberjacks.Remove(villager);
                     break;
 
                 case ProfessionType.WorkplaceHauler:
-                    localHaulers.Remove(villager);
+                    _localHaulers.Remove(villager);
                     break;
                 
                 case ProfessionType.GlobalHauler:
-                    globalHaulers.Remove(villager);
+                    _globalHaulers.Remove(villager);
                     break;
 
                 case ProfessionType.StoneMiner:
-                    stoneMiners.Remove(villager);
+                    _stoneMiners.Remove(villager);
                     break;
                 
                 default:
@@ -53,37 +56,37 @@ namespace HopeMain.Code.Characters.Villagers.Profession
         private void MakeVillagerUnemployed(Villager villager)
         {
             villager.Profession = villager.gameObject.AddComponent<Unemployed>();
-            unemployed.Add(villager);
+            _unemployed.Add(villager);
         }
         
         private void HireBuilder(Villager villager)
         {
             villager.Profession = villager.gameObject.AddComponent<Builder>();
-            builders.Add(villager);
+            _builders.Add(villager);
         }
 
         private void HireLumberjack(Villager villager)
         {
             villager.Profession = villager.gameObject.AddComponent<Lumberjack>();
-            lumberjacks.Add(villager);
+            _lumberjacks.Add(villager);
         }
 
         private void HireLocalHauler(Villager villager)
         {
             villager.Profession = villager.gameObject.AddComponent<WorkplaceHauler>();
-            localHaulers.Add(villager);
+            _localHaulers.Add(villager);
         }
 
         private void HireGlobalHauler(Villager villager)
         {
             villager.Profession = villager.gameObject.AddComponent<GlobalHauler>();
-            globalHaulers.Add(villager);
+            _globalHaulers.Add(villager);
         }
 
         private void HireStoneMiner(Villager villager)
         {
             villager.Profession = villager.gameObject.AddComponent<StoneMiner>();
-            stoneMiners.Add(villager);
+            _stoneMiners.Add(villager);
         }
 
         private void AddBehaviourTreeAIComponents(ProfessionAIType aiType, Villager villager)
@@ -142,6 +145,10 @@ namespace HopeMain.Code.Characters.Villagers.Profession
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="villager"></param>
         public void FireVillagerFromOldProfession(Villager villager)
         {
             RemoveVillagerFromProfessionStructure(villager);
@@ -153,6 +160,12 @@ namespace HopeMain.Code.Characters.Villagers.Profession
             villager.UI.ProfessionName.text = "No Profession Exception";
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="villager"></param>
+        /// <param name="professionData"></param>
+        /// <param name="workplace"></param>
         public void SetVillagerProfession(Villager villager, Data professionData, WorkplaceBase workplace)
         {
             AddProfessionComponent(villager, professionData.Type);

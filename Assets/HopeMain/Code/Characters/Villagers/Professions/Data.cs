@@ -3,8 +3,11 @@ using HopeMain.Code.World.Buildings;
 using HopeMain.Code.World.Buildings.Workplace;
 using UnityEngine;
 
-namespace HopeMain.Code.Characters.Villagers.Profession
+namespace HopeMain.Code.Characters.Villagers.Professions
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [CreateAssetMenu(fileName = "Villager Profession Data", menuName = "Game Data/Villagers/Profession Data", order = 0)]
     public class Data : ScriptableObject
     {
@@ -20,6 +23,10 @@ namespace HopeMain.Code.Characters.Villagers.Profession
         [Header("WorkplaceBase data")] 
         [SerializeField] private World.Buildings.Data workplaceBuildingData;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="amount"></param>
         public void SetGoldPerDay(int amount) =>
             goldPerDay = amount;
 
