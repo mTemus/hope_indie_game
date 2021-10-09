@@ -6,15 +6,21 @@ using UnityEngine;
 
 namespace HopeMain.Code.AI.Villagers.Tasks
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public enum ResourceGatheringFlag
     {
-        GO_TO_WORKPLACE,
-        FIND_CLOSEST_RESOURCE,
-        GO_TO_RESOURCE,
-        GATHER_RESOURCE,
-        DELIVER_RESOURCE_TO_WORKPLACE
+        GOToWorkplace,
+        FindClosestResource,
+        GOToResource,
+        GatherResource,
+        DeliverResourceToWorkplace
     }
     
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class ResourceGathering : Task
     {
         protected ResourceType resourceType;
@@ -26,7 +32,7 @@ namespace HopeMain.Code.AI.Villagers.Tasks
         
         protected int gatheringSocketId;
 
-        public Action<Resource> onResourceDelivery;
+        public Action<Resource> resourceDelivery;
 
         public abstract void DepleteCurrentResource();
     }

@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace HopeMain.Code.World.Areas
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Edge : MonoBehaviour
     {
         [SerializeField] private Area area;

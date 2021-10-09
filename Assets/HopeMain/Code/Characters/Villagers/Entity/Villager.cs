@@ -1,9 +1,13 @@
 using HopeMain.Code.AI.Villagers.Brain;
+using HopeMain.Code.Characters.Villagers.Professions;
 using HopeMain.Code.GUI.Villager;
 using UnityEngine;
 
 namespace HopeMain.Code.Characters.Villagers.Entity
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Villager : MonoBehaviour
     {
         [Header("Villager properties")]
@@ -13,13 +17,13 @@ namespace HopeMain.Code.Characters.Villagers.Entity
 
         [Header("Villager components")] 
         [SerializeField] private Brain brain;
-        [SerializeField] private Profession.Profession profession;
+        [SerializeField] private Profession profession;
         [SerializeField] private VillagerUI ui;
 
         public Brain Brain => brain;
         public Statistics Statistics => statistics;
 
-        public Profession.Profession Profession
+        public Profession Profession
         {
             get => profession;
             set => profession = value;

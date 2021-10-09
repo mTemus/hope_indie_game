@@ -3,24 +3,32 @@ using UnityEngine;
 
 namespace HopeMain.Code.AI.Villagers.Brain
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class MotionLayer : BrainLayer
     {
         [SerializeField] private float speed = 5f;
 
-        private Action<Vector3> onVillagerTurnDirection;
+        private Action<Vector3> _villagerTurnDirection;
         
-        private bool turnedFacing;
-
+        private bool _turnedFacing;
+        
         public override void Initialize(Brain brain)
         {
-            onVillagerTurnDirection += brain.Animations.Turn;
+            _villagerTurnDirection += brain.Animations.Turn;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
         public bool MoveTo(Vector3 position)
         {
-            if (!turnedFacing) {
-                onVillagerTurnDirection.Invoke(position);
-                turnedFacing = true;
+            if (!_turnedFacing) {
+                _villagerTurnDirection.Invoke(position);
+                _turnedFacing = true;
             }
 
             Vector3 villagerPosition = transform.position;
@@ -30,16 +38,22 @@ namespace HopeMain.Code.AI.Villagers.Brain
             bool isOnPosition = villagerPosition == position;
 
             if (isOnPosition) 
-                turnedFacing = false;
+                _turnedFacing = false;
             
             return isOnPosition;
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="villagerSpeed"></param>
+        /// <returns></returns>
         public bool MoveTo(Vector3 position, float villagerSpeed)
         {
-            if (!turnedFacing) {
-                onVillagerTurnDirection.Invoke(position);
-                turnedFacing = true;
+            if (!_turnedFacing) {
+                _villagerTurnDirection.Invoke(position);
+                _turnedFacing = true;
             }
             
             Vector3 villagerPosition = transform.position;
@@ -49,7 +63,7 @@ namespace HopeMain.Code.AI.Villagers.Brain
             bool isOnPosition = villagerPosition == position;
 
             if (isOnPosition) 
-                turnedFacing = false;
+                _turnedFacing = false;
             
             return isOnPosition;
         }

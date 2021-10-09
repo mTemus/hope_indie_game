@@ -4,7 +4,7 @@ namespace HopeMain.Code.System.Initialization
 {
     public enum InitializeObjectMode
     {
-        NEW, LOAD
+        New, Load
     }
     
     public abstract class InitializeObject : MonoBehaviour

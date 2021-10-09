@@ -1,6 +1,7 @@
 using System;
 using HopeMain.Code.World.Buildings;
 using HopeMain.Code.World.Buildings.Workplace;
+using HopeMain.Code.World.Buildings.Workplaces;
 using UnityEngine;
 
 namespace HopeMain.Code.Characters.Villagers.Professions
@@ -20,7 +21,7 @@ namespace HopeMain.Code.Characters.Villagers.Professions
         //TODO: this wont work, it need to be moved to "profession.cs"
         [SerializeField] private int goldPerDay;
 
-        [Header("WorkplaceBase data")] 
+        [Header("Workplace data")] 
         [SerializeField] private World.Buildings.Data workplaceBuildingData;
 
         /// <summary>
@@ -30,7 +31,7 @@ namespace HopeMain.Code.Characters.Villagers.Professions
         public void SetGoldPerDay(int amount) =>
             goldPerDay = amount;
 
-        public Type WorkplaceType => workplaceBuildingData.Prefab.GetComponent<WorkplaceBase>().GetType();
+        public Type WorkplaceType => workplaceBuildingData.Prefab.GetComponent<Workplace>().GetType();
         public BuildingType WorkplaceBuildingType => workplaceBuildingData.BuildingType;
         public ProfessionType Type => type;
         public ProfessionAIType AIType => aiType;

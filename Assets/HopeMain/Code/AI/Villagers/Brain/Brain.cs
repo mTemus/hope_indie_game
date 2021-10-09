@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace HopeMain.Code.AI.Villagers.Brain
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Brain : EntityBrain
     {
         [Header("Layers")]
@@ -21,7 +24,7 @@ namespace HopeMain.Code.AI.Villagers.Brain
 
         private void Awake()
         {
-            onWalkingSoundSet = sounds.SetWalkingAudioClip;
+            walkingSoundSet = sounds.SetWalkingAudioClip;
 
             perception.Initialize(this);
             behaviour.Initialize(this);
@@ -36,6 +39,9 @@ namespace HopeMain.Code.AI.Villagers.Brain
             behaviour.ManualUpdate();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void ClearBehaviourAIComponents()
         {
             behaviour.BehaviourTree.StopBehaviour();

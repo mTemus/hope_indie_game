@@ -1,5 +1,8 @@
 namespace HopeMain.Code.GUI.UIElements.SelectableElement
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class UiAcceptancePanel : UiSelectablePanel
     {
         private void Awake()

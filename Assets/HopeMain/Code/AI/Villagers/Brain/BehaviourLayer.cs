@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace HopeMain.Code.AI.Villagers.Brain
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class BehaviourLayer : BrainLayer
     {
         [SerializeField] private BehaviourTreeOwner behaviourTree;
@@ -11,6 +14,9 @@ namespace HopeMain.Code.AI.Villagers.Brain
         
         public override void Initialize(Brain brain) {}
         
+        /// <summary>
+        /// 
+        /// </summary>
         public void ManualUpdate()
         {
             BehaviourTree.Tick();

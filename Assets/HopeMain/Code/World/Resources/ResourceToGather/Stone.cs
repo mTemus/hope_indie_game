@@ -1,20 +1,24 @@
 using System;
 using HopeMain.Code.Characters.Villagers.Entity;
 using HopeMain.Code.World.Buildings.Workplace;
+using HopeMain.Code.World.Buildings.Workplaces;
 
 namespace HopeMain.Code.World.Resources.ResourceToGather
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Stone : ResourceToGatherBase
     {
-        private WorkplaceBase workplace;
+        private Workplace _workplace;
 
-        public WorkplaceBase Workplace
+        public Workplace Workplace
         {
-            get => workplace;
-            set => workplace = value;
+            get => _workplace;
+            set => _workplace = value;
         }
 
-        public bool hasWorkplace => workplace != null;
+        public bool HasWorkplace => _workplace != null;
 
         public override void StartGathering(Villager worker)
         {

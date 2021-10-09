@@ -1,5 +1,8 @@
 namespace HopeMain.Code.GUI.UIElements.SelectableElement
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class SelectableTextUiElement : UiSelectableElement
     {
         public override void OnElementSelected()

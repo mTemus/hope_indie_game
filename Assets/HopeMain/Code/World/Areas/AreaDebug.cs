@@ -5,28 +5,37 @@ using UnityEngine;
 
 namespace HopeMain.Code.World.Areas
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class AreaDebug : MonoBehaviour
     {
         [SerializeField] private Area myArea;
 
-        private List<TextMesh> gridText;
+        private List<TextMesh> _gridText;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void CreateGridText()
         {
             GameObject textPool = new GameObject("DebugPool");
             textPool.transform.SetParent(transform);
 
             GridMap gridMap = myArea.GridMap;
-            gridText = new List<TextMesh>();
+            _gridText = new List<TextMesh>();
             
             for (int x = 0; x < gridMap.Cells.GetLength(0); x++) {
                 for (int y = 0; y < gridMap.Cells.GetLength(1); y++) {
-                    gridText.Add(CodeMonkeyUtils.ShowWorldText(x + "," + y, textPool.transform, gridMap.GetWorldPosition(x, y, transform.position) + new Vector3(gridMap.CellSize, gridMap.CellSize) * 0.5f, 8, Color.white,
+                    _gridText.Add(CodeMonkeyUtils.ShowWorldText(x + "," + y, textPool.transform, gridMap.GetWorldPosition(x, y, transform.position) + new Vector3(gridMap.CellSize, gridMap.CellSize) * 0.5f, 8, Color.white,
                         TextAnchor.MiddleCenter));
                 }
             }
         }
     
+        /// <summary>
+        /// 
+        /// </summary>
         public void ShowGrid()
         {
             Vector3Int areaPos = Vector3Int.FloorToInt(transform.position);
@@ -42,9 +51,13 @@ namespace HopeMain.Code.World.Areas
             Debug.DrawLine(gridMap.GetWorldPosition(gridMap.Width, areaPos.y + 0, areaPos), gridMap.GetWorldPosition(gridMap.Width, gridMap.Height, areaPos), Color.white);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="condition"></param>
         public void ToggleGridText(bool condition)
         {
-            foreach (TextMesh text in gridText) 
+            foreach (TextMesh text in _gridText) 
                 text.gameObject.SetActive(condition);
         }
 

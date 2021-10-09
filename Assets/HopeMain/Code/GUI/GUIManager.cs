@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace HopeMain.Code.GUI
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class GUIManager : MonoBehaviour
     {
         [Header("Player GUI")]

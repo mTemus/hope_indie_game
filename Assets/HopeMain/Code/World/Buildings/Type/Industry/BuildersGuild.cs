@@ -1,7 +1,7 @@
 using System.Linq;
 using HopeMain.Code.AI.Villagers.Tasks;
 using HopeMain.Code.Characters.Villagers.Entity;
-using HopeMain.Code.Characters.Villagers.Profession;
+using HopeMain.Code.Characters.Villagers.Professions;
 using HopeMain.Code.System;
 using HopeMain.Code.World.Buildings.Workplace;
 using HopeMain.Code.World.Resources;
@@ -9,6 +9,9 @@ using UnityEngine;
 
 namespace HopeMain.Code.World.Buildings.Type.Industry
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class BuildersGuild : Services
     {
         public override void Initialize() {}
@@ -20,7 +23,7 @@ namespace HopeMain.Code.World.Buildings.Type.Industry
             Task nt = (from task in tasksToDo
                     where task is AI.Villagers.Tasks.Building
                     select task as AI.Villagers.Tasks.Building)
-                .FirstOrDefault(bt => bt.flag != TaskFlag.WAITING);
+                .FirstOrDefault(bt => bt.flag != TaskFlag.Waiting);
 
             RemoveTaskFromTodoList(nt);
             return nt;
@@ -41,7 +44,7 @@ namespace HopeMain.Code.World.Buildings.Type.Industry
         {
             ResourceCarrying rct =
                 new ResourceCarrying(requiredResource, true, construction.GetComponent<Building>());
-            rct.onResourceDelivery += construction.AddResources;
+            rct.resourceDelivery += construction.AddResources;
             
             Managers.I.Resources.ReserveResources(rct, requiredResource);
             AddTaskToDo(rct);
@@ -51,7 +54,7 @@ namespace HopeMain.Code.World.Buildings.Type.Industry
         {
             Debug.Log("Adding task as to do: " + task.GetType().Name);
 
-            if (task.flag == TaskFlag.WAITING) {
+            if (task.flag == TaskFlag.Waiting) {
                 tasksToDo.Add(task);
                 Debug.Log("Added task as todo, because it's state is \"WAITING\".");
                 return;
@@ -110,8 +113,8 @@ namespace HopeMain.Code.World.Buildings.Type.Industry
                 }
                 else {
                     Managers.I.Resources.AddWaitingTask(rct, rct.ResourceToCarry);
-                    rct.onTaskSetReady += rct.SetReady;
-                    rct.flag = TaskFlag.WAITING;
+                    rct.taskSetReady += rct.SetReady;
+                    rct.flag = TaskFlag.Waiting;
                 }
             }
             else {
@@ -119,6 +122,11 @@ namespace HopeMain.Code.World.Buildings.Type.Industry
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="construction"></param>
+        /// <param name="buildingData"></param>
         public void CreateBuildingTask(Construction construction, Data buildingData)
         {
             AI.Villagers.Tasks.Building bt = new AI.Villagers.Tasks.Building(construction.transform.position + construction.PositionOffset, construction);

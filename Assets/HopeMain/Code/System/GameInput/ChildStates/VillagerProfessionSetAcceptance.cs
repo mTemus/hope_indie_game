@@ -5,11 +5,11 @@ namespace HopeMain.Code.System.GameInput.ChildStates
 {
     public class VillagerProfessionSetAcceptance : IInputState
     {
-        private readonly UiAcceptancePanel acceptancePanel;
+        private readonly UiAcceptancePanel _acceptancePanel;
 
         public VillagerProfessionSetAcceptance(UiAcceptancePanel acceptancePanel)
         {
-            this.acceptancePanel = acceptancePanel;
+            _acceptancePanel = acceptancePanel;
         }
 
         public void OnStateSet()
@@ -19,16 +19,16 @@ namespace HopeMain.Code.System.GameInput.ChildStates
         public void HandleState(InputManager inputManager)
         {
             if (Input.GetKeyDown(inputManager.Left) || Input.GetKeyDown(inputManager.LeftAlt)) 
-                acceptancePanel.MovePointer(-1);
+                _acceptancePanel.MovePointer(-1);
             
             if (Input.GetKeyDown(inputManager.Right) || Input.GetKeyDown(inputManager.RightAlt)) 
-                acceptancePanel.MovePointer(1);
+                _acceptancePanel.MovePointer(1);
             
             if (Input.GetKeyDown(inputManager.Action)) 
-                acceptancePanel.UseSelectedElement();
+                _acceptancePanel.UseSelectedElement();
 
             if (Input.GetKeyDown(inputManager.Cancel)) {
-                acceptancePanel.gameObject.SetActive(false);
+                _acceptancePanel.gameObject.SetActive(false);
                 InputManager.VillagerProperties.SetToVillagerProfessionDisplayChildState(Managers.I.GUI.ProfessionChangingPanel);
             }
             

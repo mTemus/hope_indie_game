@@ -7,9 +7,12 @@ using UnityEngine;
 
 namespace HopeMain.Code.AI.Villagers.Tasks
 {
-    public class ResourceGathering_Single : ResourceGathering
+    /// <summary>
+    /// 
+    /// </summary>
+    public class ResourceGatheringSingle : ResourceGathering
     {
-        public ResourceGathering_Single(ResourceType resourceType, AreaType[] gatherAreas)
+        public ResourceGatheringSingle(ResourceType resourceType, AreaType[] gatherAreas)
         {
             this.resourceType = resourceType;
             this.gatherAreas = gatherAreas;
@@ -18,20 +21,20 @@ namespace HopeMain.Code.AI.Villagers.Tasks
         public override void Start()
         {
             worker.Brain.Animations.SetState(VillagerAnimationState.Walk);
-            currentGatheringState = ResourceGatheringFlag.FIND_CLOSEST_RESOURCE;
+            currentGatheringState = ResourceGatheringFlag.FindClosestResource;
         }
         
         public override void Execute()
         {
-            flag = TaskFlag.RUNNING;
+            flag = TaskFlag.Running;
             
             switch (currentGatheringState) {
-                case ResourceGatheringFlag.GO_TO_WORKPLACE:
+                case ResourceGatheringFlag.GOToWorkplace:
                     if (!worker.Brain.Motion.MoveTo(worker.Profession.Workplace.PivotedPosition)) break;
-                    currentGatheringState = ResourceGatheringFlag.DELIVER_RESOURCE_TO_WORKPLACE;
+                    currentGatheringState = ResourceGatheringFlag.DeliverResourceToWorkplace;
                     break;
                 
-                case ResourceGatheringFlag.FIND_CLOSEST_RESOURCE:
+                case ResourceGatheringFlag.FindClosestResource:
                     Vector3 currWorkerPosition = worker.transform.position;
                     
                     Area resourceArea =
@@ -41,7 +44,7 @@ namespace HopeMain.Code.AI.Villagers.Tasks
 
                     if (resourceToGather == null) {
                         if (worker.Profession.IsCarryingResource) {
-                            currentGatheringState = ResourceGatheringFlag.GO_TO_WORKPLACE;
+                            currentGatheringState = ResourceGatheringFlag.GOToWorkplace;
                         }
                         else {
                             worker.Profession.CarriedResource = null;
@@ -52,30 +55,30 @@ namespace HopeMain.Code.AI.Villagers.Tasks
                     
                     gatheringSocketId = resourceToGather.RegisterGatherer(worker, this);
                     resourcePosition = resourceToGather.PivotedPosition;
-                    currentGatheringState = ResourceGatheringFlag.GO_TO_RESOURCE;
+                    currentGatheringState = ResourceGatheringFlag.GOToResource;
                     break;
                 
-                case ResourceGatheringFlag.GO_TO_RESOURCE:
+                case ResourceGatheringFlag.GOToResource:
                     if (!worker.Brain.Motion.MoveTo(resourcePosition)) break;
                     resourceToGather.StartGathering(worker);
                     worker.Brain.Animations.SetState(VillagerAnimationState.Idle);
-                    currentGatheringState = ResourceGatheringFlag.GATHER_RESOURCE;
+                    currentGatheringState = ResourceGatheringFlag.GatherResource;
                     break;
                 
-                case ResourceGatheringFlag.GATHER_RESOURCE:
+                case ResourceGatheringFlag.GatherResource:
                     if (resourceToGather.Gather(worker, gatheringSocketId)) break;
                     worker.UI.SetResourceIcon(worker.Profession.CarriedResource.Type);
                     worker.Brain.Animations.SetState(VillagerAnimationState.Walk);
-                    currentGatheringState = ResourceGatheringFlag.GO_TO_WORKPLACE;
+                    currentGatheringState = ResourceGatheringFlag.GOToWorkplace;
                     break;
                 
-                case ResourceGatheringFlag.DELIVER_RESOURCE_TO_WORKPLACE:
-                    onResourceDelivery.Invoke(worker.Profession.CarriedResource);
+                case ResourceGatheringFlag.DeliverResourceToWorkplace:
+                    resourceDelivery.Invoke(worker.Profession.CarriedResource);
                     worker.UI.ClearResourceIcon();
                     worker.Profession.CarriedResource = null;
                     
                     currentGatheringState = resourceToGather != null ? 
-                        ResourceGatheringFlag.GO_TO_RESOURCE : ResourceGatheringFlag.FIND_CLOSEST_RESOURCE;
+                        ResourceGatheringFlag.GOToResource : ResourceGatheringFlag.FindClosestResource;
                     break;
                 
                 default:
@@ -85,13 +88,13 @@ namespace HopeMain.Code.AI.Villagers.Tasks
 
         public override void End()
         {
-            flag = TaskFlag.COMPLETED;
+            flag = TaskFlag.Completed;
         }
         
         public override void DepleteCurrentResource()
         {
-            if (currentGatheringState != ResourceGatheringFlag.GO_TO_WORKPLACE) 
-                currentGatheringState = ResourceGatheringFlag.FIND_CLOSEST_RESOURCE;
+            if (currentGatheringState != ResourceGatheringFlag.GOToWorkplace) 
+                currentGatheringState = ResourceGatheringFlag.FindClosestResource;
 
             resourceToGather = null; 
         }

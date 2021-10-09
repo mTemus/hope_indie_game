@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace HopeMain.Code.Environment.Parallax
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class WaterParallaxController : ParallaxController
     {
         public override void InitializeLayers(Vector3 camPos)

@@ -3,11 +3,17 @@ using UnityEngine;
 
 namespace HopeMain.Code.System.Assets
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public enum SoundType
     {
         Walking, Background, Construction,
     }
     
+    /// <summary>
+    /// 
+    /// </summary>
     [Serializable]
     public class Sound
     {

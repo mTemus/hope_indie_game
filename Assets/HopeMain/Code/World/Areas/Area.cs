@@ -18,14 +18,20 @@ using Data = HopeMain.Code.World.Buildings.Data;
 
 namespace HopeMain.Code.World.Areas
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public enum AreaType
     {
-        VILLAGE,
-        FOREST,
-        HIGHLANDS,
-        EMPTY,
+        Village,
+        Forest,
+        Highlands,
+        Empty,
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class Area : MonoBehaviour
     {
         [Header("Properties")]
@@ -36,47 +42,62 @@ namespace HopeMain.Code.World.Areas
         [Header("Environment")] 
         [SerializeField] private LocalParallaxController localParallax;
 
-        private readonly List<Villager> villagers = new List<Villager>();
-        private readonly List<Building> buildings = new List<Building>();
-        private readonly List<ResourceToGatherBase> resourcesToGather = new List<ResourceToGatherBase>();
+        private readonly List<Villager> _villagers = new List<Villager>();
+        private readonly List<Building> _buildings = new List<Building>();
+        private readonly List<ResourceToGatherBase> _resourcesToGather = new List<ResourceToGatherBase>();
         
-        private GameObject playerObject;
-        private GridMap gridMap;
+        private GameObject _playerObject;
+        private GridMap _gridMap;
         
-        public GridMap GridMap => gridMap;
+        public GridMap GridMap => _gridMap;
         public AreaType Type => type;
         public float Width => width;
         public float Height => height;
         public Vector3 AreaWorldPosition => transform.position;
-        public bool IsPlayerInArea => playerObject != null;
+        public bool IsPlayerInArea => _playerObject != null;
 
-        void Awake()
+        private void Awake()
         {
             int widthTileCnt = (int) (width / GlobalProperties.WorldTileSize);
             int heightTileCnt = (int) (height / GlobalProperties.WorldTileSize);
         
-            gridMap = new GridMap(widthTileCnt, heightTileCnt, GlobalProperties.WorldTileSize);
+            _gridMap = new GridMap(widthTileCnt, heightTileCnt, GlobalProperties.WorldTileSize);
         }
 
         #region Area
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="visitor"></param>
         public void SetVisitorWalkingAudio(GameObject visitor)
         {
             visitor
-                .GetComponent<EntityBrain>().onWalkingSoundSet
+                .GetComponent<EntityBrain>().walkingSoundSet
                 .Invoke(AssetsStorage.I
                     .GetAudioClipByName(SoundType.Walking, name.ToLower()));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="visitor"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public bool ContainsEntity(GameObject visitor)
         {
             return visitor.tag switch {
-                "Player" => playerObject != null,
-                "Villager" => villagers.Contains(visitor.GetComponent<Villager>()),
+                "Player" => _playerObject != null,
+                "Villager" => _villagers.Contains(visitor.GetComponent<Villager>()),
                 _ => throw new Exception("AREA --- CAN'T FIND ENTITY WITH TAG: " + gameObject.tag)
             };
         }
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="visitor"></param>
+        /// <exception cref="Exception"></exception>
         public void HandleEnteringEntity(GameObject visitor)
         {
             switch (visitor.tag) {
@@ -96,6 +117,11 @@ namespace HopeMain.Code.World.Areas
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="leaver"></param>
+        /// <exception cref="Exception"></exception>
         public void HandleLeavingEntity(GameObject leaver)
         {
             switch (leaver.tag) {
@@ -112,6 +138,12 @@ namespace HopeMain.Code.World.Areas
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entityX"></param>
+        /// <param name="entityWidth"></param>
+        /// <returns></returns>
         public float ClampInArea(float entityX, float entityWidth)
         {
             float leftCorner = transform.localPosition.x;
@@ -124,9 +156,9 @@ namespace HopeMain.Code.World.Areas
         
         private void PlayerEnterArea(GameObject player)
         {
-            playerObject = player;
-            playerObject.GetComponent<EntityBrain>().CurrentArea = this;
-            playerObject.transform.SetParent(transform);
+            _playerObject = player;
+            _playerObject.GetComponent<EntityBrain>().CurrentArea = this;
+            _playerObject.transform.SetParent(transform);
             localParallax.Move(Vector3.zero);
             SetCurrentLocalParallax();
             Debug.LogWarning("Player is in " + name);
@@ -135,14 +167,18 @@ namespace HopeMain.Code.World.Areas
         private void PlayerExitArea(GameObject player)
         {
             localParallax.Move(Vector3.zero);
-            playerObject.transform.SetParent(transform.root);
-            playerObject.GetComponent<EntityBrain>().CurrentArea = null;
-            playerObject = null;
+            _playerObject.transform.SetParent(transform.root);
+            _playerObject.GetComponent<EntityBrain>().CurrentArea = null;
+            _playerObject = null;
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="player"></param>
         public void SetPlayerToArea(GameObject player)
         {
-            playerObject = player;
+            _playerObject = player;
             player.transform.SetParent(transform);
         }
         
@@ -150,6 +186,11 @@ namespace HopeMain.Code.World.Areas
 
         #region Buildings
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="building"></param>
+        /// <param name="buildingData"></param>
         public void AddBuilding(Building building, Data buildingData)
         {
             Transform buildingTransform = building.transform;
@@ -157,26 +198,33 @@ namespace HopeMain.Code.World.Areas
             
             Vector3Int currBuildPos = Vector3Int.FloorToInt(buildingTransform.localPosition);
             
-            List<Vector2Int> buildingArea = gridMap.GetTileWithNeighbours(
+            List<Vector2Int> buildingArea = _gridMap.GetTileWithNeighbours(
                 new Vector2Int(currBuildPos.x / GlobalProperties.WorldTileSize, currBuildPos.y), 
                 new Vector2Int(buildingData.Size.x, buildingData.Size.y));
             
-            gridMap.SetBuildingInGrid(buildingArea, building);
-            buildings.Add(building);
+            _gridMap.SetBuildingInGrid(buildingArea, building);
+            _buildings.Add(building);
             Debug.Log("Add building " + building.name + "  to area "+ gameObject.name + ".");
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="buildingArea"></param>
+        /// <param name="requiredCellContent"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         public bool CanPlaceBuilding(List<Vector2Int> buildingArea, CellContentType requiredCellContent)
         {
             if (!buildingArea
                 .FindAll(tilePos => tilePos.y == buildingArea[0].y)
-                .Select(baseTilePos => gridMap.GetCellAt(baseTilePos.x, baseTilePos.y))
+                .Select(baseTilePos => _gridMap.GetCellAt(baseTilePos.x, baseTilePos.y))
                 .All(cell => cell.content == requiredCellContent)) 
                 return false;
             
             if (!buildingArea
                 .FindAll(tilePos => tilePos.y != buildingArea[0].y)
-                .Select(baseTilePos => gridMap.GetCellAt(baseTilePos.x, baseTilePos.y))
+                .Select(baseTilePos => _gridMap.GetCellAt(baseTilePos.x, baseTilePos.y))
                 .All(cell => cell.content == requiredCellContent || cell.content == CellContentType.Nothing)) 
                 return false;
 
@@ -191,9 +239,9 @@ namespace HopeMain.Code.World.Areas
                     break;
                 
                 case CellContentType.StoneResource:
-                    if (gridMap.GetCellAt(buildingArea[0].x, buildingArea[0].y).resourceToGatherData is Stone
+                    if (_gridMap.GetCellAt(buildingArea[0].x, buildingArea[0].y).resourceToGatherData is Stone
                         {
-                            hasWorkplace: true
+                            HasWorkplace: true
                         })
                         return false;
                     break;
@@ -212,6 +260,10 @@ namespace HopeMain.Code.World.Areas
 
         #region Resources to Gather
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="resourceToGather"></param>
         public void AddResourceToGather(ResourceToGatherBase resourceToGather)
         {
             Transform resourceTransform = resourceToGather.transform;
@@ -219,29 +271,39 @@ namespace HopeMain.Code.World.Areas
 
             Vector3Int currResourcePos = Vector3Int.FloorToInt(resourceTransform.localPosition);
 
-            List<Vector2Int> resourceArea = gridMap.GetTileWithNeighbours(
+            List<Vector2Int> resourceArea = _gridMap.GetTileWithNeighbours(
                 new Vector2Int(currResourcePos.x / GlobalProperties.WorldTileSize, currResourcePos.y),
                 new Vector2Int(resourceToGather.Size.x, resourceToGather.Size.y));
 
-            gridMap.SetResourceToGatherInGrid(resourceArea, resourceToGather);
-            resourcesToGather.Add(resourceToGather);
+            _gridMap.SetResourceToGatherInGrid(resourceArea, resourceToGather);
+            _resourcesToGather.Add(resourceToGather);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="resourceToGather"></param>
         public void RemoveResourceToGather(ResourceToGatherBase resourceToGather)
         {
             Vector3Int currResourcePos = Vector3Int.FloorToInt(resourceToGather.transform.localPosition);
-            List<Vector2Int> resourceArea = gridMap.GetTileWithNeighbours(
+            List<Vector2Int> resourceArea = _gridMap.GetTileWithNeighbours(
                 new Vector2Int(currResourcePos.x / GlobalProperties.WorldTileSize, currResourcePos.y),
                 new Vector2Int(resourceToGather.Size.x, resourceToGather.Size.y));
 
-            gridMap.SetResourceToGatherInGrid(resourceArea, null);
-            resourcesToGather.Remove(resourceToGather);
+            _gridMap.SetResourceToGatherInGrid(resourceArea, null);
+            _resourcesToGather.Remove(resourceToGather);
             Debug.LogError("Remove resource " + resourceToGather.name + "  to area "+ gameObject.name + ".");
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="resourceType"></param>
+        /// <returns></returns>
         public ResourceToGatherBase GetClosestResourceToGatherByType(Vector3 position, ResourceType resourceType)
         {
-            List<ResourceToGatherBase> resources = resourcesToGather
+            List<ResourceToGatherBase> resources = _resourcesToGather
                 .Where(resourceToGather => resourceToGather.Resource.Type == resourceType)
                 .ToList();
 
@@ -272,15 +334,19 @@ namespace HopeMain.Code.World.Areas
 
         private void VillagerExitArea(GameObject villager)
         {
-            villagers.Remove(villager.GetComponent<Villager>());
+            _villagers.Remove(villager.GetComponent<Villager>());
             villager.transform.SetParent(transform.parent);
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="villager"></param>
         public void AddVillager(Villager villager)
         {
             villager.Brain.CurrentArea = this;
             villager.transform.SetParent(transform);
-            villagers.Add(villager);
+            _villagers.Add(villager);
             
             Debug.Log("Add villager " + villager.name + "  to area "+ gameObject.name + ".");
         }

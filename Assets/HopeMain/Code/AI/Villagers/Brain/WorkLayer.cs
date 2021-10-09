@@ -7,21 +7,23 @@ namespace HopeMain.Code.AI.Villagers.Brain
 {
     public class WorkLayer : BrainLayer
     {
-        private readonly Queue<Task> tasks = new Queue<Task>();
+        private readonly Queue<Task> _tasks = new Queue<Task>();
         
-        private Task currentTask;
+        private Task _currentTask;
         
         public Resource CarriedResource { get; set; }
-        public bool HasWorkToDo => tasks.Count > 0 || currentTask != null || currentTask != null && currentTask.flag != TaskFlag.COMPLETED;
-        public bool TaskComplete => currentTask.flag == TaskFlag.COMPLETED;
+        public bool HasWorkToDo => _tasks.Count > 0 || _currentTask != null || _currentTask != null && _currentTask.flag != TaskFlag.Completed;
+        public bool TaskComplete => _currentTask.flag == TaskFlag.Completed;
         public bool IsCarryingResource => CarriedResource != null && CarriedResource.amount > 0;
 
         public override void Initialize(Brain brain) {}
         
+        /// <summary>
         /// Called in Worker Behaviour Tree
+        /// </summary>
         public void Work()
         { 
-            currentTask.Execute();
+            _currentTask.Execute();
         }
        
         #region Tasks
@@ -31,36 +33,49 @@ namespace HopeMain.Code.AI.Villagers.Brain
             task.Abandon();
         }
         
+        /// <summary>
         /// Called in Worker Behaviour Tree
+        /// </summary>
+        /// <returns></returns>
         public bool GetNewTask()
         {
-            if (tasks.Count <= 0) {
-                currentTask = null;
+            if (_tasks.Count <= 0) {
+                _currentTask = null;
                 return false;
             }
             
-            currentTask = tasks.Dequeue();
-            currentTask.Start();
+            _currentTask = _tasks.Dequeue();
+            _currentTask.Start();
             return true;
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="task"></param>
         public void AddTask(Task task)
         {
-            tasks.Enqueue(task);
+            _tasks.Enqueue(task);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void PauseCurrentTask()
         {
-            currentTask.Pause();
-            AddTask(currentTask);
-            currentTask = null;
+            _currentTask.Pause();
+            AddTask(_currentTask);
+            _currentTask = null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void AbandonCurrentTask()
         {
-            if (currentTask != null) {
-                AbandonTask(currentTask);
-                currentTask = null;
+            if (_currentTask != null) {
+                AbandonTask(_currentTask);
+                _currentTask = null;
             }
 
             if (!IsCarryingResource) return;
@@ -68,27 +83,36 @@ namespace HopeMain.Code.AI.Villagers.Brain
             CarriedResource = null;
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         public void AbandonAllTasks()
         {
             if (!HasWorkToDo) 
                 return;
 
-            AbandonTask(currentTask);
+            AbandonTask(_currentTask);
             
-            foreach (Task task in tasks) 
+            foreach (Task task in _tasks) 
                 AbandonTask(task);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void InterruptTask()
         {
-            currentTask.Interrupt();
-            AddTask(currentTask);
-            currentTask = null;
+            _currentTask.Interrupt();
+            AddTask(_currentTask);
+            _currentTask = null;
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         public void CompleteTask()
         {
-            currentTask.End();
+            _currentTask.End();
         }
         
         #endregion

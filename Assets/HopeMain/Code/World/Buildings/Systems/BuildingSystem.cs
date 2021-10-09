@@ -16,17 +16,20 @@ namespace HopeMain.Code.World.Buildings.Systems
     
     // NOTE: Building system can be optimized by checking/setting only cell content type in surface cell
     
+    /// <summary>
+    /// 
+    /// </summary>
     public class BuildingSystem : MonoBehaviour
     {
         [SerializeField] private Material buildingFadeMaterial;
         
-        private readonly int maxXOffset = 30;
-        private Vector3Int currOffset;
+        private readonly int _maxXOffset = 30;
+        private Vector3Int _currOffset;
 
         private static GameObject _currentBuilding;
         private static Data _currentBuildingData;
-        private Area currentBuildingArea;
-        private Vector3Int currentPlacingPosition;
+        private Area _currentBuildingArea;
+        private Vector3Int _currentPlacingPosition;
         
         // 1. Set building -> set building chosen from building UI and instantiate it on player position
             // after setting Move(Vector.zero)
@@ -42,7 +45,7 @@ namespace HopeMain.Code.World.Buildings.Systems
         
         private bool CheckBuildingCorner(Vector3Int cornerPosition, out Vector3 newBuildingPosition)
         {
-            CellBase cell = currentBuildingArea.GridMap.GetCellAt(cornerPosition.x / GlobalProperties.WorldTileSize, 0);
+            CellBase cell = _currentBuildingArea.GridMap.GetCellAt(cornerPosition.x / GlobalProperties.WorldTileSize, 0);
             if (cell.content == _currentBuildingData.RequiredCellContent) {
                 switch (cell.content) {
                     case CellContentType.Null:
@@ -84,19 +87,19 @@ namespace HopeMain.Code.World.Buildings.Systems
                     break;
                 
                 case CellContentType.Nothing:
-                    CheckBuildingCorner(currentPlacingPosition, out newBuildingPosition);
+                    CheckBuildingCorner(_currentPlacingPosition, out newBuildingPosition);
                     break;
                 
                 case CellContentType.WoodResource:
                     break;
                 
                 case CellContentType.StoneResource:
-                    if (!CheckBuildingCorner(currentPlacingPosition, out newBuildingPosition)) 
+                    if (!CheckBuildingCorner(_currentPlacingPosition, out newBuildingPosition)) 
                         CheckBuildingCorner( 
                             Vector3Int.FloorToInt(new Vector3(
-                                currentPlacingPosition.x + _currentBuildingData.Size.x * GlobalProperties.WorldTileSize, 
-                                currentPlacingPosition.y, 
-                                currentPlacingPosition.z)),
+                                _currentPlacingPosition.x + _currentBuildingData.Size.x * GlobalProperties.WorldTileSize, 
+                                _currentPlacingPosition.y, 
+                                _currentPlacingPosition.z)),
                             out newBuildingPosition);
                     break;
                 
@@ -108,22 +111,26 @@ namespace HopeMain.Code.World.Buildings.Systems
             }
             
 
-            return newBuildingPosition == Vector3.zero ? currentPlacingPosition : newBuildingPosition;
+            return newBuildingPosition == Vector3.zero ? _currentPlacingPosition : newBuildingPosition;
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="buildingData"></param>
         public void SetBuilding(Data buildingData)
         {
             if (_currentBuilding != null) 
                 DestroyImmediate(_currentBuilding.gameObject);
             
             _currentBuildingData = buildingData;
-            currentBuildingArea = Managers.I.Areas.GetPlayerArea();
-            currentBuildingArea.GridMap.GetXY(Managers.I.Player.GetPlayerLocalPosition(), out int x, out int y);
+            _currentBuildingArea = Managers.I.Areas.GetPlayerArea();
+            _currentBuildingArea.GridMap.GetXY(Managers.I.Player.GetPlayerLocalPosition(), out int x, out int y);
 
             Vector3Int buildingPosition = new Vector3Int(x, 0, 0) * GlobalProperties.WorldTileSize;
             
-            if (!IsBuildingInAreaRange(currentBuildingArea, buildingPosition)) 
-                while (!IsBuildingInAreaRange(currentBuildingArea, buildingPosition))
+            if (!IsBuildingInAreaRange(_currentBuildingArea, buildingPosition)) 
+                while (!IsBuildingInAreaRange(_currentBuildingArea, buildingPosition))
                     if (buildingPosition.x < 0) buildingPosition.x += 1 * GlobalProperties.WorldTileSize;
                     else if (buildingPosition.x > 0) buildingPosition.x -= 1 * GlobalProperties.WorldTileSize;
 
@@ -131,28 +138,36 @@ namespace HopeMain.Code.World.Buildings.Systems
             
             _currentBuilding = Instantiate(
                 _currentBuildingData.Prefab.gameObject, 
-                currentBuildingArea.GridMap.GetWorldPosition(buildingPosition.x, buildingPosition.y, currentBuildingArea.transform.position), 
+                _currentBuildingArea.GridMap.GetWorldPosition(buildingPosition.x, buildingPosition.y, _currentBuildingArea.transform.position), 
                 Quaternion.identity, 
-                currentBuildingArea.transform);
+                _currentBuildingArea.transform);
             
-            currentPlacingPosition = Vector3Int.FloorToInt(buildingPosition) * GlobalProperties.WorldTileSize;
+            _currentPlacingPosition = Vector3Int.FloorToInt(buildingPosition) * GlobalProperties.WorldTileSize;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="direction"></param>
         public void MoveCurrentBuilding(Vector3Int direction)
         {
             direction *= GlobalProperties.WorldTileSize;
-            int newBuildPosX = currentPlacingPosition.x + direction.x;
+            int newBuildPosX = _currentPlacingPosition.x + direction.x;
             
-            if (Mathf.Abs(currOffset.x + direction.x) > maxXOffset) return;
-            if (!currentBuildingArea.GridMap.IsTileInRange(newBuildPosX, currentPlacingPosition.y)) return;
-            if (!currentBuildingArea.GridMap.IsTileInRange(newBuildPosX, currentPlacingPosition.y, _currentBuildingData.Size.x)) return;
+            if (Mathf.Abs(_currOffset.x + direction.x) > _maxXOffset) return;
+            if (!_currentBuildingArea.GridMap.IsTileInRange(newBuildPosX, _currentPlacingPosition.y)) return;
+            if (!_currentBuildingArea.GridMap.IsTileInRange(newBuildPosX, _currentPlacingPosition.y, _currentBuildingData.Size.x)) return;
             
-            currOffset += direction;
-            currentPlacingPosition += direction;
+            _currOffset += direction;
+            _currentPlacingPosition += direction;
             
             _currentBuilding.transform.localPosition = CheckBuildingCurrentPosition();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         public void BuildBuilding()
         {
             if ((from requiredResource in _currentBuildingData.RequiredResources
@@ -165,18 +180,18 @@ namespace HopeMain.Code.World.Buildings.Systems
             }
             
             List<Vector2Int> buildingArea =
-                currentBuildingArea.GridMap.GetTileWithNeighbours(
+                _currentBuildingArea.GridMap.GetTileWithNeighbours(
                     Vector2Int.FloorToInt(_currentBuilding.transform.localPosition) / GlobalProperties.WorldTileSize, 
                     _currentBuildingData.Size);
             
-            if (!currentBuildingArea.CanPlaceBuilding(buildingArea, _currentBuildingData.RequiredCellContent)) {
+            if (!_currentBuildingArea.CanPlaceBuilding(buildingArea, _currentBuildingData.RequiredCellContent)) {
                 Debug.LogWarning("Can't build this object there");
                 return;
             }
             
             _currentBuilding.GetComponent<Construction>()
                 .InitializeConstruction(_currentBuildingData, new Material(buildingFadeMaterial));
-            currentBuildingArea.AddBuilding(_currentBuilding.GetComponent<Building>(), _currentBuildingData);
+            _currentBuildingArea.AddBuilding(_currentBuilding.GetComponent<Building>(), _currentBuildingData);
 
             switch (_currentBuildingData.RequiredCellContent) {
                 case CellContentType.Null:
@@ -189,9 +204,9 @@ namespace HopeMain.Code.World.Buildings.Systems
                     break;
                 
                 case CellContentType.StoneResource:
-                    if (currentBuildingArea.GridMap.GetCellAt(buildingArea[0].x, buildingArea[0].y).resourceToGatherData
+                    if (_currentBuildingArea.GridMap.GetCellAt(buildingArea[0].x, buildingArea[0].y).resourceToGatherData
                         is Stone stone)
-                        stone.Workplace = _currentBuilding.GetComponent<WorkplaceBase>();
+                        stone.Workplace = _currentBuilding.GetComponent<Workplaces.Workplace>();
                     break;
                 
                 case CellContentType.Building:
@@ -203,23 +218,24 @@ namespace HopeMain.Code.World.Buildings.Systems
 
             _currentBuilding = null;
             _currentBuildingData = null;
-            currentBuildingArea = null;
-            currentPlacingPosition = Vector3Int.zero;
-            currOffset = Vector3Int.zero;
+            _currentBuildingArea = null;
+            _currentPlacingPosition = Vector3Int.zero;
+            _currOffset = Vector3Int.zero;
             
             
             Managers.I.Input.SetState(InputManager.Moving);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void CancelBuilding()
         {
             DestroyImmediate(_currentBuilding);
             
             _currentBuilding = null;
             _currentBuildingData = null;
-            currOffset = Vector3Int.zero;
+            _currOffset = Vector3Int.zero;
         }
-
-        
     }
 }

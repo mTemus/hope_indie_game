@@ -292,7 +292,7 @@ namespace ThirdParty.LeanTween.Framework
 			AudioSource aSource = tempGO.AddComponent<AudioSource>(); // add an audio source
 			aSource.clip = clip; // define the clip
 			aSource.Play(); // start the sound
-			GameObject.Destroy(tempGO, clip.length); // destroy object after clip duration
+			Object.Destroy(tempGO, clip.length); // destroy object after clip duration
 			return aSource; // return the AudioSource reference
 		}
 

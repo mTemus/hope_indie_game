@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace HopeMain.Code.World.Resources.ResourceToGather
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [CreateAssetMenu(fileName = "Resource to gather data", menuName = "Game Data/Map Objects/Resource to Gather Data", order = 0)]
     public class Data : ScriptableObject
     {

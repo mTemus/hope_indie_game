@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace HopeMain.Code.World.Buildings
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class Building : MonoBehaviour
     {
         [Header("Building Data")]
@@ -19,6 +22,9 @@ namespace HopeMain.Code.World.Buildings
         public Data Data => data;
         public BuildingStorage Storage => storage;
         
+        /// <summary>
+        /// 
+        /// </summary>
         public abstract void Initialize();
     }
 }

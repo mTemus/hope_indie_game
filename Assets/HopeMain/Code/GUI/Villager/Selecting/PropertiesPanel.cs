@@ -33,6 +33,10 @@ namespace HopeMain.Code.GUI.Villager.Selecting
             gameObject.SetActive(false);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="villager"></param>
         public void OpenPropertiesPanel(Characters.Villagers.Entity.Villager villager)
         {
             villagerNameText.text = villager.name;
@@ -42,11 +46,17 @@ namespace HopeMain.Code.GUI.Villager.Selecting
             intelligenceValue.text = villager.Statistics.Intelligence.ToString();
         }
     
+        /// <summary>
+        /// 
+        /// </summary>
         public void FocusCameraOnVillagerWorkplace()
         {
             Managers.I.Cameras.FocusCameraOn(Managers.I.Selection.SelectedVillager.Profession.Workplace.transform);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void FocusCameraOnVillagerHouse()
         {
             

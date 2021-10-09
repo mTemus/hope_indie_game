@@ -4,9 +4,9 @@ namespace HopeMain.Code.Utilities
 {
     public static class CodeMonkeyUtils
     {
-        public const int sortingOrderDefault = 5000;
+        public const int SORTING_ORDER_DEFAULT = 5000;
         
-        public static TextMesh ShowWorldText(string text, Transform parent = null, Vector3 localPosition = default, int fontSize = 40, Color? color = null, TextAnchor textAnchor = TextAnchor.UpperLeft, TextAlignment textAlignment = TextAlignment.Left, int sortingOrder = sortingOrderDefault) {
+        public static TextMesh ShowWorldText(string text, Transform parent = null, Vector3 localPosition = default, int fontSize = 40, Color? color = null, TextAnchor textAnchor = TextAnchor.UpperLeft, TextAlignment textAlignment = TextAlignment.Left, int sortingOrder = SORTING_ORDER_DEFAULT) {
             if (color == null) color = Color.white;
             return CreateWorldText(parent, text, localPosition, fontSize, (Color)color, textAnchor, textAlignment, sortingOrder);
         }

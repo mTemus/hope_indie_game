@@ -9,82 +9,106 @@ using UnityEngine;
 
 namespace HopeMain.Code.World.Buildings
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Construction : MonoBehaviour
     {
-        private readonly List<Resource> requiredResources = new List<Resource>();
+        private readonly List<Resource> _requiredResources = new List<Resource>();
         
-        private float currentProgress;
+        private float _currentProgress;
         
         private AI.Villagers.Tasks.Building _buildingTask;
-        private Vector3 positionOffset;
-        private Material normalMaterial;
-        private Material buildingMaterial;
-        private AudioSource constructionChannel;
+        private Vector3 _positionOffset;
+        private Material _normalMaterial;
+        private Material _buildingMaterial;
+        private AudioSource _constructionChannel;
 
-        private AudioClip[] clips;
+        private AudioClip[] _clips;
         
         private static readonly int Visibility = Shader.PropertyToID("Vector1_Visibility");
 
         private bool AreResourceDelivered =>
-            requiredResources.All(resource => resource.amount == 0);
+            _requiredResources.All(resource => resource.amount == 0);
 
         private void PlayConstructionSound()
         {
-            if (constructionChannel.isPlaying) return;
+            if (_constructionChannel.isPlaying) return;
 
-            int idx = Random.Range(0, clips.Length);
+            int idx = Random.Range(0, _clips.Length);
             
-            constructionChannel.clip = clips[idx];
-            constructionChannel.Play();
+            _constructionChannel.clip = _clips[idx];
+            _constructionChannel.Play();
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public bool Construct()
         {
             PlayConstructionSound();
-            currentProgress -= 5 * Time.deltaTime;
-            currentProgress = Mathf.Clamp(currentProgress, 0.1f, 30f);
-            buildingMaterial.SetFloat(Visibility, currentProgress);
+            _currentProgress -= 5 * Time.deltaTime;
+            _currentProgress = Mathf.Clamp(_currentProgress, 0.1f, 30f);
+            _buildingMaterial.SetFloat(Visibility, _currentProgress);
 
-            if (!(currentProgress <= 0.1f)) return false;
-            GetComponent<SpriteRenderer>().material = normalMaterial;
+            if (!(_currentProgress <= 0.1f)) return false;
+            GetComponent<SpriteRenderer>().material = _normalMaterial;
             GetComponent<InitializeBuilding>().InitializeMe();
             return true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="resource"></param>
         public void SetRequiredResource(Resource resource)
         {
-            requiredResources.Add(resource);
+            _requiredResources.Add(resource);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="this"></param>
         public void SetBuildingTask(AI.Villagers.Tasks.Building @this)
         {
             _buildingTask = @this;
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="deliveredResource"></param>
         public void AddResources(Resource deliveredResource)
         {
-            Resource res = requiredResources.Single(resource => resource.Type == deliveredResource.Type);
+            Resource res = _requiredResources.Single(resource => resource.Type == deliveredResource.Type);
             res.amount = Mathf.Max(0, res.amount - deliveredResource.amount);
 
             Debug.Log("Add resources of type " + res.Type +" to construction of " + name + ". Required: " + res.amount);
             
             if (AreResourceDelivered) {
                 Debug.LogError("Resources delivered for: " + name);
-                _buildingTask.SetResourcesAsDelivered();
+                _buildingTask.SetReady();
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="buildingData"></param>
+        /// <param name="fadeMaterial"></param>
         public void InitializeConstruction(Data buildingData, Material fadeMaterial)
         {
             SpriteRenderer buildingRenderer = GetComponent<SpriteRenderer>();
             
-            normalMaterial = buildingRenderer.material;
-            buildingMaterial = fadeMaterial;
-            buildingRenderer.material = buildingMaterial;
+            _normalMaterial = buildingRenderer.material;
+            _buildingMaterial = fadeMaterial;
+            buildingRenderer.material = _buildingMaterial;
             
-            currentProgress = buildingMaterial.GetFloat(Visibility);
+            _currentProgress = _buildingMaterial.GetFloat(Visibility);
             
-            positionOffset = new Vector3(buildingData.EntrancePivot.x, buildingData.EntrancePivot.y, 0f);
+            _positionOffset = new Vector3(buildingData.EntrancePivot.x, buildingData.EntrancePivot.y, 0f);
 
             BuildersGuild buildersGuild = (BuildersGuild) Managers.I.Buildings.GetClosestBuildingOfClass(BuildingType.Industry,
                 typeof(BuildersGuild), transform.position);
@@ -94,22 +118,25 @@ namespace HopeMain.Code.World.Buildings
             foreach (Resource resource in buildingData.RequiredResources) 
                 SetRequiredResource(new Resource(resource));
             
-            constructionChannel = gameObject.AddComponent<AudioSource>();
-            constructionChannel.playOnAwake = false;
-            constructionChannel.volume = 0.5f;
-            constructionChannel.spatialBlend = 1f;
-            constructionChannel.minDistance = 3f;
-            constructionChannel.maxDistance = 10f;
-            clips = AssetsStorage.I.GetAudioClipsByName(SoundType.Construction, "construction");
+            _constructionChannel = gameObject.AddComponent<AudioSource>();
+            _constructionChannel.playOnAwake = false;
+            _constructionChannel.volume = 0.5f;
+            _constructionChannel.spatialBlend = 1f;
+            _constructionChannel.minDistance = 3f;
+            _constructionChannel.maxDistance = 10f;
+            _clips = AssetsStorage.I.GetAudioClipsByName(SoundType.Construction, "construction");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void CleanAfterConstruction()
         {
-            DestroyImmediate(buildingMaterial);
-            DestroyImmediate(constructionChannel);
+            DestroyImmediate(_buildingMaterial);
+            DestroyImmediate(_constructionChannel);
             DestroyImmediate(GetComponent<Construction>());
         }
 
-        public Vector3 PositionOffset => positionOffset;
+        public Vector3 PositionOffset => _positionOffset;
     }
 }

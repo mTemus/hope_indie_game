@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace HopeMain.Code.System
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Systems : MonoBehaviour
     {
         [SerializeField] private BuildingSystem building;

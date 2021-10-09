@@ -7,6 +7,9 @@ using UnityEngine;
 
 namespace HopeMain.Code.DeveloperTools.Console
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class DeveloperConsole : MonoBehaviour
     {
         [Header("UI Parts")] 
@@ -26,7 +29,7 @@ namespace HopeMain.Code.DeveloperTools.Console
         [SerializeField] private TextMeshProUGUI similarCommandsText;
         [SerializeField] private float singleCommandHeight;
         
-        private float similarCommandsWidth;
+        private float _similarCommandsWidth;
 
         public static DeveloperConsole I { get; private set; }
 
@@ -36,8 +39,8 @@ namespace HopeMain.Code.DeveloperTools.Console
             commandInputField.onSelect.AddListener(ResetPlaceholderText);
             commandInputField.onValueChanged.AddListener(ShowSimilarCommands);
             
-            similarCommandsWidth = similarCommandsBackground.sizeDelta.x;
-            similarCommandsBackground.sizeDelta = new Vector2(similarCommandsWidth, 0f);
+            _similarCommandsWidth = similarCommandsBackground.sizeDelta.x;
+            similarCommandsBackground.sizeDelta = new Vector2(_similarCommandsWidth, 0f);
             similarCommandsText.text = string.Empty;
             console.SetActive(false);
         }
@@ -45,7 +48,7 @@ namespace HopeMain.Code.DeveloperTools.Console
         private void ShowSimilarCommands(string currentCommand)
         {
             if (currentCommand.Equals(String.Empty) || currentCommand.Equals(" ")) {
-                similarCommandsBackground.sizeDelta = new Vector2(similarCommandsWidth, 0);
+                similarCommandsBackground.sizeDelta = new Vector2(_similarCommandsWidth, 0);
                 similarCommandsText.text = string.Empty;
                 return;
             }
@@ -56,7 +59,7 @@ namespace HopeMain.Code.DeveloperTools.Console
                 .ToList();
 
             if (similarCommands.Count == 0) {
-                similarCommandsBackground.sizeDelta = new Vector2(similarCommandsWidth, 0);
+                similarCommandsBackground.sizeDelta = new Vector2(_similarCommandsWidth, 0);
                 similarCommandsText.text = string.Empty;
                 return;
             }
@@ -64,7 +67,7 @@ namespace HopeMain.Code.DeveloperTools.Console
             string allSimilarCommands = string.Join("\n", similarCommands);
             float commandsHeight = 5f + similarCommands.Count * singleCommandHeight;
 
-            similarCommandsBackground.sizeDelta = new Vector2(similarCommandsWidth, commandsHeight);
+            similarCommandsBackground.sizeDelta = new Vector2(_similarCommandsWidth, commandsHeight);
             similarCommandsText.text = allSimilarCommands;
         }
         
@@ -74,6 +77,10 @@ namespace HopeMain.Code.DeveloperTools.Console
             commandPlaceholderField.color = normalTextColor;
         }
         
+        
+        /// <summary>
+        /// 
+        /// </summary>
         public void ToggleConsole()
         {
             if (IsConsoleActive()) {
@@ -88,6 +95,9 @@ namespace HopeMain.Code.DeveloperTools.Console
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         public void GetCommand()
         {
             string rawCommand = commandInputField.text;
@@ -114,6 +124,10 @@ namespace HopeMain.Code.DeveloperTools.Console
             commandInputField.Select();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="answerText"></param>
         public void ReturnWrongCommand(string answerText)
         {
             commandInputField.text = string.Empty;
@@ -122,6 +136,11 @@ namespace HopeMain.Code.DeveloperTools.Console
             commandInputField.Select();
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        //TODO: refactor
         public bool IsConsoleActive() =>
             console.activeSelf;
 

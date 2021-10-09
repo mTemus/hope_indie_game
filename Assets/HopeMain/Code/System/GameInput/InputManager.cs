@@ -29,7 +29,7 @@ namespace HopeMain.Code.System.GameInput
         private static BuildingPlacing buildingPlacing;
         private static VillagerProperties villagerProperties;
         
-        private IInputState currentInputState;
+        private IInputState _currentInputState;
         private DeveloperConsole _console;
 
         private void Awake()
@@ -40,10 +40,10 @@ namespace HopeMain.Code.System.GameInput
             buildingPlacing = new BuildingPlacing();
             villagerProperties = new VillagerProperties();
             
-            currentInputState = moving;
+            _currentInputState = moving;
             _console = new DeveloperConsole();
 
-            Debug.LogWarning(currentInputState.GetType().Name);
+            Debug.LogWarning(_currentInputState.GetType().Name);
         }
 
         void Update()
@@ -51,16 +51,16 @@ namespace HopeMain.Code.System.GameInput
             _console.HandleState(this);
 
             if (DeveloperTools.Console.DeveloperConsole.I.IsConsoleActive()) return;
-            currentInputState.HandleState(this);
+            _currentInputState.HandleState(this);
         }
         
         public void SetState(IInputState newInputState)
         {
-            currentInputState.OnStateChange();
-            currentInputState = newInputState;
-            currentInputState.OnStateSet();
+            _currentInputState.OnStateChange();
+            _currentInputState = newInputState;
+            _currentInputState.OnStateSet();
             
-            Debug.LogWarning("INPUT STATE ----" + currentInputState.GetType().Name);
+            Debug.LogWarning("INPUT STATE ----" + _currentInputState.GetType().Name);
         }
         
         public Brain Player => player;

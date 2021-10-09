@@ -5,10 +5,13 @@ using UnityEngine.UI;
 
 namespace HopeMain.Code.GUI.Player.ToolsMenu
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class RadialToolsMenu : MonoBehaviour
     {
         [Header("General")] 
-        [SerializeField] private Camera UICamera;
+        [SerializeField] private Camera uiCamera;
         [SerializeField] private GameObject backgroundPanel;
         [SerializeField] private GameObject circleMenuButtonPrefab;
 
@@ -24,8 +27,8 @@ namespace HopeMain.Code.GUI.Player.ToolsMenu
         [Header("Buttons")] 
         [SerializeField] private List<CircleMenuElement> menuElements;
     
-        private int currentMenuToolIndex;
-        private int previousMenuToolIndex;
+        private int _currentMenuToolIndex;
+        private int _previousMenuToolIndex;
 
         private void Awake()
         {
@@ -53,40 +56,50 @@ namespace HopeMain.Code.GUI.Player.ToolsMenu
                 circleMenuButton.IconImage.sprite = menuElements[i].ToolIcon;
                 circleMenuButton.IconRectTransform.rotation = Quaternion.identity;
             }
-            currentMenuToolIndex = 0;
-            menuElements[currentMenuToolIndex].ButtonBackground.color = highlightedButtonColor;
+            _currentMenuToolIndex = 0;
+            menuElements[_currentMenuToolIndex].ButtonBackground.color = highlightedButtonColor;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
         public void ChangeCurrentMenuElement(int value)
         {
-            currentMenuToolIndex += value;
+            _currentMenuToolIndex += value;
 
-            if (currentMenuToolIndex >= menuElements.Count) {
-                currentMenuToolIndex = 0;
-            } else if (currentMenuToolIndex < 0) {
-                currentMenuToolIndex = menuElements.Count - 1;
+            if (_currentMenuToolIndex >= menuElements.Count) {
+                _currentMenuToolIndex = 0;
+            } else if (_currentMenuToolIndex < 0) {
+                _currentMenuToolIndex = menuElements.Count - 1;
             }
 
-            if (currentMenuToolIndex == previousMenuToolIndex) return;
+            if (_currentMenuToolIndex == _previousMenuToolIndex) return;
             
-            menuElements[previousMenuToolIndex].ButtonBackground.color = normalButtonColor;
-            previousMenuToolIndex = currentMenuToolIndex;
-            menuElements[currentMenuToolIndex].ButtonBackground.color = highlightedButtonColor;
+            menuElements[_previousMenuToolIndex].ButtonBackground.color = normalButtonColor;
+            _previousMenuToolIndex = _currentMenuToolIndex;
+            menuElements[_currentMenuToolIndex].ButtonBackground.color = highlightedButtonColor;
             RefreshInformalCenter();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void SelectTool()
         {
-            Managers.I.Tools.SelectTool(currentMenuToolIndex);
+            Managers.I.Tools.SelectTool(_currentMenuToolIndex);
         }
 
         private void RefreshInformalCenter()
         {
-            toolName.text = menuElements[currentMenuToolIndex].ToolName;
-            toolDescription.text = menuElements[currentMenuToolIndex].ToolDescription;
-            toolIcon.sprite = menuElements[currentMenuToolIndex].ToolIcon;
+            toolName.text = menuElements[_currentMenuToolIndex].ToolName;
+            toolDescription.text = menuElements[_currentMenuToolIndex].ToolDescription;
+            toolIcon.sprite = menuElements[_currentMenuToolIndex].ToolIcon;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Activate()
         {
             Cursor.visible = false;
@@ -95,6 +108,9 @@ namespace HopeMain.Code.GUI.Player.ToolsMenu
             RefreshInformalCenter();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Deactivate()
         {
             backgroundPanel.SetActive(false);

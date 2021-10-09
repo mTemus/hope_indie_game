@@ -3,19 +3,25 @@ using UnityEngine;
 
 namespace HopeMain.Code.World.Resources
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Serializable]
     public enum ResourceType
     {
-        WOOD, STONE
+        Wood, Stone
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     [Serializable]
     public class Resource
     {
         [SerializeField] private ResourceType type;
 
         public int amount;
-        private int limit;
+        private int _limit;
 
         public Resource(Resource copy)
         {
@@ -38,11 +44,11 @@ namespace HopeMain.Code.World.Resources
         {
             this.type = type;
             this.amount = amount;
-            this.limit = limit;
+            _limit = limit;
         }
 
         public ResourceType Type => type;
 
-        public int Limit => limit;
+        public int Limit => _limit;
     }
 }

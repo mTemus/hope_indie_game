@@ -1,10 +1,11 @@
 using System;
 using System.Linq;
-using HopeMain.Code.Characters.Villagers.Profession;
+using HopeMain.Code.Characters.Villagers.Professions;
 using HopeMain.Code.System;
 using HopeMain.Code.System.Assets;
 using HopeMain.Code.System.Initialization;
 using HopeMain.Code.World.Buildings.Workplace;
+using HopeMain.Code.World.Buildings.Workplaces;
 using UnityEngine;
 
 namespace HopeMain.Code.DeveloperTools.Console.Command
@@ -24,7 +25,7 @@ namespace HopeMain.Code.DeveloperTools.Console.Command
             }
 
             Vector3 villagerPosition = new Vector3(Managers.I.Player.GetPlayerPosition().x, 0, 0);
-            WorkplaceBase workplace =
+            Workplace workplace =
                 Managers.I.Buildings.GetClosestFreeWorkplaceForProfession(
                     AssetsStorage.I.GetProfessionDataForProfessionType(professionType), villagerPosition);
 

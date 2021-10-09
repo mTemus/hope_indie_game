@@ -7,16 +7,19 @@ using UnityEngine.Events;
 
 namespace HopeMain.Code.World.Buildings.Modules
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class BuildingStorage : MonoBehaviour
     {
         [Header("Resources")]
         [SerializeField] private int resourceLimit;
         
         [Header("Observers")]
-        public UnityEvent<Resource> onResourceStored;
-        public UnityEvent<Resource> onResourceWithdraw;
-        public UnityEvent onResourceLimitReach;
-        public UnityEvent onResourceLimitReset;
+        public UnityEvent<Resource> resourceStored;
+        public UnityEvent<Resource> resourceWithdraw;
+        public UnityEvent resourceLimitReach;
+        public UnityEvent resourceLimitReset;
         
         [Header("Debug")]
         [SerializeField] private List<Resource> resources = new List<Resource>();
@@ -34,6 +37,10 @@ namespace HopeMain.Code.World.Buildings.Modules
         private Resource GetResourceByType(ResourceType type) =>
             resources.FirstOrDefault(resource => resource.Type == type);
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="newResource"></param>
         public void StoreResource(Resource newResource)
         {
             Resource storedResource = GetResourceByType(newResource.Type);
@@ -47,7 +54,7 @@ namespace HopeMain.Code.World.Buildings.Modules
                     
                     Resource overflowResource = new Resource(storedResource.Type, overflow);
                     AssetsStorage.I.ThrowResourceOnTheGround(overflowResource, GetComponent<Building>().PivotedPosition.x);
-                    onResourceLimitReach.Invoke();
+                    resourceLimitReach.Invoke();
                     return;
                 }
                 
@@ -58,9 +65,15 @@ namespace HopeMain.Code.World.Buildings.Modules
             }
             
             // Debug.LogWarning("Stored: " + newResource.amount + " " + newResource.Type + " in " + name);
-            onResourceStored?.Invoke(resources.FirstOrDefault(resource => resource.Type == newResource.Type));
+            resourceStored?.Invoke(resources.FirstOrDefault(resource => resource.Type == newResource.Type));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="resourceType"></param>
+        /// <param name="resourceAmount"></param>
+        /// <returns></returns>
         public Resource WithdrawResource(ResourceType resourceType, int resourceAmount)
         {
             Resource withdrawnResource = new Resource(resourceType);
@@ -77,6 +90,12 @@ namespace HopeMain.Code.World.Buildings.Modules
             return withdrawnResource;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="resourceType"></param>
+        /// <param name="resourceAmount"></param>
+        /// <returns></returns>
         public Resource WithdrawResourceContinuously(ResourceType resourceType, int resourceAmount)
         {
             Resource withdrawnResource = new Resource(resourceType);
@@ -87,7 +106,7 @@ namespace HopeMain.Code.World.Buildings.Modules
             }
 
             if (withdrawnResource.amount <= resourceLimit / 2) {
-                onResourceLimitReset?.Invoke();
+                resourceLimitReset?.Invoke();
             }
             
             withdrawnResource.amount = resourceAmount;

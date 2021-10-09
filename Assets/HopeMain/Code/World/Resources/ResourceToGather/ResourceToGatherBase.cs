@@ -8,6 +8,9 @@ using UnityEngine;
 
 namespace HopeMain.Code.World.Resources.ResourceToGather
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class ResourceToGatherBase : MonoBehaviour
     {
         [Header("World Properties")]
@@ -21,25 +24,44 @@ namespace HopeMain.Code.World.Resources.ResourceToGather
         protected GatheringSocket[] gatheringSockets;
         protected readonly Dictionary<Villager, ResourceGathering> gatherers = new Dictionary<Villager, ResourceGathering>();
         
-        private int maximumGatherers;
+        private int _maximumGatherers;
         
         public Vector2Int Size => size;
         public Vector3 PivotedPosition => transform.position + pivot;
         public Resource Resource => resource;
         public bool CanGather =>
-            gatherers.Keys.Count < maximumGatherers;
+            gatherers.Keys.Count < _maximumGatherers;
 
         #region AI
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="worker"></param>
         public abstract void StartGathering(Villager worker);
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="worker"></param>
+        /// <param name="socketId"></param>
+        /// <returns></returns>
         public abstract bool Gather(Villager worker, int socketId);
+        
+        /// <summary>
+        /// 
+        /// </summary>
         protected abstract void DepleteResource();
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="resourceToGatherData"></param>
         public void Initialize(Data resourceToGatherData)
         {
             resource = new Resource(resourceToGatherData.ResourceType, resourceToGatherData.Amount);
-            maximumGatherers = resourceToGatherData.MaximumGatherers;
-            gatheringSockets = new GatheringSocket[maximumGatherers];
+            _maximumGatherers = resourceToGatherData.MaximumGatherers;
+            gatheringSockets = new GatheringSocket[_maximumGatherers];
             
             for (int i = 0; i < gatheringSockets.Length; i++) {
                 AudioSource channel = gameObject.AddComponent<AudioSource>();
@@ -74,7 +96,12 @@ namespace HopeMain.Code.World.Resources.ResourceToGather
             gatherers.Remove(worker);
         }
 
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="worker"></param>
+        /// <param name="task"></param>
+        /// <returns></returns>
         public int RegisterGatherer(Villager worker, ResourceGathering task)
         {
             gatherers[worker] = task;

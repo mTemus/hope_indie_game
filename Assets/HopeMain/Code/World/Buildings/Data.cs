@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace HopeMain.Code.World.Buildings
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [CreateAssetMenu(fileName = "Building Data", menuName = "Game Data/Map Objects/Building Data", order = 0)]
     public class Data : ScriptableObject
     {

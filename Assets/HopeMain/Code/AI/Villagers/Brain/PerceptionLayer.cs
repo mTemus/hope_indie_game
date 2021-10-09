@@ -5,15 +5,18 @@ using UnityEngine;
 
 namespace HopeMain.Code.AI.Villagers.Brain
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class PerceptionLayer : BrainLayer
     {
-        private readonly List<Stimulus> stimuli = new List<Stimulus>();
+        private readonly List<Stimulus> _stimuli = new List<Stimulus>();
 
-        private float delayDecrement;
+        private float _delayDecrement;
 
         public override void Initialize(Brain brain)
         {
-            delayDecrement = Time.deltaTime;
+            _delayDecrement = Time.deltaTime;
         }
 
         private void ProcessStimulus(Stimulus stimulus)
@@ -23,28 +26,35 @@ namespace HopeMain.Code.AI.Villagers.Brain
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void ManualUpdate()
         {
-            if (stimuli.Count <= 0) return;
+            if (_stimuli.Count <= 0) return;
 
-            foreach (Stimulus stimulus in stimuli) {
+            foreach (Stimulus stimulus in _stimuli) {
                 if (stimulus.Delay > 0) 
-                    stimulus.Delay -= delayDecrement;
+                    stimulus.Delay -= _delayDecrement;
                 else {
                     ProcessStimulus(stimulus);
                     stimulus.Processed = true;
                 }
             }
 
-            List<Stimulus> tmpMessages = new List<Stimulus>(stimuli);
+            List<Stimulus> tmpMessages = new List<Stimulus>(_stimuli);
             
             foreach (Stimulus stimulus in tmpMessages
-                .Where(stimulus => stimulus.Processed)) { stimuli.Remove(stimulus); }
+                .Where(stimulus => stimulus.Processed)) { _stimuli.Remove(stimulus); }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="message"></param>
         public void ReceiveStimulusMessage(Stimulus message)
         {
-            stimuli.Add(message);
+            _stimuli.Add(message);
         }
     }
 }

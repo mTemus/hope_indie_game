@@ -3,39 +3,53 @@ using UnityEngine;
 
 namespace HopeMain.Code.AI.Player.Brain
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public enum PlayerAnimationState
     {
         Idle, Run
     }
     
+    /// <summary>
+    /// 
+    /// </summary>
     public class AnimationsLayer : BrainLayer
     {
         [SerializeField] private Animator animator;
         
-        private PlayerAnimationState currentState;
+        private PlayerAnimationState _currentState;
 
-        private Action<SoundEffectType> playSoundEffectOnAnimation;
+        private Action<SoundEffectType> _playSoundEffectOnAnimation;
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="brain"></param>
         public override void Initialize(Brain brain)
         {
-            playSoundEffectOnAnimation = brain.Sounds.PlaySoundEffect;
+            _playSoundEffectOnAnimation = brain.Sounds.PlaySoundEffect;
         }
         
         private void Awake()
         {
-            currentState = PlayerAnimationState.Idle;
+            _currentState = PlayerAnimationState.Idle;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="state"></param>
         public void SetState(PlayerAnimationState state)
         {
-            if (currentState == state) return;
-            currentState = state;
+            if (_currentState == state) return;
+            _currentState = state;
             
-            animator.Play(currentState.ToString());
+            animator.Play(_currentState.ToString());
         }
         
         private void PlaySoundEffectOnAnimation(SoundEffectType effectType) =>
-            playSoundEffectOnAnimation.Invoke(effectType);
+            _playSoundEffectOnAnimation.Invoke(effectType);
 
         
     }

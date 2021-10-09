@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 namespace HopeMain.Code.GUI.Player.BuildingSelecting
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class RequiredResourcesPanel : MonoBehaviour
     {
         [Header("Resources")]
@@ -30,6 +33,9 @@ namespace HopeMain.Code.GUI.Player.BuildingSelecting
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void OnPanelOpen()
         {
             Resource[] buildingResources = BuildingSystem.CurrentBuildingData.RequiredResources;
@@ -51,6 +57,9 @@ namespace HopeMain.Code.GUI.Player.BuildingSelecting
             enabled = true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void OnPanelClose()
         {
             foreach (UiRequiredResource resource in resources) {

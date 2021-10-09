@@ -1,21 +1,25 @@
 using System.Collections.Generic;
 using HopeMain.Code.AI.Villagers.Tasks;
 using HopeMain.Code.Characters.Villagers.Entity;
-using HopeMain.Code.Characters.Villagers.Profession;
+using HopeMain.Code.Characters.Villagers.Professions;
+using HopeMain.Code.World.Buildings.Workplace;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace HopeMain.Code.World.Buildings.Workplace
+namespace HopeMain.Code.World.Buildings.Workplaces
 {
-    public abstract class WorkplaceBase : Building
+    /// <summary>
+    /// 
+    /// </summary>
+    public abstract class Workplace : Building
     {
-        [Header("WorkplaceBase Properties")]
+        [Header("Workplace Properties")]
         [SerializeField] private Properties properties;
 
-        [Header("WorkplaceBase events")]
-        public UnityEvent onWorkerHired;
-        public UnityEvent onHaulerHired;
-        public UnityEvent onWorkerEnter;
+        [Header("Workplace events")]
+        public UnityEvent workerHired;
+        public UnityEvent haulerHired;
+        public UnityEvent workerEnter;
         
         protected readonly List<Villager> workers = new List<Villager>();
         protected readonly List<Villager> workersWithoutTasks = new List<Villager>();
@@ -23,7 +27,7 @@ namespace HopeMain.Code.World.Buildings.Workplace
         
         protected int haulersCnt;
 
-        #region WorkplaceBase-AI
+        #region Workplace-AI
 
         // ----------------------- ADD TASK (task t)
         // Method adds task to workplace's "tasksToDo" list to which workers get access and take their work from.
@@ -126,7 +130,7 @@ namespace HopeMain.Code.World.Buildings.Workplace
         public void SetTaskReady(Task readyTask)
         { 
             Debug.Log("Setting " + readyTask.GetType().Name + " as ready.");
-            readyTask.flag = TaskFlag.READY;
+            readyTask.flag = TaskFlag.Ready;
         }
 
         #endregion
@@ -159,12 +163,12 @@ namespace HopeMain.Code.World.Buildings.Workplace
         
         protected void HireNormalWorker()
         {
-            onWorkerHired?.Invoke();
+            workerHired?.Invoke();
         }
         
         private void HireHauler()
         {
-            onHaulerHired?.Invoke();
+            haulerHired?.Invoke();
             haulersCnt++;
         }
         

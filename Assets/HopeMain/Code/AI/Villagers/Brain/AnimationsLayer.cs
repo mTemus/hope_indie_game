@@ -3,56 +3,74 @@ using UnityEngine;
 
 namespace HopeMain.Code.AI.Villagers.Brain
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public enum VillagerAnimationState
     {
         Idle, Walk
     }
     
+    /// <summary>
+    /// 
+    /// </summary>
     public class AnimationsLayer : BrainLayer
     {
         [SerializeField] private Animator animator;
         [SerializeField] private GameObject spriteGo;
 
-        private Action<SoundEffectType> playSoundEffectOnAnimation;
+        private Action<SoundEffectType> _onPlaySoundEffectOnAnimation;
 
-        private VillagerAnimationState currentState;
+        private VillagerAnimationState _currentState;
         
-        private bool facingRight = true;
+        private bool _facingRight = true;
 
         private void Awake()
         {
-            currentState = VillagerAnimationState.Idle;
-        }
-
-        public override void Initialize(Brain brain)
-        {
-            playSoundEffectOnAnimation = brain.Sounds.PlaySoundEffect;
-        }
-
-        public void SetState(VillagerAnimationState state)
-        {
-            if (currentState == state) return;
-            currentState = state;
-            
-            animator.Play(currentState.ToString());
+            _currentState = VillagerAnimationState.Idle;
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="brain"></param>
+        public override void Initialize(Brain brain)
+        {
+            _onPlaySoundEffectOnAnimation = brain.Sounds.PlaySoundEffect;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="state"></param>
+        public void SetState(VillagerAnimationState state)
+        {
+            if (_currentState == state) return;
+            _currentState = state;
+            
+            animator.Play(_currentState.ToString());
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="position"></param>
         public void Turn(Vector3 position)
         {
             
             if (position.x >= transform.position.x) {
-                if (facingRight) return;
+                if (_facingRight) return;
                 Flip();
             }
             else {
-                if (!facingRight) return;
+                if (!_facingRight) return;
                 Flip();
             }
         }
         
         private void Flip()
         {
-            facingRight = !facingRight;
+            _facingRight = !_facingRight;
 
             Transform spriteGoTransform = spriteGo.transform;
             Vector3 theScale = spriteGoTransform.localScale;
@@ -61,6 +79,6 @@ namespace HopeMain.Code.AI.Villagers.Brain
         }
 
         private void PlaySoundEffectOnAnimation(SoundEffectType effectType) =>
-            playSoundEffectOnAnimation.Invoke(effectType);
+            _onPlaySoundEffectOnAnimation.Invoke(effectType);
     }
 }

@@ -7,16 +7,22 @@ using HopeMain.Code.World.Resources;
 
 namespace HopeMain.Code.World.Buildings.Type.Resources
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Sawmill : Gathering
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public override void Initialize()
         {
-            gatheringResourceType = ResourceType.WOOD;
+            gatheringResourceType = ResourceType.Wood;
             
-            onWorkerHired.AddListener(CreateSingleResourceGatheringTask);
-            onHaulerHired.AddListener(TakeTasksBackFromWarehouse);
-            Storage.onResourceStored.AddListener(DeliverStoredResources);
-            Storage.onResourceLimitReach.AddListener(StopAllTasks);
+            workerHired.AddListener(CreateSingleResourceGatheringTask);
+            haulerHired.AddListener(TakeTasksBackFromWarehouse);
+            Storage.resourceStored.AddListener(DeliverStoredResources);
+            Storage.resourceLimitReach.AddListener(StopAllTasks);
         }
         
         #region Tasks

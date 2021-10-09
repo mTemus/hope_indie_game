@@ -5,30 +5,40 @@ using UnityEngine;
 
 namespace HopeMain.Code.GUI.Player.BuildingSelecting
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class UiRequiredResource : MonoBehaviour
     {
         [SerializeField] private ResourceType type;
         [SerializeField] private TextMeshProUGUI amount;
         [SerializeField] private TextMeshProUGUI current;
 
-        private int requiredAmount;
+        private int _requiredAmount;
         
         private void Awake()
         {
             gameObject.SetActive(false);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void UpdateRequired()
         {
             int currentAmount = Managers.I.Resources.GetResourceByType(type).amount;
             current.text = "(" + currentAmount + ")";
-            current.color = currentAmount - requiredAmount < 0 ? Color.red : Color.white;
+            current.color = currentAmount - _requiredAmount < 0 ? Color.red : Color.white;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
         public void SetAmount(int value)
         {
-            requiredAmount = value;
-            amount.text = requiredAmount.ToString();
+            _requiredAmount = value;
+            amount.text = _requiredAmount.ToString();
         }
         
         public ResourceType Type => type;

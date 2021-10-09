@@ -1,7 +1,8 @@
 using HopeMain.Code.Characters.Villagers.Entity;
-using HopeMain.Code.Characters.Villagers.Profession;
+using HopeMain.Code.Characters.Villagers.Professions;
 using HopeMain.Code.World.Areas;
 using HopeMain.Code.World.Buildings.Workplace;
+using HopeMain.Code.World.Buildings.Workplaces;
 using UnityEngine;
 
 namespace HopeMain.Code.System.Initialization
@@ -9,9 +10,9 @@ namespace HopeMain.Code.System.Initialization
     public class InitializeVillager : InitializeObject
     {
         [SerializeField] private Data professionData;
-        [SerializeField] private WorkplaceBase workplace;
+        [SerializeField] private Workplace workplace;
 
-        public WorkplaceBase Workplace
+        public Workplace Workplace
         {
             get => workplace;
             set => workplace = value;

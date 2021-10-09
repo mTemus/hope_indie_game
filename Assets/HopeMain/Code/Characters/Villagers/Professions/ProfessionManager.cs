@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using HopeMain.Code.Characters.Villagers.Entity;
 using HopeMain.Code.System.Assets;
 using HopeMain.Code.World.Buildings.Workplace;
+using HopeMain.Code.World.Buildings.Workplaces;
 using NodeCanvas.BehaviourTrees;
 using NodeCanvas.Framework;
 using UnityEngine;
@@ -166,7 +167,7 @@ namespace HopeMain.Code.Characters.Villagers.Professions
         /// <param name="villager"></param>
         /// <param name="professionData"></param>
         /// <param name="workplace"></param>
-        public void SetVillagerProfession(Villager villager, Data professionData, WorkplaceBase workplace)
+        public void SetVillagerProfession(Villager villager, Data professionData, Workplace workplace)
         {
             AddProfessionComponent(villager, professionData.Type);
             villager.Profession.Data = professionData;

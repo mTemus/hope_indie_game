@@ -2,30 +2,41 @@ using UnityEngine;
 
 namespace HopeMain.Code.AI.Player.Brain
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class MotionLayer : BrainLayer
     {
         public float speed = 10f;
-        private bool facingRight = true;
+        private bool _facingRight = true;
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="brain"></param>
         public override void Initialize(Brain brain) { }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="direction"></param>
         public void Move(Vector3 direction)
         {
             transform.position += direction * (Time.deltaTime * speed);
 
             if (direction == Vector3.left) {
-                if (!facingRight) return;
+                if (!_facingRight) return;
                 Flip();
             }
             else {
-                if (facingRight) return;
+                if (_facingRight) return;
                 Flip();
             }
         }
         
         private void Flip()
         {
-            facingRight = !facingRight;
+            _facingRight = !_facingRight;
 
             var myTransform = transform;
             Vector3 theScale = myTransform.localScale;

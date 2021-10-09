@@ -8,22 +8,26 @@ using UnityEngine;
 
 namespace HopeMain.Code.World.Buildings.Type.Resources
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class StoneMine : Gathering
     {
+        
         public override void Initialize()
         {
-            gatheringResourceType = ResourceType.STONE;
+            gatheringResourceType = ResourceType.Stone;
             
-            onWorkerHired.AddListener(CreateSpotResourceGatheringTask);
-            onHaulerHired.AddListener(TakeTasksBackFromWarehouse);
-            Storage.onResourceStored.AddListener(DeliverStoredResources);
-            Storage.onResourceLimitReach.AddListener(StopAllTasks);
+            workerHired.AddListener(CreateSpotResourceGatheringTask);
+            haulerHired.AddListener(TakeTasksBackFromWarehouse);
+            Storage.resourceStored.AddListener(DeliverStoredResources);
+            Storage.resourceLimitReach.AddListener(StopAllTasks);
 
             Vector3 myPosition = transform.position;
 
             gatheringResource = Managers.I.Areas
                 .GetAreaByCoords(myPosition)
-                .GetClosestResourceToGatherByType(myPosition, ResourceType.STONE);
+                .GetClosestResourceToGatherByType(myPosition, ResourceType.Stone);
         }
 
         #region Resources

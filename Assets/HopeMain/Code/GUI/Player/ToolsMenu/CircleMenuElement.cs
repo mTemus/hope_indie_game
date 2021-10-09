@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 namespace HopeMain.Code.GUI.Player.ToolsMenu
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Serializable]
     public class CircleMenuElement : MonoBehaviour
     {

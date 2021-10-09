@@ -9,6 +9,9 @@ using UnityEngine.UI;
 
 namespace HopeMain.Code.GUI.Player.BuildingSelecting
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class BuildingSelectingMenu : MonoBehaviour
     {
         [Header("Scroll Areas")]
@@ -30,16 +33,16 @@ namespace HopeMain.Code.GUI.Player.BuildingSelecting
         [SerializeField] private TextMeshProUGUI buildingDescription;
         [SerializeField] private UiRequiredResource[] requiredResources;
         
-        private int buildingTypesIdx;
-        private int buildingObjectsIdx;
+        private int _buildingTypesIdx;
+        private int _buildingObjectsIdx;
 
-        private UiBuildingElement currentBuilding;
+        private UiBuildingElement _currentBuilding;
 
-        private UiBuildingElement[] buildingObjectsArray;
+        private UiBuildingElement[] _buildingObjectsArray;
 
         private void Awake()
         {
-            buildingObjectsArray = resourcesBuildingObjects;
+            _buildingObjectsArray = resourcesBuildingObjects;
             gameObject.SetActive(false);
         }
 
@@ -47,11 +50,11 @@ namespace HopeMain.Code.GUI.Player.BuildingSelecting
         {
             ResetResources();
             
-            miniature.sprite = currentBuilding.Sprite;
-            buildingName.text = currentBuilding.Data.BuildingName;
-            buildingDescription.text = currentBuilding.Description;
+            miniature.sprite = _currentBuilding.Sprite;
+            buildingName.text = _currentBuilding.Data.BuildingName;
+            buildingDescription.text = _currentBuilding.Description;
 
-            foreach (Resource resourceData in currentBuilding.Data.RequiredResources) {
+            foreach (Resource resourceData in _currentBuilding.Data.RequiredResources) {
                 UiRequiredResource uiResource = requiredResources.FirstOrDefault(r => r.Type == resourceData.Type);
 
                 if (uiResource != null) {
@@ -66,17 +69,17 @@ namespace HopeMain.Code.GUI.Player.BuildingSelecting
 
         private void UpdateBuildingObjectsArray()
         {
-            switch (buildingTypesIdx) {
+            switch (_buildingTypesIdx) {
                 case 0:
-                    buildingObjectsArray = resourcesBuildingObjects;
+                    _buildingObjectsArray = resourcesBuildingObjects;
                     break;
                 
                 case 1:
-                    buildingObjectsArray = villageBuildingObjects;
+                    _buildingObjectsArray = villageBuildingObjects;
                     break;
                 
                 case 2:
-                    buildingObjectsArray = industryBuildingObjects;
+                    _buildingObjectsArray = industryBuildingObjects;
                     break;
             }
         }
@@ -87,45 +90,59 @@ namespace HopeMain.Code.GUI.Player.BuildingSelecting
                 resource.gameObject.SetActive(false);
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         public void OnMenuOpen()
         {
-            currentBuilding = buildingObjectsArray[buildingObjectsIdx];
-            Systems.I.Building.SetBuilding(currentBuilding.Data);
+            _currentBuilding = _buildingObjectsArray[_buildingObjectsIdx];
+            Systems.I.Building.SetBuilding(_currentBuilding.Data);
             UpdateBuildingProperties();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void OnMenuClose()
         {
-            buildingObjectsIdx = 0;
-            buildingTypesIdx = 0;
+            _buildingObjectsIdx = 0;
+            _buildingTypesIdx = 0;
             
             ResetResources();
             UpdateBuildingObjectsArray();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
         public void ChangeBuildingType(int value)
         {
-            buildingTypesIdx += value;
-            buildingTypesIdx = Mathf.Clamp(buildingTypesIdx, 0, buildingTypesContent.childCount - 1);
+            _buildingTypesIdx += value;
+            _buildingTypesIdx = Mathf.Clamp(_buildingTypesIdx, 0, buildingTypesContent.childCount - 1);
             
             buildingTypesArea.ChangeValue(value);
-            buildingObjectsArea.ChangeContent(buildingTypesIdx);
+            buildingObjectsArea.ChangeContent(_buildingTypesIdx);
             UpdateBuildingObjectsArray();
             
-            buildingObjectsIdx = 0;
-            currentBuilding = buildingObjectsArray[buildingObjectsIdx];
-            Systems.I.Building.SetBuilding(currentBuilding.Data);
+            _buildingObjectsIdx = 0;
+            _currentBuilding = _buildingObjectsArray[_buildingObjectsIdx];
+            Systems.I.Building.SetBuilding(_currentBuilding.Data);
             UpdateBuildingProperties();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
         public void ChangeBuilding(int value)
         {
-            buildingObjectsIdx += value;
-            buildingObjectsIdx = Mathf.Clamp(buildingObjectsIdx, 0, buildingObjectsArray.Length - 1);
+            _buildingObjectsIdx += value;
+            _buildingObjectsIdx = Mathf.Clamp(_buildingObjectsIdx, 0, _buildingObjectsArray.Length - 1);
 
             buildingObjectsArea.ChangeValue(-value);
-            currentBuilding = buildingObjectsArray[buildingObjectsIdx];
-            Systems.I.Building.SetBuilding(currentBuilding.Data);
+            _currentBuilding = _buildingObjectsArray[_buildingObjectsIdx];
+            Systems.I.Building.SetBuilding(_currentBuilding.Data);
             UpdateBuildingProperties();
         }
     }

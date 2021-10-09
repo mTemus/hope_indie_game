@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace HopeMain.Code.Environment
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class EnvironmentManager : MonoBehaviour
     {
         [Header("Camera")] 
@@ -22,12 +25,19 @@ namespace HopeMain.Code.Environment
             globalParallax.InitializeLayers(mainCamera.transform.position);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="parallaxController"></param>
         public void SetLocalParallax(LocalParallaxController parallaxController)
         {
             localParallax = parallaxController;
             localParallax.InitializeLayers(mainCamera.transform.position);
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         private void LateUpdate()
         {
             Vector3 currCamPos = mainCamera.transform.position;

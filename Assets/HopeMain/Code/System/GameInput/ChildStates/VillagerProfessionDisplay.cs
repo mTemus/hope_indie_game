@@ -5,11 +5,11 @@ namespace HopeMain.Code.System.GameInput.ChildStates
 {
     public class VillagerProfessionDisplay : IInputState
     {
-        private readonly ProfessionChangingPanel professionChangingPanel;
+        private readonly ProfessionChangingPanel _professionChangingPanel;
 
         public VillagerProfessionDisplay(ProfessionChangingPanel professionChangingPanel)
         {
-            this.professionChangingPanel = professionChangingPanel;
+            _professionChangingPanel = professionChangingPanel;
         }
 
         public void OnStateSet()
@@ -19,23 +19,23 @@ namespace HopeMain.Code.System.GameInput.ChildStates
         public void HandleState(InputManager inputManager)
         {
             if (Input.GetKeyDown(inputManager.Up) || Input.GetKeyDown(inputManager.UpAlt)) 
-                professionChangingPanel.SetPointerOnProfession(-1);
+                _professionChangingPanel.SetPointerOnProfession(-1);
             
             if (Input.GetKeyDown(inputManager.Down) || Input.GetKeyDown(inputManager.DownAlt)) 
-                professionChangingPanel.SetPointerOnProfession(1);
+                _professionChangingPanel.SetPointerOnProfession(1);
             
             if (Input.GetKeyDown(inputManager.Left) || Input.GetKeyDown(inputManager.LeftAlt)) 
-                professionChangingPanel.ShowWorkplace(-1);
+                _professionChangingPanel.ShowWorkplace(-1);
             
             if (Input.GetKeyDown(inputManager.Right) || Input.GetKeyDown(inputManager.RightAlt)) 
-                professionChangingPanel.ShowWorkplace(1);
+                _professionChangingPanel.ShowWorkplace(1);
             
             if (Input.GetKeyDown(inputManager.Action))
-                if (professionChangingPanel.AreThereAnyWorkplaces()) 
-                    professionChangingPanel.ShowAcceptancePanel();
+                if (_professionChangingPanel.AreThereAnyWorkplaces()) 
+                    _professionChangingPanel.ShowAcceptancePanel();
 
             if (Input.GetKeyDown(inputManager.Cancel)) {
-                professionChangingPanel.OnPanelClose();
+                _professionChangingPanel.OnPanelClose();
                 InputManager.VillagerProperties.SetToVillagerPropertiesDisplayChildState();
             }
         }

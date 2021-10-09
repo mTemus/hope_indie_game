@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 namespace HopeMain.Code.GUI.Villager
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class VillagerUI : MonoBehaviour
     {
         [Header("GUI")] 
@@ -13,6 +16,10 @@ namespace HopeMain.Code.GUI.Villager
         [SerializeField] private TextMeshProUGUI stateText;
         [SerializeField] private Image resourceImage;
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="carriedResource"></param>
         public void SetResourceIcon(ResourceType carriedResource)
         {
             if (resourceImage.gameObject.activeSelf) return;
@@ -20,6 +27,9 @@ namespace HopeMain.Code.GUI.Villager
             resourceImage.gameObject.SetActive(true);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void ClearResourceIcon()
         {
             resourceImage.sprite = null;

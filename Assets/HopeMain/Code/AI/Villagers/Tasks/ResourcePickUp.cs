@@ -7,31 +7,37 @@ using UnityEngine;
 
 namespace HopeMain.Code.AI.Villagers.Tasks
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public enum ResourcePickUpFlag 
     {
-        GO_TO_STORAGE,
-        GET_RESOURCES_DATA,
-        GO_TO_RESOURCE,
-        COLLECT_RESOURCE,
-        DELIVER_RESOURCE
+        GOToStorage,
+        GETResourcesData,
+        GOToResource,
+        CollectResource,
+        DeliverResource
     }
     
+    /// <summary>
+    /// 
+    /// </summary>
     public class ResourcePickUp : Task
     {
-        private Queue<ResourceToPickUp> resources = new Queue<ResourceToPickUp>();
+        private Queue<ResourceToPickUp> _resources = new Queue<ResourceToPickUp>();
 
         private ResourcePickUpFlag _flag;
-        private ResourceToPickUp currentResource;
-        private Warehouse warehouse;
+        private ResourceToPickUp _currentResource;
+        private Warehouse _warehouse;
 
-        private int resourceAmount;
+        private int _resourceAmount;
 
         public ResourceType StoredResourceType { get; }
         public bool HasWorker => worker != null;
-        public bool CanStoreResources => resourceAmount < worker.Profession.Data.ResourceCarryingLimit;
+        public bool CanStoreResources => _resourceAmount < worker.Profession.Data.ResourceCarryingLimit;
         public bool IsResourceInDelivery =>
-            _flag == ResourcePickUpFlag.DELIVER_RESOURCE || 
-            _flag == ResourcePickUpFlag.GO_TO_STORAGE && worker.Profession.IsCarryingResource;
+            _flag == ResourcePickUpFlag.DeliverResource || 
+            _flag == ResourcePickUpFlag.GOToStorage && worker.Profession.IsCarryingResource;
         
         public ResourcePickUp(ResourceType storedResourceType)
         {
@@ -41,7 +47,7 @@ namespace HopeMain.Code.AI.Villagers.Tasks
         private void SortResources()
         {
             Vector3 workerPosition = worker.transform.position;
-            List<ResourceToPickUp> resourcesList = new List<ResourceToPickUp>(resources);
+            List<ResourceToPickUp> resourcesList = new List<ResourceToPickUp>(_resources);
 
             for (int i = 0; i < resourcesList.Count; i++) {
                 for (int sort = 0; sort < resourcesList.Count - 1; sort++) {
@@ -55,69 +61,78 @@ namespace HopeMain.Code.AI.Villagers.Tasks
                 }
             }
 
-            resources = new Queue<ResourceToPickUp>(resourcesList);
+            _resources = new Queue<ResourceToPickUp>(resourcesList);
         }
 
         private void GetNextResource()
         {
-            if (resources.Count > 0) {
-                currentResource = resources.Dequeue();
-                _flag = ResourcePickUpFlag.GO_TO_RESOURCE;
+            if (_resources.Count > 0) {
+                _currentResource = _resources.Dequeue();
+                _flag = ResourcePickUpFlag.GOToResource;
             }
             else {
                 if (worker.Profession.IsCarryingResource) 
-                    _flag = ResourcePickUpFlag.GO_TO_STORAGE;
+                    _flag = ResourcePickUpFlag.GOToStorage;
                 else 
-                    onTaskCompleted.Invoke();
+                    taskCompleted.Invoke();
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="resource"></param>
+        /// <returns></returns>
         public bool AddResourceToPickUp(ResourceToPickUp resource)
         {
-            int newAmount = resourceAmount + resource.StoredResource.amount;
+            int newAmount = _resourceAmount + resource.StoredResource.amount;
             if (newAmount > worker.Profession.Data.ResourceCarryingLimit)
                 return false;
             
-            resourceAmount = newAmount;
-            resources.Enqueue(resource);
+            _resourceAmount = newAmount;
+            _resources.Enqueue(resource);
             SortResources();
             return true;
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="resource"></param>
         public void RemoveResourceBeforePickUp(ResourceToPickUp resource)
         {
-            if (currentResource == resource) 
+            if (_currentResource == resource) 
                 GetNextResource();
             
-            resourceAmount -= resource.StoredResource.amount;
-            List<ResourceToPickUp> resourcesList = new List<ResourceToPickUp>(resources);
+            _resourceAmount -= resource.StoredResource.amount;
+            List<ResourceToPickUp> resourcesList = new List<ResourceToPickUp>(_resources);
             resourcesList.Remove(resource);
-            resources = new Queue<ResourceToPickUp>(resourcesList);
+            _resources = new Queue<ResourceToPickUp>(resourcesList);
         }
 
         public override void Start()
         {
             switch (flag) {
-                case TaskFlag.NEW:
-                    warehouse = worker.Profession.Workplace as Warehouse;
+                case TaskFlag.New:
+                    _warehouse = worker.Profession.Workplace as Warehouse;
                     
-                    if (warehouse == null) 
+                    if (_warehouse == null) 
                         throw new Exception("CAN'T GET WAREHOUSE REFERENCE FROM WORKER " + worker.name + " IN TASK " + GetType());
 
-                    _flag = ResourcePickUpFlag.GET_RESOURCES_DATA;
+                    _flag = ResourcePickUpFlag.GETResourcesData;
                     break;
                 
-                case TaskFlag.WAITING:
+                case TaskFlag.Waiting:
                     break;
-                case TaskFlag.RUNNING:
+                case TaskFlag.Running:
                     break;
-                case TaskFlag.INTERRUPTED:
+                case TaskFlag.Interrupted:
                     break;
-                case TaskFlag.PAUSED:
+                case TaskFlag.Paused:
                     break;
-                case TaskFlag.ABANDONED:
+                case TaskFlag.Abandoned:
                     break;
-                case TaskFlag.COMPLETED:
+                case TaskFlag.Completed:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -128,29 +143,29 @@ namespace HopeMain.Code.AI.Villagers.Tasks
 
         public override void Execute()
         {
-            flag = TaskFlag.RUNNING;
+            flag = TaskFlag.Running;
             
             switch (_flag) {
-                case ResourcePickUpFlag.GO_TO_STORAGE:
-                    if (worker.Brain.Motion.MoveTo(warehouse.PivotedPosition)) 
+                case ResourcePickUpFlag.GOToStorage:
+                    if (worker.Brain.Motion.MoveTo(_warehouse.PivotedPosition)) 
                         _flag = worker.Profession.CarriedResource != null ? 
-                            ResourcePickUpFlag.DELIVER_RESOURCE : ResourcePickUpFlag.GET_RESOURCES_DATA;
+                            ResourcePickUpFlag.DeliverResource : ResourcePickUpFlag.GETResourcesData;
                     break;
                 
-                case ResourcePickUpFlag.GET_RESOURCES_DATA:
-                    warehouse.GetResourcesToPickUpByType(this);
+                case ResourcePickUpFlag.GETResourcesData:
+                    _warehouse.GetResourcesToPickUpByType(this);
                     GetNextResource();
-                    _flag = ResourcePickUpFlag.GO_TO_RESOURCE;
+                    _flag = ResourcePickUpFlag.GOToResource;
                     break;
                 
-                case ResourcePickUpFlag.GO_TO_RESOURCE:
-                    if (worker.Brain.Motion.MoveTo(currentResource.transform.position))
-                        _flag = ResourcePickUpFlag.COLLECT_RESOURCE;
+                case ResourcePickUpFlag.GOToResource:
+                    if (worker.Brain.Motion.MoveTo(_currentResource.transform.position))
+                        _flag = ResourcePickUpFlag.CollectResource;
                     break;
                 
-                case ResourcePickUpFlag.COLLECT_RESOURCE:
-                    worker.UI.SetResourceIcon(currentResource.StoredResource.Type);
-                    Resource collectedResource = currentResource.WithdrawResource();
+                case ResourcePickUpFlag.CollectResource:
+                    worker.UI.SetResourceIcon(_currentResource.StoredResource.Type);
+                    Resource collectedResource = _currentResource.WithdrawResource();
                     Resource workerResource = worker.Profession.CarriedResource;
 
                     if (workerResource == null) 
@@ -158,15 +173,15 @@ namespace HopeMain.Code.AI.Villagers.Tasks
                     else 
                         workerResource.amount += collectedResource.amount;
                     
-                    warehouse.UnregisterResourceToPickUp(currentResource);
+                    _warehouse.UnregisterResourceToPickUp(_currentResource);
                     GetNextResource();
                     break;
                 
-                case ResourcePickUpFlag.DELIVER_RESOURCE:
-                    warehouse.StoreResource(worker.Profession.CarriedResource);
+                case ResourcePickUpFlag.DeliverResource:
+                    _warehouse.StoreResource(worker.Profession.CarriedResource);
                     worker.UI.ClearResourceIcon();
                     worker.Profession.CarriedResource = null;
-                    onTaskCompleted.Invoke();
+                    taskCompleted.Invoke();
                     break;
                 
                 default:

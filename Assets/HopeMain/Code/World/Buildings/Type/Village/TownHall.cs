@@ -5,7 +5,7 @@ using HopeMain.Code.World.Buildings.Workplace;
 
 namespace HopeMain.Code.World.Buildings.Type.Village
 {
-    public class TownHall : WorkplaceBase
+    public class TownHall : Workplaces.Workplace
     {
         public override void Initialize()
         {

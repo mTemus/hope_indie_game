@@ -4,25 +4,28 @@ using UnityEngine;
 
 namespace HopeMain.Code.Environment.Parallax
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class LocalParallaxController : ParallaxController
     {
-        private Area myArea;
+        private Area _myArea;
         
         private void Awake()
         {
-            myArea = Managers.I.Areas.GetAreaByCoords(transform.position);
+            _myArea = Managers.I.Areas.GetAreaByCoords(transform.position);
         }
         
         public override void InitializeLayers(Vector3 camPos)
         {
             foreach (ParallaxLayer layer in layers) 
-                layer.InitializeLocal(camPos, myArea);
+                layer.InitializeLocal(camPos, _myArea);
         }
 
         public override void Move(Vector3 pos)
         {
             foreach (ParallaxLayer layer in layers) {
-                layer.MoveLocally(pos, myArea);
+                layer.MoveLocally(pos, _myArea);
             }
         }
     }

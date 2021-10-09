@@ -1,6 +1,6 @@
 using HopeMain.Code.Characters.Player;
 using HopeMain.Code.Characters.Villagers;
-using HopeMain.Code.Characters.Villagers.Profession;
+using HopeMain.Code.Characters.Villagers.Professions;
 using HopeMain.Code.Environment;
 using HopeMain.Code.GUI;
 using HopeMain.Code.System.Camera;

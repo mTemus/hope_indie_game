@@ -3,11 +3,15 @@ using HopeMain.Code.GUI.UIElements.SelectableElement;
 using HopeMain.Code.System;
 using HopeMain.Code.System.GameInput;
 using HopeMain.Code.World.Buildings.Workplace;
+using HopeMain.Code.World.Buildings.Workplaces;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace HopeMain.Code.GUI.Villager.Selecting
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ProfessionChangingPanel : UiSelectablePanel
     {
         [Header("Properties")] 
@@ -23,8 +27,8 @@ namespace HopeMain.Code.GUI.Villager.Selecting
         [SerializeField] private GameObject leftArrow;
         [SerializeField] private GameObject rightArrow;
 
-        private int workplacesIdx;
-        private ProfessionLabelItem currentProfession;
+        private int _workplacesIdx;
+        private ProfessionLabelItem _currentProfession;
 
         private void Awake()
         {
@@ -32,6 +36,9 @@ namespace HopeMain.Code.GUI.Villager.Selecting
             gameObject.SetActive(false);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void UpdateCurrentWorkPointerPosition()
         {
             Characters.Villagers.Entity.Villager villager = Managers.I.Selection.SelectedVillager;
@@ -49,12 +56,18 @@ namespace HopeMain.Code.GUI.Villager.Selecting
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void ReloadProfessionWorkplaces()
         {
             foreach (UiSelectableElement selectableElement in elementsToSelect) 
                 selectableElement.GetComponent<ProfessionLabelItem>().LoadWorkplaces();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void OnPanelOpen()
         {
             InputManager.VillagerProperties.SetToVillagerProfessionDisplayChildState(Managers.I.GUI.ProfessionChangingPanel);
@@ -64,14 +77,14 @@ namespace HopeMain.Code.GUI.Villager.Selecting
             UpdateCurrentWorkPointerPosition();
             
             //Initialize first selected item
-            currentProfession = (ProfessionLabelItem) elementsToSelect[0];
+            _currentProfession = (ProfessionLabelItem) elementsToSelect[0];
             
             //Initialize profession properties panel
-            propertiesLabel.AttachPanelToProfession(currentProfession.transform);
+            propertiesLabel.AttachPanelToProfession(_currentProfession.transform);
             professionsGroup.UpdateElementsPosition();
             
             //Initialize pointer
-            pointer.SetPointerOnUiElementWithParent(currentProfession.transform);
+            pointer.SetPointerOnUiElementWithParent(_currentProfession.transform);
             
             // Initialize workplaces
             rightArrow.SetActive(true);
@@ -79,14 +92,17 @@ namespace HopeMain.Code.GUI.Villager.Selecting
             
             //Initialize profession label data
             if (AreThereAnyWorkplaces()) {
-                propertiesLabel.LoadProfessionData(currentProfession.Data, villager); 
-                Managers.I.Cameras.FocusCameraOn(currentProfession.Workplaces[0].transform);
+                propertiesLabel.LoadProfessionData(_currentProfession.Data, villager); 
+                Managers.I.Cameras.FocusCameraOn(_currentProfession.Workplaces[0].transform);
             }
             else {
                 propertiesLabel.ShowNotAvailableWorkplacesPanel(true);
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void OnPanelClose()
         {
             foreach (UiSelectableElement selectableElement in elementsToSelect) {
@@ -99,52 +115,66 @@ namespace HopeMain.Code.GUI.Villager.Selecting
             gameObject.SetActive(false);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
         public void SetPointerOnProfession(int value)
         {
             GetNextElement(value);
-            currentProfession.ResetLabel(normalLabelHeight);
-            currentProfession = (ProfessionLabelItem) currentElement;
+            _currentProfession.ResetLabel(normalLabelHeight);
+            _currentProfession = (ProfessionLabelItem) currentElement;
 
             if (AreThereAnyWorkplaces()) {
                 propertiesLabel.ShowNotAvailableWorkplacesPanel(false);
-                propertiesLabel.LoadProfessionData(currentProfession.Data, Managers.I.Selection.SelectedVillager);
+                propertiesLabel.LoadProfessionData(_currentProfession.Data, Managers.I.Selection.SelectedVillager);
             }
             else {
                 propertiesLabel.ShowNotAvailableWorkplacesPanel(true);
             }
             
-            propertiesLabel.AttachPanelToProfession(currentProfession.transform);
+            propertiesLabel.AttachPanelToProfession(_currentProfession.transform);
             professionsGroup.UpdateElementsPosition();
             MovePointerWithParent();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
         public void ShowWorkplace(int value)
         {
             //TODO: switch arrows on available workplaces, but someday, maybe
             //TODO: arrows are buggy
             if (!AreThereAnyWorkplaces()) return;
-            workplacesIdx += value;
+            _workplacesIdx += value;
             
-            if (workplacesIdx < 0) workplacesIdx = 0;
-            else if (workplacesIdx >= currentProfession.Workplaces.Length) workplacesIdx = currentProfession.Workplaces.Length - 1;
+            if (_workplacesIdx < 0) _workplacesIdx = 0;
+            else if (_workplacesIdx >= _currentProfession.Workplaces.Length) _workplacesIdx = _currentProfession.Workplaces.Length - 1;
             
-            leftArrow.SetActive(workplacesIdx > 0);
-            rightArrow.SetActive(workplacesIdx < currentProfession.Workplaces.Length -1);
+            leftArrow.SetActive(_workplacesIdx > 0);
+            rightArrow.SetActive(_workplacesIdx < _currentProfession.Workplaces.Length -1);
             
             Managers.I.Cameras.FocusCameraOn(CurrentWorkplace.transform);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void ShowAcceptancePanel()
         {
             acceptancePanel.gameObject.SetActive(true);
             InputManager.VillagerProperties.SetToNewProfessionAcceptChildState(acceptancePanel);
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         public void TakeProfession()
         {
             Characters.Villagers.Entity.Villager selectedVillager = Managers.I.Selection.SelectedVillager;
 
-            if (selectedVillager.Profession.Data.Type == currentProfession.Data.Type) {
+            if (selectedVillager.Profession.Data.Type == _currentProfession.Data.Type) {
                 if (selectedVillager.Profession.Workplace == CurrentWorkplace) return;
                 selectedVillager.Profession.Workplace.FireWorker(selectedVillager);
                 CurrentWorkplace.HireWorker(selectedVillager);
@@ -152,16 +182,24 @@ namespace HopeMain.Code.GUI.Villager.Selecting
             } else {
                 Managers.I.Professions.FireVillagerFromOldProfession(selectedVillager);
                 Managers.I.Professions.SetVillagerProfession(selectedVillager,
-                    currentProfession.Data, CurrentWorkplace);
+                    _currentProfession.Data, CurrentWorkplace);
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        //TODO: refactor
         public bool AreThereAnyWorkplaces() =>
-            currentProfession.Workplaces.Length != 0;
+            _currentProfession.Workplaces.Length != 0;
 
-        public WorkplaceBase CurrentWorkplace =>
-            currentProfession.Workplaces[workplacesIdx];
+        public Workplace CurrentWorkplace =>
+            _currentProfession.Workplaces[_workplacesIdx];
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void CloseAcceptablePanel()
         {
             acceptancePanel.gameObject.SetActive(false);

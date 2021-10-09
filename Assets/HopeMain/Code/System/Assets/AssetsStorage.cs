@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using HopeMain.Code.Characters.Villagers.Profession;
+using HopeMain.Code.Characters.Villagers.Professions;
 using HopeMain.Code.World.Resources;
 using HopeMain.Code.World.Resources.ResourceToGather;
 using NodeCanvas.BehaviourTrees;
@@ -9,14 +9,17 @@ using ThirdParty.LeanTween.Framework;
 using UnityEngine;
 using Data = HopeMain.Code.World.Resources.ResourceToGather.Data;
 
-//TODO: whole class should be deleted and all assets should be available through addressables
+//TODO: whole class should be deleted and all assets should be available through addressables or there should be created a database in scriptable objects
 namespace HopeMain.Code.System.Assets
 {
+   /// <summary>
+   /// 
+   /// </summary>
    public class AssetsStorage : MonoBehaviour
    {
       [Header("Villagers")] 
       [SerializeField] private GameObject[] villagerPrefabs;
-      [SerializeField] private Characters.Villagers.Profession.Data[] professionData;
+      [SerializeField] private Characters.Villagers.Professions.Data[] professionData;
 
       [Header("Buildings")] 
       [SerializeField] private GameObject[] buildingPrefabs;
@@ -39,6 +42,9 @@ namespace HopeMain.Code.System.Assets
       [Header("Other")] 
       [SerializeField] private GameObject resourceOnGround;
       
+      /// <summary>
+      /// 
+      /// </summary>
       public static AssetsStorage I { get; private set; }
    
       private void Awake()
@@ -58,6 +64,12 @@ namespace HopeMain.Code.System.Assets
             .SingleOrDefault(sound => sound.AssetName.Contains(areaName))
             ?.Clip;
       
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="resourceType"></param>
+      /// <returns></returns>
+      /// <exception cref="Exception"></exception>
       public Sprite GetResourceIcon(ResourceType resourceType)
       {
          Sprite s = resourceIcons.FirstOrDefault(sprite => sprite.name == resourceType.ToString().ToLower());
@@ -68,6 +80,12 @@ namespace HopeMain.Code.System.Assets
          return s;
       }
 
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="villagerType"></param>
+      /// <returns></returns>
+      /// <exception cref="Exception"></exception>
       public GameObject GetVillagerPrefab(ProfessionType villagerType)
       {
          GameObject p = villagerPrefabs.FirstOrDefault(villager => villager.name.Contains(villagerType.ToString()));
@@ -78,6 +96,12 @@ namespace HopeMain.Code.System.Assets
          return p;
       }
       
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="buildingName"></param>
+      /// <returns></returns>
+      /// <exception cref="Exception"></exception>
       public GameObject GetBuildingPrefab(string buildingName)
       {
          GameObject p = buildingPrefabs.FirstOrDefault( building => building.name == buildingName);
@@ -88,9 +112,15 @@ namespace HopeMain.Code.System.Assets
          return p;
       }
 
-      public Characters.Villagers.Profession.Data GetProfessionDataForProfessionType(ProfessionType professionType)
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="professionType"></param>
+      /// <returns></returns>
+      /// <exception cref="Exception"></exception>
+      public Characters.Villagers.Professions.Data GetProfessionDataForProfessionType(ProfessionType professionType)
       {
-         Characters.Villagers.Profession.Data p = professionData.FirstOrDefault(data => data.Type == professionType);
+         Characters.Villagers.Professions.Data p = professionData.FirstOrDefault(data => data.Type == professionType);
 
          if (p == null)
             throw new Exception("ASSET STORAGE ----- CAN'T FIND DATA FOR PROFESSION: " + professionType);
@@ -98,6 +128,12 @@ namespace HopeMain.Code.System.Assets
          return p;
       }
 
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="resourceType"></param>
+      /// <returns></returns>
+      /// <exception cref="Exception"></exception>
       public Data GetResourceToGatherDataByResourceType(ResourceType resourceType)
       {
          Data r =
@@ -109,6 +145,12 @@ namespace HopeMain.Code.System.Assets
          return r;
       }
 
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="aiType"></param>
+      /// <returns></returns>
+      /// <exception cref="Exception"></exception>
       public BehaviourTree GetBehaviourTreeForAIType(ProfessionAIType aiType)
       {
          BehaviourTree bt = behaviourTrees.FirstOrDefault(tree => tree.name.Contains(aiType.ToString()));
@@ -119,6 +161,12 @@ namespace HopeMain.Code.System.Assets
          return bt;
       }
 
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="aiType"></param>
+      /// <returns></returns>
+      /// <exception cref="Exception"></exception>
       public Blackboard GetBlackboardForAIType(ProfessionAIType aiType)
       {
          Blackboard blackboard = blackboards.FirstOrDefault(board => board.name.Contains(aiType.ToString()));
@@ -132,9 +180,14 @@ namespace HopeMain.Code.System.Assets
       
       //TODO: these should be added somewhere else
       
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="resource"></param>
+      /// <param name="mapX"></param>
       public void ThrowResourceOnTheGround(Resource resource, float mapX)
       {
-         Characters.Villagers.Profession.Data haulerData = GetProfessionDataForProfessionType(ProfessionType.GlobalHauler);
+         Characters.Villagers.Professions.Data haulerData = GetProfessionDataForProfessionType(ProfessionType.GlobalHauler);
          int resourceCnt =  Mathf.FloorToInt(resource.amount / haulerData.ResourceCarryingLimit) + (resource.amount % haulerData.ResourceCarryingLimit > 0 ? 1 : 0);
          int currentAmount = resource.amount;
          
@@ -154,6 +207,13 @@ namespace HopeMain.Code.System.Assets
          }
       }
 
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="soundType"></param>
+      /// <param name="assetName"></param>
+      /// <returns></returns>
+      /// <exception cref="Exception"></exception>
       public AudioClip[] GetAudioClipsByName(SoundType soundType, string assetName)
       {
          AudioClip[] clips = null;
@@ -176,6 +236,13 @@ namespace HopeMain.Code.System.Assets
          return clips;
       }
 
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="soundType"></param>
+      /// <param name="assetName"></param>
+      /// <returns></returns>
+      /// <exception cref="ArgumentOutOfRangeException"></exception>
       public AudioClip GetAudioClipByName(SoundType soundType, string assetName)
       {
          AudioClip clip = null;

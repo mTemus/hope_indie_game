@@ -2,6 +2,9 @@ using HopeMain.Code.Characters.Villagers.Entity;
 
 namespace HopeMain.Code.World.Resources.ResourceToGather
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Wood : ResourceToGatherBase
     {
         public override void StartGathering(Villager worker)

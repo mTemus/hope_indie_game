@@ -3,6 +3,9 @@ using UnityEngine.UI;
 
 namespace HopeMain.Code.GUI.UIElements
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class UIScrollXArea : UIScrollArea
     {
         private void Awake()

@@ -2,11 +2,18 @@ using UnityEngine;
 
 namespace HopeMain.Code.GUI.UIElements
 {
+   /// <summary>
+   /// 
+   /// </summary>
    public class UISelectingPointer : MonoBehaviour
    {
       [SerializeField] private RectTransform pointer;
       [SerializeField] private float offset;
       
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="element"></param>
       public void SetPointerOnUiElement(Transform element)
       {
          Rect elementRect = element.GetComponent<RectTransform>().rect;
@@ -15,6 +22,10 @@ namespace HopeMain.Code.GUI.UIElements
          pointer.transform.position = element.position;
       }
 
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="element"></param>
       public void SetPointerOnUiElementWithParent(Transform element)
       {
          Transform pointerTransform = pointer.transform;

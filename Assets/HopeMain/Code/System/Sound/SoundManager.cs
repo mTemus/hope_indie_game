@@ -14,7 +14,7 @@ namespace HopeMain.Code.System.Sound
         [SerializeField] private AudioClip[] backgroundSounds;
         [SerializeField] private Assets.Sound[] environmentEffects;
 
-        private float backgroundTimer = 5f;
+        private float _backgroundTimer = 5f;
         
         private void Start()
         {
@@ -26,18 +26,18 @@ namespace HopeMain.Code.System.Sound
 
         private IEnumerator PlayBackgroundSound()
         {
-            yield return new WaitUntil(() => backgroundTimer > 0);
+            yield return new WaitUntil(() => _backgroundTimer > 0);
 
             AudioClip clip = backgroundSounds[Random.Range(0, backgroundSounds.Length)];
             backgroundChannel.clip = clip;
             backgroundChannel.Play();
 
-            backgroundTimer = clip.length + Random.Range(0, 10);
+            _backgroundTimer = clip.length + Random.Range(0, 10);
         }
 
         private void Update()
         {
-            backgroundTimer -= Time.deltaTime;
+            _backgroundTimer -= Time.deltaTime;
         }
     }
 }

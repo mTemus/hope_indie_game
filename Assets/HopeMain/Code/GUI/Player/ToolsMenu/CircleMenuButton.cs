@@ -3,6 +3,9 @@ using UnityEngine.UI;
 
 namespace HopeMain.Code.GUI.Player.ToolsMenu
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class CircleMenuButton : MonoBehaviour
     {
         [SerializeField] private RectTransform rectTransform;

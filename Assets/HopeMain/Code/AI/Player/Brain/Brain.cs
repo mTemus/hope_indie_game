@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace HopeMain.Code.AI.Player.Brain
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Brain : EntityBrain
     {
         [Header("Player components")] 
@@ -17,7 +20,7 @@ namespace HopeMain.Code.AI.Player.Brain
 
         private void Awake()
         {
-            onWalkingSoundSet = sounds.SetWalkingAudioClip;
+            walkingSoundSet = sounds.SetWalkingAudioClip;
         
             motion.Initialize(this);
             animations.Initialize(this);

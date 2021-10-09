@@ -1,4 +1,4 @@
-using HopeMain.Code.Characters.Villagers.Profession;
+using HopeMain.Code.Characters.Villagers.Professions;
 using TMPro;
 using UnityEngine;
 
@@ -21,14 +21,14 @@ namespace HopeMain.Code.GUI.Villager.Selecting
         [SerializeField] private TextMeshProUGUI intelligenceValueVillager;
         [SerializeField] private TextMeshProUGUI goldValue;
 
-        [Header("WorkplaceBase values")] 
+        [Header("Workplace values")] 
         [SerializeField] private GameObject noAvailableWorkplacePanel;
 
-        private Vector2 labelSize;
+        private Vector2 _labelSize;
         
         private void Awake()
         {
-            labelSize = GetComponent<RectTransform>().rect.size;
+            _labelSize = GetComponent<RectTransform>().rect.size;
         }
 
         private Color CompareStats(int profession, int villager)
@@ -57,7 +57,7 @@ namespace HopeMain.Code.GUI.Villager.Selecting
         public void AttachPanelToProfession(Transform parent)
         {
             transform.SetParent(parent);
-            parent.GetComponent<RectTransform>().sizeDelta += new Vector2(0, labelSize.y);
+            parent.GetComponent<RectTransform>().sizeDelta += new Vector2(0, _labelSize.y);
             GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         }
 

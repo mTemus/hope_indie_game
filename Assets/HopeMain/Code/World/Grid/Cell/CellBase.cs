@@ -3,11 +3,17 @@ using HopeMain.Code.World.Resources.ResourceToGather;
 
 namespace HopeMain.Code.World.Grid.Cell
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public enum CellContentType
     {
         Null, Nothing, WoodResource, StoneResource, Building, 
     }
     
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class CellBase
     {
         public Building buildingData;

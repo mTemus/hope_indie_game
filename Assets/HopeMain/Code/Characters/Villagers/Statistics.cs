@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace HopeMain.Code.Characters.Villagers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Serializable]
     public class Statistics
     {

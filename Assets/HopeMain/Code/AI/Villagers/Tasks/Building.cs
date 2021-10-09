@@ -5,47 +5,53 @@ using UnityEngine;
 
 namespace HopeMain.Code.AI.Villagers.Tasks
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public enum BuildingFlag
     {
-        GO_TO_CONSTRUCTION,
-        BUILD,
+        GOToConstruction,
+        Build,
     }
     
+    /// <summary>
+    /// 
+    /// </summary>
     public class Building : Task
     {
-        private readonly Construction construction;
-        private readonly Vector3 constructionPosition;
+        private readonly Construction _construction;
+        private readonly Vector3 _constructionPosition;
 
         private BuildingFlag _flag;
         
         public Building(Vector3 taskPosition, Construction construction)
         {
             this.taskPosition = taskPosition;
-            this.construction = construction;
-            constructionPosition = construction.transform.position + construction.GetComponent<World.Buildings.Building>().Data.EntrancePivot;
+            _construction = construction;
+            _constructionPosition = construction.transform.position + construction.GetComponent<World.Buildings.Building>().Data.EntrancePivot;
         }
         
         public override void Start()
         {
             worker.Brain.Animations.SetState(VillagerAnimationState.Walk);
-            _flag = BuildingFlag.GO_TO_CONSTRUCTION;
+            _flag = BuildingFlag.GOToConstruction;
         }
         
         public override void Execute()
         {
-            flag = TaskFlag.RUNNING;
+            flag = TaskFlag.Running;
 
             switch (_flag) {
-                case BuildingFlag.GO_TO_CONSTRUCTION:
-                    if (!worker.Brain.Motion.MoveTo(constructionPosition)) return;
+                case BuildingFlag.GOToConstruction:
+                    if (!worker.Brain.Motion.MoveTo(_constructionPosition)) return;
                     worker.Brain.Animations.SetState(VillagerAnimationState.Idle);
-                    _flag = BuildingFlag.BUILD;
+                    _flag = BuildingFlag.Build;
                     break;
                 
-                case BuildingFlag.BUILD:
-                    if (!construction.Construct()) return;
-                    onTaskCompleted.Invoke();
-                    construction.CleanAfterConstruction();
+                case BuildingFlag.Build:
+                    if (!_construction.Construct()) return;
+                    taskCompleted.Invoke();
+                    _construction.CleanAfterConstruction();
                     break;
                 
                 default:
@@ -56,13 +62,14 @@ namespace HopeMain.Code.AI.Villagers.Tasks
         public override void End()
         {
             worker.Brain.Animations.SetState(VillagerAnimationState.Walk);
-            flag = TaskFlag.COMPLETED;
+            flag = TaskFlag.Completed;
         }
         
         public override void Pause() {}
         
         public void SetResourcesAsDelivered()
         {
+            //TODO: ???
             SetReady();
         }
     }

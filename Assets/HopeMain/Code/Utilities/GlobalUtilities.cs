@@ -1,7 +1,17 @@
 ﻿namespace HopeMain.Code.Utilities
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class GlobalUtilities
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="idx"></param>
+        /// <param name="value"></param>
+        /// <param name="maxValue"></param>
+        /// <returns></returns>
         public static int IncrementIdx(int idx, int value, int maxValue)
         {
             if (idx + value > maxValue - 1) 

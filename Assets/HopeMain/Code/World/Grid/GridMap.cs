@@ -10,34 +10,49 @@ using UnityEngine;
 
 namespace HopeMain.Code.World.Grid
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class GridMap
     {
-        private readonly int width;
-        private readonly int height;
-        private readonly int cellSize;
+        private readonly int _width;
+        private readonly int _height;
+        private readonly int _cellSize;
 
-        private readonly CellBase[,] cells;
+        private readonly CellBase[,] _cells;
 
         public GridMap(int width, int height, int cellSize)
         {
-            this.width = width;
-            this.height = height;
-            this.cellSize = cellSize;
+            _width = width;
+            _height = height;
+            _cellSize = cellSize;
 
-            cells = new CellBase[width, height];
+            _cells = new CellBase[width, height];
 
             for (int i = 0; i < width; i++)
             for (int j = 0; j < height; j++)
-                if (j == 0) cells[i, j] = new SurfaceCell();
-                else cells[i, j] = new SpaceCell();
+                if (j == 0) _cells[i, j] = new SurfaceCell();
+                else _cells[i, j] = new SpaceCell();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="worldPosition"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void GetXY(Vector3 worldPosition, out int x, out int y)
         {
-            x = Mathf.FloorToInt(worldPosition.x / cellSize);
-            y = Mathf.FloorToInt(worldPosition.y / cellSize);
+            x = Mathf.FloorToInt(worldPosition.x / _cellSize);
+            y = Mathf.FloorToInt(worldPosition.y / _cellSize);
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tile"></param>
+        /// <param name="objectSize"></param>
+        /// <returns></returns>
         public List<Vector2Int> GetTileWithNeighbours(Vector2Int tile, Vector2Int objectSize)
         {
             List<Vector2Int> tiles = new List<Vector2Int>();
@@ -50,32 +65,74 @@ namespace HopeMain.Code.World.Grid
             return tiles;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="worldAreaPos"></param>
+        /// <returns></returns>
         public Vector3 GetWorldPosition(int x, int y, Vector3 worldAreaPos) => 
-            new Vector3(x, y) * cellSize + worldAreaPos;
+            new Vector3(x, y) * _cellSize + worldAreaPos;
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
         public Vector3 GetLocalAreaPosition(int x, int y) => 
-            new Vector3(x, y) * cellSize;
+            new Vector3(x, y) * _cellSize;
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pos"></param>
+        /// <returns></returns>
         public Vector2 GetWorldPosition(Vector2 pos) => 
-            pos * cellSize;
+            pos * _cellSize;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
         public CellBase GetCellAt(int x, int y) =>
-            cells[x, y];
+            _cells[x, y];
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
         public bool IsTileInRange(int x, int y)
         {
             x /= GlobalProperties.WorldTileSize;
             y /= GlobalProperties.WorldTileSize;
-            return y <= height && y >= 0 && x <= width && x >= 0;
+            return y <= _height && y >= 0 && x <= _width && x >= 0;
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="objectWidth"></param>
+        /// <returns></returns>
         public bool IsTileInRange(int x, int y, int objectWidth)
         {
             x /= GlobalProperties.WorldTileSize;
             y /= GlobalProperties.WorldTileSize;
-            return y  <= height && y >= 0 && x + objectWidth <= width && x >= 0;
+            return y  <= _height && y >= 0 && x + objectWidth <= _width && x >= 0;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="area"></param>
+        /// <param name="building"></param>
         public void SetBuildingInGrid(List<Vector2Int> area, Building building)
         {
             foreach (var cell in area
@@ -85,6 +142,12 @@ namespace HopeMain.Code.World.Grid
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="area"></param>
+        /// <param name="resourceToGather"></param>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         public void SetResourceToGatherInGrid(List<Vector2Int> area, ResourceToGatherBase resourceToGather)
         {
             foreach (var cell in area
@@ -92,11 +155,11 @@ namespace HopeMain.Code.World.Grid
                 cell.resourceToGatherData = resourceToGather;
 
                 switch (resourceToGather.Resource.Type) {
-                    case ResourceType.WOOD:
+                    case ResourceType.Wood:
                         cell.content = CellContentType.WoodResource;
                         break;
                     
-                    case ResourceType.STONE:
+                    case ResourceType.Stone:
                         cell.content = CellContentType.StoneResource;
                         break;
                     
@@ -106,12 +169,12 @@ namespace HopeMain.Code.World.Grid
             }
         }
         
-        public int CellSize => cellSize;
+        public int CellSize => _cellSize;
 
-        public CellBase[,] Cells => cells;
+        public CellBase[,] Cells => _cells;
 
-        public int Width => width;
+        public int Width => _width;
 
-        public int Height => height;
+        public int Height => _height;
     }
 }

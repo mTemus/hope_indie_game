@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace HopeMain.Code.GUI.Player.BuildingSelecting
 {
+   /// <summary>
+   /// 
+   /// </summary>
    public class UiBuildingElement : MonoBehaviour
    {
       [SerializeField] private Data data;

@@ -4,17 +4,28 @@ using Random = UnityEngine.Random;
 
 namespace HopeMain.Code.AI.Player.Brain
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public enum SoundEffectType
     {
         Walking, 
     }
     
+    /// <summary>
+    /// 
+    /// </summary>
     public class SoundsLayer : BrainLayer
     {
         [SerializeField] private AudioSource walkingChannel;
 
         public override void Initialize(Brain brain) { }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="effectType"></param>
+        /// <exception cref="Exception"></exception>
         public void PlaySoundEffect(SoundEffectType effectType)
         {
             switch (effectType) {
@@ -27,12 +38,17 @@ namespace HopeMain.Code.AI.Player.Brain
             }
         }
  
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="clip"></param>
         public void SetWalkingAudioClip(AudioClip clip)
         {
             if (walkingChannel.clip == clip) return;
             walkingChannel.clip = clip;
         }
 
+        
         private void PlayWalkingSoundEffect()
         {
             if (walkingChannel.isPlaying) return;

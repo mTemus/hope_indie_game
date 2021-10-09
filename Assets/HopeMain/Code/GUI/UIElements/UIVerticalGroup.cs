@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace HopeMain.Code.GUI.UIElements
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class UIVerticalGroup : MonoBehaviour
     {
         [Header("Group elements")]
@@ -11,20 +14,23 @@ namespace HopeMain.Code.GUI.UIElements
         [SerializeField] private float spacing;
         [SerializeField] private float topPadding;
         
-        private float currentY;
+        private float _currentY;
         
+        /// <summary>
+        /// 
+        /// </summary>
         public void UpdateElementsPosition()
         {
-            currentY = -topPadding;
+            _currentY = -topPadding;
             
             foreach (RectTransform element in groupElements) {
                 Vector2 elemAnchPos = element.anchoredPosition;
-                currentY += -(element.sizeDelta.y / 2);
-                element.anchoredPosition = new Vector2(elemAnchPos.x, currentY);
-                currentY += -(element.sizeDelta.y / 2 + spacing);
+                _currentY += -(element.sizeDelta.y / 2);
+                element.anchoredPosition = new Vector2(elemAnchPos.x, _currentY);
+                _currentY += -(element.sizeDelta.y / 2 + spacing);
             }
             
-            currentY = 0;
+            _currentY = 0;
         }
     }
 }

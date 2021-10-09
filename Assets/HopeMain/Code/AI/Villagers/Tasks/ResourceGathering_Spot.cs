@@ -4,10 +4,12 @@ using HopeMain.Code.World.Resources.ResourceToGather;
 
 namespace HopeMain.Code.AI.Villagers.Tasks
 {
-    public class ResourceGathering_Spot : ResourceGathering
+    /// <summary>
+    /// 
+    /// </summary>
+    public class ResourceGatheringSpot : ResourceGathering
     {
-        // Start is called before the first frame update
-        public ResourceGathering_Spot(ResourceToGatherBase resourceToGather)
+        public ResourceGatheringSpot(ResourceToGatherBase resourceToGather)
         {
             this.resourceToGather = resourceToGather;
         }
@@ -15,37 +17,37 @@ namespace HopeMain.Code.AI.Villagers.Tasks
         public override void Start()
         {
             worker.Brain.Animations.SetState(VillagerAnimationState.Walk);
-            currentGatheringState = ResourceGatheringFlag.GO_TO_WORKPLACE;
+            currentGatheringState = ResourceGatheringFlag.GOToWorkplace;
         }
 
         public override void End()
         {
-            flag = TaskFlag.COMPLETED;
+            flag = TaskFlag.Completed;
         }
 
         public override void Execute()
         {
-            flag = TaskFlag.RUNNING;
+            flag = TaskFlag.Running;
 
             switch (currentGatheringState) {
-                case ResourceGatheringFlag.GO_TO_WORKPLACE:
+                case ResourceGatheringFlag.GOToWorkplace:
                     if (!worker.Brain.Motion.MoveTo(worker.Profession.Workplace.PivotedPosition)) break;
                     worker.Profession.Workplace.WorkerEntersWorkplace(worker);
                     worker.Brain.Animations.SetState(VillagerAnimationState.Idle);
                     resourceToGather.StartGathering(worker);
-                    currentGatheringState = ResourceGatheringFlag.GATHER_RESOURCE;
+                    currentGatheringState = ResourceGatheringFlag.GatherResource;
                     break;
 
-                case ResourceGatheringFlag.GATHER_RESOURCE:
+                case ResourceGatheringFlag.GatherResource:
                     if (resourceToGather.Gather(worker, gatheringSocketId)) break;
-                    currentGatheringState = ResourceGatheringFlag.DELIVER_RESOURCE_TO_WORKPLACE;
+                    currentGatheringState = ResourceGatheringFlag.DeliverResourceToWorkplace;
                     break;
                 
-                case ResourceGatheringFlag.DELIVER_RESOURCE_TO_WORKPLACE:
-                    onResourceDelivery.Invoke(worker.Profession.CarriedResource);
+                case ResourceGatheringFlag.DeliverResourceToWorkplace:
+                    resourceDelivery.Invoke(worker.Profession.CarriedResource);
                     worker.Profession.CarriedResource = null;
                     resourceToGather.StartGathering(worker);
-                    currentGatheringState = ResourceGatheringFlag.GATHER_RESOURCE;
+                    currentGatheringState = ResourceGatheringFlag.GatherResource;
                     break;
                 
                 default:

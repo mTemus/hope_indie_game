@@ -5,48 +5,69 @@ using UnityEngine;
 
 namespace HopeMain.Code.Characters.Villagers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class SelectionManager : MonoBehaviour
     {
-        private readonly List<Villager> villagersToSelect = new List<Villager>();
+        private readonly List<Villager> _villagersToSelect = new List<Villager>();
 
-        private Villager selectedVillager;
+        private Villager _selectedVillager;
     
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="villager"></param>
         public void AddVillagerToSelect(Villager villager)
         {
-            villagersToSelect.Add(villager);
+            _villagersToSelect.Add(villager);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="villager"></param>
         public void RemoveVillagerToSelect(Villager villager)
         {
-            if (villagersToSelect.Contains(villager)) {
-                villagersToSelect.Remove(villager);
+            if (_villagersToSelect.Contains(villager)) {
+                _villagersToSelect.Remove(villager);
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void SelectVillager()
         {
             Vector3 playerPos = Managers.I.Player.GetPlayerPosition();
-            float closestDistance = Vector3.Distance(villagersToSelect[0].transform.position, playerPos);
+            float closestDistance = Vector3.Distance(_villagersToSelect[0].transform.position, playerPos);
         
-            foreach (Villager villager in villagersToSelect) {
+            foreach (Villager villager in _villagersToSelect) {
                 float distanceToPlayer = Vector3.Distance(villager.transform.position, playerPos);
 
                 if (distanceToPlayer > closestDistance) continue;
                 closestDistance = distanceToPlayer;
-                selectedVillager = villager;
+                _selectedVillager = villager;
             }
         
-            Managers.I.GUI.VillagerPropertiesPanel.OpenPropertiesPanel(selectedVillager);
+            Managers.I.GUI.VillagerPropertiesPanel.OpenPropertiesPanel(_selectedVillager);
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         public void DeselectVillager()
         {
-            selectedVillager = null;
+            _selectedVillager = null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public bool AreVillagersNearby() =>
-            villagersToSelect.Count > 0;
+            _villagersToSelect.Count > 0;
         
-        public Villager SelectedVillager => selectedVillager;
+        public Villager SelectedVillager => _selectedVillager;
     }
 }

@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace HopeMain.Code.Environment
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class WaterReflectionController : MonoBehaviour
     {
         [SerializeField] private Transform target;

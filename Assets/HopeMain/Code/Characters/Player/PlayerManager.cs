@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace HopeMain.Code.Characters.Player
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class PlayerManager : MonoBehaviour
     {
         [SerializeField] private Brain player;
@@ -16,9 +19,17 @@ namespace HopeMain.Code.Characters.Player
             area.SetPlayerToArea(player.gameObject);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public Vector2 GetPlayerPosition() 
             => player.transform.position;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public Vector2 GetPlayerLocalPosition()
             => player.transform.localPosition;
 

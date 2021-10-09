@@ -5,28 +5,34 @@ using UnityEngine;
 
 namespace HopeMain.Code.AI.Villagers.Tasks
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public enum TaskFlag
     {
-        NEW,
-        WAITING,
-        READY,
-        RUNNING,
-        INTERRUPTED,
-        PAUSED,
-        ABANDONED,
-        COMPLETED
+        New,
+        Waiting,
+        Ready,
+        Running,
+        Interrupted,
+        Paused,
+        Abandoned,
+        Completed
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class Task
     {
         protected Vector3 taskPosition;
         protected Villager worker;
 
-        public TaskFlag flag = TaskFlag.NEW;
+        public TaskFlag flag = TaskFlag.New;
         
-        public Action onTaskCompleted;
-        public Action onTaskCancel;
-        public Action onTaskSetReady;
+        public Action taskCompleted;
+        public Action taskCancel;
+        public Action taskSetReady;
         
         /// <summary>
         /// Method should check current state of task and execute block of code dependently of it
@@ -48,7 +54,7 @@ namespace HopeMain.Code.AI.Villagers.Tasks
         /// </summary>
         public virtual void Pause()
         {
-            flag = TaskFlag.PAUSED;
+            flag = TaskFlag.Paused;
         }
 
         /// <summary>
@@ -56,7 +62,7 @@ namespace HopeMain.Code.AI.Villagers.Tasks
         /// </summary>
         public virtual void Abandon()
         {
-            flag = TaskFlag.ABANDONED;
+            flag = TaskFlag.Abandoned;
             worker.Profession.Workplace.TakeTaskBackFromWorker(this);
         }
 
@@ -65,7 +71,7 @@ namespace HopeMain.Code.AI.Villagers.Tasks
         /// </summary>
         public virtual void Interrupt()
         {
-            flag = TaskFlag.INTERRUPTED;
+            flag = TaskFlag.Interrupted;
         }
 
         /// <summary>
@@ -73,7 +79,7 @@ namespace HopeMain.Code.AI.Villagers.Tasks
         /// </summary>
         public void SetWaiting()
         {
-            flag = TaskFlag.WAITING;
+            flag = TaskFlag.Waiting;
         }
 
         /// <summary>
@@ -81,15 +87,20 @@ namespace HopeMain.Code.AI.Villagers.Tasks
         /// </summary>
         public void SetReady()
         {
-            flag = TaskFlag.READY;
+            flag = TaskFlag.Ready;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="newWorker"></param>
+        /// <param name="taskCompleteActions"></param>
         public void Take(Villager newWorker, params Action[] taskCompleteActions)
         {
             worker = newWorker;
         
             foreach (Action taskCompleted in taskCompleteActions) 
-                onTaskCompleted += taskCompleted;
+                this.taskCompleted += taskCompleted;
         }
 
         protected void ThrowResourceOnGround()

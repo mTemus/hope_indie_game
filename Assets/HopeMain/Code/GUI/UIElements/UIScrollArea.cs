@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace HopeMain.Code.GUI.UIElements
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class UIScrollArea : MonoBehaviour
     {
         [SerializeField] protected Transform[] content;
@@ -13,10 +16,18 @@ namespace HopeMain.Code.GUI.UIElements
         
         protected abstract void CountAreaProperties();
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
         public abstract void ChangeValue(int value);
 
         protected abstract void ResetArea();
-        
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
         public void ChangeContent(int id)
         {
             ResetArea();
