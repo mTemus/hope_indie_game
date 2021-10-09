@@ -10817,7 +10817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c636d71a3cfeaca47a87859536b5d87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UICamera: {fileID: 0}
+  uiCamera: {fileID: 0}
   backgroundPanel: {fileID: 643624588}
   circleMenuButtonPrefab: {fileID: 7549245923606730458, guid: 455beba3e6191cb4ea2030e01fd38125, type: 3}
   normalButtonColor: {r: 0.7137255, g: 0.47450984, b: 0.36862746, a: 1}
@@ -30926,7 +30926,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6ef0733c5b0d324188f5a215166bb18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myArea: {fileID: 0}
+  myArea: {fileID: 2080944412}
 --- !u!1 &2089969471
 GameObject:
   m_ObjectHideFlags: 0
