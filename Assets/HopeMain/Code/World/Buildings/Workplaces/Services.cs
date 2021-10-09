@@ -4,10 +4,13 @@ using UnityEngine;
 
 namespace HopeMain.Code.World.Buildings.Workplace
 {
-    public abstract class Services : WorkplaceBase
+    /// <summary>
+    /// 
+    /// </summary>
+    public abstract class Services : Workplaces.Workplace
     {
         #region Workers
-
+        
         public override void HireWorker(Villager worker)
         {
             HireNormalWorker();
@@ -29,7 +32,5 @@ namespace HopeMain.Code.World.Buildings.Workplace
         }
         
         #endregion
-        
-        
     }
 }

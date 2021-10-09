@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using HopeMain.Code.AI.Villagers.Tasks;
 using HopeMain.Code.Characters.Villagers.Entity;
-using HopeMain.Code.Characters.Villagers.Profession;
+using HopeMain.Code.Characters.Villagers.Professions;
 using HopeMain.Code.System;
 using HopeMain.Code.System.Assets;
 using HopeMain.Code.World.Buildings.Type.Resources;
@@ -13,7 +13,7 @@ using UnityEngine;
 
 namespace HopeMain.Code.World.Buildings.Workplace
 {
-    public abstract class Gathering : WorkplaceBase
+    public abstract class Gathering : Workplaces.Workplace
     {
         protected ResourceType gatheringResourceType;
         protected ResourceToGatherBase gatheringResource;
@@ -71,8 +71,8 @@ namespace HopeMain.Code.World.Buildings.Workplace
             { worker.Brain.Work.CompleteTask(); }
             
             
-            Storage.onResourceLimitReset.AddListener(RecoverAllTasks);
-            Storage.onResourceLimitReset.AddListener(() => Storage.onResourceLimitReset.RemoveAllListeners());
+            Storage.resourceLimitReset.AddListener(RecoverAllTasks);
+            Storage.resourceLimitReset.AddListener(() => Storage.resourceLimitReset.RemoveAllListeners());
         }
 
         private void RecoverAllTasks()
@@ -91,8 +91,8 @@ namespace HopeMain.Code.World.Buildings.Workplace
         protected virtual void CreateSingleResourceGatheringTask()
         {
             Resources.ResourceToGather.Data rtgd = AssetsStorage.I.GetResourceToGatherDataByResourceType(gatheringResourceType);
-            ResourceGathering rgt = new ResourceGathering_Single(rtgd.ResourceType, rtgd.OccurAreas);
-            rgt.onResourceDelivery += Storage.StoreResource;
+            ResourceGathering rgt = new ResourceGatheringSingle(rtgd.ResourceType, rtgd.OccurAreas);
+            rgt.resourceDelivery += Storage.StoreResource;
             AddTaskToDo(rgt);
             
             Debug.LogError("Created automated task in: " + name);
@@ -100,8 +100,8 @@ namespace HopeMain.Code.World.Buildings.Workplace
         
         protected virtual void CreateSpotResourceGatheringTask()
         {
-            ResourceGathering rgt = new ResourceGathering_Spot(gatheringResource);
-            rgt.onResourceDelivery += Storage.StoreResource;
+            ResourceGathering rgt = new ResourceGatheringSpot(gatheringResource);
+            rgt.resourceDelivery += Storage.StoreResource;
             AddTaskToDo(rgt);
             
             Debug.LogError("Created automated task in: " + name);
@@ -116,14 +116,14 @@ namespace HopeMain.Code.World.Buildings.Workplace
             
             if (HasHiredHaulers) {
                 rct = new ResourceCarrying(storedResource, false, warehouse, this);
-                rct.onResourceDelivery += warehouse.StoreResource;
-                rct.onResourceWithdraw += Storage.WithdrawResourceContinuously;
+                rct.resourceDelivery += warehouse.StoreResource;
+                rct.resourceWithdraw += Storage.WithdrawResourceContinuously;
                 AddTaskToDo(rct);
             }
             else if (storedResource.amount >= AssetsStorage.I.GetProfessionDataForProfessionType(ProfessionType.GlobalHauler).ResourceCarryingLimit) {
                 rct = new ResourceCarrying(storedResource, false, warehouse, this);
-                rct.onResourceDelivery += warehouse.StoreResource;
-                rct.onResourceWithdraw += Storage.WithdrawResource;
+                rct.resourceDelivery += warehouse.StoreResource;
+                rct.resourceWithdraw += Storage.WithdrawResource;
                 AddTaskToDo(rct);
             }
         }

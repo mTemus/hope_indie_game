@@ -7,10 +7,10 @@ namespace HopeMain.Code.World.Buildings.Workplace
         Gathering, Production, Services
     }
     
-    [CreateAssetMenu(fileName = "WorkplaceBase Properties", menuName = "Game Data/Map Objects/WorkplaceBase Properties", order = 1)]
+    [CreateAssetMenu(fileName = "Workplace Properties", menuName = "Game Data/Map Objects/Workplace Properties", order = 1)]
     public class Properties : ScriptableObject
     {
-        [Header("WorkplaceBase properties")]
+        [Header("Workplace properties")]
         [SerializeField] private int workers;
         [SerializeField] private int haulers;
         [SerializeField] private WorkplaceType type;
