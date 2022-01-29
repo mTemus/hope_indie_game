@@ -4,7 +4,7 @@ using UnityEngine;
 namespace HopeMain.Code.AI.Player.Brain
 {
     /// <summary>
-    /// 
+    /// State machine of player character animations
     /// </summary>
     public enum PlayerAnimationState
     {
@@ -17,6 +17,13 @@ namespace HopeMain.Code.AI.Player.Brain
     public class AnimationsLayer : BrainLayer
     {
         [SerializeField] private Animator animator;
+
+        private static float valueOne;
+        private float valueTwo;
+        
+        [Range(valueOne,3)]
+        public int someValue;
+        
         
         private PlayerAnimationState _currentState;
 
@@ -29,6 +36,7 @@ namespace HopeMain.Code.AI.Player.Brain
         public override void Initialize(Brain brain)
         {
             _playSoundEffectOnAnimation = brain.Sounds.PlaySoundEffect;
+            
         }
         
         private void Awake()
