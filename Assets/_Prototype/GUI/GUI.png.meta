@@ -108,6 +108,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -117,8 +118,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -784,6 +785,35 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Frame_Iron: 5740453210667488706
+      Box_white: -550459873359513890
+      Icon_Mail: -3238813901825184631
+      Icon_Heart: 6667725422741070258
+      Belt_small_outline: -5058847034674082712
+      Arrow_left: 6118865108981898103
+      Icon_Yes: -9168193397101357998
+      Button_1_Pressed: -7344508877482438339
+      Belt_small_fill_re: -4972417160956389086
+      Frame_paper: -5376358965234703051
+      Icon_Lock: 319298653339161350
+      Icon_No: 2802904198054408972
+      Belt_big_outline: -3352333929547219395
+      Icon_Hero: 5772783901100147917
+      Belt_big_fill_cyan: -3398404699847443785
+      Belt_big_fill_blue: -3673437966201261359
+      Belt_big_fill_orange: -596989141680907126
+      Field_Fill: -6613218214482179272
+      Frame_wood: 8105364098890919055
+      Belt_small_fill_red: -8110373546920229927
+      Icon_Home: -66242598018789029
+      Icon_Pause: 3976019420461107629
+      Button_1_Normal: 4137037144684975938
+      Icon_Question_Mark: 9112046958845575407
+      Arrow_right: 944800511937124426
+      Frame_1: -7151958888795693489
+      Belt_big_fill_red: 2020845106392875415
+      Field_outline: -7568063341596875841
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

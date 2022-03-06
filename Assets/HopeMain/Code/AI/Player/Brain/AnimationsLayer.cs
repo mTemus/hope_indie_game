@@ -17,13 +17,6 @@ namespace HopeMain.Code.AI.Player.Brain
     public class AnimationsLayer : BrainLayer
     {
         [SerializeField] private Animator animator;
-
-        private static float valueOne;
-        private float valueTwo;
-        
-        [Range(valueOne,3)]
-        public int someValue;
-        
         
         private PlayerAnimationState _currentState;
 
