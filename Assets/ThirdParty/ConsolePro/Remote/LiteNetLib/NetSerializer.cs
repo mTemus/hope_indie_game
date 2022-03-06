@@ -1,12 +1,12 @@
 #if DEBUG && !UNITY_WP_8_1 && !UNITY_WSA
-﻿using System;
-using System.Reflection;
+using System;
 using System.Collections.Generic;
+using System.Reflection;
 #if WINRT || NETCORE
 using System.Linq;
 #endif
 
-namespace FlyingWormConsole3.LiteNetLib.Utils
+namespace ThirdParty.ConsolePro.Remote.LiteNetLib
 {
     public interface INetSerializable
     {

@@ -1,8 +1,8 @@
 #if DEBUG && !UNITY_WP_8_1 && !UNITY_WSA
-﻿using System;
+using System;
 using System.Collections.Generic;
 
-namespace FlyingWormConsole3.LiteNetLib
+namespace ThirdParty.ConsolePro.Remote.LiteNetLib
 {
     internal sealed class NetPeerCollection
     {

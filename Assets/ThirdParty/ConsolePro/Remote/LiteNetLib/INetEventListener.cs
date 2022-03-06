@@ -1,7 +1,5 @@
 #if DEBUG && !UNITY_WP_8_1 && !UNITY_WSA
-using FlyingWormConsole3.LiteNetLib.Utils;
-
-namespace FlyingWormConsole3.LiteNetLib
+namespace ThirdParty.ConsolePro.Remote.LiteNetLib
 {
     public enum UnconnectedMessageType
     {

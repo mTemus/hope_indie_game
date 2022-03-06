@@ -2,7 +2,7 @@
 using System;
 using System.Text;
 
-namespace FlyingWormConsole3.LiteNetLib.Utils
+namespace ThirdParty.ConsolePro.Remote.LiteNetLib
 {
     public class NetDataWriter
     {

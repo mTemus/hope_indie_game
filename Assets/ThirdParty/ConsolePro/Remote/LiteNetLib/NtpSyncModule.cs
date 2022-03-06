@@ -2,7 +2,7 @@
 using System;
 using System.Threading;
 
-namespace FlyingWormConsole3.LiteNetLib
+namespace ThirdParty.ConsolePro.Remote.LiteNetLib
 {
     public class NtpSyncModule
     {

@@ -7,9 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
-using FlyingWormConsole3.LiteNetLib.Utils;
 
-namespace FlyingWormConsole3.LiteNetLib
+namespace ThirdParty.ConsolePro.Remote.LiteNetLib
 {
     public sealed class NetManager
     {

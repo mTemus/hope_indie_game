@@ -1,11 +1,10 @@
 #if DEBUG && !UNITY_WP_8_1 && !UNITY_WSA
 using System;
 using System.Collections.Generic;
-using FlyingWormConsole3.LiteNetLib.Utils;
 
 //Some code parts taked from lidgren-network-gen3
 
-namespace FlyingWormConsole3.LiteNetLib
+namespace ThirdParty.ConsolePro.Remote.LiteNetLib
 {
     public interface INatPunchListener
     {

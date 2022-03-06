@@ -5,14 +5,13 @@
 
 using System;
 using System.Threading;
-
 #if USE_WINRT
 using Windows.Foundation;
 using Windows.System.Threading;
 using Windows.System.Threading.Core;
 #endif
 
-namespace FlyingWormConsole3.LiteNetLib
+namespace ThirdParty.ConsolePro.Remote.LiteNetLib
 {
     public sealed class NetThread
     {

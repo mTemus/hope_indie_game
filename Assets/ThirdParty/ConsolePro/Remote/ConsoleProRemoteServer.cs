@@ -20,13 +20,12 @@ using System.Collections.Generic;
 #endif
 
 using UnityEngine;
-
 #if USECONSOLEPROREMOTESERVER
 using FlyingWormConsole3.LiteNetLib;
 using FlyingWormConsole3.LiteNetLib.Utils;
 #endif
 
-namespace FlyingWormConsole3
+namespace ThirdParty.ConsolePro.Remote
 {
 	#if USECONSOLEPROREMOTESERVER
 public class ConsoleProRemoteServer : MonoBehaviour, INetEventListener

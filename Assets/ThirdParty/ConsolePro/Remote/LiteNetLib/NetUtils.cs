@@ -1,19 +1,19 @@
 #if DEBUG && !UNITY_WP_8_1 && !UNITY_WSA
 #define UNITY
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 #if WINRT && !UNITY_EDITOR
 using Windows.Networking;
 using Windows.Networking.Connectivity;
 #else
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
-using System.Net.Sockets;
 using System.Net.NetworkInformation;
+using System.Net.Sockets;
 #endif
 
-namespace FlyingWormConsole3.LiteNetLib
+namespace ThirdParty.ConsolePro.Remote.LiteNetLib
 {
 #if WINRT && !UNITY_EDITOR
     public enum ConsoleColor
