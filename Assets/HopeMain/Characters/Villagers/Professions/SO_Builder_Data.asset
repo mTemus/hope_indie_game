@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 964b5c3e2a62608468f2280bc47c0de4, type: 3}
+  m_Name: SO_Builder_Data
+  m_EditorClassIdentifier: 
+  type: 1
+  aiType: 0
+  requiredStatistics:
+    strength: 8
+    dexterity: 5
+    intelligence: 2
+  resourceCarryingLimit: 30
+  goldPerDay: 10
+  workplaceBuildingData: {fileID: 11400000, guid: 63260f9bd399de44e843a2dca00b82a7, type: 2}
