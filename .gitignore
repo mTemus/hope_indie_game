@@ -37,3 +37,6 @@ sysinfo.txt
 *.apk
 *.unitypackage
 /Logs/
+
+# Plugins and assets
+.Assets/ThirdParty/
