@@ -2,12 +2,13 @@ using System.Collections.Generic;
 using _Prototype.Code.v001.GameProperties;
 using _Prototype.Code.v002.World.Grid.Cells;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using SpaceCell = _Prototype.Code.v002.World.Grid.Cells.SpaceCell;
 
 namespace _Prototype.Code.v002.World.Grid
 {
     /// <summary>
-    /// GridMap is an grid object containing cells. 
+    /// GridMap is an grid object containing cells
     /// </summary>
     public class GridMap
     {
@@ -17,7 +18,7 @@ namespace _Prototype.Code.v002.World.Grid
 
         private readonly Cell[,] _cells;
 
-        public GridMap(int width, int height, int cellSize)
+        public GridMap(int width, int height, int cellSize, Tilemap tilemap)
         {
             _width = width;
             _height = height;
@@ -27,20 +28,23 @@ namespace _Prototype.Code.v002.World.Grid
 
             for (int x = 0; x < width; x++)
             for (int y = 0; y < height; y++)
-                if (y == 0) _cells[x, y] = new LandCell();
-                else _cells[x, y] = new SpaceCell();
+                if (tilemap.GetTile(new Vector3Int(x, y, 0)) == null) 
+                    _cells[x, y] = new SpaceCell();
+                else
+                    _cells[x, y] = new LandCell();
+
         }
 
         /// <summary>
-        /// 
+        /// Get cell coordinates in grid based on given position
         /// </summary>
-        /// <param name="worldPosition"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void GetXY(Vector3 worldPosition, out int x, out int y)
+        /// <param name="position">Position in world</param>
+        /// <param name="x">Cell X</param>
+        /// <param name="y">Cell Y</param>
+        public void GetCellXY(Vector3 position, out int x, out int y)
         {
-            x = Mathf.FloorToInt(worldPosition.x / _cellSize);
-            y = Mathf.FloorToInt(worldPosition.y / _cellSize);
+            x = Mathf.FloorToInt(position.x / _cellSize);
+            y = Mathf.FloorToInt(position.y / _cellSize);
         }
         
         /// <summary>
@@ -53,11 +57,10 @@ namespace _Prototype.Code.v002.World.Grid
         {
             List<Vector2Int> cells = new List<Vector2Int>();
 
-            for (int x = 0; x < objectSize.x; x++) {
-                for (int y = 0; y < objectSize.y; y++) {
-                    cells.Add(new Vector2Int(tile.x + x, tile.y + y));
-                }
-            }
+            for (int x = 0; x < objectSize.x; x++) 
+            for (int y = 0; y < objectSize.y; y++) 
+                cells.Add(new Vector2Int(tile.x + x, tile.y + y));
+            
             return cells;
         }
 
