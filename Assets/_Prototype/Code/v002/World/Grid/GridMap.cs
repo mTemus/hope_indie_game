@@ -3,7 +3,6 @@ using _Prototype.Code.v001.GameProperties;
 using _Prototype.Code.v002.World.Grid.Cells;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using SpaceCell = _Prototype.Code.v002.World.Grid.Cells.SpaceCell;
 
 namespace _Prototype.Code.v002.World.Grid
 {
@@ -34,6 +33,11 @@ namespace _Prototype.Code.v002.World.Grid
                     _cells[x, y] = new LandCell();
 
         }
+        
+        public int CellSize => _cellSize;
+        public Cell[,] Cells => _cells;
+        public int Width => _width;
+        public int Height => _height;
 
         /// <summary>
         /// Get cell coordinates in grid based on given position
@@ -127,12 +131,5 @@ namespace _Prototype.Code.v002.World.Grid
             return y  <= _height && y >= 0 && x + objectWidth <= _width && x >= 0;
         }
 
-        public int CellSize => _cellSize;
-
-        public Cell[,] Cells => _cells;
-
-        public int Width => _width;
-
-        public int Height => _height;
     }
 }

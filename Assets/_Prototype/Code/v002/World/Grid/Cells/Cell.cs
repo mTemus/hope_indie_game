@@ -25,6 +25,5 @@ namespace _Prototype.Code.v002.World.Grid.Cells
             content = CellContentType.Nothing;
         }
         
-
     }
 }

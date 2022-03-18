@@ -14,7 +14,15 @@ namespace _Prototype.Code.v002.World.Areas
         [SerializeField] private Area myArea;
 
         private List<TextMeshPro> _gridText;
-
+        
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Vector3 areaSize = new Vector3(myArea.Width, myArea.Height, 0);
+            
+            Gizmos.DrawWireCube(transform.position + areaSize * 0.5f, areaSize);
+        }
+        
         /// <summary>
         /// Create gizmos and text to illustrate grid on GridMap object
         /// </summary>
@@ -70,14 +78,5 @@ namespace _Prototype.Code.v002.World.Areas
             foreach (TextMeshPro text in _gridText) 
                 text.gameObject.SetActive(condition);
         }
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
-            Vector3 areaSize = new Vector3(myArea.Width, myArea.Height, 0);
-            
-            Gizmos.DrawWireCube(transform.position + areaSize * 0.5f, areaSize);
-        }
-        
     }
 }
