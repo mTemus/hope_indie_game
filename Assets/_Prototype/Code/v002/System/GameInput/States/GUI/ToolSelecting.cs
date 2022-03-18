@@ -1,8 +1,11 @@
-﻿
+﻿using _Prototype.Code.v001.System;
 using UnityEngine;
 
-namespace _Prototype.Code.v001.System.GameInput.States
+namespace _Prototype.Code.v002.System.GameInput.States.GUI
 {
+    /// <summary>
+    /// Input state responsible for handling player input while using the player tools GUI
+    /// </summary>
     public class ToolSelecting : IInputState
     {
         public void OnStateSet()

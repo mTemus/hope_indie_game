@@ -1,9 +1,13 @@
-﻿using _Prototype.Code.v001.World.Buildings.Systems;
+﻿using _Prototype.Code.v001.System;
+using _Prototype.Code.v001.World.Buildings.Systems;
 using UnityEngine;
 
-namespace _Prototype.Code.v001.System.GameInput.States
+namespace _Prototype.Code.v002.System.GameInput.States.GUI
 {
-    public class BuildingPlacing :IInputState
+    /// <summary>
+    /// Input state responsible for handling user input while placing a building
+    /// </summary>
+    public class BuildingPlacing : IInputState
     {
         public void OnStateSet()
         {

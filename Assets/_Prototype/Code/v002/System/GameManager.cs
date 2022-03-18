@@ -1,18 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
+using _Prototype.Code.v002.System.GameInput;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+namespace _Prototype.Code.v002.System
 {
-    // Start is called before the first frame update
-    void Start()
+    /// <summary>
+    /// Main manager of the game
+    /// </summary>
+    public class GameManager : MonoBehaviour
     {
-        
-    }
+        [SerializeField] private InputManager _inputManager;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private float _timeSpeed = 1f;
+
+        private void Update()
+        {
+            _inputManager.ManualUpdate(_timeSpeed);
+        }
     }
 }

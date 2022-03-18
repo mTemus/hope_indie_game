@@ -1,7 +1,10 @@
 using UnityEngine;
 
-namespace _Prototype.Code.v001.System.GameInput.States
+namespace _Prototype.Code.v002.System.GameInput.States
 {
+    /// <summary>
+    /// Input state responsible for handling developer input for developer console
+    /// </summary>
     public class DeveloperConsole : IInputState
     {
         public void OnStateSet()
@@ -12,12 +15,12 @@ namespace _Prototype.Code.v001.System.GameInput.States
         public void HandleState(InputManager inputManager)
         {
             if (Input.GetKeyDown(inputManager.Console)) 
-                DeveloperTools.Console.DeveloperConsole.I.ToggleConsole();
+                v001.DeveloperTools.Console.DeveloperConsole.I.ToggleConsole();
             
-            if (!DeveloperTools.Console.DeveloperConsole.I.IsConsoleActive()) return;
+            if (!v001.DeveloperTools.Console.DeveloperConsole.I.IsConsoleActive()) return;
 
             if (Input.GetKeyDown(inputManager.Accept)) 
-                DeveloperTools.Console.DeveloperConsole.I.GetCommand();
+                v001.DeveloperTools.Console.DeveloperConsole.I.GetCommand();
         }
 
         public void OnStateChange()

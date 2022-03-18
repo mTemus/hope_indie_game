@@ -1,8 +1,12 @@
 using _Prototype.Code.v001.GUI.Villager.Selecting;
+using _Prototype.Code.v001.System;
 using UnityEngine;
 
-namespace _Prototype.Code.v001.System.GameInput.ChildStates
+namespace _Prototype.Code.v002.System.GameInput.ChildStates.GUI.Villagers
 {
+    /// <summary>
+    /// Child input state responsible for handling user input when opening 'Villager Profession' panel UI
+    /// </summary>
     public class VillagerProfessionDisplay : IInputState
     {
         private readonly ProfessionChangingPanel _professionChangingPanel;

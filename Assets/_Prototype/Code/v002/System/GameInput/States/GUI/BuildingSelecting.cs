@@ -1,7 +1,11 @@
-﻿using UnityEngine;
+﻿using _Prototype.Code.v001.System;
+using UnityEngine;
 
-namespace _Prototype.Code.v001.System.GameInput.States
+namespace _Prototype.Code.v002.System.GameInput.States.GUI
 {
+    /// <summary>
+    /// Input state responsible for handling user input while selecting a building to build
+    /// </summary>
     public class BuildingSelecting :IInputState
     {
         public void OnStateSet()

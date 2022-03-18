@@ -1,12 +1,16 @@
 using _Prototype.Code.v001.GUI.UIElements.SelectableElement;
+using _Prototype.Code.v001.System;
 using UnityEngine;
 
-namespace _Prototype.Code.v001.System.GameInput.ChildStates
+namespace _Prototype.Code.v002.System.GameInput.ChildStates.GUI.Villagers
 {
+    /// <summary>
+    /// Child input state responsible for handling user input when opening 'Villager Profession Acceptance' panel UI
+    /// </summary>
     public class VillagerProfessionSetAcceptance : IInputState
     {
         private readonly UiAcceptancePanel _acceptancePanel;
-
+        
         public VillagerProfessionSetAcceptance(UiAcceptancePanel acceptancePanel)
         {
             _acceptancePanel = acceptancePanel;

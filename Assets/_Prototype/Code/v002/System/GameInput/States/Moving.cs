@@ -1,8 +1,12 @@
-﻿using _Prototype.Code.v001.AI.Player.Brain;
+﻿using _Prototype.Code.v001.System;
+using _Prototype.Code.v002.Player;
 using UnityEngine;
 
-namespace _Prototype.Code.v001.System.GameInput.States
+namespace _Prototype.Code.v002.System.GameInput.States
 {
+    /// <summary>
+    /// Input state responsible of handling user input for moving player character
+    /// </summary>
     public class Moving : IInputState
     {
         public void OnStateSet()
