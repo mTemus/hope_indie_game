@@ -4,7 +4,6 @@ using _Prototype.Code.v001.System;
 using _Prototype.Code.v001.System.Assets;
 using _Prototype.Code.v001.World.Buildings;
 using _Prototype.Code.v001.World.Buildings.Type.Resources;
-using ThirdParty.LeanTween.Framework;
 using UnityEngine;
 
 namespace _Prototype.Code.v001.World.Resources

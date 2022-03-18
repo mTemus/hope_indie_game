@@ -4,7 +4,6 @@ using _Prototype.Code.v001.Characters.Villagers.Professions;
 using _Prototype.Code.v001.World.Resources;
 using NodeCanvas.BehaviourTrees;
 using NodeCanvas.Framework;
-using ThirdParty.LeanTween.Framework;
 using UnityEngine;
 using Data = _Prototype.Code.v001.World.Resources.ResourceToGather.Data;
 
