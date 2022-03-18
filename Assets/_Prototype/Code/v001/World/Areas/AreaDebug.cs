@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using _Prototype.Code.v001.Utilities;
 using _Prototype.Code.v001.World.Grid;
+using TMPro;
 using UnityEngine;
 
 namespace _Prototype.Code.v001.World.Areas
@@ -12,7 +13,7 @@ namespace _Prototype.Code.v001.World.Areas
     {
         [SerializeField] private Area myArea;
 
-        private List<TextMesh> _gridText;
+        private List<TextMeshPro> _gridText;
 
         /// <summary>
         /// 
@@ -23,12 +24,11 @@ namespace _Prototype.Code.v001.World.Areas
             textPool.transform.SetParent(transform);
 
             GridMap gridMap = myArea.GridMap;
-            _gridText = new List<TextMesh>();
+            _gridText = new List<TextMeshPro>();
             
             for (int x = 0; x < gridMap.Cells.GetLength(0); x++) {
                 for (int y = 0; y < gridMap.Cells.GetLength(1); y++) {
-                    _gridText.Add(CodeMonkeyUtils.ShowWorldText(x + "," + y, textPool.transform, gridMap.GetWorldPosition(x, y, transform.position) + new Vector3(gridMap.CellSize, gridMap.CellSize) * 0.5f, 8, Color.white,
-                        TextAnchor.MiddleCenter));
+                    _gridText.Add(CodeMonkeyUtils.ShowWorldText(x + "," + y, textPool.transform, gridMap.GetWorldPosition(x, y, transform.position) + new Vector3(gridMap.CellSize, gridMap.CellSize) * 0.5f, 8, Color.white));
                 }
             }
         }
@@ -57,7 +57,7 @@ namespace _Prototype.Code.v001.World.Areas
         /// <param name="condition"></param>
         public void ToggleGridText(bool condition)
         {
-            foreach (TextMesh text in _gridText) 
+            foreach (TextMeshPro text in _gridText) 
                 text.gameObject.SetActive(condition);
         }
 
