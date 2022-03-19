@@ -425,8 +425,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5848884425dbd884db4fc9967334c297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _motion: {fileID: 183499593}
-  _animations: {fileID: 183499594}
+  movement: {fileID: 183499593}
+  animations: {fileID: 183499594}
 --- !u!1 &201168797
 GameObject:
   m_ObjectHideFlags: 0
@@ -768,7 +768,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: Show grid
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6584,6 +6584,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1994485953}
+  - component: {fileID: 1994485954}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -6609,6 +6610,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1994485954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1994485951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d48e5fb506292ce4e831cca7e14a6c9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tools: {fileID: 0}
+  player: {fileID: 0}
+  input: {fileID: 2018251260}
+  cameras: {fileID: 0}
+  initialization: {fileID: 0}
+  sound: {fileID: 0}
+  areas: {fileID: 0}
+  buildings: {fileID: 0}
+  resources: {fileID: 0}
+  professions: {fileID: 0}
+  selection: {fileID: 0}
+  environment: {fileID: 0}
+  gui: {fileID: 0}
 --- !u!1 &2018251258
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 ﻿using _Prototype.Code.v001.System;
 using _Prototype.Code.v002.Player;
 using UnityEngine;
+using Zenject;
 
 namespace _Prototype.Code.v002.System.GameInput.States
 {
@@ -9,6 +10,13 @@ namespace _Prototype.Code.v002.System.GameInput.States
     /// </summary>
     public class Moving : IInputState
     {
+        private readonly PlayerCharacter _playerCharacter;
+
+        public Moving(PlayerCharacter playerCharacter)
+        {
+            _playerCharacter = playerCharacter;
+        }
+
         public void OnStateSet()
         {
             
@@ -17,17 +25,17 @@ namespace _Prototype.Code.v002.System.GameInput.States
         public void HandleState(InputManager inputManager)
         {
             if (Input.GetKey(inputManager.Left) || Input.GetKey(inputManager.LeftAlt)) {
-                inputManager.Player.Motion.Move(Vector3.left);
-                inputManager.Player.Animations.SetState(PlayerAnimationState.Run);
+                _playerCharacter.Movement.Move(Vector3.left);
+                _playerCharacter.Animations.SetState(PlayerAnimationState.Run);
             }
 
             if (Input.GetKey(inputManager.Right) || Input.GetKey(inputManager.RightAlt)) {
-                inputManager.Player.Motion.Move(Vector3.right);
-                inputManager.Player.Animations.SetState(PlayerAnimationState.Run);
+                _playerCharacter.Movement.Move(Vector3.right);
+                _playerCharacter.Animations.SetState(PlayerAnimationState.Run);
             }
 
             if (!Input.anyKey) 
-                inputManager.Player.Animations.SetState(PlayerAnimationState.Idle);
+                _playerCharacter.Animations.SetState(PlayerAnimationState.Idle);
 
             if (Input.GetKeyDown(inputManager.Action)) 
                 Managers.I.Tools.UseCurrentTool();

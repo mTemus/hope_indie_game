@@ -66,7 +66,6 @@ namespace _Prototype.Code.v002.World.Areas
         
             Debug.DrawLine(gridMap.GetWorldPosition(0, areaPos.y + gridMap.Height, areaPos), gridMap.GetWorldPosition(gridMap.Width, gridMap.Height, areaPos), Color.white);
             Debug.DrawLine(gridMap.GetWorldPosition(gridMap.Width, areaPos.y + 0, areaPos), gridMap.GetWorldPosition(gridMap.Width, gridMap.Height, areaPos), Color.white);
-            Debug.Log("here");
         }
 
         /// <summary>

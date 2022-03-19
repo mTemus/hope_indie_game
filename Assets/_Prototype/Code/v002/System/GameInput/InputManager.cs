@@ -10,7 +10,8 @@ namespace _Prototype.Code.v002.System.GameInput
     /// </summary>
     public class InputManager : MonoBehaviour, IManualUpdate
     {
-        [SerializeField] private PlayerController player;
+        [Header("Player Character")]
+        [SerializeField] private PlayerCharacter player;
 
         [Header("Keycodes")] 
         [SerializeField] private KeyCode left;
@@ -26,7 +27,7 @@ namespace _Prototype.Code.v002.System.GameInput
         [SerializeField] private KeyCode cancel;
         [SerializeField] private KeyCode console;
         [SerializeField] private KeyCode accept;
-
+        
         private static Moving moving;
         private static ToolSelecting toolSelecting;
         private static BuildingSelecting buildingSelecting;
@@ -36,7 +37,7 @@ namespace _Prototype.Code.v002.System.GameInput
         private IInputState _currentInputState;
         // private DeveloperConsole _console;
 
-        public PlayerController Player => player;
+        public PlayerCharacter Player => player;
         public KeyCode Left => left;
         public KeyCode LeftAlt => leftAlt;
         public KeyCode Right => right;
@@ -59,7 +60,7 @@ namespace _Prototype.Code.v002.System.GameInput
         
         private void Awake()
         {
-            moving = new Moving();
+            moving = new Moving(player);
             toolSelecting = new ToolSelecting();
             buildingSelecting = new BuildingSelecting();
             buildingPlacing = new BuildingPlacing();
