@@ -33,7 +33,7 @@ namespace _Prototype.Code.v002.System.GameInput.States.GUI
             
             if (Input.GetKeyDown(inputManager.Cancel)) {
                 Systems.I.Building.CancelBuilding();
-                Managers.I.Input.SetState(InputManager.Moving);
+                Managers.I.Input.SetState(InputManager.PlayerActions);
             }
         }
 

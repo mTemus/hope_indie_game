@@ -1,3 +1,4 @@
+using _Prototype.Code.v001.System;
 using _Prototype.Code.v002.Player;
 using _Prototype.Code.v002.System.GameInput.States;
 using _Prototype.Code.v002.System.GameInput.States.GUI;
@@ -30,7 +31,7 @@ namespace _Prototype.Code.v002.System.GameInput
 
         private global::GameInput _gameInput;
         
-        private static Moving moving;
+        private static PlayerActions playerActions;
         private static ToolSelecting toolSelecting;
         private static BuildingSelecting buildingSelecting;
         private static BuildingPlacing buildingPlacing;
@@ -54,7 +55,7 @@ namespace _Prototype.Code.v002.System.GameInput
         public KeyCode Console => console;
         public KeyCode Accept => accept;
 
-        public static Moving Moving => moving;
+        public static PlayerActions PlayerActions => playerActions;
         public static ToolSelecting ToolSelecting => toolSelecting;
         public static BuildingSelecting BuildingSelecting => buildingSelecting;
         public static BuildingPlacing BuildingPlacing => buildingPlacing;
@@ -64,13 +65,19 @@ namespace _Prototype.Code.v002.System.GameInput
         {
             _gameInput = new global::GameInput();
             
-            moving = new Moving(_gameInput, player);
+            playerActions = new PlayerActions(_gameInput);
+            playerActions.onMovement += player.Movement.Move;
+            playerActions.onMovementPerformed += player.Animations.SetState;
+            playerActions.onMovementCanceled += player.Animations.SetState;
+            // playerActions.onToolUsePerformed += Managers.I.Tools.UseCurrentTool;
+            playerActions.onToolsSelectingPerformed += SetState;
+
             toolSelecting = new ToolSelecting();
             buildingSelecting = new BuildingSelecting();
             buildingPlacing = new BuildingPlacing();
             villagerProperties = new VillagerProperties();
             
-            _currentInputState = moving;
+            _currentInputState = playerActions;
             _currentInputState.OnStateSet();
             // _console = new DeveloperConsole();
 

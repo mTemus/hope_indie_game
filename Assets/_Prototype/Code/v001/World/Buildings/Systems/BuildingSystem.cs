@@ -222,7 +222,7 @@ namespace _Prototype.Code.v001.World.Buildings.Systems
             _currOffset = Vector3Int.zero;
             
             
-            Managers.I.Input.SetState(InputManager.Moving);
+            Managers.I.Input.SetState(InputManager.PlayerActions);
         }
 
         /// <summary>

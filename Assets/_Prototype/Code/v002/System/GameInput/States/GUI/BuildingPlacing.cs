@@ -32,7 +32,7 @@ namespace _Prototype.Code.v002.System.GameInput.States.GUI
             if (Input.GetKeyDown(inputManager.Cancel)) {
                 Systems.I.Building.CancelBuilding();
                 Managers.I.Cameras.FocusCameraOn(Managers.I.Player.PlayerGO.transform);
-                Managers.I.Input.SetState(InputManager.Moving);
+                Managers.I.Input.SetState(InputManager.PlayerActions);
             }
         }
 

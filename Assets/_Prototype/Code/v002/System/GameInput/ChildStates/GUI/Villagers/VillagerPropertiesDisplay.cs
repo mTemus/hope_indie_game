@@ -30,7 +30,7 @@ namespace _Prototype.Code.v002.System.GameInput.ChildStates.GUI.Villagers
             if (Input.GetKeyDown(inputManager.Cancel)) {
                 Managers.I.GUI.VillagerPropertiesPanel.gameObject.SetActive(false);
                 Managers.I.Cameras.FocusCameraOnPlayer();
-                Managers.I.Input.SetState(InputManager.Moving);
+                Managers.I.Input.SetState(InputManager.PlayerActions);
             }
         }
 
