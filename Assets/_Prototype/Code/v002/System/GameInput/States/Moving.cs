@@ -1,52 +1,41 @@
 ﻿using _Prototype.Code.v001.System;
 using _Prototype.Code.v002.Player;
 using UnityEngine;
-using Zenject;
 
 namespace _Prototype.Code.v002.System.GameInput.States
 {
     /// <summary>
     /// Input state responsible of handling user input for moving player character
     /// </summary>
-    public class Moving : IInputState
+    public class Moving : InputState, IInputState
     {
         private readonly PlayerCharacter _playerCharacter;
-
-        public Moving(PlayerCharacter playerCharacter)
+        
+        public Moving(global::GameInput gameInput, PlayerCharacter playerCharacter) : base(gameInput)
         {
             _playerCharacter = playerCharacter;
+            this.gameInput.Moving.MovePlayer.canceled += context => _playerCharacter.Animations.SetState(PlayerAnimationState.Idle);
+            this.gameInput.Moving.UseTool.performed += context => Managers.I.Tools.UseCurrentTool();
+            this.gameInput.Moving.OpenTools.performed += context => Managers.I.Input.SetState(InputManager.ToolSelecting);
         }
 
         public void OnStateSet()
         {
-            
+            gameInput.Moving.Enable();
         }
-
+        
         public void HandleState(InputManager inputManager)
         {
-            if (Input.GetKey(inputManager.Left) || Input.GetKey(inputManager.LeftAlt)) {
-                _playerCharacter.Movement.Move(Vector3.left);
+           Vector2 moveValue = gameInput.Moving.MovePlayer.ReadValue<Vector2>();
+            _playerCharacter.Movement.Move(new Vector3(moveValue.x, 0, 0));
+
+            if (gameInput.Moving.MovePlayer.WasPerformedThisFrame()) 
                 _playerCharacter.Animations.SetState(PlayerAnimationState.Run);
-            }
-
-            if (Input.GetKey(inputManager.Right) || Input.GetKey(inputManager.RightAlt)) {
-                _playerCharacter.Movement.Move(Vector3.right);
-                _playerCharacter.Animations.SetState(PlayerAnimationState.Run);
-            }
-
-            if (!Input.anyKey) 
-                _playerCharacter.Animations.SetState(PlayerAnimationState.Idle);
-
-            if (Input.GetKeyDown(inputManager.Action)) 
-                Managers.I.Tools.UseCurrentTool();
-            
-            if (Input.GetKeyDown(inputManager.Tools)) 
-                Managers.I.Input.SetState(InputManager.ToolSelecting);
         }
 
         public void OnStateChange()
         {
-            
+            gameInput.Moving.Disable();
         }
     }
 }

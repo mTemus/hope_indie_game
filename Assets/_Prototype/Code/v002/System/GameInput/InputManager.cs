@@ -27,6 +27,8 @@ namespace _Prototype.Code.v002.System.GameInput
         [SerializeField] private KeyCode cancel;
         [SerializeField] private KeyCode console;
         [SerializeField] private KeyCode accept;
+
+        private global::GameInput _gameInput;
         
         private static Moving moving;
         private static ToolSelecting toolSelecting;
@@ -60,13 +62,16 @@ namespace _Prototype.Code.v002.System.GameInput
         
         private void Awake()
         {
-            moving = new Moving(player);
+            _gameInput = new global::GameInput();
+            
+            moving = new Moving(_gameInput, player);
             toolSelecting = new ToolSelecting();
             buildingSelecting = new BuildingSelecting();
             buildingPlacing = new BuildingPlacing();
             villagerProperties = new VillagerProperties();
             
             _currentInputState = moving;
+            _currentInputState.OnStateSet();
             // _console = new DeveloperConsole();
 
             Debug.LogWarning(_currentInputState.GetType().Name);
