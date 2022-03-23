@@ -23,6 +23,8 @@ namespace _Prototype.Code.v001.Utilities
             tmp.fontSize = fontSize;
             tmp.color = color;
             tmp.text = text;
+            tmp.margin = new Vector4(9.5f, 2f, 9.5f, 2f);
+            tmp.alignment = TextAlignmentOptions.CenterGeoAligned;
             tmp.GetComponent<MeshRenderer>().sortingOrder = sortingOrder;
             
             return tmp;
