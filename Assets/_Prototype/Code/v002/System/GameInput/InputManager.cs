@@ -1,8 +1,8 @@
-using _Prototype.Code.v001.System;
 using _Prototype.Code.v002.Player;
 using _Prototype.Code.v002.System.GameInput.States;
 using _Prototype.Code.v002.System.GameInput.States.GUI;
 using UnityEngine;
+using Zenject;
 
 namespace _Prototype.Code.v002.System.GameInput
 {
@@ -11,9 +11,6 @@ namespace _Prototype.Code.v002.System.GameInput
     /// </summary>
     public class InputManager : MonoBehaviour, IManualUpdate
     {
-        [Header("Player Character")]
-        [SerializeField] private PlayerCharacter player;
-
         [Header("Keycodes")] 
         [SerializeField] private KeyCode left;
         [SerializeField] private KeyCode leftAlt;
@@ -29,6 +26,7 @@ namespace _Prototype.Code.v002.System.GameInput
         [SerializeField] private KeyCode console;
         [SerializeField] private KeyCode accept;
 
+        [Inject] private PlayerCharacter _player;
         private global::GameInput _gameInput;
         
         private static PlayerActions playerActions;
@@ -40,7 +38,7 @@ namespace _Prototype.Code.v002.System.GameInput
         private IInputState _currentInputState;
         // private DeveloperConsole _console;
 
-        public PlayerCharacter Player => player;
+        public PlayerCharacter Player => _player;
         public KeyCode Left => left;
         public KeyCode LeftAlt => leftAlt;
         public KeyCode Right => right;
@@ -66,22 +64,26 @@ namespace _Prototype.Code.v002.System.GameInput
             _gameInput = new global::GameInput();
             
             playerActions = new PlayerActions(_gameInput);
-            playerActions.onMovement += player.Movement.Move;
-            playerActions.onMovementPerformed += player.Animations.SetState;
-            playerActions.onMovementCanceled += player.Animations.SetState;
-            // playerActions.onToolUsePerformed += Managers.I.Tools.UseCurrentTool;
-            playerActions.onToolsSelectingPerformed += SetState;
-
             toolSelecting = new ToolSelecting();
             buildingSelecting = new BuildingSelecting();
             buildingPlacing = new BuildingPlacing();
             villagerProperties = new VillagerProperties();
-            
-            _currentInputState = playerActions;
-            _currentInputState.OnStateSet();
             // _console = new DeveloperConsole();
 
+            _currentInputState = playerActions;
+            _currentInputState.OnStateSet();
+
+            InitializeInputEvents();
             Debug.LogWarning(_currentInputState.GetType().Name);
+        }
+
+        private void InitializeInputEvents()
+        {
+            playerActions.onMovement += _player.Movement.Move;
+            playerActions.onMovementPerformed += _player.Animations.SetState;
+            playerActions.onMovementCanceled += _player.Animations.SetState;
+            // playerActions.onToolUsePerformed += Managers.I.Tools.UseCurrentTool;
+            playerActions.onToolsSelectingPerformed += SetState;
         }
         
         /// <summary>
