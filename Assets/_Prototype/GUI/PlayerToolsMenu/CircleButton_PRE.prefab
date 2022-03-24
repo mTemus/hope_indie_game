@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &500768434136072534
+--- !u!1 &3443639741680236071
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8138823605132711559}
-  - component: {fileID: 8488403451237204969}
-  - component: {fileID: 4074886096165963432}
+  - component: {fileID: 6470470725841166838}
+  - component: {fileID: 6698418154552292504}
+  - component: {fileID: 1276125587035582937}
   m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
@@ -18,18 +18,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &8138823605132711559
+--- !u!224 &6470470725841166838
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 500768434136072534}
+  m_GameObject: {fileID: 3443639741680236071}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4525642128894208437}
+  m_Father: {fileID: 1726881609231392452}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -37,21 +38,21 @@ RectTransform:
   m_AnchoredPosition: {x: -190, y: -260}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &8488403451237204969
+--- !u!222 &6698418154552292504
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 500768434136072534}
+  m_GameObject: {fileID: 3443639741680236071}
   m_CullTransparentMesh: 0
---- !u!114 &4074886096165963432
+--- !u!114 &1276125587035582937
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 500768434136072534}
+  m_GameObject: {fileID: 3443639741680236071}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -65,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 27c76c1e0ea1bc44198630ccf2148696, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 09844abe304b6c840b2f52d66256396f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -75,7 +76,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1 &4754988728488386987
+--- !u!1 &7549245923606730458
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -83,29 +84,29 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4525642128894208437}
-  - component: {fileID: 151968356208085051}
-  - component: {fileID: -8188794598399140470}
+  - component: {fileID: 1726881609231392452}
+  - component: {fileID: -3156382654790462587}
   m_Layer: 5
-  m_Name: CircleButton-CoinPocket
+  m_Name: CircleButton_PRE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &4525642128894208437
+--- !u!224 &1726881609231392452
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4754988728488386987}
+  m_GameObject: {fileID: 7549245923606730458}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6285425160594165176}
-  - {fileID: 8138823605132711559}
+  - {fileID: 9080104316721232585}
+  - {fileID: 6470470725841166838}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -114,39 +115,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 900, y: 900}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &151968356208085051
+--- !u!114 &-3156382654790462587
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4754988728488386987}
+  m_GameObject: {fileID: 7549245923606730458}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bff2dcd47f9417a4ebc9b3c90510350e, type: 3}
+  m_Script: {fileID: 11500000, guid: 0dab4398cb7246c9b38c719437e5e139, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rectTransform: {fileID: 6285425160594165176}
-  backgroundImage: {fileID: 6285425160594165177}
-  iconImage: {fileID: 4074886096165963432}
-  iconRectTransform: {fileID: 8138823605132711559}
---- !u!114 &-8188794598399140470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4754988728488386987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8aaf78b658cb44499ae188d68262d32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toolName: Coin Pocket
-  toolDescription: Item requied for gold management.
-  buttonBackground: {fileID: 6285425160594165177}
-  toolIcon: {fileID: 21300000, guid: 27c76c1e0ea1bc44198630ccf2148696, type: 3}
---- !u!1 &6285425160594165159
+  rectTransform: {fileID: 9080104316721232585}
+  iconRectTransform: {fileID: 6470470725841166838}
+  backgroundImage: {fileID: 9080104316721232584}
+  iconImage: {fileID: 1276125587035582937}
+--- !u!1 &9080104316721232598
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -154,9 +139,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6285425160594165176}
-  - component: {fileID: 6285425160594165178}
-  - component: {fileID: 6285425160594165177}
+  - component: {fileID: 9080104316721232585}
+  - component: {fileID: 9080104316721232587}
+  - component: {fileID: 9080104316721232584}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -164,18 +149,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &6285425160594165176
+--- !u!224 &9080104316721232585
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6285425160594165159}
+  m_GameObject: {fileID: 9080104316721232598}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4525642128894208437}
+  m_Father: {fileID: 1726881609231392452}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -183,21 +169,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &6285425160594165178
+--- !u!222 &9080104316721232587
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6285425160594165159}
+  m_GameObject: {fileID: 9080104316721232598}
   m_CullTransparentMesh: 0
---- !u!114 &6285425160594165177
+--- !u!114 &9080104316721232584
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6285425160594165159}
+  m_GameObject: {fileID: 9080104316721232598}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}

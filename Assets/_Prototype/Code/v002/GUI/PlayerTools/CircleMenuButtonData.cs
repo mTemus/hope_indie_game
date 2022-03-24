@@ -1,0 +1,19 @@
+﻿using UnityEngine;
+
+namespace _Prototype.Code.v002.GUI.PlayerTools
+{
+    /// <summary>
+    /// 
+    /// </summary>
+    [CreateAssetMenu(fileName = "Circle Button Data", menuName = "Game Data/GUI/Circle Button Data", order = 0)]
+    public class CircleMenuButtonData : ScriptableObject
+    {
+        [SerializeField] private string toolName;
+        [SerializeField] private string toolDescription;
+        [SerializeField] private Sprite toolIcon;
+
+        public string ToolName => toolName;
+        public string ToolDescription => toolDescription;
+        public Sprite ToolIcon => toolIcon;
+    }
+}
