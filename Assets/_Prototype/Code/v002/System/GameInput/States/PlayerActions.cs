@@ -17,24 +17,24 @@ namespace _Prototype.Code.v002.System.GameInput.States
 
         private void HandleMovement()
         {
-            Vector2 moveValue = gameInput.Moving.MovePlayer.ReadValue<Vector2>();
+            Vector2 moveValue = gameInput.PlayerActions.MovePlayer.ReadValue<Vector2>();
             onMovement?.Invoke(new Vector3(moveValue.x, 0, 0));
 
-            if (gameInput.Moving.MovePlayer.WasPerformedThisFrame()) 
+            if (gameInput.PlayerActions.MovePlayer.WasPerformedThisFrame()) 
                 onMovementPerformed?.Invoke(PlayerAnimationState.Run);
         }
         
         public PlayerActions(global::GameInput gameInput) : base(gameInput)
         {
-            this.gameInput.Moving.MovePlayer.canceled += context => onMovementCanceled?.Invoke(PlayerAnimationState.Idle);
+            this.gameInput.PlayerActions.MovePlayer.canceled += context => onMovementCanceled?.Invoke(PlayerAnimationState.Idle);
             // this.gameInput.Moving.UseTool.performed += context => onToolUsePerformed?.Invoke();
-            this.gameInput.Moving.OpenTools.performed +=
+            this.gameInput.PlayerActions.OpenTools.performed +=
                 context => onToolsSelectingPerformed?.Invoke(InputManager.ToolSelecting);
         }
 
         public void OnStateSet()
         {
-            gameInput.Moving.Enable();
+            gameInput.PlayerActions.Enable();
         }
         
         public void HandleState(InputManager inputManager)
@@ -44,7 +44,7 @@ namespace _Prototype.Code.v002.System.GameInput.States
 
         public void OnStateChange()
         {
-            gameInput.Moving.Disable();
+            gameInput.PlayerActions.Disable();
         }
     }
 }

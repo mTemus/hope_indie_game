@@ -24,7 +24,7 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
     ""name"": ""GameInput"",
     ""maps"": [
         {
-            ""name"": ""Moving"",
+            ""name"": ""PlayerActions"",
             ""id"": ""0ae6a539-3cb4-4bc7-bca9-85110c6bae42"",
             ""actions"": [
                 {
@@ -150,11 +150,11 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
         }
     ]
 }");
-        // Moving
-        m_Moving = asset.FindActionMap("Moving", throwIfNotFound: true);
-        m_Moving_MovePlayer = m_Moving.FindAction("MovePlayer", throwIfNotFound: true);
-        m_Moving_UseTool = m_Moving.FindAction("UseTool", throwIfNotFound: true);
-        m_Moving_OpenTools = m_Moving.FindAction("OpenTools", throwIfNotFound: true);
+        // PlayerActions
+        m_PlayerActions = asset.FindActionMap("PlayerActions", throwIfNotFound: true);
+        m_PlayerActions_MovePlayer = m_PlayerActions.FindAction("MovePlayer", throwIfNotFound: true);
+        m_PlayerActions_UseTool = m_PlayerActions.FindAction("UseTool", throwIfNotFound: true);
+        m_PlayerActions_OpenTools = m_PlayerActions.FindAction("OpenTools", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -211,39 +211,39 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // Moving
-    private readonly InputActionMap m_Moving;
-    private IMovingActions m_MovingActionsCallbackInterface;
-    private readonly InputAction m_Moving_MovePlayer;
-    private readonly InputAction m_Moving_UseTool;
-    private readonly InputAction m_Moving_OpenTools;
-    public struct MovingActions
+    // PlayerActions
+    private readonly InputActionMap m_PlayerActions;
+    private IPlayerActionsActions m_PlayerActionsActionsCallbackInterface;
+    private readonly InputAction m_PlayerActions_MovePlayer;
+    private readonly InputAction m_PlayerActions_UseTool;
+    private readonly InputAction m_PlayerActions_OpenTools;
+    public struct PlayerActionsActions
     {
         private @GameInput m_Wrapper;
-        public MovingActions(@GameInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @MovePlayer => m_Wrapper.m_Moving_MovePlayer;
-        public InputAction @UseTool => m_Wrapper.m_Moving_UseTool;
-        public InputAction @OpenTools => m_Wrapper.m_Moving_OpenTools;
-        public InputActionMap Get() { return m_Wrapper.m_Moving; }
+        public PlayerActionsActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MovePlayer => m_Wrapper.m_PlayerActions_MovePlayer;
+        public InputAction @UseTool => m_Wrapper.m_PlayerActions_UseTool;
+        public InputAction @OpenTools => m_Wrapper.m_PlayerActions_OpenTools;
+        public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(MovingActions set) { return set.Get(); }
-        public void SetCallbacks(IMovingActions instance)
+        public static implicit operator InputActionMap(PlayerActionsActions set) { return set.Get(); }
+        public void SetCallbacks(IPlayerActionsActions instance)
         {
-            if (m_Wrapper.m_MovingActionsCallbackInterface != null)
+            if (m_Wrapper.m_PlayerActionsActionsCallbackInterface != null)
             {
-                @MovePlayer.started -= m_Wrapper.m_MovingActionsCallbackInterface.OnMovePlayer;
-                @MovePlayer.performed -= m_Wrapper.m_MovingActionsCallbackInterface.OnMovePlayer;
-                @MovePlayer.canceled -= m_Wrapper.m_MovingActionsCallbackInterface.OnMovePlayer;
-                @UseTool.started -= m_Wrapper.m_MovingActionsCallbackInterface.OnUseTool;
-                @UseTool.performed -= m_Wrapper.m_MovingActionsCallbackInterface.OnUseTool;
-                @UseTool.canceled -= m_Wrapper.m_MovingActionsCallbackInterface.OnUseTool;
-                @OpenTools.started -= m_Wrapper.m_MovingActionsCallbackInterface.OnOpenTools;
-                @OpenTools.performed -= m_Wrapper.m_MovingActionsCallbackInterface.OnOpenTools;
-                @OpenTools.canceled -= m_Wrapper.m_MovingActionsCallbackInterface.OnOpenTools;
+                @MovePlayer.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnMovePlayer;
+                @MovePlayer.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnMovePlayer;
+                @MovePlayer.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnMovePlayer;
+                @UseTool.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnUseTool;
+                @UseTool.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnUseTool;
+                @UseTool.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnUseTool;
+                @OpenTools.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnOpenTools;
+                @OpenTools.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnOpenTools;
+                @OpenTools.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnOpenTools;
             }
-            m_Wrapper.m_MovingActionsCallbackInterface = instance;
+            m_Wrapper.m_PlayerActionsActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @MovePlayer.started += instance.OnMovePlayer;
@@ -258,7 +258,7 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
             }
         }
     }
-    public MovingActions @Moving => new MovingActions(this);
+    public PlayerActionsActions @PlayerActions => new PlayerActionsActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -268,7 +268,7 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
             return asset.controlSchemes[m_KeyboardSchemeIndex];
         }
     }
-    public interface IMovingActions
+    public interface IPlayerActionsActions
     {
         void OnMovePlayer(InputAction.CallbackContext context);
         void OnUseTool(InputAction.CallbackContext context);
