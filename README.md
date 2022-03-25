@@ -112,10 +112,11 @@ Every villager-worker with profession has a collection which contain tasks that 
 
 --- 
 
-## Assets used in project
+## Assets and plugins used in project
 
-[1. Lean Tween](https://assetstore.unity.com/packages/tools/animation/leantween-3595)  
-[2. Node Canvas](https://assetstore.unity.com/packages/tools/visual-scripting/nodecanvas-14914)
+* [Lean Tween](https://assetstore.unity.com/packages/tools/animation/leantween-3595)  
+* [Node Canvas](https://assetstore.unity.com/packages/tools/visual-scripting/nodecanvas-14914)
+* [Zenject](https://assetstore.unity.com/packages/tools/utilities/extenject-dependency-injection-ioc-157735)
 
 _All visual assets are currently also from asset store._
 
