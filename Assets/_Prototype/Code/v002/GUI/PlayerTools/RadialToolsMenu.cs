@@ -100,7 +100,7 @@ namespace _Prototype.Code.v002.GUI.PlayerTools
         /// </summary>
         public void SelectTool()
         {
-           _playerTools.SelectTool(_currentMenuToolIndex);
+           _playerTools.SelectTool(menuButtonsData[_currentMenuToolIndex].ToolType);
         }
         
         /// <summary>

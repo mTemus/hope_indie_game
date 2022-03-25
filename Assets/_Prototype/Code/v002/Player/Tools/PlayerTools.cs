@@ -1,3 +1,4 @@
+using System;
 using _Prototype.Code.v002.System.GameInput;
 using UnityEngine;
 using Zenject;
@@ -43,18 +44,18 @@ namespace _Prototype.Code.v002.Player.Tools
         /// <summary>
         /// Set player tool that should be selected and be invoked on use
         /// </summary>
-        /// <param name="toolIndex">Tool int id (should be handled by enum to have more control)</param>
-        public void SelectTool(int toolIndex)
+        /// <param name="toolType"> Enum of tool type that will be converted to tool object </param>
+        public void SelectTool(PlayerTool toolType)
         {
-            _currentTool = toolIndex switch {
-                0 => _buildingsBook,
-                1 => _villagersBook,
-                2 => _goldPocket,
-                3 => _hammer,
-                4 => _hand,
-                _ => _currentTool
+            _currentTool = toolType switch {
+                PlayerTool.Hand => _hand,
+                PlayerTool.Hammer => _hammer,
+                PlayerTool.VillagersBook => _villagersBook,
+                PlayerTool.BuildingsBook => _buildingsBook,
+                PlayerTool.CoinPocket => _goldPocket,
+                _ => throw new ArgumentOutOfRangeException(nameof(toolType), toolType, null)
             };
-            
+
             Debug.LogWarning(_currentTool + " selected.");
         }
     }

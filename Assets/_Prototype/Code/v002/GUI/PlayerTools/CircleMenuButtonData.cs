@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using _Prototype.Code.v002.Player.Tools;
+using UnityEngine;
 
 namespace _Prototype.Code.v002.GUI.PlayerTools
 {
@@ -9,10 +10,12 @@ namespace _Prototype.Code.v002.GUI.PlayerTools
     public class CircleMenuButtonData : ScriptableObject
     {
         [SerializeField] private string toolName;
+        [SerializeField] private PlayerTool toolType;
         [SerializeField] private string toolDescription;
         [SerializeField] private Sprite toolIcon;
 
         public string ToolName => toolName;
+        public PlayerTool ToolType => toolType;
         public string ToolDescription => toolDescription;
         public Sprite ToolIcon => toolIcon;
     }
