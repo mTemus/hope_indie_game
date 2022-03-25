@@ -1,4 +1,4 @@
-﻿namespace _Prototype.Code.v002.System.GameInput.States
+﻿namespace _Prototype.Code.v002.System.GameInput
 {
     public abstract class InputState
     {
