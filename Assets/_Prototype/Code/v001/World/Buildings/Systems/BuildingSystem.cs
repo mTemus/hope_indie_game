@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using _Prototype.Code.v001.GameProperties;
 using _Prototype.Code.v001.System;
-using _Prototype.Code.v001.System.GameInput;
 using _Prototype.Code.v001.World.Areas;
 using _Prototype.Code.v001.World.Grid.Cell;
 using _Prototype.Code.v001.World.Resources.ResourceToGather;
+using _Prototype.Code.v002.System.GameInput;
 using UnityEngine;
 
 namespace _Prototype.Code.v001.World.Buildings.Systems

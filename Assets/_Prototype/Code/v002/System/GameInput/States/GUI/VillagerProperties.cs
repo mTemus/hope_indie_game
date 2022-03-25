@@ -1,7 +1,6 @@
 using _Prototype.Code.v001.GUI.UIElements.SelectableElement;
 using _Prototype.Code.v001.GUI.Villager.Selecting;
 using _Prototype.Code.v001.System;
-using _Prototype.Code.v002.System.GameInput.ChildStates;
 using _Prototype.Code.v002.System.GameInput.ChildStates.GUI.Villagers;
 
 namespace _Prototype.Code.v002.System.GameInput.States.GUI

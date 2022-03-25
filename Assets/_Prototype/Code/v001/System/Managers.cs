@@ -4,13 +4,13 @@ using _Prototype.Code.v001.Characters.Villagers.Professions;
 using _Prototype.Code.v001.Environment;
 using _Prototype.Code.v001.GUI;
 using _Prototype.Code.v001.System.Camera;
-using _Prototype.Code.v001.System.GameInput;
 using _Prototype.Code.v001.System.Initialization;
 using _Prototype.Code.v001.System.PlayerTools;
 using _Prototype.Code.v001.System.Sound;
 using _Prototype.Code.v001.World.Areas;
 using _Prototype.Code.v001.World.Buildings;
 using _Prototype.Code.v001.World.Resources;
+using _Prototype.Code.v002.System.GameInput;
 using UnityEngine;
 
 namespace _Prototype.Code.v001.System

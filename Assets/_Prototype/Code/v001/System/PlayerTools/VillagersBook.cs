@@ -1,4 +1,4 @@
-using _Prototype.Code.v001.System.GameInput;
+using _Prototype.Code.v002.System.GameInput;
 
 namespace _Prototype.Code.v001.System.PlayerTools
 {

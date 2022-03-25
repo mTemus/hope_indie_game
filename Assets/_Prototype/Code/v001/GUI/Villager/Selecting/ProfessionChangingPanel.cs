@@ -1,8 +1,8 @@
 using _Prototype.Code.v001.GUI.UIElements;
 using _Prototype.Code.v001.GUI.UIElements.SelectableElement;
 using _Prototype.Code.v001.System;
-using _Prototype.Code.v001.System.GameInput;
 using _Prototype.Code.v001.World.Buildings.Workplaces;
+using _Prototype.Code.v002.System.GameInput;
 using UnityEngine;
 using UnityEngine.UI;
 
