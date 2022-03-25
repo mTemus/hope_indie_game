@@ -3,7 +3,7 @@
 namespace _Prototype.Code.v002.GUI.PlayerTools
 {
     /// <summary>
-    /// 
+    /// Scriptable Object asset containing data for custom UI buttons of player tools circular menu
     /// </summary>
     [CreateAssetMenu(fileName = "Circle Button Data", menuName = "Game Data/GUI/Circle Button Data", order = 0)]
     public class CircleMenuButtonData : ScriptableObject

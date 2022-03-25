@@ -4,6 +4,9 @@ using Zenject;
 
 namespace _Prototype.Code.v002.Player.Tools
 {
+    /// <summary>
+    /// Class responsible for handling user tools
+    /// </summary>
     public class PlayerTools : MonoBehaviour
     {
         private Tool _hammer;
@@ -15,7 +18,7 @@ namespace _Prototype.Code.v002.Player.Tools
         private Tool _currentTool;
 
         [Inject]
-        public void Construct(InputManager inputManager)
+        private void Construct(InputManager inputManager)
         {
             _hammer = new Hammer();
             _hand = new FreeHand();
@@ -29,11 +32,18 @@ namespace _Prototype.Code.v002.Player.Tools
             _villagersBook.onInputChange += inputManager.SetState;
         }
         
+        /// <summary>
+        /// Use current selected tool and invoke its properties
+        /// </summary>
         public void UseCurrentTool()
         {
             _currentTool.UseTool();
         }
         
+        /// <summary>
+        /// Set player tool that should be selected and be invoked on use
+        /// </summary>
+        /// <param name="toolIndex">Tool int id (should be handled by enum to have more control)</param>
         public void SelectTool(int toolIndex)
         {
             _currentTool = toolIndex switch {

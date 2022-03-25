@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
-using _Prototype.Code.v001.System;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace _Prototype.Code.v002.GUI.PlayerTools
 {
     /// <summary>
-    /// 
+    /// UI menu responsible for handling user tools selection logic
     /// </summary>
     public class RadialToolsMenu : MonoBehaviour
     {
@@ -27,7 +27,10 @@ namespace _Prototype.Code.v002.GUI.PlayerTools
         [SerializeField] private List<CircleMenuButtonData> menuButtonsData;
 
         private List<CircleMenuButton> _menuButtons;
-    
+
+        [Inject]
+        private Player.Tools.PlayerTools _playerTools;
+        
         private int _currentMenuToolIndex;
         private int _previousMenuToolIndex;
 
@@ -63,10 +66,17 @@ namespace _Prototype.Code.v002.GUI.PlayerTools
             circleMenuButtonPrefab = null;
         }
 
+        private void RefreshInformalCenter()
+        {
+            toolName.text = menuButtonsData[_currentMenuToolIndex].ToolName;
+            toolDescription.text = menuButtonsData[_currentMenuToolIndex].ToolDescription;
+            toolIcon.sprite = menuButtonsData[_currentMenuToolIndex].ToolIcon;
+        }
+        
         /// <summary>
-        /// 
+        /// Set pointer on other button and highlight its background
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="value">Index of a button</param>
         public void ChangeCurrentMenuElement(int value)
         {
             _currentMenuToolIndex += value;
@@ -86,22 +96,15 @@ namespace _Prototype.Code.v002.GUI.PlayerTools
         }
 
         /// <summary>
-        /// 
+        /// Tell tools logic which tool is selected in the UI
         /// </summary>
         public void SelectTool()
         {
-            Managers.I.Tools.SelectTool(_currentMenuToolIndex);
+           _playerTools.SelectTool(_currentMenuToolIndex);
         }
-
-        private void RefreshInformalCenter()
-        {
-            toolName.text = menuButtonsData[_currentMenuToolIndex].ToolName;
-            toolDescription.text = menuButtonsData[_currentMenuToolIndex].ToolDescription;
-            toolIcon.sprite = menuButtonsData[_currentMenuToolIndex].ToolIcon;
-        }
-
+        
         /// <summary>
-        /// 
+        /// Activate the UI
         /// </summary>
         public void Activate()
         {
@@ -112,7 +115,7 @@ namespace _Prototype.Code.v002.GUI.PlayerTools
         }
 
         /// <summary>
-        /// 
+        /// Deactivate the UI
         /// </summary>
         public void Deactivate()
         {
