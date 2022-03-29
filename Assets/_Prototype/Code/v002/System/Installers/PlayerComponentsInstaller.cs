@@ -7,13 +7,17 @@ namespace _Prototype.Code.v002.System.Installers
 {
     public class PlayerComponentsInstaller : MonoInstaller<PlayerComponentsInstaller>
     {
-        [SerializeField] private PlayerCharacter _playerCharacter;
-        [SerializeField] private PlayerTools _playerTools;
+        [SerializeField] private PlayerCharacter playerCharacter;
+        [SerializeField] private PlayerMovement movement;
+        [SerializeField] private PlayerAnimations animations;
+        [SerializeField] private PlayerTools tools;
         
         public override void InstallBindings()
         {
-            Container.BindInstance(_playerCharacter);
-            Container.BindInstance(_playerTools);
+            Container.BindInstance(playerCharacter);
+            Container.BindInstance(movement);
+            Container.BindInstance(animations);
+            Container.BindInstance(tools);
         }
     }
 }

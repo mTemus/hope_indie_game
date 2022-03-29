@@ -73,19 +73,30 @@ namespace _Prototype.Code.v002.GUI.PlayerTools
             toolIcon.sprite = menuButtonsData[_currentMenuToolIndex].ToolIcon;
         }
         
+        private void Activate()
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.None;
+            backgroundPanel.SetActive(true);
+            RefreshInformalCenter();
+        }
+
+        private void Deactivate()
+        {
+            backgroundPanel.SetActive(false);
+        }
+        
         /// <summary>
         /// Set pointer on other button and highlight its background
         /// </summary>
         /// <param name="value">Index of a button</param>
         public void ChangeCurrentMenuElement(int value)
         {
+            _menuButtons[_currentMenuToolIndex].BackgroundImage.color = normalButtonColor;
             _currentMenuToolIndex += value;
 
-            if (_currentMenuToolIndex >= menuButtonsData.Count) {
-                _currentMenuToolIndex = 0;
-            } else if (_currentMenuToolIndex < 0) {
-                _currentMenuToolIndex = menuButtonsData.Count - 1;
-            }
+            if (_currentMenuToolIndex >= menuButtonsData.Count) _currentMenuToolIndex = 0;
+            else if (_currentMenuToolIndex < 0) _currentMenuToolIndex = menuButtonsData.Count - 1;
 
             if (_currentMenuToolIndex == _previousMenuToolIndex) return;
             
@@ -104,22 +115,13 @@ namespace _Prototype.Code.v002.GUI.PlayerTools
         }
         
         /// <summary>
-        /// Activate the UI
+        /// Set visibility of whole radial menu
         /// </summary>
-        public void Activate()
+        /// <param name="state">If true - menu visible, if false - menu not visible</param>
+        public void SetVisibility(bool state)
         {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.None;
-            backgroundPanel.SetActive(true);
-            RefreshInformalCenter();
-        }
-
-        /// <summary>
-        /// Deactivate the UI
-        /// </summary>
-        public void Deactivate()
-        {
-            backgroundPanel.SetActive(false);
+            if(state) Activate();
+            else Deactivate();
         }
     }
 }

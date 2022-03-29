@@ -12,8 +12,7 @@ namespace _Prototype.Code.v002.System.GameInput.States
         public event Action<Vector3> onMovement;
         public event Action<PlayerAnimationState> onMovementPerformed;
         public event Action<PlayerAnimationState> onMovementCanceled;
-        public event Action<IInputState> onToolsSelectingPerformed;
-        // public event Action onToolUsePerformed;
+        public event Action onToolUsePerformed;
 
         private void HandleMovement()
         {
@@ -27,9 +26,9 @@ namespace _Prototype.Code.v002.System.GameInput.States
         public PlayerActions(global::GameInput gameInput) : base(gameInput)
         {
             this.gameInput.PlayerActions.MovePlayer.canceled += context => onMovementCanceled?.Invoke(PlayerAnimationState.Idle);
-            // this.gameInput.Moving.UseTool.performed += context => onToolUsePerformed?.Invoke();
+            this.gameInput.PlayerActions.UseTool.performed += context => onToolUsePerformed?.Invoke();
             this.gameInput.PlayerActions.OpenTools.performed +=
-                context => onToolsSelectingPerformed?.Invoke(InputManager.ToolSelecting);
+                context => onStateTransition?.Invoke(InputManager.ToolSelecting);
         }
 
         public void OnStateSet()

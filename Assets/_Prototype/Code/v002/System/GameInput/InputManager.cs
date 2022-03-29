@@ -1,4 +1,6 @@
+using _Prototype.Code.v002.GUI.PlayerTools;
 using _Prototype.Code.v002.Player;
+using _Prototype.Code.v002.Player.Tools;
 using _Prototype.Code.v002.System.GameInput.States;
 using _Prototype.Code.v002.System.GameInput.States.GUI;
 using UnityEngine;
@@ -11,8 +13,15 @@ namespace _Prototype.Code.v002.System.GameInput
     /// </summary>
     public class InputManager : MonoBehaviour, IManualUpdate
     {
+        private static PlayerActions playerActions;
+        private static ToolSelecting toolSelecting;
+        private static BuildingSelecting buildingSelecting;
+        private static BuildingPlacing buildingPlacing;
+        private static VillagerProperties villagerProperties;
+
         [Header("Keycodes")] 
         [SerializeField] private KeyCode left;
+
         [SerializeField] private KeyCode leftAlt;
         [SerializeField] private KeyCode right;
         [SerializeField] private KeyCode rightAlt;
@@ -26,16 +35,10 @@ namespace _Prototype.Code.v002.System.GameInput
         [SerializeField] private KeyCode console;
         [SerializeField] private KeyCode accept;
 
-        [Inject] private PlayerCharacter _player;
-        private global::GameInput _gameInput;
-        
-        private static PlayerActions playerActions;
-        private static ToolSelecting toolSelecting;
-        private static BuildingSelecting buildingSelecting;
-        private static BuildingPlacing buildingPlacing;
-        private static VillagerProperties villagerProperties;
-        
         private IInputState _currentInputState;
+        private global::GameInput _gameInput;
+
+        [Inject] private PlayerCharacter _player;
         // private DeveloperConsole _console;
 
         public PlayerCharacter Player => _player;
@@ -58,32 +61,52 @@ namespace _Prototype.Code.v002.System.GameInput
         public static BuildingSelecting BuildingSelecting => buildingSelecting;
         public static BuildingPlacing BuildingPlacing => buildingPlacing;
         public static VillagerProperties VillagerProperties => villagerProperties;
-        
+
         private void Awake()
         {
-            _gameInput = new global::GameInput();
-            
-            playerActions = new PlayerActions(_gameInput);
-            toolSelecting = new ToolSelecting();
             buildingSelecting = new BuildingSelecting();
             buildingPlacing = new BuildingPlacing();
             villagerProperties = new VillagerProperties();
             // _console = new DeveloperConsole();
-
+        }
+        
+        [Inject]
+        private void Construct(global::GameInput gameInput)
+        {
+            _gameInput = gameInput;
+        }
+        
+        [Inject]
+        private void ConstructPlayerInputs(PlayerTools playerTools, PlayerAnimations animations, PlayerMovement movement)
+        {
+            playerActions = new PlayerActions(_gameInput);
+            playerActions.onMovement += movement.Move;
+            playerActions.onMovementPerformed += animations.SetState;
+            playerActions.onMovementCanceled += animations.SetState;
+            playerActions.onToolUsePerformed += playerTools.UseCurrentTool;
+            playerActions.onStateTransition += SetState;
+            
             _currentInputState = playerActions;
             _currentInputState.OnStateSet();
-
-            InitializeInputEvents();
             Debug.LogWarning(_currentInputState.GetType().Name);
         }
 
-        private void InitializeInputEvents()
+        [Inject]
+        private void ConstructPlayerGUIInputs(RadialToolsMenu toolsMenu)
         {
-            playerActions.onMovement += _player.Movement.Move;
-            playerActions.onMovementPerformed += _player.Animations.SetState;
-            playerActions.onMovementCanceled += _player.Animations.SetState;
-            // playerActions.onToolUsePerformed += Managers.I.Tools.UseCurrentTool;
-            playerActions.onToolsSelectingPerformed += SetState;
+            toolSelecting = new ToolSelecting(_gameInput);
+            toolSelecting.onMenuValueChanged += toolsMenu.ChangeCurrentMenuElement;
+            toolSelecting.onToolSelected += toolsMenu.SelectTool;
+            toolSelecting.onMenuVisibilityChanged += toolsMenu.SetVisibility;
+            toolSelecting.onStateTransition += SetState;
+        }
+
+        public void ManualUpdate(float timeSpeed)
+        {
+            // _console.HandleState(this);
+
+            // if (v001.DeveloperTools.Console.DeveloperConsole.I.IsConsoleActive()) return;
+            _currentInputState.HandleState(this);
         }
         
         /// <summary>
@@ -97,14 +120,6 @@ namespace _Prototype.Code.v002.System.GameInput
             _currentInputState.OnStateSet();
             
             Debug.LogWarning("INPUT STATE ----" + _currentInputState.GetType().Name);
-        }
-
-        public void ManualUpdate(float timeSpeed)
-        {
-            // _console.HandleState(this);
-
-            // if (v001.DeveloperTools.Console.DeveloperConsole.I.IsConsoleActive()) return;
-            _currentInputState.HandleState(this);
         }
     }
 }

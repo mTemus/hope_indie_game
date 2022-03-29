@@ -112,6 +112,74 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "ToolSelecting",
+            "id": "763b8d6b-a27f-458f-a3fa-bae821548044",
+            "actions": [
+                {
+                    "name": "ChangeToolLeft",
+                    "type": "Button",
+                    "id": "0e47c76d-7e92-4886-a923-93dcc24e7a5e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ChangeToolRight",
+                    "type": "Button",
+                    "id": "ac9f9319-fe92-42ce-a701-16a9bc1fee93",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UseTool",
+                    "type": "Button",
+                    "id": "5068ca2b-f419-41ab-a667-3d591ab335cf",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "6587912e-2a38-4396-8e11-b06c37d18c55",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeToolLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5e1884b4-e661-4476-bf6f-69e2c7c5e2cd",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeToolRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "91399090-98da-4ecd-8a2e-b654ca319a74",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UseTool",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

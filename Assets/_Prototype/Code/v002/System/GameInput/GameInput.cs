@@ -134,6 +134,74 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""ToolSelecting"",
+            ""id"": ""763b8d6b-a27f-458f-a3fa-bae821548044"",
+            ""actions"": [
+                {
+                    ""name"": ""ChangeToolLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""0e47c76d-7e92-4886-a923-93dcc24e7a5e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeToolRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""ac9f9319-fe92-42ce-a701-16a9bc1fee93"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseTool"",
+                    ""type"": ""Button"",
+                    ""id"": ""5068ca2b-f419-41ab-a667-3d591ab335cf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""6587912e-2a38-4396-8e11-b06c37d18c55"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeToolLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5e1884b4-e661-4476-bf6f-69e2c7c5e2cd"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeToolRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""91399090-98da-4ecd-8a2e-b654ca319a74"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseTool"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -155,6 +223,11 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
         m_PlayerActions_MovePlayer = m_PlayerActions.FindAction("MovePlayer", throwIfNotFound: true);
         m_PlayerActions_UseTool = m_PlayerActions.FindAction("UseTool", throwIfNotFound: true);
         m_PlayerActions_OpenTools = m_PlayerActions.FindAction("OpenTools", throwIfNotFound: true);
+        // ToolSelecting
+        m_ToolSelecting = asset.FindActionMap("ToolSelecting", throwIfNotFound: true);
+        m_ToolSelecting_ChangeToolLeft = m_ToolSelecting.FindAction("ChangeToolLeft", throwIfNotFound: true);
+        m_ToolSelecting_ChangeToolRight = m_ToolSelecting.FindAction("ChangeToolRight", throwIfNotFound: true);
+        m_ToolSelecting_UseTool = m_ToolSelecting.FindAction("UseTool", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -259,6 +332,55 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
         }
     }
     public PlayerActionsActions @PlayerActions => new PlayerActionsActions(this);
+
+    // ToolSelecting
+    private readonly InputActionMap m_ToolSelecting;
+    private IToolSelectingActions m_ToolSelectingActionsCallbackInterface;
+    private readonly InputAction m_ToolSelecting_ChangeToolLeft;
+    private readonly InputAction m_ToolSelecting_ChangeToolRight;
+    private readonly InputAction m_ToolSelecting_UseTool;
+    public struct ToolSelectingActions
+    {
+        private @GameInput m_Wrapper;
+        public ToolSelectingActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ChangeToolLeft => m_Wrapper.m_ToolSelecting_ChangeToolLeft;
+        public InputAction @ChangeToolRight => m_Wrapper.m_ToolSelecting_ChangeToolRight;
+        public InputAction @UseTool => m_Wrapper.m_ToolSelecting_UseTool;
+        public InputActionMap Get() { return m_Wrapper.m_ToolSelecting; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ToolSelectingActions set) { return set.Get(); }
+        public void SetCallbacks(IToolSelectingActions instance)
+        {
+            if (m_Wrapper.m_ToolSelectingActionsCallbackInterface != null)
+            {
+                @ChangeToolLeft.started -= m_Wrapper.m_ToolSelectingActionsCallbackInterface.OnChangeToolLeft;
+                @ChangeToolLeft.performed -= m_Wrapper.m_ToolSelectingActionsCallbackInterface.OnChangeToolLeft;
+                @ChangeToolLeft.canceled -= m_Wrapper.m_ToolSelectingActionsCallbackInterface.OnChangeToolLeft;
+                @ChangeToolRight.started -= m_Wrapper.m_ToolSelectingActionsCallbackInterface.OnChangeToolRight;
+                @ChangeToolRight.performed -= m_Wrapper.m_ToolSelectingActionsCallbackInterface.OnChangeToolRight;
+                @ChangeToolRight.canceled -= m_Wrapper.m_ToolSelectingActionsCallbackInterface.OnChangeToolRight;
+                @UseTool.started -= m_Wrapper.m_ToolSelectingActionsCallbackInterface.OnUseTool;
+                @UseTool.performed -= m_Wrapper.m_ToolSelectingActionsCallbackInterface.OnUseTool;
+                @UseTool.canceled -= m_Wrapper.m_ToolSelectingActionsCallbackInterface.OnUseTool;
+            }
+            m_Wrapper.m_ToolSelectingActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @ChangeToolLeft.started += instance.OnChangeToolLeft;
+                @ChangeToolLeft.performed += instance.OnChangeToolLeft;
+                @ChangeToolLeft.canceled += instance.OnChangeToolLeft;
+                @ChangeToolRight.started += instance.OnChangeToolRight;
+                @ChangeToolRight.performed += instance.OnChangeToolRight;
+                @ChangeToolRight.canceled += instance.OnChangeToolRight;
+                @UseTool.started += instance.OnUseTool;
+                @UseTool.performed += instance.OnUseTool;
+                @UseTool.canceled += instance.OnUseTool;
+            }
+        }
+    }
+    public ToolSelectingActions @ToolSelecting => new ToolSelectingActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -273,5 +395,11 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
         void OnMovePlayer(InputAction.CallbackContext context);
         void OnUseTool(InputAction.CallbackContext context);
         void OnOpenTools(InputAction.CallbackContext context);
+    }
+    public interface IToolSelectingActions
+    {
+        void OnChangeToolLeft(InputAction.CallbackContext context);
+        void OnChangeToolRight(InputAction.CallbackContext context);
+        void OnUseTool(InputAction.CallbackContext context);
     }
 }

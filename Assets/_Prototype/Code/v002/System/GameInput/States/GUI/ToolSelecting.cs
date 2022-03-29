@@ -1,35 +1,38 @@
-﻿using _Prototype.Code.v001.System;
-using UnityEngine;
+﻿using System;
 
 namespace _Prototype.Code.v002.System.GameInput.States.GUI
 {
     /// <summary>
     /// Input state responsible for handling player input while using the player tools GUI
     /// </summary>
-    public class ToolSelecting : IInputState
+    public class ToolSelecting : InputState, IInputState
     {
+        public event Action onToolSelected;
+        public event Action<int> onMenuValueChanged;
+        public event Action<bool> onMenuVisibilityChanged;
+        
+        public ToolSelecting(global::GameInput gameInput) : base(gameInput)
+        {
+            gameInput.ToolSelecting.ChangeToolLeft.performed += context => onMenuValueChanged?.Invoke(1);
+            gameInput.ToolSelecting.ChangeToolRight.performed += context => onMenuValueChanged?.Invoke(-1);
+            gameInput.ToolSelecting.UseTool.performed += context => onToolSelected?.Invoke();
+            gameInput.ToolSelecting.UseTool.performed += context => onStateTransition?.Invoke(InputManager.PlayerActions);
+        }
+        
         public void OnStateSet()
         {
-            Managers.I.GUI.PlayerToolsMenu.Activate();
+            onMenuVisibilityChanged?.Invoke(true);
+            gameInput.ToolSelecting.Enable();
         }
 
         public void HandleState(InputManager inputManager)
         {
-            if (Input.GetKeyDown(inputManager.Left) || Input.GetKeyDown(inputManager.LeftAlt)) 
-                Managers.I.GUI.PlayerToolsMenu.ChangeCurrentMenuElement(1);
-        
-            if (Input.GetKeyDown(inputManager.Right) || Input.GetKeyDown(inputManager.RightAlt)) 
-                Managers.I.GUI.PlayerToolsMenu.ChangeCurrentMenuElement(-1);
-            
-            if (Input.GetKeyDown(inputManager.Tools)) {
-                Managers.I.GUI.PlayerToolsMenu.SelectTool();
-                Managers.I.GUI.PlayerToolsMenu.Deactivate();
-                Managers.I.Input.SetState(InputManager.PlayerActions);
-            }
         }
 
         public void OnStateChange()
         {
+            gameInput.ToolSelecting.Disable();
+            onMenuVisibilityChanged?.Invoke(false);
         }
     }
 }
